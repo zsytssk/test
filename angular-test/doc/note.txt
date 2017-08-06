@@ -1,0 +1,15 @@
+## 2017-08-05 11:56:30
+* modules
+> @ques imports declarations providers bootstrap 什么意思
+* NgModule 说明
+
+* 一个大的angular项目结构是什么
+
+* @Input() @Output() 是做什么的
+> @Output('changeEvent') change = new EventEmitter<any>();
+
+* modules component 分别控制什么
+> AppModule 里面定义方法 属性有什么用
+> AppComponent 里面定义的又有什么用
+
+* component 如何给template绑定事件 如何在component中修改查找template

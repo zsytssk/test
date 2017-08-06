@@ -1,0 +1,31 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "npm",
+            "script": "build",
+            "path": "d:\\zsytssk\\test\\ts_import",
+            "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "build",
+            "path": "d:\\zsytssk\\test\\webpack",
+            "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "build",
+            "path": "d:\\zsytssk\\github\\test\\webpack_babel",
+            "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "dev",
+            "path": "d:\\zsytssk\\github\\test\\webpack_babel",
+            "problemMatcher": []
+        }
+    ]
+}

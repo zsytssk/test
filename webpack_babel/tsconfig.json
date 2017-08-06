@@ -1,0 +1,22 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es2015",
+        "watch": true,
+        "outDir": "dist",
+        "rootDir": "src",
+        "typeRoots": [
+            "./typings"
+        ],
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "noEmitHelpers": true
+        // "sourceMap": true
+    },
+    "include": [
+        "src",
+        "typings",
+        "webpack.config.ts"
+    ]
+}

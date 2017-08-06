@@ -1,0 +1,23 @@
+## 我的目的
+* 只修改store中的一部分信息 更新修改部分的展示
+* 很容易很合理的控制对象
+
+```javascript
+
+let store = {
+    game: {
+        fish_list: [
+            {
+                fish_id: ...
+                pos
+            }
+        ]
+    }
+}
+
+```
+
+fish_list addFish 在鱼群中添加一条鱼
+> fish
+>> pos:> 鱼的位置
+>> status:> 鱼的状态 死亡 ...
