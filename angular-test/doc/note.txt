@@ -1,3 +1,18 @@
+## 2017-08-07 09:18:05
+* angular的vscode插件 decorative
+
+* @ques 这是什么错误
+Uncaught TypeError: Cannot read property 'name' of undefined
+
+* @ques 下面同时放在一个tag里面就报错, 如果我有多个条件呢
+如果我不把这条件放在标签里面可行吗, 一般的模版都支持
+*ngIf="heroes.length > 15" *ngFor="let hero of heroes"
+
+* 点击..., 如何触发component里面的方法
+
+* @Component 是给相应的对象扩展方法
+> 但是我在new 这个对象的时候无法索引这些属性...
+
 ## 2017-08-05 11:56:30
 * modules
 > @ques imports declarations providers bootstrap 什么意思
