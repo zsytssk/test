@@ -2,30 +2,21 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: `
+   <h2>Should mankind colonize the Universe?</h2>
+   <h3>Agree: {{agreed}}, Disagree: {{disagreed}}</h3>
+   <app-voter *ngFor="let voter of voters"
+     [name]="voter"
+     (onVoted)="onVoted($event)">
+   </app-voter>
+ `
 })
 export class AppComponent {
-  title = 'hh';
-  selectedHero: Hero;
-  heroes = [
-    new Hero(1, 'Windstorm'),
-    new Hero(13, 'Bombasto'),
-    new Hero(15, 'Magneta'),
-    new Hero(20, 'Tornado')
-  ];
-  onClick() {
-    console.log(1);
+  agreed = 0;
+  disagreed = 0;
+  voters = ['Mr. IQ', 'Ms. Universe', 'Bombasto'];
+
+  onVoted(agreed: boolean) {
+    agreed ? this.agreed++ : this.disagreed++;
   }
-  getVal() {
-    return 10;
-  }
-  onSelect(hero: Hero) {
-    console.log(hero);
-    this.selectedHero = hero;
-  }
-}
-export class Hero {
-  constructor(public id: number,
-    public name: string) { }
 }

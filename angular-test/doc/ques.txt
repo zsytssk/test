@@ -1,0 +1,14 @@
+* @ques 我可以引用component 然后使用component 那么modules 这个有什么作用
+> modules 和 component 关系
+
+* 模版里面的变量怎么运行的 eval??
+
+* [ngClass] 是什么意思
+
+* [attr.label] 这个不应该是设置属性的吗
+> 怎么没有用
+
+*  [ngFor] 不可以使用 [ngClass]可以 什么鬼  attribute directive, structural directive 这两个有什么区别吗
+
+* modules
+> @ques imports declarations providers bootstrap 什么意思

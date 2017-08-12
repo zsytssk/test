@@ -1,3 +1,39 @@
+## 2017-08-10 09:15:54
+
+* input output 到底有什么作用
+
+* @ques 如何使用多个模块
+
+
+* @ques
+
+
+> directives
+
+
+
+## 2017-08-09 09:19:05
+Uncaught Error: Template parse errors:
+There is no directive with "exportAs" set to "ngForm"
+<form (ngSubmit)="onSubmit(heroForm)" #heroForm="ngForm">
+???
+
+* [(ngModel)]="hero.name" (ngSubmit) [disabled]
+*
+
+
+## 2017-08-08 09:26:13
+* angular 如何找到@Component这里面绑定的属性
+
+> <hero-detail (deleteRequest)="deleteHero()"></hero-detail> deleteRequest ...什么意思
+> <div (myClick)="clicked=$event" clickable>click me</div> (myClick)="clicked=$event" 什么意思
+> <input [(ngModel)]="name"> ngModel??
+
+
+
+
+
+
 ## 2017-08-07 09:18:05
 * angular的vscode插件 decorative
 
@@ -14,8 +50,7 @@ Uncaught TypeError: Cannot read property 'name' of undefined
 > 但是我在new 这个对象的时候无法索引这些属性...
 
 ## 2017-08-05 11:56:30
-* modules
-> @ques imports declarations providers bootstrap 什么意思
+
 * NgModule 说明
 
 * 一个大的angular项目结构是什么
