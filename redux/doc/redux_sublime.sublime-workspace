@@ -1,0 +1,484 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"hoo",
+				"hookShowing"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/C/Users/zhangshiyang/AppData/Local/Microsoft/TypeScript/2.7/node_modules/redux/dist/redux.js",
+			"settings":
+			{
+				"buffer_size": 26711,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/D/zsytssk/other/test/redux/redux-examples/node_modules/redux/es/compose.js",
+			"settings":
+			{
+				"buffer_size": 870,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/zhangshiyang/AppData/Local/Microsoft/TypeScript/2.7/node_modules/redux/src/applyMiddleware.js",
+			"settings":
+			{
+				"buffer_size": 1247,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "import printBuffer from './core';\nimport { timer } from './helpers';\nimport defaults from './defaults';\n/* eslint max-len: [\"error\", 110, { \"ignoreComments\": true }] */\n/**\n * Creates logger with following options\n *\n * @namespace\n * @param {object} options - options for logger\n * @param {string | function | object} options.level - console[level]\n * @param {boolean} options.duration - print duration of each action?\n * @param {boolean} options.timestamp - print timestamp with each action?\n * @param {object} options.colors - custom colors\n * @param {object} options.logger - implementation of the `console` API\n * @param {boolean} options.logErrors - should errors in action execution be caught, logged, and re-thrown?\n * @param {boolean} options.collapsed - is group collapsed?\n * @param {boolean} options.predicate - condition which resolves logger behavior\n * @param {function} options.stateTransformer - transform state before print\n * @param {function} options.actionTransformer - transform action before print\n * @param {function} options.errorTransformer - transform error before print\n *\n * @returns {function} logger middleware\n */\nfunction createLogger(options = {}) {\n  const loggerOptions = Object.assign({}, defaults, options);\n\n  const {\n    logger,\n    stateTransformer,\n    errorTransformer,\n    predicate,\n    logErrors,\n    diffPredicate,\n  } = loggerOptions;\n\n  // Return if 'console' object is not defined\n  if (typeof logger === 'undefined') {\n    return () => next => action => next(action);\n  }\n\n  // Detect if 'createLogger' was passed directly to 'applyMiddleware'.\n  if (options.getState && options.dispatch) {\n    // eslint-disable-next-line no-console\n    console.error(`[redux-logger] redux-logger not installed. Make sure to pass logger instance as middleware:\n// Logger with default options\nimport { logger } from 'redux-logger'\nconst store = createStore(\n  reducer,\n  applyMiddleware(logger)\n)\n// Or you can create your own logger with custom options http://bit.ly/redux-logger-options\nimport { createLogger } from 'redux-logger'\nconst logger = createLogger({\n  // ...options\n});\nconst store = createStore(\n  reducer,\n  applyMiddleware(logger)\n)\n`);\n\n    return () => next => action => next(action);\n  }\n\n  const logBuffer = [];\n\n  return ({ getState }) => next => (action) => {\n    // Exit early if predicate function returns 'false'\n    if (typeof predicate === 'function' && !predicate(getState, action)) {\n      return next(action);\n    }\n\n    const logEntry = {};\n\n    logBuffer.push(logEntry);\n\n    logEntry.started = timer.now();\n    logEntry.startedTime = new Date();\n    logEntry.prevState = stateTransformer(getState());\n    logEntry.action = action;\n\n    let returnedValue;\n    if (logErrors) {\n      try {\n        returnedValue = next(action);\n      } catch (e) {\n        logEntry.error = errorTransformer(e);\n      }\n    } else {\n      returnedValue = next(action);\n    }\n\n    logEntry.took = timer.now() - logEntry.started;\n    logEntry.nextState = stateTransformer(getState());\n\n    const diff = loggerOptions.diff && typeof diffPredicate === 'function'\n      ? diffPredicate(getState, action)\n      : loggerOptions.diff;\n\n    printBuffer(logBuffer, Object.assign({}, loggerOptions, { diff }));\n    logBuffer.length = 0;\n\n    if (logEntry.error) throw logEntry.error;\n    return returnedValue;\n  };\n}\n\n// eslint-disable-next-line consistent-return\nconst defaultLogger = ({ dispatch, getState } = {}) => {\n  if (typeof dispatch === 'function' || typeof getState === 'function') {\n    return createLogger()({ dispatch, getState });\n  }\n  // eslint-disable-next-line no-console\n  console.error(`\n[redux-logger v3] BREAKING CHANGE\n[redux-logger v3] Since 3.0.0 redux-logger exports by default logger with default settings.\n[redux-logger v3] Change\n[redux-logger v3] import createLogger from 'redux-logger'\n[redux-logger v3] to\n[redux-logger v3] import { createLogger } from 'redux-logger'\n`);\n};\n\nexport { defaults, createLogger, defaultLogger as logger };\n\nexport default defaultLogger;\n",
+			"file": "/D/zsytssk/other/test/redux/redux-logger/src/index.js",
+			"file_size": 4035,
+			"file_write_time": 131568908120000000,
+			"settings":
+			{
+				"buffer_size": 4035,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "export default {\n  level: 'log',\n  logger: console,\n  logErrors: true,\n  collapsed: undefined,\n  predicate: undefined,\n  duration: false,\n  timestamp: true,\n  stateTransformer: state => state,\n  actionTransformer: action => action,\n  errorTransformer: error => error,\n  colors: {\n    title: () => 'inherit',\n    prevState: () => '#9E9E9E',\n    action: () => '#03A9F4',\n    nextState: () => '#4CAF50',\n    error: () => '#F20404',\n  },\n  diff: false,\n  diffPredicate: undefined,\n\n  // Deprecated options\n  transformer: undefined,\n};\n",
+			"file": "/D/zsytssk/other/test/redux/redux-logger/src/defaults.js",
+			"file_size": 531,
+			"file_write_time": 131568908120000000,
+			"settings":
+			{
+				"buffer_size": 531,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 171.0,
+		"last_filter": "menu",
+		"selected_items":
+		[
+			[
+				"menu",
+				"View: Toggle Menu"
+			],
+			[
+				"pro",
+				"Project: Save As"
+			],
+			[
+				"java",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"toggle",
+				"View: Toggle Menu"
+			]
+		],
+		"width": 444.0
+	},
+	"console":
+	{
+		"height": 165.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/zhangshiyang/AppData/Local/Microsoft/TypeScript/2.7/node_modules/redux",
+		"/C/Users/zhangshiyang/AppData/Local/Microsoft/TypeScript/2.7/node_modules/redux/src",
+		"/D/zsytssk/other/test/redux/redux-logger"
+	],
+	"file_history":
+	[
+		"/D/zsytssk/other/test/redux/redux-logger/src/core.js",
+		"/D/zsytssk/job/git/dbmahjong/doc/redux.txt",
+		"/D/zsytssk/job/git/ahmahjong/.gitignore",
+		"/D/zsytssk/job/git/dbmahjong/.gitignore",
+		"/D/zsytssk/job/git/dbmahjong/doc/note.txt",
+		"/D/zsytssk/other/test/fish/assets/Script/pop/common.ts",
+		"/D/zsytssk/job/git/dbmahjong/doc/todo.txt",
+		"/C/Users/zhangshiyang/Desktop/LayaAirJS_1.7.0/js/LayaAir.d.ts",
+		"/C/Users/zhangshiyang/AppData/Roaming/Lantern/settings.yaml",
+		"/C/Users/zhangshiyang/AppData/Roaming/Lantern/global.yaml",
+		"/C/Users/zhangshiyang/Desktop/fish/shape/info.js",
+		"/C/Users/zhangshiyang/Desktop/fish.json",
+		"/C/Users/zhangshiyang/Desktop/fish/shape/info.json",
+		"/D/zsytssk/test/cocos_creator/ts/assets/Script/SuperClass.ts",
+		"/D/zsytssk/job/git/mahjong/mymahjong/doc/note.txt",
+		"/D/zsytssk/job/git/mahjong/shaanximahjong/project.json",
+		"/D/zsytssk/job/git/mahjong/shaanximahjong/jsconfig.json",
+		"/D/zsytssk/job/git/mahjong/shaanximahjong/init.sh",
+		"/D/zsytssk/test/cocos_creator/hello_world/game/assets/Texture.meta",
+		"/D/zsytssk/job/git/mahjong/ahmahjong/.git/config",
+		"/D/zsytssk/job/git/mahjong/shaanximahjong/.git/config",
+		"/D/zsytssk/job/git/mahjong/ahmahjong/package.json",
+		"/D/zsytssk/job/git/mahjong/mymahjong/.gitignore",
+		"/D/zsytssk/job/git/mahjong/mymahjong/game/.gitignore",
+		"/C/Users/zhangshiyang/Desktop/server.js",
+		"/C/Users/zhangshiyang/Desktop/redNum47.fnt",
+		"/D/zsytssk/github/common/photoshop javascript/path/getCoodinate.js",
+		"/D/zsytssk/github/common/photoshop javascript/path/getCoodinate.jsx",
+		"/C/Users/zhangshiyang/Desktop/zutil.js",
+		"/D/zsytssk/job/git/game_csmahjong_idle/.gitignore",
+		"/C/Users/zhangshiyang/Desktop/room.css",
+		"/D/zsytssk/test/webpackBabel7/tsconfig.json",
+		"/D/zsytssk/test/webpackBabel7/tsconfig.webpack.json",
+		"/D/zsytssk/test/redux/fish2/tsconfig.json",
+		"/D/zsytssk/test/webpackThreadLoaderTs/tsconfig.json",
+		"/D/zsytssk/github/node_script/.gitignore",
+		"/D/zsytssk/github/node_script/importZutil/.gitignore",
+		"/D/zsytssk/test/subarchive/trc/utils/displacePath.ts",
+		"/D/zsytssk/github/common/photoshop javascript/shoal/analysisShoal3PSD.js",
+		"/D/zsytssk/github/common/photoshop javascript/shoal/analysisShoal1PSD.js",
+		"/C/Users/zhangshiyang/Desktop/OmegaOptions.bak",
+		"/C/Users/zhangshiyang/Desktop/VSCode-win32-x64-1.18.0/createLink.vbs",
+		"/C/Users/zhangshiyang/Desktop/工作簿1.csv",
+		"/C/Users/zhangshiyang/Desktop/common.js",
+		"/C/Users/zhangshiyang/.gitconfig",
+		"/D/zsytssk/test/rust/test.rs",
+		"/C/Users/zhangshiyang/AppData/Roaming/Lantern/proxies.yaml",
+		"/D/zsytssk/other/software/Sublime Text/OpenWithSublime.vbs",
+		"/D/Program Files/Microsoft VS Code Insiders/createLink.vbs",
+		"/D/zsytssk/other/software/Sublime Text/subl.exe"
+	],
+	"find":
+	{
+		"height": 43.0
+	},
+	"find_in_files":
+	{
+		"height": 135.0,
+		"where_history":
+		[
+			"C:\\Users\\zhangshiyang\\AppData\\Local\\Microsoft\\TypeScript\\2.7\\node_modules\\redux",
+			"D:\\zsytssk\\other\\test\\redux\\redux-logger",
+			"C:\\Users\\zhangshiyang\\AppData\\Local\\Microsoft\\TypeScript\\2.7\\node_modules\\redux",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"createLogger",
+			"getState",
+			"preloadedState",
+			"reducer",
+			"createStore",
+			"createLogger",
+			"defaults",
+			"printBuffer",
+			"prev state",
+			"prevStage",
+			"createLogger",
+			"redux-logger"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/C/Users/zhangshiyang/AppData/Local/Microsoft/TypeScript/2.7/node_modules/redux/dist/redux.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 26711,
+						"regions":
+						{
+							"bookmarks":
+							{
+								"flags": 144,
+								"icon": "bookmark",
+								"regions":
+								[
+									[
+										7794,
+										7794
+									]
+								],
+								"scope": "bookmarks"
+							}
+						},
+						"selection":
+						[
+							[
+								25348,
+								25348
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 15317.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/D/zsytssk/other/test/redux/redux-examples/node_modules/redux/es/compose.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 870,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								602,
+								602
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 126.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/Users/zhangshiyang/AppData/Local/Microsoft/TypeScript/2.7/node_modules/redux/src/applyMiddleware.js",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1247,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								760,
+								771
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"file": "/D/zsytssk/other/test/redux/redux-logger/src/index.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4035,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1509,
+								1515
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 281.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/D/zsytssk/other/test/redux/redux-logger/src/defaults.js",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 531,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								400,
+								400
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 29.0
+	},
+	"input":
+	{
+		"height": 53.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.396958410925,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": false,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "redux_sublime.sublime-project",
+	"replace":
+	{
+		"height": 54.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"dis",
+				"subarchive\\trc\\utils\\displacePath.ts"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 309.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
