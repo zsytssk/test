@@ -43,7 +43,7 @@ const posts = (state = {
   }
 }
 
-const postsBySubreddit = (state = { }, action) => {
+const postsBySubreddit = (state = {}, action) => {
   switch (action.type) {
     case INVALIDATE_SUBREDDIT:
     case RECEIVE_POSTS:

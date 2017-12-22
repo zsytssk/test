@@ -6,7 +6,6 @@ import thunk from 'redux-thunk'
 import reducer from './reducers'
 import App from './containers/App'
 
-
 const myMiddleware1 = store => next => action => {
   console.log('prev state1', store.getState());
   let result = next(action);
@@ -30,6 +29,7 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   applyMiddleware(...middleware)
 )
+
 
 store.subscribe(() => {
   let next_state = store.getState();

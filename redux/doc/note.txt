@@ -1,8 +1,35 @@
+## 2017-12-22 09:47:44
+* @ques 假如每一个数据都有一个id来确定唯一 那么如何通过这个id来寻找到相应的数据呢？？
+> 张俊清 如何找到数组中的元素
+
+* @ques 如何connect 特定的一个值得改变 subscribe
+
+* mapStateToProps mapDispatchToProps 如何作用
+
+* compose 组合函数
+
+## 2017-12-21 09:46:56
+* redux 的优点
+> state只是一个数据结构可以 自由使用 复用
+> debug
+> maintain undo hostory
+
+
+
 ## 2017-12-20 09:48:59
-* @ques 我如何知道一个对象需不需要监听
-
 
 * @ques 我如何知道一个对象需不需要监听
+
+const posts = (...) => {
+  ...
+}
+const postsBySubreddit = (...) => {
+  ...
+}
+const rootReducer = combineReducers({
+  postsBySubreddit,
+  selectedSubreddit
+})
 
 
 mapStateToProps
