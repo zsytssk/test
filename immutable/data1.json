@@ -1,0 +1,368 @@
+{
+    "1": {
+        "cmd": "sendCards",
+        "code": 200,
+        "res": {
+            "rInfo": {
+                "roomId": "983296",
+                "currentNum": "1",
+                "config": {
+                    "method": [1],
+                    "number": 4,
+                    "record": {
+                        "num": "1",
+                        "card": "1"
+                    }
+                },
+                "roomNum": "4",
+                "userList": {
+                    "1": "3001",
+                    "2": "3002",
+                    "3": "3003",
+                    "4": "3004"
+                },
+                "dealerId": "3001",
+                "speakerId": "3001",
+                "takeId": 3001,
+                "remainCount": 59,
+                "takeCard": 38
+            },
+            "list": {
+                "3001": {
+                    "userId": "3001",
+                    "shouLen": 14,
+                    "userInfo": {
+                        "roomId": "983296",
+                        "roundId": "983296_1513767899898",
+                        "seatNum": "1",
+                        "status": "3",
+                        "takePai": "38",
+                        "takePaiCount": "1",
+                        "isHit": "1",
+                        "pengKind": "null",
+                        "gangKind": [],
+                        "tingKind": {},
+                        "huKind": 0,
+                        "tingResult": [],
+                        "isLeakHu": {},
+                        "card": "null"
+                    },
+                    "discard": [],
+                    "complete": []
+                },
+                "3002": {
+                    "userId": "3002",
+                    "shouLen": 13,
+                    "userInfo": {
+                        "roomId": "983296",
+                        "roundId": "983296_1513767899898",
+                        "seatNum": "2",
+                        "status": "42",
+                        "pengKind": "null",
+                        "gangKind": [],
+                        "tingKind": {},
+                        "huKind": 0,
+                        "tingResult": [],
+                        "isLeakHu": {},
+                        "card": "null"
+                    },
+                    "discard": [],
+                    "complete": []
+                },
+                "3003": {
+                    "userId": "3003",
+                    "shouLen": 13,
+                    "userInfo": {
+                        "roomId": "983296",
+                        "roundId": "983296_1513767899898",
+                        "seatNum": "3",
+                        "status": "42",
+                        "pengKind": "null",
+                        "gangKind": [],
+                        "tingKind": {},
+                        "huKind": 0,
+                        "tingResult": [],
+                        "isLeakHu": {},
+                        "card": "null"
+                    },
+                    "discard": [],
+                    "complete": []
+                },
+                "3004": {
+                    "userId": "3004",
+                    "shouLen": 13,
+                    "userInfo": {
+                        "roomId": "983296",
+                        "roundId": "983296_1513767899898",
+                        "seatNum": "4",
+                        "status": "42",
+                        "pengKind": "null",
+                        "gangKind": [],
+                        "tingKind": {},
+                        "huKind": 0,
+                        "tingResult": [],
+                        "isLeakHu": {},
+                        "card": "null"
+                    },
+                    "discard": [],
+                    "complete": []
+                }
+            },
+            "uid": "3003",
+            "shou": [11, 12, 13, 15, 16, 17, 19, 24, 27, 27, 29, 29, 29]
+        }
+    },
+    "2": {
+        "cmd": "gameReplay",
+        "code": 200,
+        "res": {
+            "uid": "3001",
+            "frontId": "null",
+            "status": "42",
+            "scoreConf": ["0", "1", "2"],
+            "isHit": 1,
+            "take": 38,
+            "shou": ["12", "13", "13", "23", "26", "26", "26", "28", "35", "37", "37", "38", "39"],
+            "rInfo": {
+                "roomId": "983296",
+                "currentNum": "1",
+                "config": {
+                    "method": [1],
+                    "number": 4,
+                    "record": {
+                        "num": "1",
+                        "card": "1"
+                    }
+                },
+                "roomNum": "4",
+                "userList": {
+                    "1": "3001",
+                    "2": "3002",
+                    "3": "3003",
+                    "4": "3004"
+                },
+                "dealerId": "3001",
+                "speakerId": "3001",
+                "takeId": 3001,
+                "remainCount": 59
+            },
+            "list": {
+                "3001": {
+                    "userId": "3001",
+                    "shouLen": 14,
+                    "userInfo": {
+                        "roomId": "983296",
+                        "roundId": "983296_1513767899898",
+                        "seatNum": "1",
+                        "status": "42",
+                        "takePai": "38",
+                        "takePaiCount": "1",
+                        "isHit": "1",
+                        "pengKind": "null",
+                        "gangKind": [],
+                        "tingKind": {},
+                        "huKind": 0,
+                        "tingResult": [],
+                        "isLeakHu": {},
+                        "card": "null"
+                    },
+                    "discard": [],
+                    "complete": []
+                },
+                "3002": {
+                    "userId": "3002",
+                    "shouLen": 13,
+                    "userInfo": {
+                        "roomId": "983296",
+                        "roundId": "983296_1513767899898",
+                        "seatNum": "2",
+                        "status": "42",
+                        "pengKind": "null",
+                        "gangKind": [],
+                        "tingKind": {},
+                        "huKind": 0,
+                        "tingResult": [],
+                        "isLeakHu": {},
+                        "card": "null"
+                    },
+                    "discard": [],
+                    "complete": []
+                },
+                "3003": {
+                    "userId": "3003",
+                    "shouLen": 13,
+                    "userInfo": {
+                        "roomId": "983296",
+                        "roundId": "983296_1513767899898",
+                        "seatNum": "3",
+                        "status": "42",
+                        "pengKind": "null",
+                        "gangKind": [],
+                        "tingKind": {},
+                        "huKind": 0,
+                        "tingResult": [],
+                        "isLeakHu": {},
+                        "card": "null"
+                    },
+                    "discard": [],
+                    "complete": []
+                },
+                "3004": {
+                    "userId": "3004",
+                    "shouLen": 13,
+                    "userInfo": {
+                        "roomId": "983296",
+                        "roundId": "983296_1513767899898",
+                        "seatNum": "4",
+                        "status": "42",
+                        "pengKind": "null",
+                        "gangKind": [],
+                        "tingKind": {},
+                        "huKind": 0,
+                        "tingResult": [],
+                        "isLeakHu": {},
+                        "card": "null"
+                    },
+                    "discard": [],
+                    "complete": []
+                }
+            }
+        }
+    },
+    "3": {
+        "cmd": "roomConfig",
+        "code": 200,
+        "res": {
+            "roomConf": {
+                "isFree": 0,
+                "beforeRoomConf": {
+                    "userCount": 4,
+                    "mode": [{
+                        "type": "common",
+                        "typeName": "经典玩法",
+                        "play": [{
+                            "txt": "红中满天飞",
+                            "key": "hzmtf",
+                            "default": 1
+                        }, {
+                            "txt": "刮大风",
+                            "key": "gdf",
+                            "default": 1
+                        }, {
+                            "txt": "3/7边,单吊夹",
+                            "key": "37b_ddj",
+                            "default": 1
+                        }, {
+                            "txt": "杠加分",
+                            "key": "gjf",
+                            "default": 1
+                        }, {
+                            "txt": "漏胡(对宝)",
+                            "key": "louhu",
+                            "default": 1
+                        }, {
+                            "txt": "庄家翻倍",
+                            "key": "zjfb",
+                            "default": 1
+                        }, {
+                            "txt": "不夹不胡",
+                            "key": "bjbh",
+                            "default": 0
+                        }, {
+                            "txt": "暗宝",
+                            "key": "anbao",
+                            "default": 0
+                        }, {
+                            "txt": "开牌炸",
+                            "key": "kpz",
+                            "default": 0
+                        }]
+                    }]
+                },
+                "userCount": 4,
+                "mode": [{
+                    "type": "common",
+                    "typeName": "经典玩法",
+                    "play": [{
+                        "txt": "红中满天飞",
+                        "key": "hzmtf",
+                        "default": 1
+                    }, {
+                        "txt": "刮大风",
+                        "key": "gdf",
+                        "default": 1
+                    }, {
+                        "txt": "3/7边,单吊夹",
+                        "key": "37b_ddj",
+                        "default": 1
+                    }, {
+                        "txt": "杠加分",
+                        "key": "gjf",
+                        "default": 1
+                    }, {
+                        "txt": "漏胡(对宝)",
+                        "key": "louhu",
+                        "default": 1
+                    }, {
+                        "txt": "庄家翻倍",
+                        "key": "zjfb",
+                        "default": 1
+                    }, {
+                        "txt": "不夹不胡",
+                        "key": "bjbh",
+                        "default": 0
+                    }, {
+                        "txt": "暗宝",
+                        "key": "anbao",
+                        "default": 0
+                    }, {
+                        "txt": "开牌炸",
+                        "key": "kpz",
+                        "default": 0
+                    }]
+                }],
+                "roomConf": {
+                    "record": [{
+                        "num": "2",
+                        "card": "1"
+                    }, {
+                        "num": "4",
+                        "card": "14"
+                    }, {
+                        "num": "8",
+                        "card": "20"
+                    }]
+                }
+            }
+        }
+    },
+    "4": {
+        "pusResult": {
+            "uid": "3001",
+            "card": 36,
+            "sourceId": "3001",
+            "huKind": 0,
+            "gangKind": [],
+            "tingKind": {
+                "kind": {
+                    "32": [{
+                        "ting": 34,
+                        "multi": 1,
+                        "remainCount": 4
+                    }, {
+                        "ting": 37,
+                        "multi": 1,
+                        "remainCount": 2
+                    }],
+                    "37": [{
+                        "ting": 32,
+                        "multi": 1,
+                        "remainCount": 3
+                    }]
+                }
+            },
+            "pengKind": "ddd"
+        },
+        "roundId": "123456"
+    }
+}

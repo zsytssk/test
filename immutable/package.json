@@ -1,0 +1,18 @@
+{
+  "name": "immutable-demo",
+  "version": "1.0.0",
+  "description": "sample code for Ottawa Javascript meetup",
+  "dependencies": {
+    "immutable": "*",
+    "seamless-immutable": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mackenza/immutable-demo.git"
+  },
+  "author": "Andrew MacKenzie",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mackenza/immutable-demo/issues"
+  }
+}
