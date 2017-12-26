@@ -41,16 +41,20 @@ import * as state2 from './data2.json';
 const a = fromJS(state1);
 const b = fromJS(state2);
 
-let change = compareObj(a, b);
+// let change = compareObj(a, b);
 
+// console.log(change);
 
-// let count = 2;
+// let count = 10;
 // console.time(`compare ${count} time`);
 // for (let i = 0; i < count; i++) {
-//     if (i == 0) {
-//         console.log(compareObj(a, b));
-//         continue;
-//     }
-//     compareObj(a, b);
+//     a.equals(b);
 // }
 // console.timeEnd(`compare ${count} time`);
+
+let count = 1;
+console.time(`compare total ${count} time`);
+for (let i = 0; i < count; i++) {
+    compareObj(a, b);
+}
+console.timeEnd(`compare total ${count} time`);

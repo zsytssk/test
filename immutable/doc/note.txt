@@ -1,3 +1,11 @@
 ## 2017-12-26 09:59:23
 * @note
 > 删除某个connect，如果node为最低级 直接删除， 不然清楚其中的listener就可以了
+
+* @ques 有没有办法mapPropToReducer,
+> 每次改变state 自动找到相应的 connect 触发修改
+
+
+* @ques 为什么 data.1 中对象对比
+> compareObj内部 和 compareObj外部差了整整1毫秒
+> 中间没有任何运算。。

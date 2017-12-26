@@ -5,7 +5,7 @@
         "res": {
             "rInfo": {
                 "roomId": "983296",
-                "currentNum": "1",
+                "currentNum": "2",
                 "config": {
                     "method": [1],
                     "number": 4,
@@ -209,7 +209,7 @@
                 },
                 "3004": {
                     "userId": "3004",
-                    "shouLen": 13,
+                    "shouLen": 1,
                     "userInfo": {
                         "roomId": "983296",
                         "roundId": "983296_1513767899898",
