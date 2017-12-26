@@ -7,9 +7,8 @@ export function compareObj(ori_obj, com_obj, parent_key?) {
         return change_arr;
     }
 
-    let okeys = ori_obj.keySeq().toArray();
-
-    for (let i = 0, len = okeys.length; i < len; i++) {
+    let [...okeys] = ori_obj.keys();
+    for (let i = 0; i < okeys.length; i++) {
         let o_key = okeys[i];
 
         let ori_item = ori_obj.get(o_key);
@@ -50,9 +49,9 @@ export function compareObj(ori_obj, com_obj, parent_key?) {
         change_arr = change_arr.concat(change_item_arr);
     }
 
-    let ckeys = com_obj.keySeq().toArray();
+    let [...ckeys] = com_obj.keys();
     /**查找增加的 */
-    for (let i = 0, len = ckeys.length; i < len; i++) {
+    for (let i = 0; i < ckeys.length; i++) {
         let c_key = ckeys[i];
         if (ori_obj.has(c_key)) {
             continue;

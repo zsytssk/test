@@ -1,19 +1,19 @@
-import { Store } from './reduxManager'
 import { getPropByPath } from './reduxUtils';
 
 /**监听store state的变化执行函数 */
 export class ReduxConnectManager {
     config_node: ConnectNode;
     constructor() {
-
     }
     init() {
+        this.config_node = new ConnectNode({ path: 'root' });
     }
     public onStateChange(prev_state: any, next_state: any) {
         this.config_node.detectChange(prev_state, next_state);
     }
     public add(connect_info: ConnectInfo) {
-
+        let root_node = this.config_node;
+        root_node.createChildByConfig(connect_info);
     }
     public remove() {
 
@@ -31,19 +31,18 @@ export type ConnectStoreChangeInfo = {
 export type ConnectStoreChangeFun = (change_info: ConnectStoreChangeInfo) => void;
 export type ConnectInfo = {
     path: string;
-    callback: ConnectStoreChangeFun;
+    listener: ConnectStoreChangeFun;
 };
 
 /**所有connect按照父子树连接在一起 */
 type ConnectNodeConfig = {
     path: string;
-    listener?: ConnectStoreChangeFun[];
-    children?: ConnectNodeConfig[]
+    listener?: ConnectStoreChangeFun;
 }
 
 class ConnectNode {
     path: string;
-    listener: ConnectStoreChangeFun[] = [];
+    listeners: ConnectStoreChangeFun[] = [];
     childs = [] as ConnectNode[];
     parent: ConnectNode;
     constructor(config: ConnectNodeConfig) {
@@ -101,18 +100,27 @@ class ConnectNode {
         }
         return null;
     }
-    public createChildByConfig(config: ConnectNodeConfig[]) {
-        for (let i = 0; i < config.length; i++) {
-            let config_item = config[i];
-            let config_node = new ConnectNode({
-                path: config_item.path,
-            });
-            if (config_item.children) {
-                config_node.createChildByConfig(config_item.children);
-            }
+    public createChildByConfig(config: ConnectNodeConfig) {
+        let path_arr = config.path.split('.');
+        let path = path_arr.shift();
 
-            this.addChild(config_node);
+        let child_node = this.findChildNodeByPath([path]);
+        if (!child_node) {
+            child_node = new ConnectNode({
+                path: path,
+            });
+            this.addChild(child_node);
         }
+
+        if (path_arr.length) {
+            child_node.createChildByConfig({
+                path: path_arr.join('.'),
+                listener: config.listener
+            });
+        } else {
+            child_node.addListener(config.listener);
+        }
+
     }
     public detectChange(prev_state, next_state) {
         let path = this.path;
@@ -162,10 +170,13 @@ class ConnectNode {
     private findChildForKey(key) {
 
     }
+    public addListener(listener: ConnectStoreChangeFun) {
+        this.listeners.push(listener);
+    }
     private callListener(change_info: ConnectStoreChangeInfo) {
-        let listener = this.listener;
-        for (let i = 0, len = listener.length; i < len; i++) {
-            listener[i](change_info);
+        let listeners = this.listeners;
+        for (let i = 0, len = listeners.length; i < len; i++) {
+            listeners[i](change_info);
         }
     }
     public destroy() {
