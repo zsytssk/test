@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "sample code for Ottawa Javascript meetup",
   "dependencies": {
+    "deep-diff": "^0.3.8",
     "immutable": "*",
+    "immutablediff": "^0.4.4",
     "seamless-immutable": "*"
   },
   "repository": {

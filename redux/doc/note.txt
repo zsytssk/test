@@ -1,3 +1,16 @@
+## 2017-12-28 09:16:25
+> array reducers
+mapStateToProps
+> 会将State中的值和props联系 如果state中对应值发生改变 props会相应改变
+mapDispatchToProps
+> 会将props和dispatch联系在一起
+
+* 如果我知道两者的原理，对我本身的connect应该很有帮助
+> 只是将现有的值和原来的值进行比较
+
+* redux devtool 中如何对比 state的区别
+
+
 ## 2017-12-22 09:47:44
 * @ques 假如每一个数据都有一个id来确定唯一 那么如何通过这个id来寻找到相应的数据呢？？
 > 张俊清 如何找到数组中的元素

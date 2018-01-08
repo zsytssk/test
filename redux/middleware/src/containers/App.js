@@ -44,8 +44,8 @@ class App extends Component {
     return (
       <div>
         <Picker value={selectedSubreddit}
-                onChange={this.handleChange}
-                options={[ 'reactjs', 'frontend' ]} />
+          onChange={this.handleChange}
+          options={['reactjs', 'frontend']} />
         <p>
           {lastUpdated &&
             <span>
@@ -62,25 +62,31 @@ class App extends Component {
         {isEmpty
           ? (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
           : <div style={{ opacity: isFetching ? 0.5 : 1 }}>
-              <Posts posts={posts} />
-            </div>
+            <Posts posts={posts} />
+          </div>
         }
       </div>
     )
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps = { x: 1 }) => {
   const { selectedSubreddit, postsBySubreddit } = state
   const {
     isFetching,
     lastUpdated,
     items: posts
   } = postsBySubreddit[selectedSubreddit] || {
-    isFetching: true,
-    items: []
-  }
+      isFetching: true,
+      items: []
+    }
 
+  console.log({
+    selectedSubreddit,
+    posts,
+    isFetching,
+    lastUpdated
+  });
   return {
     selectedSubreddit,
     posts,

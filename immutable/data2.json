@@ -25,7 +25,7 @@
                 "speakerId": "3001",
                 "takeId": 3001,
                 "remainCount": 59,
-                "takeCard": 38
+                "takeCard": 3
             },
             "list": {
                 "3001": {
@@ -71,7 +71,7 @@
                 },
                 "3003": {
                     "userId": "3003",
-                    "shouLen": 13,
+                    "shouLen": 11,
                     "userInfo": {
                         "roomId": "983296",
                         "roundId": "983296_1513767899898",

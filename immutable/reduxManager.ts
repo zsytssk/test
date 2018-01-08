@@ -1,4 +1,10 @@
-import { getPropByPath } from './reduxUtils';
+import {
+    getPropByPath,
+    compareObj,
+    ChangeInfo
+} from './reduxUtils';
+
+export type ChangeInfo = ChangeInfo;
 
 /**监听store state的变化执行函数 */
 export class ReduxConnectManager {
@@ -6,10 +12,14 @@ export class ReduxConnectManager {
     constructor() {
     }
     init() {
-        this.config_node = new ConnectNode({ path: 'root' });
+        this.config_node = new ConnectNode({ path: '' });
     }
     public onStateChange(prev_state: any, next_state: any) {
-        this.config_node.detectChange(prev_state, next_state);
+        let changes = compareObj(prev_state, next_state);
+
+        for (let i = 0; i < changes.length; i++) {
+            this.config_node.detectChange(changes[i]);
+        }
     }
     public add(connect_info: ConnectInfo) {
         let root_node = this.config_node;
@@ -20,15 +30,8 @@ export class ReduxConnectManager {
     }
 }
 
-export type ConnectStoreChangeType = 'keychange' | 'add' | 'destroy';
-export type ConnectStoreChangeInfo = {
-    type: ConnectStoreChangeType;
-    keyname?: string;
-    old_val?: any;
-    new_val?: any;
-}
 
-export type ConnectStoreChangeFun = (change_info: ConnectStoreChangeInfo) => void;
+export type ConnectStoreChangeFun = (change_info: ChangeInfo) => void;
 export type ConnectInfo = {
     path: string;
     listener: ConnectStoreChangeFun;
@@ -51,12 +54,12 @@ class ConnectNode {
     public get is_top() {
         return this.parent ? false : true;
     }
-    public get abs_path() {
+    public get abs_path(): string {
         if (!this.path) {
-            return;
+            return '';
         }
         if (this.parent.is_top) {
-            return '.' + this.path;
+            return this.path;
         }
         return this.parent.abs_path + '.' + this.path;
     }
@@ -120,64 +123,57 @@ class ConnectNode {
         } else {
             child_node.addListener(config.listener);
         }
-
     }
-    public detectChange(prev_state, next_state) {
-        let path = this.path;
-        let is_change = false;
+    public detectChange(change_info: ChangeInfo) {
+        let childs = this.childs;
+        let change_handled = false;
+        let path = change_info.path;
 
-        let self_prev_state = getPropByPath(path, prev_state);
-        let self_cur_state = getPropByPath(path, next_state);
-
-        /**没有变化 */
-        if (!self_prev_state && !self_cur_state) {
-            return is_change;
+        if (path.indexOf(this.abs_path) == -1) {
+            return change_handled;
         }
-        /**no change */
-        if (self_prev_state && self_prev_state.isEqual(self_cur_state)) {
-            return is_change;
-        }
+        // debugger;
+        for (let i = 0; i < childs.length; i++) {
+            let item = childs[i];
 
-        /**add */
-        if (!self_prev_state && self_cur_state) {
-            this.callListener({
-                type: 'add',
-                old_val: self_prev_state,
-                new_val: self_cur_state
-            });
-            is_change = true;
+            change_handled = item.detectChange(change_info);
+            if (change_handled) {
+                return change_handled;
+            }
         }
 
-        /**destroy */
-        if (self_prev_state && !self_cur_state) {
-            this.callListener({
-                type: 'destroy',
-                old_val: self_prev_state,
-                new_val: self_cur_state
-            });
-            is_change = true;
+        /** 去掉第一个.*/
+        let node_change_path = path.replace(this.abs_path, '');
+        if (node_change_path.indexOf('.') == 0) {
+            node_change_path = node_change_path.replace('.', '');
+        }
+        /**当前绑定元素自己发生修改 */
+        if (node_change_path === '') {
+            node_change_path = 'self';
         }
 
-        let [...state_keys] = self_prev_state.keys();
+        change_handled = this.callListener({
+            type: change_info.type,
+            ori_val: change_info.ori_val,
+            end_val: change_info.end_val,
+            path: node_change_path
+        });
 
-        for (let i = 0, len = state_keys.len; i < len; i++) {
-            let prev_key_state = self_prev_state.get(state_keys[i]);
-            let cur_key_state = self_cur_state.get(state_keys[i]);
-        }
-
-        return is_change;
-    }
-    private findChildForKey(key) {
-
+        return change_handled;
     }
     public addListener(listener: ConnectStoreChangeFun) {
         this.listeners.push(listener);
     }
-    private callListener(change_info: ConnectStoreChangeInfo) {
+    private callListener(change_info: ChangeInfo) {
         let listeners = this.listeners;
+        if (!listeners.length) {
+            return false;
+        }
+
         for (let i = 0, len = listeners.length; i < len; i++) {
             listeners[i](change_info);
         }
+        return true;
     }
     public destroy() {
         // 删除所有的子类
