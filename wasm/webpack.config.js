@@ -13,16 +13,16 @@ module.exports = {
     filename: 'bundle.js',
   },
   module: {
-    rules: [{
-      test: /\.rs$/,
-      type: 'webassembly/experimental',
-      use: {
-        loader: 'rust-native-wasm-loader',
-        options: {
-          gc: true,
-          release: true
-        },
-      },
-    }, ],
+    // rules: [{
+    //   test: /\.rs$/,
+    //   type: 'webassembly/experimental',
+    //   use: {
+    //     loader: 'rust-native-wasm-loader',
+    //     options: {
+    //       gc: true,
+    //       release: true
+    //     },
+    //   },
+    // }, ],
   },
 }

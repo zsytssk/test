@@ -7,6 +7,17 @@
             "label": "compile",
             "type": "shell",
             "command": "cargo  +nightly build --target wasm32-unknown-unknown --release"
+        },
+        {
+            "label": "copy wasm",
+            "type": "shell",
+            "command": "node ./other/releaseFile/main.js copy_wasm",
+            "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "start",
+            "problemMatcher": []
         }
     ]
 }

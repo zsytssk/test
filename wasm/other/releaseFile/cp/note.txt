@@ -1,0 +1,19 @@
+## 创建文件夹文件夹
+* fs.mkdirSync('a/b/c', 0755);
+
+## 复制文件
+var fileName = "coverflow-3.0.1.zip";
+
+var sourceFile = path.join(__dirname, fileName);
+var destPath = path.join(__dirname, "dest", fileName);
+
+var readStream = fs.createReadStream(sourceFile);
+var writeStream = fs.createWriteStream(destPath);
+readStream.pipe(writeStream);
+
+
+## 存不存在
+
+if (!fs.existsSync(src_path)) {
+
+}

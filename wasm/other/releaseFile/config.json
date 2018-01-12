@@ -1,0 +1,7 @@
+{
+  "src_git": "D:/zsytssk/github/test/wasm/target/wasm32-unknown-unknown/release/",
+  "dist_git": "D:/zsytssk/github/test/wasm/public/test/",
+  "copy_wasm": {
+    "rust_wasm_webpack.wasm": "rust_wasm_webpack.wasm"
+  }
+}
