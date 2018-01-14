@@ -1,0 +1,11 @@
+* keyword
+  > Component-Oriented
+  > js 组件化
+
+- @ques js 如何实现组件化
+  * 易于使用 + 易于理解
+
+## 要求
+
+* 子类继承父类的 Components
+* 每一个子类的 Components 的实例都不一眼

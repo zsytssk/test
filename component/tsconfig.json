@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es2016",
+      "dom"
+    ],
+    "target": "esnext",
+    "module": "CommonJS",
+    "allowJs": true,
+    "experimentalDecorators": true
+  }
+}
