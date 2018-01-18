@@ -1,27 +1,29 @@
-type Comps = ComponentWrap[];
+type Comps = Component[];
 
 export class ComponentWrap {
   private components = [] as Comps;
-  constructor(comps?: ComponentWrap[]) {
+  constructor(comps?: Component[]) {
     if (comps) {
-      this.components = comps;
+      this.addComponents(comps);
     }
   }
-  public getComponents<T>(creator: any): ComponentWrap {
-    let components = this.components;
-    for (let i = 0; i < components.length; i++) {
-      let item = components[i];
+  public getComponent<T>(creator: any): Component {
+    const components = this.components;
+    for (const item of components) {
       if (item instanceof creator) {
         return item;
       }
     }
   }
-  public addComponents(comps: ComponentWrap[]) {
+  public addComponents(comps: Component[]) {
     this.components = this.components.concat(comps);
+    for (const comps_item of comps) {
+      comps_item.bindWrap(this);
+    }
   }
 }
 export class Component {
-  wrap: ComponentWrap;
+  protected wrap: ComponentWrap;
   public bindWrap(wrap: ComponentWrap) {
     this.wrap = wrap;
   }
