@@ -1,13 +1,13 @@
-type Comps = any[];
+type Comps = ComponentWrap[];
 
-export class Component {
+export class ComponentWrap {
   private components = [] as Comps;
-  constructor(comps?: any[]) {
+  constructor(comps?: ComponentWrap[]) {
     if (comps) {
       this.components = comps;
     }
   }
-  public getComponents<T>(creator: typeof T): T {
+  public getComponents<T>(creator: any): ComponentWrap {
     let components = this.components;
     for (let i = 0; i < components.length; i++) {
       let item = components[i];
@@ -16,7 +16,13 @@ export class Component {
       }
     }
   }
-  public addComponents(comps: any[]) {
+  public addComponents(comps: ComponentWrap[]) {
     this.components = this.components.concat(comps);
+  }
+}
+export class Component {
+  wrap: ComponentWrap;
+  public bindWrap(wrap: ComponentWrap) {
+    this.wrap = wrap;
   }
 }
