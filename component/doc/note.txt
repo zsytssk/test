@@ -1,8 +1,14 @@
-* keyword
+## 2018-01-18 20:34:16
+
+* 缺点
+  * 用起来太繁琐 不知道绑定多少 component
+  * 不知道什么时候调用, 相互调用 容易搞糊涂
+
+- keyword
   > Component-Oriented
   > js 组件化
 
-- @ques js 如何实现组件化
+* @ques js 如何实现组件化
   * 易于使用 + 易于理解
 
 ## 要求
