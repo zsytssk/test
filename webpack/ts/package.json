@@ -1,0 +1,17 @@
+{
+  "name": "webpack_test",
+  "main": "index.js",
+  "version": "1.0.0",
+  "scripts": {
+    "webpack_dev": "webpack --colors --config webpack.config.dev.js",
+    "webpack_dev_server": "webpack-dev-server --colors --config webpack.config.dev.js",
+    "webpack_release": "webpack --config  webpack.config.rel.js"
+  },
+  "devDependencies": {
+    "redux": "^3.7.2",
+    "ts-loader": "^3.0.3",
+    "typescript": "^2.6.2",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.7.1"
+  }
+}
