@@ -1,0 +1,5 @@
+## 下面这段代码是什么意思
+
+var decrease = Rx.Observable.fromEvent(decreaseButton, 'click')
+// 我们还是映射到一个函数，它会减少 count
+.map(() => state => Object.assign({}, state, {count: state.count - 1}));
