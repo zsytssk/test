@@ -36,7 +36,7 @@ class Man extends Person {
     );
   }
   public bindOtherEvent(other: Man) {
-    const this_event_cmp = this.getComponent(BaseEvent) as BaseEvent;
+    const this_event_cmp = this.getComponent(BaseEvent);
     const other_event_cmp = other.getComponent(BaseEvent) as BaseEvent;
     this_event_cmp.bindOtherEvent(
       other_event_cmp,
@@ -49,10 +49,5 @@ class Man extends Person {
   }
 }
 
-const a = new Man();
+const a = new Person();
 const b = new Man();
-a.init();
-
-a.bindOtherEvent(b);
-(b.getComponent(Test) as Test).test();
-(b.getComponent(Test) as Test).test();

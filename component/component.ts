@@ -1,5 +1,10 @@
 type Comps = Component[];
 
+interface ClassConstructor<T> extends Function {
+  new (...any): T;
+  prototype: T;
+}
+
 export class ComponentWrap {
   private components = [] as Comps;
   constructor(comps?: Component[]) {
@@ -7,7 +12,7 @@ export class ComponentWrap {
       this.addComponents(comps);
     }
   }
-  public getComponent<T>(creator: any): Component {
+  public getComponent<T extends Component>(creator: ClassConstructor<T>): T {
     const components = this.components;
     for (const item of components) {
       if (item instanceof creator) {

@@ -1,14 +1,21 @@
 ## 2018-01-18 20:34:16
 
-* 缺点
+* @ques
+  * 外界能不能调用 components 内部的方法
+  * components 相互之间能不能调用
+  * 如果 components 限制只能有一个 那么和继承又有什么区别
+  * component 如果只是在最外层使用 为什么我不直接 使用 class 的属性呢
+
+- 缺点
   * 用起来太繁琐 不知道绑定多少 component
   * 不知道什么时候调用, 相互调用 容易搞糊涂
 
-- keyword
+* keyword
   > Component-Oriented
+  > Component-Based Architecture
   > js 组件化
 
-* @ques js 如何实现组件化
+- @ques js 如何实现组件化
   * 易于使用 + 易于理解
 
 ## 要求
