@@ -1,20 +1,24 @@
 import { Observable } from 'rxjs/Rx';
+import { BaseEvent } from './event';
 import { log } from './utils';
 
-const myObserverable = Observable.create(observer => {
-  observer.next('foo');
-  setTimeout(() => {
-    observer.next('bar');
-  }, 1000);
-});
+const test_event = new BaseEvent();
 
-myObserverable
-  .filter(value => {
-    return value === 'bar';
-  })
-  .map(() => state => Object.assign({}, state, { count: state.count + 1 }))
-  .scan((state, changeFn) => changeFn(state), { count: 0 })
-  .subscribe(fn => {
-    log(fn);
-    // log(value);
+function createObserver(event_obj: BaseEvent, event_name: string) {
+  return new Observable(observer => {
+    event_obj.on(event_name, data => {
+      observer.next(data);
+    });
   });
+}
+
+createObserver(test_event, 'click')
+  .throttleTime(1000)
+  .subscribe(val => {
+    log(val);
+  });
+
+test_event.trigger('click', { data: '124' });
+// setTimeout(() => {
+//   test_event.trigger('click', { data: '123' });
+// }, 900);
