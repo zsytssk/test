@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Rx';
 import { callFunc, createRandomString, log } from './utils';
 
 type i_hook_other_event = {

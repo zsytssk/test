@@ -13,7 +13,7 @@ export function callFunc(func: () => void) {
   }
   func();
 }
-export function log(arg) {
+export function log(...args) {
   // tslint:disable-next-line:no-console
-  console.log(arg);
+  console.log.apply(console, args);
 }

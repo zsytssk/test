@@ -1,3 +1,22 @@
+## 2018-01-22 10:26:36
+
+* rxjs 的应用场景
+
+  * socket 全部 return observer
+  * connect 修改 全部 return observer
+
+* event 全部使用 observer...
+
+  * 甚至 我的所有 on bindOther 全部返回 observer
+  * once 能用这个吗 Observer take(1) 之后应该会自己销毁
+  * 这时候 observer.next("") 保存在其他地方 会不会自己销毁, 应该不会
+  * 这会导致什么 bug 吗??
+
+* 一个 observerable 每次 subscripe 都会重新创建
+  * 那么初始的 observervable 我只需要创建一个
+  * 需要的时候我将原来的 observer 直接 return 就可以了
+  * 是这样吗
+
 ## 下面这段代码是什么意思
 
 var decrease = Rx.Observable.fromEvent(decreaseButton, 'click')
