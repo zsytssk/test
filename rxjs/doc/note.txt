@@ -13,9 +13,12 @@
   * 这会导致什么 bug 吗??
 
 * 一个 observerable 每次 subscripe 都会重新创建
+
   * 那么初始的 observervable 我只需要创建一个
   * 需要的时候我将原来的 observer 直接 return 就可以了
   * 是这样吗
+
+  http://www.syntaxsuccess.com/viewarticle/error-handling-in-rxjs
 
 ## 下面这段代码是什么意思
 
