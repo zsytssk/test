@@ -1,9 +1,3 @@
-* @ques
-  * 如何 cancel
-  * 如何 retry
-  * http get .. 这个外在的东西怎么可能能够 retry 呢
-  * 如何合并多个 observer
-
 ## 2018-01-21 11:14:17
 
 * scan 是什么意思
@@ -16,6 +10,10 @@
 * 如何清除 observer
 
 * 有没有公共 socket 测试的地址
+
+* @ques
+  * 如何 retry
+  * 如何合并多个 observer
 
 ## 2018-01-22 10:26:36
 
