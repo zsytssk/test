@@ -1,3 +1,9 @@
+## 2018-01-21 11:14:17
+
+* scan 是什么意思
+
+* 如何应用到 cocos 或者 laya 中
+
 ## 下面这段代码是什么意思
 
 var decrease = Rx.Observable.fromEvent(decreaseButton, 'click')
