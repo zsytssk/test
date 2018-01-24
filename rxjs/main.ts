@@ -11,8 +11,8 @@ function createObserver(event_obj: BaseEvent, event_name: string) {
     };
     event_obj.on(event_name, fn);
 
-    return function unsubscribe() {
-      log(`unsubscribe`);
+    return function unsubscribe(arg) {
+      log(`unsubscribe$`, arg, this);
       event_obj.off(event_name, fn);
     };
   });
@@ -27,9 +27,10 @@ obser
     log(1, val);
   });
 
-// obser.take(2).subscribe(val => {
-//   log(2, val);
-// });
+const subscribe2 = obser.take(2).subscribe(val => {
+  log(2, val);
+});
+subscribe2.unsubscribe();
 
 test_event.trigger('click', { data: '124' });
 test_event.trigger('click', { data: '124' });
