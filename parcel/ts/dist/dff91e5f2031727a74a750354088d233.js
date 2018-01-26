@@ -69,12 +69,10 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({6:[function(require,module,exports) {
-function main() {
-    alert(1);
-    test();
+})({5:[function(require,module,exports) {
+function test() {
+    alert("test");
 }
-main();
 
 },{}],7:[function(require,module,exports) {
 
@@ -197,5 +195,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[7,6])
-//# sourceMappingURL=/dist/5fc7cf9ae761e6ff19a8614ade31926c.map
+},{}]},{},[7,5])
+//# sourceMappingURL=/dist/dff91e5f2031727a74a750354088d233.map
