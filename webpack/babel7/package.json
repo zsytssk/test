@@ -1,0 +1,36 @@
+{
+  "name": "webpack_test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "webpack-dev-server_dev": "webpack-dev-server --colors --config webpack.config.dev.js",
+    "webpack-dev-server_release": "webpack-dev-server --colors --config webpack.config.rel.js",
+    "webpack_dev": "webpack --colors --config webpack.config.dev.js",
+    "webpack_release": "webpack --config  webpack.config.rel.js",
+    "release_js": "node ./other/releaseFile/main.js release_js",
+    "release_libs": "node ./other/releaseFile/main.js release_libs",
+    "release_light": "node ./other/releaseFile/main.js release_light",
+    "release_all": "node ./other/releaseFile/main.js release_all"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "lodash-webpack-plugin": "^0.11.4",
+    "webpack": "^3.5.6",
+    "webpack-dev-server": "^2.7.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^7.0.0-beta.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-lodash": "^3.2.11",
+    "babel-plugin-syntax-typescript": "^7.0.0-alpha.19",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^2.0.0-beta.2",
+    "babel-preset-typescript": "^7.0.0-alpha.19"
+  }
+}
