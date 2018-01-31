@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "sourceMap": false,
+    "watch": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "outFile": "dist/main.min.js",
+    "rootDir": "src",
+    "module": "esnext",
+    "moduleResolution": "node"
+  },
+  "include": ["src", "typings"]
+}
