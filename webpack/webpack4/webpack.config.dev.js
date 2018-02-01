@@ -4,7 +4,7 @@ const path = require("path");
 module.exports = {
   devtool: "eval-source-map",
   entry: {
-    "fish.min": "./src/main.ts",
+    "main.min": "./src/main.ts",
     test: "./src/test.ts"
   },
   output: {
