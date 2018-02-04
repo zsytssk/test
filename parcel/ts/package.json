@@ -1,0 +1,20 @@
+{
+  "author": "zsytssk",
+  "license": "MIT",
+  "name": "parcel-test",
+  "version": "1.0.0",
+  "description": "TypeScript app with parcel bundler.",
+  "scripts": {
+    "start": "parcel serve index.html",
+    "build": "cross-env NODE_ENV=production parcel build src/main.ts --public-url .",
+    "watch": "parcel watch src/main.ts",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "devDependencies": {
+    "cross-env": "^5.1.1",
+    "gh-pages": "^1.1.0",
+    "parcel-bundler": "^1.5.0",
+    "typescript": "^2.6.2"
+  }
+}

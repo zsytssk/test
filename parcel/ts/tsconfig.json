@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "sourceMap": true,
+    "watch": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "outFile": "dist/main.min.js",
+    "rootDir": "src",
+    "module": "none",
+    "moduleResolution": "node"
+  },
+  "include": ["src", "typings"]
+}

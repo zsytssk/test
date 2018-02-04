@@ -1,0 +1,13 @@
+{
+  "globalDependencies": {
+    "LayaAir": "github:layabox/layaair/bin/ts/LayaAir.d.ts#master",
+    "base64": "github:aquavit/DefinitelyTyped/base64/base64.d.ts#master",
+    "bezier-js": "registry:dt/bezier-js#0.0.0+20170212180440",
+    "cryptojs": "registry:dt/cryptojs#3.1.2+20160510002910",
+    "es6-promise": "registry:dt/es6-promise#0.0.0+20160726191732",
+    "sat": "github:omni360/sat.d.ts/sat.d.ts"
+  },
+  "dependencies": {
+    "lodash": "registry:dt/lodash#4.14.0+20170324155812"
+  }
+}

@@ -1,3 +1,10 @@
+* promise.all == forkJoin == merge
+  * 合并所有完成
+* promise.then => concatMap(onebyone) => concat(...)
+
+- @ques
+  * 这 observer mergeAll 是如何实现的
+
 * @ques
   * mergeMap 由什么实用场景？？
 

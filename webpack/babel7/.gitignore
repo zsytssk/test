@@ -1,0 +1,16 @@
+*.xlsx
+*.doc
+typings/
+release/
+other/*
+!other/save/
+!other/releaseFile/
+other/releaseFile/config.json
+node_modules/
+laya/.laya
+laya/libs/
+laya/src/*
+!laya/src/libs
+laya/bin/*
+!laya/bin/libs
+!laya/bin/*.html

@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "sourceMap": false,
+    "watch": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "outFile": "laya/src/fish.check.js",
+    "rootDir": "trc",
+    "module": "amd",
+    "baseUrl": "./node_modules"
+  },
+  "include": [
+    "trc",
+    "typings"
+  ]
+}
