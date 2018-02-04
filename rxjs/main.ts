@@ -1,19 +1,21 @@
-import http = require('http');
 import { Observable, Observer, Subscriber } from 'rxjs/Rx';
-import { BaseEvent } from './event';
-import { log } from './utils';
-
-const source = Observable.interval(1000);
-const example = source
-  .flatMap(val => {
-    if (val > 5) {
-      return Observable.throw('Error!');
+import { extend, log } from './utils';
+fetch('http://www.example.org/submit.php', {
+  method: 'POST',
+  // tslint:disable-next-line:object-literal-sort-keys
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  },
+  body: 'firstName=Nikhil&favColor=blue&password=easytoguess',
+}).then(
+  res => {
+    if (res.ok) {
+      alert('Perfect! Your settings are saved.');
+    } else if (res.status === 401) {
+      alert('Oops! You are not authorized.');
     }
-    return Observable.of(val);
-  })
-  .retry(2);
-
-const subscribe = example.subscribe({
-  error: val => log(`${val}: two time quit`),
-  next: val => log(val),
-});
+  },
+  e => {
+    alert('Error submitting form!');
+  },
+);

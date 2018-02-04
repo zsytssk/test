@@ -1,4 +1,7 @@
 * @ques
+  * mergeMap 由什么实用场景？？
+
+- @ques
   * 如何 cancel
   * 如何 retry
   * http get .. 这个外在的东西怎么可能能够 retry 呢
