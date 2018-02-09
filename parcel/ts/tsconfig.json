@@ -4,9 +4,10 @@
     "sourceMap": true,
     "watch": true,
     "allowJs": true,
+    "checkJs": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "outFile": "dist/main.min.js",
+    "outDir": "dist",
     "rootDir": "src",
     "module": "none",
     "moduleResolution": "node"

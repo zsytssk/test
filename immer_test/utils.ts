@@ -5,7 +5,7 @@ export function createRandomString() {
 }
 
 export function isFunc(func: () => void): boolean {
-  return func && typeof func === 'function';
+  return func && typeof func === "function";
 }
 export function callFunc(func: () => void) {
   if (!isFunc(func)) {
@@ -13,7 +13,7 @@ export function callFunc(func: () => void) {
   }
   func();
 }
-export function log(arg) {
+export function log(...arg) {
   // tslint:disable-next-line:no-console
-  console.log(arg);
+  console.log(...arg);
 }

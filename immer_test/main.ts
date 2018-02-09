@@ -17,8 +17,7 @@ const baseState: StateData = [
 ];
 
 const nextState = produce(baseState, draftState => {
+  log(this);
   draftState.push({ todo: "Tweet about it" });
   draftState[1].done = true;
 });
-
-log(nextState);
