@@ -11,7 +11,7 @@ module.exports = {
     filename: "[name].js",
     path: path.join(__dirname, "dist/")
   },
-  mode: "development",
+  mode: "production",
   module: {
     rules: [
       {
@@ -19,7 +19,12 @@ module.exports = {
         loader: "ts-loader",
         options: {
           configFile: "tsconfig.webpack.json",
-          transpileOnly: true
+          transpileOnly: true,
+          compilerOptions: {
+            target: "es5",
+            sourceMap: false,
+            lib: ["dom", "es5", "scripthost", "es2015.promise"]
+          }
         }
       }
     ]
@@ -28,7 +33,11 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".tsx", ".js"]
   },
-  devServer: {
-    contentBase: path.join(__dirname, "laya")
-  }
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
+      }
+    })
+  ]
 };

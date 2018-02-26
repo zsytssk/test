@@ -1,7 +1,9 @@
 "use strict";
 
-const { spawn } = require("child_process"),
-  ls = spawn("cmd", ["/c", "dir"]);
+const {
+  spawn
+} = require("child_process"),
+  ls = spawn("cmd", ["/c", "cd"]);
 
 ls.stdout.on("data", data => {
   console.log(`stdout: ${data}`);
