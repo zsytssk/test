@@ -1,0 +1,40 @@
+```tsx
+// import * as React from "react";
+import * as React from "react";
+import { render } from "react-dom";
+
+const rootElement = document.getElementById("root");
+
+function Message({ message }) {
+  return <div>{message ? message : "no message"}</div>;
+}
+
+const element = <Message message={null} />;
+render(element, rootElement);
+```
+
+```tsx
+// import * as React from "react";
+import * as React from "react";
+import { render } from "react-dom";
+
+const rootElement = document.getElementById("root");
+
+type SayHelloProps = {
+  firstName: string;
+  lastName: string;
+};
+class SayHello extends React.Component<SayHelloProps, any> {
+  render() {
+    const { firstName, lastName } = this.props;
+    return (
+      <div>
+        Hello {firstName} {lastName}!
+      </div>
+    );
+  }
+}
+
+const element = <SayHello firstName="liu" lastName="xiaoyong" />;
+render(element, rootElement);
+```

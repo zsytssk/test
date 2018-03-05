@@ -3,7 +3,10 @@ import * as React from "react";
 import { render } from "react-dom";
 
 const rootElement = document.getElementById("root");
-const content = "Hello World";
 
-const element = <div className="container">{content}</div>;
+function Message({ message }) {
+  return <div>{message ? message : "no message"}</div>;
+}
+
+const element = <Message message={null} />;
 render(element, rootElement);
