@@ -5,6 +5,7 @@
     "module": "esnext",
     "allowJs": true,
     "skipLibCheck": true,
+    "jsx": "react",
     "skipDefaultLibCheck": true
   },
   "include": ["./src", "./typings"]

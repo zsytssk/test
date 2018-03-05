@@ -2,7 +2,7 @@
 const path = require("path");
 
 module.exports = {
-  entry: "./src/main.ts",
+  entry: "./src/main.tsx",
   output: {
     filename: "bundle.js",
     path: path.join(__dirname, "dist/")
@@ -14,7 +14,7 @@ module.exports = {
         test: /\.(.*)?$/,
         loader: "ts-loader",
         options: {
-          configFile: "tsconfig.webpack.json",
+          configFile: "tsconfig.json",
           transpileOnly: true
         }
       }
@@ -25,6 +25,6 @@ module.exports = {
     extensions: [".ts", ".tsx", ".js"]
   },
   devServer: {
-    contentBase: path.join(__dirname, "dist")
+    contentBase: path.join(__dirname, "./")
   }
 };
