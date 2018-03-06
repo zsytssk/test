@@ -1,3 +1,109 @@
+## 2018-03-06 09:13:08
+
+* @ques react redux 本身如何监听改变去一个个的变化...
+  * 有没有可能他是直接绑定属性, 属性变化, 就会触发改变...
+  * react-redux connect 的原理
+  * 属性发生改变触发变化 这个是如何做到的 reRender??
+
+```tsx
+// import * as React from "react";
+import * as React from "react";
+import { render } from "react-dom";
+
+const rootElement = document.getElementById("root");
+type State = {
+  lapse: number;
+  running: boolean;
+};
+class StopWatch extends React.Component<State, State> {
+  timer: number;
+  state = { lapse: 0, running: false };
+  handleRunClick = () => {
+    const startTime = Date.now() - this.state.lapse;
+    this.setState(state => {
+      if (!state.running) {
+        this.timer = setInterval(() => {
+          this.setState({ lapse: Date.now() - startTime });
+        }, 1);
+      } else {
+        clearInterval(this.timer);
+      }
+      return { running: !state.running };
+    });
+  };
+  handleClearClick = () => {
+    clearInterval(this.timer);
+    this.setState({ lapse: 0, running: false });
+  };
+  render() {
+    const { lapse, running } = this.state;
+    return (
+      <div>
+        <label>{`${lapse}ms`}</label>
+        <button onClick={this.handleRunClick}>
+          {running ? "stop" : "start"}
+        </button>
+        <button onClick={this.handleClearClick}>clear</button>
+      </div>
+    );
+  }
+}
+const element = <StopWatch lapse={0} running={false} />;
+
+render(element, rootElement);
+```
+
+```tsx
+// import * as React from "react";
+import * as React from "react";
+import { render } from "react-dom";
+
+const rootElement = document.getElementById("root");
+
+const state = {
+  eventCount: 0,
+  username: ""
+};
+function App() {
+  return (
+    <div>
+      <p>There have been {state.eventCount} events</p>
+      <p>
+        <button onClick={increment}>.</button>
+      </p>
+      <p>You typed: {state.username}</p>
+      <p>
+        <input type="text" onBlur={updateUserName} />
+      </p>
+    </div>
+  );
+}
+function increment() {
+  setState({
+    eventCount: state.eventCount + 1
+  });
+  console.log(state);
+}
+
+function updateUserName(event) {
+  console.log(event.nativeEvent);
+  setState({
+    username: event.target.value
+  });
+}
+
+function setState(newState) {
+  Object.assign(state, newState);
+  renderApp();
+}
+
+function renderApp() {
+  render(<App />, document.getElementById("root"));
+}
+
+renderApp();
+```
+
 ```tsx
 // import * as React from "react";
 import * as React from "react";
