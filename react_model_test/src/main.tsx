@@ -19,7 +19,7 @@ type ItemInfo = {
 class ListModel extends BaseModel {
   public list: ItemModel[] = [];
   public addItem(item_info: ItemInfo) {
-    this.list.push(new ItemModel(item_info.id, item_info.value));
+    this.list.push(new ItemModel(item_info.id, item_info.value, this));
     this.trigger("addItem");
   }
   public removeItem(id: number) {
@@ -33,8 +33,15 @@ class ListModel extends BaseModel {
   }
 }
 class ItemModel extends BaseModel {
-  constructor(public id: number, public value: string) {
+  constructor(
+    public id: number,
+    public value: string,
+    private list: ListModel
+  ) {
     super();
+  }
+  destroy() {
+    this.list.removeItem(this.id);
   }
 }
 
@@ -49,17 +56,18 @@ class List extends React.Component<ListProps, ListState> {
   state = {
     num: this.props.model.list.length
   } as ListState;
+  updateState = () => {
+    this.setState({
+      num: this.props.model.list.length
+    });
+  };
   componentDidMount() {
     const model = this.props.model;
     model.on("addItem", () => {
-      this.setState({
-        num: this.props.model.list.length
-      });
+      this.updateState();
     });
     model.on("removeItem", () => {
-      this.setState({
-        num: this.props.model.list.length
-      });
+      this.updateState();
     });
   }
   render() {
@@ -80,20 +88,23 @@ type ItemProps = {
   key: number;
 };
 class Item extends React.Component<ItemProps, any> {
+  handleClick = () => {
+    this.props.model.destroy();
+  };
   render() {
     let model = this.props.model;
-    return <div className="item">{model.value}</div>;
+    return (
+      <div className="item" onClick={this.handleClick}>
+        {model.value}
+      </div>
+    );
   }
 }
 
 let listModel = new ListModel();
 
-let test = () => {
-  for (let state_item of State) {
-    listModel.addItem(state_item);
-  }
-  render(element, rootElement);
-};
-window.test = test;
+for (let state_item of State) {
+  listModel.addItem(state_item);
+}
 const element = <List model={listModel} />;
 render(element, rootElement);
