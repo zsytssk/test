@@ -1,5 +1,25 @@
 ## 2018-03-08 09:23:07
 
+* @todo
+
+  * addItem...
+  * change item value...
+
+* 能不能把 Laya 做成 react
+
+- @note 将 bindModel 做成继承模块 这样可以
+
+  * 在 destroy 的时候清除所有的 item
+
+- @ques 增加 删除 item, 会不会导致所有的页面进行重绘
+  * 如果是这样那就是很不好
+  * 我只是改变 listComponent 的 num, 就会导致 list 所有的数据 重新渲染
+  * 这能不能做成自动的处理, 我改变 model, view 自动发生变化
+  * 这样是不是太好了, Component 只需要监听 特定的事件就可以了
+  * 也许需要改变其中的某个值, 比方说 list.state.num
+  * 其他只需要监听就可以了...
+  * OnModelChange(),
+
 * @ques model 发生改变不会导致 react 重新渲染
 
   * 可能是因为对象里面的值是变化但是对象还是原来的对象
