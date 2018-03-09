@@ -1,0 +1,1 @@
+type FuncVoid = () => void;

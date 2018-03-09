@@ -17,17 +17,19 @@ type ItemInfo = {
   value: string;
 };
 class ListModel extends BaseModel {
-  public list: ItemModel[];
+  public list: ItemModel[] = [];
   public addItem(item_info: ItemInfo) {
-    new ItemModel(item_info.id, item_info.value);
+    this.list.push(new ItemModel(item_info.id, item_info.value));
+    this.trigger("addItem");
   }
   public removeItem(id: number) {
     const list = this.list;
-    for (let item of list) {
-      if (item.id == id) {
-        list;
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].id == id) {
+        list.splice(i, 1);
       }
     }
+    this.trigger("removeItem");
   }
 }
 class ItemModel extends BaseModel {
@@ -35,23 +37,63 @@ class ItemModel extends BaseModel {
     super();
   }
 }
-class List extends React.Component<any, any> {
+
+type ListProps = {
+  model: ListModel;
+};
+type ListState = {
+  num: number;
+};
+
+class List extends React.Component<ListProps, ListState> {
+  state = {
+    num: this.props.model.list.length
+  } as ListState;
+  componentDidMount() {
+    const model = this.props.model;
+    model.on("addItem", () => {
+      this.setState({
+        num: this.props.model.list.length
+      });
+    });
+    model.on("removeItem", () => {
+      this.setState({
+        num: this.props.model.list.length
+      });
+    });
+  }
   render() {
-    const state = this.props.state;
+    const model = this.props.model;
     return (
       <div className="list">
-        {state.map(item => {
-          return <Item key={item.id} children={item.value} />;
+        num: {this.state.num}
+        {model.list.map(item => {
+          return <Item key={item.id} model={item} />;
         })}
       </div>
     );
   }
 }
-class Item extends React.Component<any, any> {
+
+type ItemProps = {
+  model: ItemModel;
+  key: number;
+};
+class Item extends React.Component<ItemProps, any> {
   render() {
-    return <div className="item" {...this.props} />;
+    let model = this.props.model;
+    return <div className="item">{model.value}</div>;
   }
 }
 
-const element = <List state={State} />;
+let listModel = new ListModel();
+
+let test = () => {
+  for (let state_item of State) {
+    listModel.addItem(state_item);
+  }
+  render(element, rootElement);
+};
+window.test = test;
+const element = <List model={listModel} />;
 render(element, rootElement);

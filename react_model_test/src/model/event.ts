@@ -1,28 +1,27 @@
-import { zutil } from './utils/zutil';
-import { callFunc } from './utils/other';
+import { callFunc, createRandomString, log } from "./utils";
 
 type i_hook_other_event = {
   /**绑定对象id, 用于在清除的时候进行对比*/
-  other_id: string,
+  other_id: string;
   /**绑定对象name, 用于展示*/
-  other_name: string,
+  other_name: string;
   /**清除绑定事件*/
-  off: Function,
+  off: Function;
   /**事件名称*/
-  event: string,
-}
+  event: string;
+};
 
 type i_hook_other_events = i_hook_other_event[];
 type t_hook_fun_item = {
   /** 监听事件 */
-  listener: Function,
+  listener: Function;
   /** 是否执行一次 */
-  once: boolean,
+  once: boolean;
   /**清除事件函数绑定*/
-  off: Function
-}
+  off: Function;
+};
 type t_hook_funs = {
-  [x: string]: t_hook_fun_item[]
+  [x: string]: t_hook_fun_item[];
 };
 
 /**事件基础类*/
@@ -37,15 +36,15 @@ export class BaseEvent {
   /**储存所有的timetimeout interval 在destroy的时候清除*/
   protected timeout_list: number[] = [];
   protected interval_list: number[] = [];
-  name: string = 'base_event';
+  name: string = "base_event";
   /**事件基础类, 创建随机id*/
   constructor() {
-    this._id = zutil.createRandomString();
+    this._id = createRandomString();
   }
   /** 监听事件 */
   public on(event_name: string, listener: Function, once?: boolean) {
-    if (typeof listener !== 'function') {
-      zutil.log(`${this.name} bind ${event_name} with not a function`);
+    if (typeof listener !== "function") {
+      log(`${this.name} bind ${event_name} with not a function`);
       return;
     }
     if (!this.hook_funs[event_name]) {
@@ -53,12 +52,12 @@ export class BaseEvent {
     }
     let off = () => {
       this.off(event_name, listener);
-    }
+    };
     let bind_obj = {
       listener: listener,
       once: once ? once : false,
-      off: off,
-    }
+      off: off
+    };
     this.hook_funs[event_name].push(bind_obj);
     return {
       off: off
@@ -75,7 +74,7 @@ export class BaseEvent {
    */
   protected trigger(event_name: string, data?) {
     if (!this.hook_funs[event_name]) {
-      zutil.logAll(`${this.name} hasn't bind event:${event_name};`);
+      log(`${this.name} hasn't bind event:${event_name};`);
       return;
     }
     let hook_event_funs = this.hook_funs[event_name];
@@ -83,7 +82,7 @@ export class BaseEvent {
       /** 如果trigger destroy 就会导致别的ctrl|model绑定在这里的事件在执行listener
        * 就会全部清除, 这时候hook_event_funs为空, 执行下面的代码就会报错
        * 现在还没有什么方法解决这个问题 只能先跳过了 也许我可以将trigger的事件 异步执行
-      */
+       */
       let hook_event_item = hook_event_funs[i];
       if (!hook_event_item) {
         continue;
@@ -114,7 +113,7 @@ export class BaseEvent {
 
     for (let len = hook_list.length, i = len - 1; i >= 0; i--) {
       let listener = hook_list[i].listener;
-      if (typeof (track_info) == 'function' && listener == track_info) {
+      if (typeof track_info == "function" && listener == track_info) {
         hook_list.splice(i, 1);
         return;
       }
@@ -126,7 +125,12 @@ export class BaseEvent {
   }
 
   /** 在其他的model或者ctrl上面绑定事件处理函数*/
-  protected bindOtherEvent(other: BaseEvent, event_name: string, callback?: Function, once?: boolean) {
+  protected bindOtherEvent(
+    other: BaseEvent,
+    event_name: string,
+    callback?: Function,
+    once?: boolean
+  ) {
     if (!other) {
       return;
     }
@@ -136,7 +140,7 @@ export class BaseEvent {
       other_id: other._id,
       event: event_name,
       other_name: other.name
-    }
+    };
     this.hook_other_funs.push(bind_obj);
     return bind_info;
   }
@@ -175,14 +179,14 @@ export class BaseEvent {
    * @param fun 执行函数
    * @param time 延迟时间
    */
-  protected createTimeout(fun: Function, time: number) {
+  protected createTimeout(fun: FuncVoid, time: number) {
     let time_out = window.setTimeout(() => {
       callFunc(fun);
       this.clearTimeout(time_out);
     }, time);
     this.timeout_list.push(time_out);
     return time_out;
-  };
+  }
   /**
    * 创建setInterval
    * @param fun 执行函数
@@ -192,7 +196,7 @@ export class BaseEvent {
     let interval = setInterval(fun, time);
     this.interval_list.push(interval);
     return interval;
-  };
+  }
   /**清除time_out setinterval*/
   protected clearTimeout(time_out) {
     let timeout_list = this.timeout_list;
