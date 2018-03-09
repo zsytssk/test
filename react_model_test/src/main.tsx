@@ -1,6 +1,7 @@
 // import * as React from "react";
 import * as React from "react";
 import { render } from "react-dom";
+import { BaseModel } from "./model/baseModel";
 
 const State = [
   { id: 0, value: "zero" },
@@ -11,6 +12,29 @@ const State = [
 ];
 
 const rootElement = document.getElementById("root");
+type ItemInfo = {
+  id: number;
+  value: string;
+};
+class ListModel extends BaseModel {
+  public list: ItemModel[];
+  public addItem(item_info: ItemInfo) {
+    new ItemModel(item_info.id, item_info.value);
+  }
+  public removeItem(id: number) {
+    const list = this.list;
+    for (let item of list) {
+      if (item.id == id) {
+        list;
+      }
+    }
+  }
+}
+class ItemModel extends BaseModel {
+  constructor(public id: number, public value: string) {
+    super();
+  }
+}
 class List extends React.Component<any, any> {
   render() {
     const state = this.props.state;

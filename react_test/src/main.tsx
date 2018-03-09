@@ -1,6 +1,7 @@
 // import * as React from "react";
 import * as React from "react";
 import { render } from "react-dom";
+import { default as Axios } from "axios";
 
 const State = [
   { id: 0, value: "zero" },
@@ -11,23 +12,44 @@ const State = [
 ];
 
 const rootElement = document.getElementById("root");
-class List extends React.Component<any, any> {
-  render() {
-    const state = this.props.state;
-    return (
-      <div className="list">
-        {state.map(item => {
-          return <Item key={item.id} children={item.value} />;
-        })}
-      </div>
+
+class UserCompany extends React.Component<any, any> {
+  state = { company: undefined, loaded: false };
+  componentDidMount() {
+    Axios({
+      url: "https://api.github.com/graphql",
+      method: "post",
+      data: {
+        query: `{
+          user(login: "${this.props.username}") {
+            company
+          }
+        }`
+      },
+      headers: {
+        Authorization: `bearer 31aa2cf609b3e12548638d88adc7714d6a6220ac`
+      }
+    }).then(
+      response => {
+        this.setState({
+          loaded: true,
+          company: response.data.data.user.company
+        });
+      },
+      error => {
+        console.log(error);
+      }
     );
   }
-}
-class Item extends React.Component<any, any> {
   render() {
-    return <div className="item" {...this.props} />;
+    return this.state.loaded ? this.state.company || "UNknow" : "...";
   }
 }
-
-const element = <List state={State} />;
+const username = "zsytssk";
+const element = (
+  <div>
+    {`@${username} works at `}
+    <UserCompany username={username} />
+  </div>
+);
 render(element, rootElement);

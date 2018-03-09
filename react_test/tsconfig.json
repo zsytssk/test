@@ -6,7 +6,8 @@
     "allowJs": true,
     "skipLibCheck": true,
     "jsx": "react",
-    "skipDefaultLibCheck": true
+    "skipDefaultLibCheck": true,
+    "moduleResolution": "node"
   },
   "include": ["./src", "./typings"]
 }
