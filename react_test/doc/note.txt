@@ -5,6 +5,7 @@
   * 可能是因为对象里面的值是变化但是对象还是原来的对象
   * model 的变化导致 component 的 setState 就可以了
   * 监听变化的事件 setState 就可以了
+  * 创建的时候监听, 销毁的时候清除就可以了
 
 * react 监听 model 改变,dispatch-->changeModel
   `<div model={model}>`
