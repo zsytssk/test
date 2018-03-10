@@ -1,5 +1,11 @@
 ## 2018-03-08 09:23:07
 
+* 子类改变父类的数据如何处理
+
+* 参考 react-redux 的绑定实现
+
+  * 最顶级如何绑定
+
 * react 监听 model 改变,dispatch-->changeModel
   `<div model={model}>`
 
