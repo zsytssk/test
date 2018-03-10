@@ -3,19 +3,20 @@ import * as React from "react";
 import { render } from "react-dom";
 import { ListModel, ItemModel } from "./model";
 
+import { BaseComponent } from "./component/base";
 import { Item } from "./item";
 import { ListForm } from "./form";
-
 const rootElement = document.getElementById("root");
 
 type ListProps = {
   model: ListModel;
 };
+
 type ListState = {
   num: number;
 };
 
-class List extends React.Component<ListProps, ListState> {
+class List extends BaseComponent<ListProps, ListState> {
   state = {
     num: this.props.model.list.length
   } as ListState;

@@ -1,11 +1,12 @@
 import * as React from "react";
 import { ListModel } from "./model";
 import { createRandomString } from "./model/utils";
+import { BaseComponent } from "./component/base";
 
 type Props = {
   model: ListModel;
 };
-export class ListForm extends React.Component<Props, any> {
+export class ListForm extends BaseComponent<Props, any> {
   addItem = event => {
     event.preventDefault();
     const value = this.inputNode.value;

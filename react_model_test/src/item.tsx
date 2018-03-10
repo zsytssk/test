@@ -1,5 +1,6 @@
 import * as React from "react";
 import { ListModel, ItemModel } from "./model";
+import { BaseComponent } from "./component/base";
 
 type Props = {
   model: ItemModel;
@@ -8,14 +9,9 @@ type Props = {
 type State = {
   value: string;
 };
-export class Item extends React.Component<Props, State> {
+export class Item extends BaseComponent<Props, State> {
   state = {} as State;
-  componentDidMount() {
-    const model = this.props.model;
-    model.on("change", value => {
-      this.forceUpdate();
-    });
-  }
+  inputNode: HTMLInputElement;
   removeModel = (event: React.MouseEvent<any>) => {
     event.preventDefault();
     this.props.model.destroy();
@@ -30,7 +26,12 @@ export class Item extends React.Component<Props, State> {
     model.changeValue(value);
     this.inputNode.value = "";
   };
-  inputNode: HTMLInputElement;
+  componentDidMount() {
+    const model = this.props.model;
+    model.on("change", value => {
+      this.forceUpdate();
+    });
+  }
   render() {
     let model = this.props.model;
     return (
