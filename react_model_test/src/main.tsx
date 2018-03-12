@@ -27,10 +27,7 @@ class List extends BaseComponent<ListProps, ListState> {
   };
   componentDidMount() {
     const model = this.props.model;
-    model.on("addItem", () => {
-      this.updateState();
-    });
-    model.on("removeItem", () => {
+    this.listen(["addItem", "removeItem"], () => {
       this.updateState();
     });
   }

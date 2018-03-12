@@ -1,43 +1,60 @@
 ## 2018-03-08 09:23:07
 
-* @ques 如何让 BaseComponent props 中必须有 model 属性必须是 model
+* @ques component 之间如何相互的作用...
+
+  * 如何找到目标 component
+
+* @ques 能不能手动 destroy Component
+
+  * 这样 list 就不用父类重新渲染了
+  * ReactDOM.unmountComponentAtNode(container);
+
+* state 中一个属性变化, 会导致所有的全部重新渲染
+
+  * 如果是这样, 我又能怎么控制
+  * 每一次 trigger 会导致当前的 model state 变化 通过这个判断需不需要 rerender ...
+  * ... 每一个 model 变化只会导致自己发生变化
+  * 需要重新创建 销毁子类如何处理 父类 state 发生变化..
+    * 之后改变 那个特定的子类的变化...
+
+- @ques 如何让 BaseComponent props 中必须有 model 属性必须是 model
 
   * 其他的属性任意
   * 类型的属性必须是
 
-* @ques @react 改变子对象会导致父对象重绘
+- @ques @react 改变子对象会导致父对象重绘
 
-* BaseComponent
+- BaseComponent
 
   * 绑定 model 的更新 listen
   * 在清除的时候消去事件绑定
 
-* @note 能不能做成一个 react-laya 组件
+- @note 能不能做成一个 react-laya 组件
 
   * 这样的 ui 都是一行一行的吗出来的
   * 如果能做成，ui 能用好的方式去处理吗，
   * 能兼得 ui 拖拽和代码合并吗
   * 默认数据处理
 
-* @ques react-laya 的组建的 render 如何处理
+- @ques react-laya 的组建的 render 如何处理
 
-* @ques 性能 让 react 去控制更新 会不会导致性能问题
+- @ques 性能 让 react 去控制更新 会不会导致性能问题
 
   * react 重绘
   * componentDidMount 不会多次触发
   * render 会多次重绘
   * 每次 model 改变都会 changeState(随机字符串)，通过这个让 component 是否更新
 
-* 子类改变父类的数据如何处理
+- 子类改变父类的数据如何处理
 
-* 参考 react-redux 的绑定实现
+- 参考 react-redux 的绑定实现
 
   * 最顶级如何绑定
 
-* react 监听 model 改变,dispatch-->changeModel
+- react 监听 model 改变,dispatch-->changeModel
   `<div model={model}>`
 
-* @ques model 的子元素如何渲染在 child 下面
+- @ques model 的子元素如何渲染在 child 下面
 
-* @ques react 中的动画如何处理, 一个个都是 state 改变自动改变
+- @ques react 中的动画如何处理, 一个个都是 state 改变自动改变
   * 如何控制改变..

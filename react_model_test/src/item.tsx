@@ -28,9 +28,7 @@ export class Item extends BaseComponent<Props, State> {
   };
   componentDidMount() {
     const model = this.props.model;
-    model.on("change", value => {
-      this.forceUpdate();
-    });
+    this.listen(["change", "removeItem"]);
   }
   render() {
     let model = this.props.model;
