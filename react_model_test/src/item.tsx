@@ -1,14 +1,16 @@
 import * as React from "react";
 import { ListModel, ItemModel } from "./model";
-import { BaseComponent } from "./component/base";
+import { BaseComponent, BaseProps } from "./component/base";
+import { List } from "./main";
 
-type Props = {
+interface Props extends BaseProps {
   model: ItemModel;
-  key: string;
-};
+  parent: List;
+}
 type State = {
   value: string;
 };
+
 export class Item extends BaseComponent<Props, State> {
   state = {} as State;
   inputNode: HTMLInputElement;
@@ -31,6 +33,7 @@ export class Item extends BaseComponent<Props, State> {
     model.on("change", value => {
       this.forceUpdate();
     });
+    super.componentDidMount();
   }
   render() {
     let model = this.props.model;

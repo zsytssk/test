@@ -32,6 +32,7 @@ export class ItemModel extends BaseModel {
     this.trigger("change");
   }
   public destroy() {
+    super.destroy();
     this.list.removeItem(this.id);
   }
 }
