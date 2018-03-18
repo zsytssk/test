@@ -1,0 +1,34 @@
+\*
+
+* @ques
+  * react-devtool 如何判断有没有使用 react
+  * 渲染节点如何走 react 的逻辑 componentDidMount。。。
+
+- @note
+
+  * 解析 jsx 是 react 做的， render 是自己处理的
+
+- @note
+  * fiber 的基本逻辑
+  * render 的基本逻辑。。
+
+* @note
+  * 要实现将所有的 laya 节点变成 react 节点
+  * 实现顶级 render 和每一个节点的 props 对应关系 render 逻辑。。
+  * react 可以实现 dom 的渲染， 也就可以实现我想要的
+  * props 和节点的对应关系
+  * ---
+  * 但是其中有多少是需要我去做的。。如果太多那就没有可行性
+  * 能不能将 react-dom 中的节点渲染替换掉就可以了。。。
+
+- @ques 如何将 laya 节点， 像 react 一样加入到页面中
+
+- @note react-laya 集成功能
+  * find 节点
+  * 参考 react-dom zutil...
+
+* @ques laya 中的 ui 要依赖资源这个如何处理
+
+- Laya.ResourceVersion 这个是怎么处理的
+
+- react 开发人员工具 查找结点 如何在 canvas 中使用。。。
