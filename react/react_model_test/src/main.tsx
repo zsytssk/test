@@ -30,7 +30,6 @@ export class List extends BaseComponent<Props, ListState> {
     this.childs.push(node);
   };
   componentDidMount() {
-    window.element = this;
     const model = this.props.model;
     this.listen(["addItem", "removeItem"], () => {
       this.updateState();

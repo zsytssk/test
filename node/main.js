@@ -1,18 +1,33 @@
 "use strict";
 
-const {
-  spawn
-} = require("child_process"),
-  ls = spawn("cmd", ["/c", "cd"]);
 
-ls.stdout.on("data", data => {
-  console.log(`stdout: ${data}`);
-});
+function main() {
+  let start = new Date();
+  let duration = formatDuring(new Date() - start);
+  console.log(duration);
+}
 
-ls.stderr.on("data", data => {
-  console.log(`stderr: ${data}`);
-});
-
-ls.on("close", code => {
-  console.log(`child process exited with code ${code}`);
-});
+function formatDuring(mss) {
+  let result = '';
+  let days = parseInt(mss / (1000 * 60 * 60 * 24));
+  if (days) {
+    result += days + "d ";
+  }
+  let hours = parseInt((mss % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  if (hours) {
+    result += hours + "h ";
+  }
+  let minutes = parseInt((mss % (1000 * 60 * 60)) / (1000 * 60));
+  if (minutes) {
+    result += minutes + "m ";
+  }
+  let seconds = (mss % (1000 * 60)) / 1000;
+  if (seconds) {
+    result += seconds + "s ";
+  }
+  if (!result) {
+    result = '0s'
+  }
+  return result;
+}
+main();
