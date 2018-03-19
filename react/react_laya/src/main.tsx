@@ -1,21 +1,29 @@
 import * as React from "react";
 import { render } from "react-dom";
-import { initState } from "./react-laya";
+import { Stage, Text } from "./react-laya/lib/index";
 
 import TestUI = ui.test.TestPageUI;
 
-initState({ width: 600, height: 500 });
-Laya.loader.load("res/atlas/comp.atlas", Laya.Handler.create(null, onLoaded));
+// Laya.loader.load("res/atlas/comp.atlas", Laya.Handler.create(null, onLoaded));
 
-class TestComponent extends React.Component<any, any> {
+class App extends React.Component<any, any> {
+  handleClick =() => {
+    console.log(1);
+    this.text.text="hello world";
+  }
+  text:any;
   render() {
-    return <div />;
+    return (
+    <Stage width="500" height="500" click={this.handleClick}>
+      <Text ref={node=> this.text = node} text="sdfsdfsdf" color = "#ffffff"/>
+    </Stage>
+    );
   }
 }
-
+onLoaded();
 function onLoaded(): void {
   // //实例UI界面
-  var renderelement = document.getElementById("layaContainer");
-  let App = <TestComponent className="yes" />;
-  render(App, renderelement);
+  var renderelement = document.getElementById("Laya");
+  let app = <App/>;
+  render(app, renderelement);
 }

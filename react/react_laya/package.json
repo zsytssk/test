@@ -17,7 +17,9 @@
   "dependencies": {
     "@types/react": "^16.0.40",
     "@types/react-dom": "^16.0.4",
+    "fbjs": "^0.8.16",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-reconciler": "^0.7.0"
   }
 }

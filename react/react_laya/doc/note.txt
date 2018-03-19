@@ -1,4 +1,5 @@
-\*
+* @note react 如何更新其中的属性...
+  * ddd
 
 * @ques
   * react-devtool 如何判断有没有使用 react
