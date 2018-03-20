@@ -1,10 +1,20 @@
-* @note react 如何更新其中的属性...
+* Propsread-only
+
+* @note 报错... <Text>
+
+- @note react 如何更新其中的属性...
+
   * ddd
   * 如何将属性设置为开发人员工具中可改写的...
-  * 开发人员工具高亮....
-  * 开发人员工具没有顶级stage
+  * 开发人员工具高亮.... KonvaRenderer.injectIntoDevTools
+  * 开发人员工具没有顶级 stage
   * 性能
 
+- ReactFiberReconciler
+- @note react router
+  * 能用上吗, react 用来创建 html 元素 history
+  * KonvaRenderer.createContainer
+  * KonvaRenderer.updateContainer
 
 * @ques
   * react-devtool 如何判断有没有使用 react

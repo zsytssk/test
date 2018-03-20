@@ -1,14 +1,13 @@
 import * as React from "react";
 import { render } from "react-dom";
-import { Stage, Text, Image } from "./react-laya/lib/index";
-
-import TestUI = ui.test.TestPageUI;
+import { Stage, Text, Image, Button } from "./react-laya/lib/index";
 
 class App extends React.Component<any, any> {
   state = {
     text: "default",
     img: "",
-    rotate: 0
+    rotate: 0,
+    button: ""
   };
   interval: any;
   handleClick = () => {
@@ -31,7 +30,8 @@ class App extends React.Component<any, any> {
       "res/atlas/comp.atlas",
       Laya.Handler.create(null, () => {
         this.setState({
-          img: "comp/image.png"
+          img: "comp/image.png",
+          button: "comp/button.png"
         });
       })
     );
@@ -53,7 +53,18 @@ class App extends React.Component<any, any> {
           skin={this.state.img}
           rotation={this.state.rotate}
           onClick={this.clickImage}
-        />
+        >
+          <Button
+            x="41"
+            y="56"
+            skin={this.state.button}
+            label="点我赋值"
+            width="150"
+            height="37"
+            sizeGrid="4,4,4,4"
+            var="btn"
+          />
+        </Image>
       </Stage>
     );
   }

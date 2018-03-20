@@ -5,7 +5,7 @@
  *
  * MIT
  */
-'use strict';
+"use strict";
 
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -15,14 +15,21 @@ function _classCallCheck(instance, Constructor) {
 
 function _possibleConstructorReturn(self, call) {
   if (!self) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    throw new ReferenceError(
+      "this hasn't been initialised - super() hasn't been called"
+    );
   }
-  return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  return call && (typeof call === "object" || typeof call === "function") ?
+    call :
+    self;
 }
 
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    throw new TypeError(
+      "Super expression must either be null or a function, not " +
+      typeof superClass
+    );
   }
   subClass.prototype = Object.create(superClass && superClass.prototype, {
     constructor: {
@@ -32,19 +39,21 @@ function _inherits(subClass, superClass) {
       configurable: true
     }
   });
-  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  if (superClass)
+    Object.setPrototypeOf ?
+    Object.setPrototypeOf(subClass, superClass) :
+    (subClass.__proto__ = superClass);
 }
 
-var invariant = require('fbjs/lib/invariant');
-var emptyObject = require('fbjs/lib/emptyObject');
-var React = require('react');
+var invariant = require("fbjs/lib/invariant");
+var emptyObject = require("fbjs/lib/emptyObject");
+var React = require("react");
 var Konva = Laya;
-var ReactFiberReconciler = require('react-reconciler');
-var ReactDOMFrameScheduling = require('./ReactDOMFrameScheduling');
-var ReactDOMComponentTree = require('./ReactDOMComponentTree');
+var ReactFiberReconciler = require("react-reconciler");
+var ReactDOMFrameScheduling = require("./ReactDOMFrameScheduling");
+var ReactDOMComponentTree = require("./ReactDOMComponentTree");
 
 var Component = React.Component;
-
 
 var propsToSkip = {
   children: true,
@@ -56,10 +65,14 @@ var propsToSkip = {
 var warningShowed = false;
 
 function applyNodeProps(instance, props) {
-  var oldProps = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  var oldProps =
+    arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-  if (!warningShowed && 'id' in props) {
-    var message = 'ReactKonva: You are using "id" attribute for a Konva node. In some very rare cases it may produce bugs. Currently we recommend not to use it and use "name" attribute instead.\nYou are using id = "' + props.id + '".\nFor me info see: https://github.com/lavrton/react-konva/issues/119';
+  if (!warningShowed && "id" in props) {
+    var message =
+      'ReactKonva: You are using "id" attribute for a Konva node. In some very rare cases it may produce bugs. Currently we recommend not to use it and use "name" attribute instead.\nYou are using id = "' +
+      props.id +
+      '".\nFor me info see: https://github.com/lavrton/react-konva/issues/119';
     console.warn(message);
     warningShowed = true;
   }
@@ -70,36 +83,44 @@ function applyNodeProps(instance, props) {
     if (propsToSkip[key]) {
       continue;
     }
-    var isEvent = key.slice(0, 2) === 'on';
+    var isEvent = key.slice(0, 2) === "on";
     var propChanged = oldProps[key] !== props[key];
     if (isEvent && propChanged) {
       var eventName = key.substr(2).toLowerCase();
-      if (eventName.substr(0, 7) === 'content') {
-        eventName = 'content' + eventName.substr(7, 1).toUpperCase() + eventName.substr(8);
+      if (eventName.substr(0, 7) === "content") {
+        eventName =
+          "content" +
+          eventName.substr(7, 1).toUpperCase() +
+          eventName.substr(8);
       }
       instance.off(eventName, oldProps[key]);
     }
     var toRemove = !props.hasOwnProperty(key);
     if (toRemove) {
-      instance.setAttr(key, undefined);
+      instance[key] = undefined;
     }
   }
   for (var key in props) {
     if (propsToSkip[key]) {
       continue;
     }
-    var isEvent = key.slice(0, 2) === 'on';
+    var isEvent = key.slice(0, 2) === "on";
     var toAdd = oldProps[key] !== props[key];
     if (isEvent && toAdd) {
       var eventName = key.substr(2).toLowerCase();
-      if (eventName.substr(0, 7) === 'content') {
-        eventName = 'content' + eventName.substr(7, 1).toUpperCase() + eventName.substr(8);
+      if (eventName.substr(0, 7) === "content") {
+        eventName =
+          "content" +
+          eventName.substr(7, 1).toUpperCase() +
+          eventName.substr(8);
       }
       if (props[key]) {
         instance.on(eventName, instance, props[key]);
       }
     }
-    if (!isEvent && (props[key] !== oldProps[key] || props[key] !== instance[key])) {
+    if (!isEvent &&
+      (props[key] !== oldProps[key] || props[key] !== instance[key])
+    ) {
       hasUpdates = true;
       updatedProps[key] = props[key];
     }
@@ -107,7 +128,6 @@ function applyNodeProps(instance, props) {
 
   if (hasUpdates) {
     setAttrs(instance, updatedProps);
-    updatePicture(instance);
   }
 }
 
@@ -117,12 +137,7 @@ function setAttrs(instance, props) {
   }
 }
 
-function updatePicture(node) {
-  var drawingNode = node.stage;
-  // drawingNode && drawingNode.batchDraw();
-}
-
-var Stage = function (_Component) {
+var Stage = (function (_Component) {
   _inherits(Stage, _Component);
 
   function Stage() {
@@ -146,7 +161,10 @@ var Stage = function (_Component) {
     KonvaRenderer.updateContainer(this.props.children, this._mountNode, this);
   };
 
-  Stage.prototype.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
+  Stage.prototype.componentDidUpdate = function componentDidUpdate(
+    prevProps,
+    prevState
+  ) {
     var props = this.props;
 
     applyNodeProps(this._stage, this.props, prevProps);
@@ -165,12 +183,11 @@ var Stage = function (_Component) {
 
   Stage.prototype.render = function render() {
     var _this2 = this;
-
     var props = this.props;
 
-    return React.createElement('div', {
+    return React.createElement("div", {
       ref: function ref(_ref) {
-        return _this2._tagRef = _ref;
+        return (_this2._tagRef = _ref);
       },
       accessKey: props.accessKey,
       className: props.className,
@@ -182,9 +199,9 @@ var Stage = function (_Component) {
   };
 
   return Stage;
-}(Component);
+})(Component);
 
-var KONVA_NODES = ['Sprite', 'Text', 'Image'];
+var KONVA_NODES = ["Sprite", "Text", "Image", "Button", "Box"];
 
 var TYPES = {};
 
@@ -196,15 +213,18 @@ var UPDATE_SIGNAL = {};
 
 var KonvaRenderer = ReactFiberReconciler({
   appendInitialChild: function appendInitialChild(parentInstance, child) {
-    if (typeof child === 'string') {
+    if (typeof child === "string") {
       // Noop for string children of Text (eg <Text>{'foo'}{'bar'}</Text>)
-      invariant(false, 'Don not use plain text as child of Konva.Node. You are using text: "%s"', child);
+      invariant(
+        false,
+        'Don not use plain text as child of Konva.Node. You are using text: "%s"',
+        child
+      );
       return;
     }
 
     parentInstance.addChild(child);
 
-    updatePicture(parentInstance);
   },
   createInstance: function createInstance(type, props, internalInstanceHandle) {
     var NodeClass = Konva[type];
@@ -214,15 +234,25 @@ var KonvaRenderer = ReactFiberReconciler({
     }
 
     var instance = new NodeClass();
-    instance._applyProps = applyNodeProps;
-    instance._applyProps(instance, props);
+    applyNodeProps(instance, props);
 
     return instance;
   },
-  createTextInstance: function createTextInstance(text, rootContainerInstance, internalInstanceHandle) {
-    invariant(false, 'Text components are not supported for now in ReactKonva.');
+  createTextInstance: function createTextInstance(
+    text,
+    rootContainerInstance,
+    internalInstanceHandle
+  ) {
+    invariant(
+      false,
+      "Text components are not supported for now in ReactKonva."
+    );
   },
-  finalizeInitialChildren: function finalizeInitialChildren(domElement, type, props) {
+  finalizeInitialChildren: function finalizeInitialChildren(
+    domElement,
+    type,
+    props
+  ) {
     return false;
   },
   getPublicInstance: function getPublicInstance(instance) {
@@ -250,13 +280,11 @@ var KonvaRenderer = ReactFiberReconciler({
     return emptyObject;
   },
 
-
   scheduleDeferredCallback: ReactDOMFrameScheduling.rIC,
 
   shouldSetTextContent: function shouldSetTextContent(type, props) {
     return false;
   },
-
 
   now: ReactDOMFrameScheduling.now,
 
@@ -265,64 +293,89 @@ var KonvaRenderer = ReactFiberReconciler({
   mutation: {
     appendChild: function appendChild(parentInstance, child) {
       if (child.parent === parentInstance) {
-        child.moveToTop();
-      } else {
-        parentInstance.addChild(child);
+        return;
       }
+      parentInstance.addChild(child);
 
-      updatePicture(parentInstance);
     },
-    appendChildToContainer: function appendChildToContainer(parentInstance, child) {
+    appendChildToContainer: function appendChildToContainer(
+      parentInstance,
+      child
+    ) {
       if (child.parent === parentInstance) {
-        child.moveToTop();
-      } else {
-        parentInstance.addChild(child);
+        return;
       }
-      updatePicture(parentInstance);
+      parentInstance.addChild(child);
     },
     insertBefore: function insertBefore(parentInstance, child, beforeChild) {
-      invariant(child !== beforeChild, 'ReactKonva: Can not insert node before itself');
-      // remove and add back to reset zIndex
-      child.remove();
-      parentInstance.addChild(child);
-      child.setZIndex(beforeChild.getZIndex());
-      updatePicture(parentInstance);
+      invariant(
+        child !== beforeChild,
+        "ReactKonva: Can not insert node before itself"
+      );
+      for (let i = 0; i < parentInstance.numChildren; i++) {
+        if (parentInstance.getChildAt(i) == beforeChild) {
+          parentInstance.addChildAt(child, i + 1);
+          return;
+        }
+      }
     },
-    insertInContainerBefore: function insertInContainerBefore(parentInstance, child, beforeChild) {
-      invariant(child !== beforeChild, 'ReactKonva: Can not insert node before itself');
-      // remove and add back to reset zIndex
-      child.remove();
-      parentInstance.addChild(child);
-      child.setZIndex(beforeChild.getZIndex());
-      updatePicture(parentInstance);
+    insertInContainerBefore: function insertInContainerBefore(
+      parentInstance,
+      child,
+      beforeChild
+    ) {
+      invariant(
+        child !== beforeChild,
+        "ReactKonva: Can not insert node before itself"
+      );
+      for (let i = 0; i < parentInstance.numChildren; i++) {
+        if (parentInstance.getChildAt(i) == beforeChild) {
+          parentInstance.addChildAt(child, i + 1);
+          return;
+        }
+      }
     },
     removeChild: function removeChild(parentInstance, child) {
       child.destroy();
-      updatePicture(parentInstance);
     },
-    removeChildFromContainer: function removeChildFromContainer(parentInstance, child) {
+    removeChildFromContainer: function removeChildFromContainer(
+      parentInstance,
+      child
+    ) {
       child.destroy();
-      updatePicture(parentInstance);
     },
-    commitTextUpdate: function commitTextUpdate(textInstance, oldText, newText) {
-      invariant(false, 'Text components are not yet supported in ReactKonva.');
+    commitTextUpdate: function commitTextUpdate(
+      textInstance,
+      oldText,
+      newText
+    ) {
+      invariant(false, "Text components are not yet supported in ReactKonva.");
     },
     commitMount: function commitMount(instance, type, newProps) {
       // Noop
     },
-    commitUpdate: function commitUpdate(instance, updatePayload, type, oldProps, newProps, fiberInstance) {
-      instance._applyProps(instance, newProps, oldProps);
+    commitUpdate: function commitUpdate(
+      instance,
+      updatePayload,
+      type,
+      oldProps,
+      newProps,
+      fiberInstance
+    ) {
+      applyNodeProps(instance, newProps, oldProps);
     }
   }
 });
 
 var foundDevTools = KonvaRenderer.injectIntoDevTools({
   findFiberByHostInstance: ReactDOMComponentTree.getClosestInstanceFromNode,
-  bundleType: process.env.NODE_ENV !== 'production' ? 1 : 0,
+  bundleType: 1,
   version: React.version || 16,
-  rendererPackageName: 'react-konva',
+  rendererPackageName: "react-konva",
   getInspectorDataForViewTag: function getInspectorDataForViewTag() {
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (
+      var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++
+    ) {
       args[_key] = arguments[_key];
     }
 
