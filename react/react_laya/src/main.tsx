@@ -40,32 +40,37 @@ class App extends React.Component<any, any> {
     let state = this.state;
     return (
       <Stage width="500" height="500" onClick={this.handleClick}>
-        <Text
-          ref={node => (this.text = node)}
-          text={this.state.text}
-          color="#ffffff"
-        />
-        <Image
-          x={200}
-          y={200}
-          anchorX={0.5}
-          anchorY={0.5}
+        <Test
           skin={this.state.img}
-          rotation={this.state.rotate}
-          onClick={this.clickImage}
-        >
-          <Button
-            x="41"
-            y="56"
-            skin={this.state.button}
-            label="点我赋值"
-            width="150"
-            height="37"
-            sizeGrid="4,4,4,4"
-            var="btn"
-          />
-        </Image>
+          clickImage={this.clickImage}
+          rotate={this.state.rotate}
+        />
       </Stage>
+    );
+  }
+}
+
+type TestProps = {
+  skin: string;
+  rotate?: number;
+  clickImage?: (any) => void;
+};
+
+class Test extends React.Component<TestProps, any> {
+  componentDidMount() {
+    console.log(this);
+  }
+  render() {
+    return (
+      <Image
+        x={200}
+        y={200}
+        anchorX={0.5}
+        anchorY={0.5}
+        skin={this.props.skin}
+        rotation={this.props.rotate}
+        onClick={this.props.clickImage}
+      />
     );
   }
 }

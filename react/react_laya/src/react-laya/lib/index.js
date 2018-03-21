@@ -19,16 +19,16 @@ function _possibleConstructorReturn(self, call) {
       "this hasn't been initialised - super() hasn't been called"
     );
   }
-  return call && (typeof call === "object" || typeof call === "function") ?
-    call :
-    self;
+  return call && (typeof call === "object" || typeof call === "function")
+    ? call
+    : self;
 }
 
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError(
       "Super expression must either be null or a function, not " +
-      typeof superClass
+        typeof superClass
     );
   }
   subClass.prototype = Object.create(superClass && superClass.prototype, {
@@ -40,9 +40,9 @@ function _inherits(subClass, superClass) {
     }
   });
   if (superClass)
-    Object.setPrototypeOf ?
-    Object.setPrototypeOf(subClass, superClass) :
-    (subClass.__proto__ = superClass);
+    Object.setPrototypeOf
+      ? Object.setPrototypeOf(subClass, superClass)
+      : (subClass.__proto__ = superClass);
 }
 
 var invariant = require("fbjs/lib/invariant");
@@ -118,7 +118,8 @@ function applyNodeProps(instance, props) {
         instance.on(eventName, instance, props[key]);
       }
     }
-    if (!isEvent &&
+    if (
+      !isEvent &&
       (props[key] !== oldProps[key] || props[key] !== instance[key])
     ) {
       hasUpdates = true;
@@ -137,7 +138,7 @@ function setAttrs(instance, props) {
   }
 }
 
-var Stage = (function (_Component) {
+var Stage = (function(_Component) {
   _inherits(Stage, _Component);
 
   function Stage() {
@@ -150,14 +151,13 @@ var Stage = (function (_Component) {
     var _props = this.props,
       height = _props.height,
       width = _props.width;
-
     Laya.init(_props.width, _props.height);
-
     this._stage = Laya.stage;
-
     applyNodeProps(this._stage, this.props);
 
     this._mountNode = KonvaRenderer.createContainer(this._stage);
+
+    console.log(this._mountNode);
     KonvaRenderer.updateContainer(this.props.children, this._mountNode, this);
   };
 
@@ -182,20 +182,7 @@ var Stage = (function (_Component) {
   };
 
   Stage.prototype.render = function render() {
-    var _this2 = this;
-    var props = this.props;
-
-    return React.createElement("div", {
-      ref: function ref(_ref) {
-        return (_this2._tagRef = _ref);
-      },
-      accessKey: props.accessKey,
-      className: props.className,
-      role: props.role,
-      style: props.style,
-      tabIndex: props.tabIndex,
-      title: props.title
-    });
+    return "";
   };
 
   return Stage;
@@ -205,7 +192,7 @@ var KONVA_NODES = ["Sprite", "Text", "Image", "Button", "Box"];
 
 var TYPES = {};
 
-KONVA_NODES.forEach(function (nodeName) {
+KONVA_NODES.forEach(function(nodeName) {
   TYPES[nodeName] = nodeName;
 });
 
@@ -224,7 +211,6 @@ var KonvaRenderer = ReactFiberReconciler({
     }
 
     parentInstance.addChild(child);
-
   },
   createInstance: function createInstance(type, props, internalInstanceHandle) {
     var NodeClass = Konva[type];
@@ -296,7 +282,6 @@ var KonvaRenderer = ReactFiberReconciler({
         return;
       }
       parentInstance.addChild(child);
-
     },
     appendChildToContainer: function appendChildToContainer(
       parentInstance,
@@ -374,7 +359,9 @@ var foundDevTools = KonvaRenderer.injectIntoDevTools({
   rendererPackageName: "react-konva",
   getInspectorDataForViewTag: function getInspectorDataForViewTag() {
     for (
-      var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++
+      var _len = arguments.length, args = Array(_len), _key = 0;
+      _key < _len;
+      _key++
     ) {
       args[_key] = arguments[_key];
     }
