@@ -1,13 +1,18 @@
-import { ipcRenderer } from 'electron';
 import * as React from 'react';
 import { render } from 'react-dom';
-import { test } from './test';
+import { Header } from './header';
+import { Panel } from './panel';
 
 const conainer = document.getElementById('app');
 
 class App extends React.Component {
   public render() {
-    return <div />;
+    return (
+      <div>
+        <Header />
+        <Panel />
+      </div>
+    );
   }
 }
 

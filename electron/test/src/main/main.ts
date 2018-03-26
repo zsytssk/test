@@ -7,7 +7,7 @@ let mainWindow: BrowserWindow;
 app.on('ready', () => {
   mainWindow = new BrowserWindow({ width: 300, height: 300 });
   const render_adress =
-    process.env.NODE_ENV === 'production'
+    process.env.NODE_ENV !== 'production'
       ? 'http://localhost:8080/dist/renderer/'
       : url.format({
           pathname: path.join(__dirname, '../../dist/renderer/index.html'),
@@ -15,7 +15,14 @@ app.on('ready', () => {
           slashes: true,
         });
 
-  mainWindow.loadURL(render_adress);
+  // mainWindow.loadURL(render_adress);
+  mainWindow.loadURL(
+    url.format({
+      pathname: path.join(__dirname, '../../dist/renderer/index.html'),
+      protocol: 'file:',
+      slashes: true,
+    }),
+  );
 
   mainWindow.on('closed', () => {
     app.quit();
