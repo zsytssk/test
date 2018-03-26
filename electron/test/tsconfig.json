@@ -7,6 +7,7 @@
     "skipDefaultLibCheck": true,
     "outDir": "dist",
     "moduleResolution": "node",
-    "allowJs": true
+    "allowJs": true,
+    "jsx": "react"
   }
 }

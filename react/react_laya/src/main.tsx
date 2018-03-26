@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render } from "react-dom";
-import { Stage, Text, Image, Button } from "./react-laya/lib/index";
+import { Stage, Text, Image } from "react-laya";
 
 class App extends React.Component<any, any> {
   state = {
@@ -39,7 +39,8 @@ class App extends React.Component<any, any> {
   render() {
     let state = this.state;
     return (
-      <Stage width="500" height="500" onClick={this.handleClick}>
+      <Stage ref={node => console.log(node)} onRightClick={this.handleClick}>
+        <Text text={this.state.text} color="#ffffff" />
         <Test
           skin={this.state.img}
           clickImage={this.clickImage}
@@ -57,12 +58,11 @@ type TestProps = {
 };
 
 class Test extends React.Component<TestProps, any> {
-  componentDidMount() {
-    console.log(this);
-  }
+  componentDidMount() {}
   render() {
     return (
       <Image
+        ref={node => console.log(node)}
         x={200}
         y={200}
         anchorX={0.5}
@@ -74,11 +74,8 @@ class Test extends React.Component<TestProps, any> {
     );
   }
 }
-function onLoaded(): void {
-  // //实例UI界面
-  var renderelement = document.getElementById("Laya");
-  let app = <App />;
-  render(app, renderelement);
-}
 
-onLoaded();
+Laya.init(500, 300);
+var renderelement = document.querySelector("#layaContainer div");
+let app = <App />;
+render(app, renderelement);

@@ -1,5 +1,4 @@
 {
-  "extends": "tslint:recommended",
   "rules": {
     "max-line-length": {
       "options": [120]
@@ -8,11 +7,23 @@
     "no-arg": true,
     "no-bitwise": true,
     "no-conditional-assignment": true,
-    "no-consecutive-blank-lines": false
+    "no-consecutive-blank-lines": false,
+    "no-console": {
+      "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
+    },
+    "quotemark": [true, "single", "jsx-double"],
+    "interface-over-type-literal": false,
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "variable-name": [true, "allow-snake-case"],
+    "max-classes-per-file": [true, 5],
+    "member-ordering": [false],
+    "object-literal-key-quotes": [true, "never"],
+    "interface-name": [true, "never-prefix"]
   },
   "jsRules": {
     "max-line-length": {
       "options": [120]
     }
-  }
+  },
+  "extends": ["tslint:recommended"]
 }

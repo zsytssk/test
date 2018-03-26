@@ -1,32 +1,38 @@
-import { app, BrowserWindow, Menu, ipcMain } from "electron";
-import * as url from "url";
-import * as path from "path";
+import { app, BrowserWindow, ipcMain, Menu } from 'electron';
+import * as path from 'path';
+import * as url from 'url';
 
-let mainWindow;
+let mainWindow: BrowserWindow;
 
-app.on("ready", () => {
-  mainWindow = new BrowserWindow({ width: 300, height: 300, frame: false });
-  mainWindow.loadURL(
-    url.format({
-      pathname: path.join(__dirname, "../../dist/renderer/index.html"),
-      protocol: "file:",
-      slashes: true
-    })
-  );
+app.on('ready', () => {
+  mainWindow = new BrowserWindow({ width: 300, height: 300 });
+  const render_adress =
+    process.env.NODE_ENV === 'production'
+      ? 'http://localhost:8080/dist/renderer/'
+      : url.format({
+          pathname: path.join(__dirname, '../../dist/renderer/index.html'),
+          protocol: 'file:',
+          slashes: true,
+        });
 
-  mainWindow.on("closed", function() {
+  mainWindow.loadURL(render_adress);
+
+  mainWindow.on('closed', () => {
     app.quit();
+    mainWindow = null;
   });
+
+  mainWindow.webContents.openDevTools();
 
   // const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
   // Menu.setApplicationMenu(mainMenu);
 
-  app.on("window-all-closed", function() {
+  app.on('window-all-closed', () => {
     app.quit();
   });
 });
 
-ipcMain.on("close-main-window", () => {
+ipcMain.on('close-main-window', () => {
   app.quit();
 });
 

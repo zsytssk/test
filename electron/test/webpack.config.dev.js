@@ -1,58 +1,58 @@
-"use strict";
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+'use strict';
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 let common_config = {
-  devtool: "source-map",
+  devtool: 'source-map',
   watch: true,
   node: {
-    __dirname: true
+    __dirname: true,
   },
-  mode: "development",
+  mode: 'development',
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: "ts-loader",
+        loader: 'ts-loader',
         options: {
-          transpileOnly: true
-        }
-      }
-    ]
+          transpileOnly: true,
+        },
+      },
+    ],
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"]
-  }
+    extensions: ['.tsx', '.ts', '.js'],
+  },
 };
 
 module.exports = [
   Object.assign({}, common_config, {
-    target: "electron-main",
+    target: 'electron-main',
     entry: {
-      main: "./src/main/main.ts"
+      main: './src/main/main.ts',
     },
     output: {
-      filename: "bundle.js",
-      path: path.resolve(__dirname, "dist/main")
-    }
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist/main'),
+    },
   }),
   Object.assign({}, common_config, {
-    target: "electron-renderer",
+    target: 'electron-renderer',
     entry: {
-      ui: "./src/renderer/main.ts"
+      ui: './src/renderer/main.tsx',
     },
     output: {
-      filename: "bundle.js",
-      path: path.resolve(__dirname, "dist/renderer")
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist/renderer'),
     },
     plugins: [
       new HtmlWebpackPlugin({
-        filename: "index.html",
-        template: "src/renderer/index.html"
-      })
+        filename: 'index.html',
+        template: 'src/renderer/index.html',
+      }),
     ],
     devServer: {
-      contentBase: path.join(__dirname, "dist/renderer")
-    }
-  })
+      contentBase: path.join(__dirname, './'),
+    },
+  }),
 ];

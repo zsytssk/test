@@ -10,7 +10,7 @@
   "devDependencies": {
     "ts-loader": "^4.1.0",
     "typescript": "^2.7.2",
-    "webpack": "^4.1.1",
+    "webpack": "^4.2.0",
     "webpack-cli": "^2.0.12",
     "webpack-dev-server": "^3.1.1"
   },
@@ -20,6 +20,7 @@
     "fbjs": "^0.8.16",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-laya": "^0.1.1",
     "react-reconciler": "^0.7.0"
   }
 }

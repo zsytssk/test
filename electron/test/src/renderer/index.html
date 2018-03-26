@@ -20,11 +20,11 @@
             line-height: 50px;
             font-size: 30px;
             text-align: center;
-            border: 1px solid #000;
             position: relative;
         }
 
         .close {
+            -webkit-app-region: no-drag;
             position: absolute;
             right: 0;
             top: 0;
@@ -36,10 +36,8 @@
 </head>
 
 <body>
-    <header>
-        hellow world
-        <div class="close"></div>
-    </header>
+    <div id="app"></div>
+    <!-- <script src="/webpack-dev-server.js"></script> -->
 </body>
 
 </html>

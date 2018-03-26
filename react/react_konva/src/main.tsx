@@ -28,7 +28,7 @@ export class List extends BaseComponent<Props, ListState> {
   render() {
     const model = this.props.model;
     return (
-      <Layer>
+      <Layer ref={node => console.log(node)}>
         <Text text="Try click on rect" />
         {model.list.map((item, index) => {
           return (

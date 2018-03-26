@@ -1,3 +1,11 @@
+## 2018-03-26 09:16:41
+
+* 获取 electron log 信息
+* electron . 到底执行什么命令
+* Foremen 是干什么的阿
+  * [d](https://medium.freecodecamp.org/building-an-electron-application-with-create-react-app-97945861647c)
+  * process.env.PORT
+
 ## 2018-03-24 21:50:40
 
 * @note 如何自己隐藏主窗口
