@@ -15,14 +15,7 @@ app.on('ready', () => {
           slashes: true,
         });
 
-  // mainWindow.loadURL(render_adress);
-  mainWindow.loadURL(
-    url.format({
-      pathname: path.join(__dirname, '../../dist/renderer/index.html'),
-      protocol: 'file:',
-      slashes: true,
-    }),
-  );
+  mainWindow.loadURL(render_adress);
 
   mainWindow.on('closed', () => {
     app.quit();

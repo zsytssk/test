@@ -24,3 +24,14 @@
   * 可以
   * 其实我只要将所有的 ts 转成 js
   * 然后 copyhtml 文件就可以了
+
+### saddsdf
+
+POST http://9test4-wap.stg3.1768.com/
+?st=getCardNum
+&act=wxfangka_hall
+&appId=2010
+&platform=Windows
+&userId=2038961394
+&appVersion=1.0.1
+&jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjIwMzg5NjEzOTQsImV4cCI6MTUxNzMwMzM4MjIyNzAwMH0.NDY0KPffc8InjoxavmUSzAcYtWzLjdL73mLzjElJO4Y
