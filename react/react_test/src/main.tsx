@@ -22,7 +22,7 @@ class ErrorBoundary extends React.Component<any, any> {
     this.setState({ hasError: true });
   }
   render() {
-    return [<p key="first">ReactJS </p>, <li key="first">ReactJS </li>];
+    return [<p key="first">ReactJS1 </p>, <p key="second">ReactJS2 </p>];
   }
 }
 const element = (
