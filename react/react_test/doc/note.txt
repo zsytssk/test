@@ -1,3 +1,15 @@
+## 2018-04-09
+
+## 2018-04-09 09:29:14
+
+* @ques Context Provide 中的值发生变化, 并没有导致 consumer 中发生变化 这怎么处理
+
+  * @fix 可以
+
+* @ques 弹出层 用 context 应该很好控制...
+
+* @note react context .d.ts 更新...
+
 ## 2018-03-29 09:22:09
 
 * @ques 如何在加载的过程中显示 loading, 而且 loading 进度条

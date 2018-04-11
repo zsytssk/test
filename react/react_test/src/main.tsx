@@ -4,32 +4,57 @@ import * as React from "react";
 import { render } from "react-dom";
 import { default as Axios } from "axios";
 
-const State = [
-  { id: 0, value: "zero" },
-  { id: 1, value: "one" },
-  { id: 2, value: "tow" },
-  { id: 3, value: "three" },
-  { id: 4, value: "four" }
-];
+let ThemeContext = React.createContext("light");
 
-const rootElement = document.getElementById("root");
+type AppState = {
+  count: number;
+  changeCount: () => void;
+};
+class App extends React.Component<any, AppState> {
+  changeCount = () => {
+    this.setState({ ...this.state, count: this.state.count + 1 });
+  };
+  state = { count: 1, changeCount: this.changeCount };
+  render() {
+    return (
+      <ThemeContext.Provider value={this.state}>
+        <Item />
+      </ThemeContext.Provider>
+    );
+  }
+}
+
 class ErrorBoundary extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.state = { hasError: false };
   }
+
   componentDidCatch(error, info) {
+    // Display fallback UI
     this.setState({ hasError: true });
+    // You can also log the error to an error reporting service
   }
+
   render() {
-    return [<p key="first">ReactJS1 </p>, <p key="second">ReactJS2 </p>];
+    if (this.state.hasError) {
+      // You can render any custom fallback UI
+      return <h1>Something went wrong.</h1>;
+    }
+    return this.props.children;
   }
 }
-const element = (
-  <div>
-    <ErrorBoundary>
-      <div />
-    </ErrorBoundary>
-  </div>
-);
+
+function Item() {
+  return (
+    <ThemeContext.Consumer>
+      {(value: AppState) => (
+        <button onClick={value.changeCount}>{value.count}</button>
+      )}
+    </ThemeContext.Consumer>
+  );
+}
+
+const rootElement = document.getElementById("root");
+const element = <App />;
 render(element, rootElement);

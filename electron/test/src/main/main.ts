@@ -1,12 +1,14 @@
-import { app, BrowserWindow, ipcMain, Menu } from 'electron';
+import { app, BrowserWindow } from 'electron';
+import * as fs from 'fs';
 import * as path from 'path';
 import * as url from 'url';
+import { sendToRenderer } from './ipc';
 
 let mainWindow: BrowserWindow;
 
 app.on('ready', () => {
   mainWindow = new BrowserWindow({ width: 300, height: 300 });
-  const render_adress =
+  const render_address =
     process.env.NODE_ENV !== 'production'
       ? 'http://localhost:8080/dist/renderer/'
       : url.format({
@@ -15,7 +17,14 @@ app.on('ready', () => {
           slashes: true,
         });
 
-  mainWindow.loadURL(render_adress);
+  // mainWindow.loadURL(render_address);
+  mainWindow.loadURL(
+    url.format({
+      pathname: path.join(__dirname, '../../dist/renderer/index.html'),
+      protocol: 'file:',
+      slashes: true,
+    }),
+  );
 
   mainWindow.on('closed', () => {
     app.quit();
@@ -32,26 +41,7 @@ app.on('ready', () => {
   });
 });
 
-ipcMain.on('close-main-window', () => {
-  app.quit();
+/** 监听renderer页面修改发送刷新命令给renderer */
+fs.watch(path.resolve(__dirname, '../../dist/renderer'), () => {
+  sendToRenderer(mainWindow, 'reload');
 });
-
-// const mainMenuTemplate = [
-//   {
-//     label: "File",
-//     submenu: [
-//       {
-//         label: "quit",
-//         click() {
-//           app.quit();
-//         }
-//       },
-//       {
-//         label: "reload",
-//         click() {
-//           app.relaunch();
-//         }
-//       }
-//     ]
-//   }
-// ];

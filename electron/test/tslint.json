@@ -25,5 +25,6 @@
       "options": [120]
     }
   },
+  "semicolon": [true, "always", "ignore-bound-class-methods"],
   "extends": ["tslint:recommended"]
 }

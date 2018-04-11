@@ -1,19 +1,26 @@
 import * as React from 'react';
-import { render } from 'react-dom';
+import * as ReactDom from 'react-dom';
 import { Header } from './header';
-import { Panel } from './panel';
+import { emitToMain } from './ipc';
+import { log } from './util';
 
-const conainer = document.getElementById('app');
+const container = document.getElementById('app');
+const { Component } = React;
 
-class App extends React.Component {
+class App extends Component {
+  private getData = () => {
+    emitToMain('test-getFolder').then(data => {
+      log(data);
+    });
+  };
   public render() {
     return (
       <div>
+        <button onClick={this.getData} />
         <Header />
-        <Panel />
       </div>
     );
   }
 }
 
-render(<App />, conainer);
+ReactDom.render(<App />, container);

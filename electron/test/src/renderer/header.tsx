@@ -11,26 +11,6 @@ const { Component } = React;
 
 export class Header extends Component {
   public render() {
-    return (
-      <div
-        style={{
-          width: '100%',
-          height: '50px',
-          background: 'black',
-          position: 'relative',
-        }}
-      >
-        <AppBar>
-          <Toolbar>
-            <Typography variant="title" color="inherit">
-              Title
-            </Typography>
-            <Button color="inherit">
-              <Icon>close</Icon>
-            </Button>
-          </Toolbar>
-        </AppBar>
-      </div>
-    );
+    return <div />;
   }
 }
