@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Header } from './header';
 import { emitToMain } from './ipc';
+import { Panel } from './panel/main';
 import { log } from './util';
 
 const container = document.getElementById('app');
@@ -16,8 +17,8 @@ class App extends Component {
   public render() {
     return (
       <div>
-        <button onClick={this.getData} />
         <Header />
+        <Panel />
       </div>
     );
   }

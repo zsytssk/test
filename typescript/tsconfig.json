@@ -6,10 +6,13 @@
     "allowJs": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "outFile": "dist/main.min.js",
+    "outDir": "dist",
     "rootDir": "src",
     "module": "esnext",
     "moduleResolution": "node"
   },
-  "include": ["src", "typings"]
+  "include": [
+    "src",
+    "typings"
+  ]
 }

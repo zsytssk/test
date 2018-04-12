@@ -26,8 +26,5 @@ export function emitToMain(cmd, data?) {
 ipcRenderer.on('reload', () => {
   log(__dirname);
 
-  const reload = confirm('reload');
-  if (reload) {
-    location.reload(true);
-  }
+  location.reload(true);
 });

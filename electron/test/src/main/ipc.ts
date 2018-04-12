@@ -1,5 +1,5 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
-import { log } from 'util';
+// import { log } from 'util';
 import { CONFIG } from './config';
 import * as walk from './ls/walk';
 
@@ -8,7 +8,6 @@ ipcMain.on('close-main-window', () => {
 });
 
 ipcMain.on('test-getFolder', (event, arg) => {
-  log(files);
   event.sender.send('test-getFolder', {
     code: arg.code,
     data: walk(CONFIG.test_dir),
