@@ -22,9 +22,11 @@ export function emitToMain(cmd, data?) {
   });
 }
 
-/** 从main传过来reload命令 */
-ipcRenderer.on('reload', () => {
-  log(__dirname);
+export function initEvent() {
+  /** 从main传过来reload命令 */
+  ipcRenderer.on('reload', () => {
+    log(__dirname);
 
-  location.reload(true);
-});
+    location.reload(true);
+  });
+}

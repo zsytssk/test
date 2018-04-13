@@ -1,21 +1,19 @@
 import * as React from 'react';
 import { default as styled } from 'styled-components';
 
+type PanelProps = {
+  title: string;
+  content: string;
+};
 // tslint:disable-next-line:variable-name
 const Div = styled.div`
-  background-color: #252525;
-  color: #c8c8c8;
+  color: #fff;
   padding: 0 5px;
   height: 25px;
   line-height: 25px;
 `;
-
-export class Header extends React.Component {
+export class Panel extends React.Component<PanelProps, any> {
   public render() {
-    return (
-      <Div className="header">
-        <label>header</label>
-      </Div>
-    );
+    return <Div>{this.props.content}</Div>;
   }
 }

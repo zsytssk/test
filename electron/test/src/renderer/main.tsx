@@ -1,27 +1,34 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Header } from './header';
-import { emitToMain } from './ipc';
-import { Panel } from './panel/main';
-import { log } from './util';
+import { initEvent } from './ipc';
+import { Container } from './panel/container';
+import { Panel } from './panel/panel';
 
 const container = document.getElementById('app');
 const { Component } = React;
 
+const TEST_STATE = [
+  { title: 'panel1', content: 'content1' },
+  { title: 'panel2', content: 'content2' },
+];
+
 class App extends Component {
-  private getData = () => {
-    emitToMain('test-getFolder').then(data => {
-      log(data);
-    });
-  };
   public render() {
     return (
       <div>
         <Header />
-        <Panel />
+        <Container>
+          {TEST_STATE.map((item, index) => {
+            return (
+              <Panel key={index} title={item.title} content={item.content} />
+            );
+          })}
+        </Container>
       </div>
     );
   }
 }
 
+initEvent();
 ReactDom.render(<App />, container);

@@ -5,8 +5,8 @@
   "main": "./dist/main/bundle.js",
   "scripts": {
     "start": "electron .",
-    "auto-start": "nodemon --watch dist/main --exec npm start",
-    "test": "npm-run-all --parallel start webpack-dev-server",
+    "reload-start": "nodemon --watch dist/main --exec npm start",
+    "test": "npm-run-all --parallel webpack reload-start",
     "webpack": "webpack --config webpack.config.dev.js",
     "webpack-dev-server": "webpack-dev-server --config webpack.config.dev.js"
   },
