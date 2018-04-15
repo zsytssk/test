@@ -34,15 +34,45 @@ const Div = styled.div`
 `;
 
 type TabProps = {
+  id: string;
   title: string;
+  removePanel: (id: string) => void;
+  setCur: (id: string) => void;
 };
 export class Tab extends React.Component<TabProps, any> {
+  private close = (event: React.FormEvent<HTMLElement>) => {
+    event.stopPropagation();
+    this.props.removePanel(this.props.id);
+  }; // tslint:disable-line:semicolon
+  private setCur = () => {
+    this.props.setCur(this.props.id);
+  }; // tslint:disable-line:semicolon
+  private dragStart = (evt: React.DragEvent<HTMLElement>) => {
+    const data = {
+      id: this.props.id,
+    };
+    evt.dataTransfer.setData('dragtab', JSON.stringify(data));
+    evt.dataTransfer.effectAllowed = 'move';
+  }; // tslint:disable-line:semicolon
+  private dragEnd = (evt: React.DragEvent<HTMLElement>) => {
+    const drop_effect = evt.dataTransfer.dropEffect;
+    if (drop_effect === 'move') {
+      this.props.removePanel(this.props.id);
+    }
+  }; // tslint:disable-line:semicolon
   public render() {
     return (
-      <Div>
+      <Div
+        onClick={this.setCur}
+        draggable={true}
+        onDragStart={this.dragStart}
+        onDragEnd={this.dragEnd}
+      >
         <i className="icon material-icons">insert_drive_file</i>
         <label>{this.props.title}</label>
-        <i className="close material-icons">close</i>
+        <i className="close material-icons" onClick={this.close}>
+          close
+        </i>
       </Div>
     );
   }

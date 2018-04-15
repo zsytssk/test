@@ -1,11 +1,55 @@
+## 2018-04-15 13:48:09
+
+* @ques styled-components 无法读取 props
+
+- @todo
+
+  * 创建 panel 在左边 右边创建
+  * tab 排序...
+  * 上下创建 panel
+
+- @ques 如何判断 drag 失败...如何终止 drag..
+  * drop 时如何本身已经有这个 panel, 就不 drop 了
+  * 但是我没有办法让 dragend 知道, 我没有 drag
+  * 难道我必须在 Drop 事件里面去处理这个事情
+  * 我在 drop 的时候根本就不知道, 从什么地方 drag 来的啊
+  * 我只能搞一个全局对象来保存这个东西了
+
+## 2018-04-15 11:09:26
+
+* 下面这种形式 如何定义类型
+  `const {children, ...other} = this.props as Panel[];`
+
+`{const children, let ...other} = this.props as Panel[];`
+这样行不行
+
+* @ques 设置 className 报错
+  Props & React.Props
+
+* @怎么把原来的删除掉...
+
 ## 2018-04-13 10:04:20
 
 * @todo
 
   * tab 关闭
-  * 拖拽..
 
-* @ques tab 标签上面的 context 目录怎么处理...
+    * 打开上一个打开的标签.. 这要记录标签打开历史..
+
+  * 两个 pannel container 之间如何拖拽
+  * 拖拽如何创建 container
+  * tab 的顺序如何拖拽改变..
+
+- @ques 如何保存 panel 的状态 下次打开还是那个样子
+
+  * app setting
+  * ...
+
+- @ques tab 标签上面的 context 目录怎么处理...
+
+* @ques 在 dragOver 的时候无法知道 drag target 的类型 这如何去处理...
+
+* @ques 子元素出现 父元素的就触发 dragLeave 能不能让 子元素不接受 drag 事件??
 
 ## 2018-04-12 09:07:23
 
