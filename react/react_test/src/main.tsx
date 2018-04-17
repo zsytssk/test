@@ -2,58 +2,66 @@
 import * as React from "react";
 
 import { render } from "react-dom";
-import { default as Axios } from "axios";
-
-let ThemeContext = React.createContext("light");
 
 type AppState = {
   count: number;
   changeCount: () => void;
 };
 class App extends React.Component<any, AppState> {
-  changeCount = () => {
-    this.setState({ ...this.state, count: this.state.count + 1 });
+  testRef = React.createRef();
+  componentDidMount() {
+    console.log(this.testRef.current);
+  }
+  change = () => {
+    console.log(this.testRef.current);
   };
-  state = { count: 1, changeCount: this.changeCount };
   render() {
     return (
-      <ThemeContext.Provider value={this.state}>
-        <Item />
-      </ThemeContext.Provider>
+      <div>
+        <React.StrictMode>
+          <div>
+            {/* <MyComponent ref={this.testRef} change={this.onChange} /> */}
+            <MyComponentWrapRef ref={this.testRef} change={this.change} />
+          </div>
+        </React.StrictMode>
+      </div>
     );
   }
 }
 
-class ErrorBoundary extends React.Component<any, any> {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false };
+class MyComponent extends React.Component {
+  componentDidMount() {
+    console.log(this.props);
   }
-
-  componentDidCatch(error, info) {
-    // Display fallback UI
-    this.setState({ hasError: true });
-    // You can also log the error to an error reporting service
-  }
-
   render() {
-    if (this.state.hasError) {
-      // You can render any custom fallback UI
-      return <h1>Something went wrong.</h1>;
-    }
-    return this.props.children;
+    return <input type="text" onChange={this.props.change} />;
   }
 }
 
-function Item() {
-  return (
-    <ThemeContext.Consumer>
-      {(value: AppState) => (
-        <button onClick={value.changeCount}>{value.count}</button>
-      )}
-    </ThemeContext.Consumer>
-  );
+function WrapRef(Component) {
+  class LogProps extends React.Component {
+    componentDidUpdate(prevProps) {
+      console.log("old props:", prevProps);
+      console.log("new props:", this.props);
+    }
+
+    render() {
+      const { forwardedRef, ...rest } = this.props;
+
+      // Assign the custom prop "forwardedRef" as a ref
+      return <Component ref={forwardedRef} {...rest} />;
+    }
+  }
+
+  // Note the second param "ref" provided by React.forwardRef.
+  // We can pass it along to LogProps as a regular prop, e.g. "forwardedRef"
+  // And it can then be attached to the Component.
+  return React.forwardRef((props, ref) => {
+    return <LogProps {...props} forwardedRef={ref} />;
+  });
 }
+
+const MyComponentWrapRef = WrapRef(MyComponent);
 
 const rootElement = document.getElementById("root");
 const element = <App />;
