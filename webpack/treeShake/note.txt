@@ -1,12 +1,14 @@
-* @ques 为什么会生成三个 js runtime~main.main.js 是什么意思]
+* @ques split chunk 无法 tree shake...
+
+- @ques 为什么会生成三个 js runtime~main.main.js 是什么意思]
   * 而且必须三个 js 全部引用才行
 
-- @ques webpack size warning 怎么去掉
+* @ques webpack size warning 怎么去掉
 
-* runtimeChunk 是什么意思 为什么他要这个 js
+- runtimeChunk 是什么意思 为什么他要这个 js
   * 这到底是干什么的 为什么要独立生成一个 runTime 文件
 
-- 话说连 两个 js 闭包 如何就可以相互引用了...
+* 话说连 两个 js 闭包 如何就可以相互引用了...
   * 可能用的 webpack 全局对象..
 
-* @ques tree shake 怎么没有作用....
+- @ques tree shake 怎么没有作用....
