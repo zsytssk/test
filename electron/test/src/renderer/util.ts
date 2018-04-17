@@ -5,11 +5,11 @@ export function generateRandomString() {
 }
 
 // log
-function createLog(log_type?) {
+function createLog(type?) {
   // tslint:disable-next-line:no-empty only-arrow-functions
   const empty_fn = function() {};
 
-  const type = 'log';
+  type = type || 'log';
 
   if (!window.console) {
     return empty_fn;
@@ -23,3 +23,22 @@ function createLog(log_type?) {
 }
 
 export const log = createLog();
+
+/** 获取节点的位置... */
+export function getNodeOffset(node) {
+  const offset = {
+    left: 0,
+    top: 0,
+  } as {
+    left: number;
+    top: number;
+  };
+  while (node.offsetParent) {
+    offset.left += node.offsetLeft;
+    offset.top += node.offsetTop;
+
+    node = node.offsetParent;
+  }
+
+  return offset;
+}
