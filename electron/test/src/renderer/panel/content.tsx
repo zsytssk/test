@@ -34,6 +34,7 @@ const Div = styled.div`
 `;
 type Props = {
   addPanel: (id: string) => void;
+  className: string;
 };
 export class Content extends React.Component<Props, State> {
   public state = {
