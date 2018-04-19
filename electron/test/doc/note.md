@@ -1,19 +1,49 @@
 ## 2018-04-15 13:48:09
 
-* @ques styled-components 无法读取 props
+#### structure
 
-- @todo
+* group(direction, container)
+
+  * group || container
+  * container
+
+* group > group... > container > panel
+  {
+  direction:
+  }
+
+* @note panel type 表示各种类型...
+
+- group 里面的信息因该是怎样的
+  * 怎么从最顶层将这些数据传递过去...
+
+* @todo 先全部 然后在里面创建新的
+
+- @ques container 下面再包括 container 如何处理
+
+  * 这 ui 需要重新整理先
+  * container_group
+  * 横向纵向都可以
+
+- @ques styled-components 无法读取 props
+
+* @todo
 
   * 创建 panel 在左边 右边创建
   * tab 排序...
   * 上下创建 panel
 
-- @ques 如何判断 drag 失败...如何终止 drag..
+* @ques 如何判断 drag 失败...如何终止 drag..
+
   * drop 时如何本身已经有这个 panel, 就不 drop 了
   * 但是我没有办法让 dragend 知道, 我没有 drag
   * 难道我必须在 Drop 事件里面去处理这个事情
   * 我在 drop 的时候根本就不知道, 从什么地方 drag 来的啊
   * 我只能搞一个全局对象来保存这个东西了
+
+* @ques 这用 radio 能不能布局整个的 div
+  * 位置不好处理 大小基本上没有问题
+  * 如果不行还不如 left,right,width,height 这样的布局
 
 ## 2018-04-15 11:09:26
 
