@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { default as styled } from 'styled-components';
-import { PanelInfo } from '../main';
 import { Content } from './content';
 import { Panel } from './panel';
 import { Tab } from './tab';
@@ -11,14 +10,14 @@ const w_w = window.innerWidth;
 type State = {
   cur_id?: string;
   drag_status?: boolean;
-  contains: PanelInfo[];
+  contains: PanelData[];
 };
 
 type Props = {
-  width: number;
-  left: number;
-  all_panel: PanelInfo[];
-  contains: PanelInfo[];
+  wrapDirection: GroupDirection;
+  wrapRadio: number;
+  all_panel: PanelData[];
+  contains: PanelData[];
 };
 export class Container extends React.Component<Props, State> {
   public state = { contains: [] } as State;
@@ -69,13 +68,20 @@ export class Container extends React.Component<Props, State> {
   }; // tslint:disable-line:semicolon
   public render() {
     const { cur_id, contains } = this.state;
-    const { all_panel, width, left, ...other } = this.props;
+    const { all_panel, ...other } = this.props;
+    let { wrapDirection, wrapRadio } = this.props;
+
+    wrapDirection = wrapDirection || 'horizontal';
+    wrapRadio = wrapRadio || 1;
+
+    const w = wrapDirection === 'horizontal' ? wrapRadio * 100 + '%' : '100%';
+    const h = wrapDirection === 'horizontal' ? '100%' : wrapRadio * 100 + '%';
+
     // tslint:disable-next-line:variable-name
     const Div = styled.div`
       position: absolute;
-      height: ${w_h}px;
-      width: ${width}px;
-      left: ${left}px;
+      height: ${h};
+      width: ${w};
 
       & > .header.tabs {
         background-color: #2e3440;

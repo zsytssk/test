@@ -1,5 +1,21 @@
 ## 2018-04-15 13:48:09
 
+* 没有兼容的调用签名
+
+```tsx
+layoutChildren: ContainerData[] | GroupData[]layoutChildren.map((item, index) => {
+    return (
+      <Container
+        key={index}
+        wrapDirection={layoutDirection}
+        wrapRadio={(item as ContainerData).wrap_radio}
+        contains={(item as ContainerData).panels}
+        all_panel={(item as ContainerData).panels}
+      />
+    );
+  });
+```
+
 #### structure
 
 * group(direction, container)
