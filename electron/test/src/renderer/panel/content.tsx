@@ -33,7 +33,7 @@ const Div = styled.div`
   }
 `;
 type Props = {
-  addPanel: (id: string) => void;
+  setDropPanel: () => void;
   className: string;
 };
 export class Content extends React.Component<Props, State> {
@@ -55,8 +55,7 @@ export class Content extends React.Component<Props, State> {
     if (type !== 'dragtab') {
       return false;
     }
-    this.props.addPanel(data.id);
-
+    this.props.setDropPanel();
     this.setDragStatus('default');
   }; // tslint:disable-line:semicolon
   private dragOver = (evt: React.DragEvent<HTMLElement>) => {

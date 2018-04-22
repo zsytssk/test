@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { default as styled } from 'styled-components';
 import { Content } from './content';
+import { PanelContextProvider } from './context';
 import { Panel } from './panel';
 import { Tab } from './tab';
-
-const w_h = window.innerHeight;
-const w_w = window.innerWidth;
 
 type State = {
   cur_id?: string;
@@ -14,10 +12,12 @@ type State = {
 };
 
 type Props = {
-  wrapDirection: GroupDirection;
-  wrapRadio: number;
-  all_panel: PanelData[];
+  width: number;
+  height: number;
+  left: number;
+  top: number;
   contains: PanelData[];
+  panel_manager: PanelContextProvider;
 };
 export class Container extends React.Component<Props, State> {
   public state = { contains: [] } as State;
@@ -31,8 +31,11 @@ export class Container extends React.Component<Props, State> {
   public removePanel = (id: string) => {
     let { cur_id, contains } = this.state;
 
+    const index = contains.findIndex(item => item.id === id);
+    if (index === -1) {
+      return;
+    }
     if (id === cur_id) {
-      const index = contains.findIndex(item => item.id === id);
       if (index < contains.length - 1) {
         cur_id = contains[index + 1].id;
       } else {
@@ -47,41 +50,59 @@ export class Container extends React.Component<Props, State> {
       cur_id,
     });
   }; // tslint:disable-line:semicolon
-  public addPanel = (id: string) => {
-    let { contains } = this.state;
-    const panel_item = this.props.all_panel.find(item => item.id === id);
-
-    const is_contained = contains.find(item => item.id === id);
+  public addPanel = (data: PanelData, is_cur?: boolean) => {
+    const { contains } = this.state;
+    const is_contained = contains.find(item => item.id === data.id);
     if (is_contained) {
       return;
     }
-    contains = [...contains, { ...panel_item }];
+    const end_state = {} as {
+      contains: PanelData[];
+      cur_id: string;
+    };
+    end_state.contains = [...contains, data];
 
+    if (is_cur) {
+      end_state.cur_id = data.id;
+    }
     this.setState({
       ...this.state,
-      contains,
+      ...end_state,
     });
+
     return true;
   }; // tslint:disable-line:semicolon
   public setCur = (id: string) => {
     this.setState({ ...this.state, cur_id: id });
   }; // tslint:disable-line:semicolon
+  public getPanel = (id: string) => {
+    const { contains } = this.state;
+    const panel_item = contains.find(item => item.id === id);
+    if (!panel_item) {
+      return;
+    }
+    return panel_item;
+  }; // tslint:disable-line:semicolon
+  public startDragPanel = (id: string) => {
+    this.props.panel_manager.setMovePanel(id, this);
+  }; // tslint:disable-line:semicolon
+  public setDropPanel = () => {
+    this.props.panel_manager.setTargetContainer(this);
+  }; // tslint:disable-line:semicolon
+  public endDragPanel = (id: string) => {
+    this.props.panel_manager.movePanel();
+  }; // tslint:disable-line:semicolon
   public render() {
     const { cur_id, contains } = this.state;
-    const { all_panel, ...other } = this.props;
-    let { wrapDirection, wrapRadio } = this.props;
-
-    wrapDirection = wrapDirection || 'horizontal';
-    wrapRadio = wrapRadio || 1;
-
-    const w = wrapDirection === 'horizontal' ? wrapRadio * 100 + '%' : '100%';
-    const h = wrapDirection === 'horizontal' ? '100%' : wrapRadio * 100 + '%';
+    const { width, height, top, left } = this.props;
 
     // tslint:disable-next-line:variable-name
     const Div = styled.div`
       position: absolute;
-      height: ${h};
-      width: ${w};
+      top: ${top}px;
+      left: ${left}px;
+      height: ${height}px;
+      width: ${width}px;
 
       & > .header.tabs {
         background-color: #2e3440;
@@ -98,13 +119,15 @@ export class Container extends React.Component<Props, State> {
       return '';
     }
     return (
-      <Div {...other}>
+      <Div>
         <div className="header tabs title">
           {contains.map(contain => {
             const { content, ...props } = contain;
             return (
               <Tab
                 removePanel={this.removePanel}
+                startDragPanel={this.startDragPanel}
+                endDragPanel={this.endDragPanel}
                 setCur={this.setCur}
                 key={contain.id}
                 {...props}
@@ -112,7 +135,7 @@ export class Container extends React.Component<Props, State> {
             );
           })}
         </div>
-        <Content className="con-container" addPanel={this.addPanel}>
+        <Content className="con-container" setDropPanel={this.setDropPanel}>
           {contains.map(contain => {
             if (contain.id !== cur_id) {
               return;

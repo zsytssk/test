@@ -33,13 +33,15 @@ const Div = styled.div`
   }
 `;
 
-type TabProps = {
+type Props = {
   id: string;
   title: string;
-  removePanel: (id: string) => void;
   setCur: (id: string) => void;
+  removePanel: (id: string) => void;
+  startDragPanel: (id: string) => void;
+  endDragPanel: (id: string) => void;
 };
-export class Tab extends React.Component<TabProps, any> {
+export class Tab extends React.Component<Props, any> {
   private close = (event: React.FormEvent<HTMLElement>) => {
     event.stopPropagation();
     this.props.removePanel(this.props.id);
@@ -53,11 +55,12 @@ export class Tab extends React.Component<TabProps, any> {
     };
     evt.dataTransfer.setData('dragtab', JSON.stringify(data));
     evt.dataTransfer.effectAllowed = 'move';
+    this.props.startDragPanel(this.props.id);
   }; // tslint:disable-line:semicolon
   private dragEnd = (evt: React.DragEvent<HTMLElement>) => {
     const drop_effect = evt.dataTransfer.dropEffect;
     if (drop_effect === 'move') {
-      this.props.removePanel(this.props.id);
+      this.props.endDragPanel(this.props.id);
     }
   }; // tslint:disable-line:semicolon
   public render() {

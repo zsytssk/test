@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { default as styled } from 'styled-components';
 import { initEvent } from './ipc';
+import { PanelContextProvider } from './panel/context';
 import { Group } from './panel/group';
 
 const container = document.getElementById('app');
@@ -17,7 +18,6 @@ const layout_data = {
             { id: 'panel2', title: 'panel2', content: 'content2' },
             { id: 'panel3', title: 'panel3', content: 'content3' },
           ],
-          wrap_radio: 1,
         },
         {
           panels: [
@@ -25,10 +25,9 @@ const layout_data = {
             { id: 'panel5', title: 'panel5', content: 'content5' },
             { id: 'panel6', title: 'panel6', content: 'content6' },
           ],
-          wrap_radio: 1,
         },
       ],
-      direction: 'horizontal',
+      direction: 'vertical',
     },
   ],
 } as LayoutData;
@@ -47,10 +46,16 @@ class App extends Component {
 
     return (
       <Div>
-        <Group
-          layoutChildren={group_data.children}
-          layoutDirection={group_data.direction}
-        />
+        <PanelContextProvider>
+          <Group
+            width={client_width}
+            height={client_height}
+            left={0}
+            top={0}
+            layoutChildren={group_data.children}
+            layoutDirection={group_data.direction}
+          />
+        </PanelContextProvider>
       </Div>
     );
   }
