@@ -1,6 +1,50 @@
 ## 2018-04-15 13:48:09
 
-* 没有兼容的调用签名
+* @note 我所有的 container 修改都是数据 调用 component 里面的 state 实在不方便
+
+  * 难道全部要使用 数据控制>>>
+
+* goupContainer(container)
+
+  * 我想要的情形是我 return 一个新的 container
+  * 然后调用 addPanel 添加 panel 信息
+  * 但是我只是修改数据, 并不知道新建的 container 是哪一个
+  * 这个如何处理 我 return 新 container 的 contains 信息可以吗
+    * 这好奇怪
+
+* 能不能将 group 和 container 的结构保持统一...
+
+* @ques container 和 group 同一级行不行
+
+- @ques 增加 container 如何处理
+
+  * 一直往上最近的 group 添加一个新的 container
+  * 如果我已经有两个 container 了呢??
+    * 原来的一个放在一个 group 中
+    * 新的两个交互的添加 group
+  * 一个 group 里面最两个 container
+
+    * 如果原来里面只有一个 container 直接将这个 contianr 加入
+    * 如果原来有两个 container 将 group 和新建的 container 放在一个 group 中
+    * 另一个 container, 新建一个 group 包裹...
+
+* 所有的 ui 改变都是 state 的改变....
+
+  * 我并不知道 react 的 ui 改变, 我只知道他的 state, 改变他的 state 导致 react 重绘他的 ui....!!
+
+  * 将 panelData 移动过去
+
+- 如果这一切都是控制 redux 数据, 逻辑要简单些>>>
+
+* @ques 如何将数据保存起来?
+
+  * redux ??
+
+* 直接编辑 react component 有一个问题
+  * 我怎么知道 react 的 dom 结构, 而且有时候 react 节点都不是真正的 laya 节点
+  * 可以通过这个判断 是不是 节点类型
+
+- 没有兼容的调用签名
 
 ```tsx
 layoutChildren: ContainerData[] | GroupData[]layoutChildren.map((item, index) => {

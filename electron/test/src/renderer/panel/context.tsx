@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { Container } from './container';
+import { DragStatus } from './content';
 
 const { Provider, Consumer } = React.createContext('panel');
 type State = {
   move_panel_id: string;
+  drag_status: DragStatus;
   source_container: Container;
   target_container: Container;
 };
@@ -17,18 +19,29 @@ export class PanelContextProvider extends React.Component<any, State> {
     this.state.source_container = container;
     return;
   }
-  public setTargetContainer(container: Container) {
-    this.state.target_container = container;
+  public setTargetContainer(container: Container, drag_status: DragStatus) {
+    this.setState({
+      drag_status,
+      target_container: container,
+    });
   }
   public getTargetContainer() {
     return this.state.target_container;
   }
   public movePanel() {
-    const source_container = this.state.source_container;
-    const target_container = this.state.target_container;
-    const move_panel_id = this.state.move_panel_id;
-
+    const {
+      source_container,
+      target_container,
+      move_panel_id,
+      drag_status,
+    } = this.state;
     if (!source_container || !move_panel_id || !target_container) {
+      return;
+    }
+    if (source_container === target_container) {
+      if (!drag_status || drag_status === 'full') {
+        return;
+      }
       return;
     }
 

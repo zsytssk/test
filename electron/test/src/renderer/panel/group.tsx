@@ -5,7 +5,8 @@ import { PanelContextConsumer, PanelContextProvider } from './context';
 import { Sash } from './sash';
 
 type State = {
-  type: GroupDirection;
+  direction: GroupDirection;
+  contains: ContainerData[] | GroupData[];
 };
 
 type Props = {
@@ -20,9 +21,50 @@ type Props = {
 // tslint:disable-next-line:variable-name
 
 export class Group extends React.Component<Props, State> {
-  public state = {} as State;
+  public state = {
+    contains: [],
+    direction: 'horizontal',
+  } as State;
+  public componentDidMount() {
+    const direction = this.props.layoutDirection || 'horizontal';
+    const contains = this.props.layoutChildren;
+    this.setState({ direction, contains });
+  }
+  public async groupContainer(
+    data: ContainerData,
+    direction,
+    panel_data: PanelData,
+  ) {
+    const contains = this.state.contains as ContainerData[];
+    const index = contains.findIndex(item => item === data);
+    if (index === -1) {
+      return;
+    }
+    const new_contains = [];
+
+    /** 新创建的container的数据 */
+    const new_container = {
+      panels: [],
+    };
+    const group_container = {
+      contains: [data, new_container],
+      direction,
+    };
+    new_contains.push(group_container);
+    const other_container = contains.find(item => item !== data);
+    if (other_container) {
+      new_contains.push(other_container);
+    }
+
+    await this.setState({
+      ...this.state,
+      contains: new_contains,
+    });
+
+    return new_container;
+  }
   public render() {
-    const { layoutDirection, layoutChildren } = this.props;
+    const { direction, contains } = this.state;
     const { width, height, top, left } = this.props;
 
     // tslint:disable-next-line:variable-name
@@ -34,7 +76,7 @@ export class Group extends React.Component<Props, State> {
       top: ${top}px;
     `;
 
-    const num_childs = layoutChildren.length;
+    const num_childs = contains.length;
     const sash_nums = num_childs - 1;
     const sash_size = 5;
 
@@ -42,7 +84,7 @@ export class Group extends React.Component<Props, State> {
     let child_h;
     let sash_w;
     let sash_h;
-    if (layoutDirection === 'horizontal') {
+    if (direction === 'horizontal') {
       child_w = (width - sash_nums * sash_size) / num_childs;
       child_h = height;
       sash_w = 5;
@@ -59,12 +101,12 @@ export class Group extends React.Component<Props, State> {
         {Array(num_childs)
           .fill('*')
           .map((item, index) => {
-            const child = layoutChildren[index];
+            const child = contains[index];
             let child_left;
             let child_top;
             let sash_top;
             let sash_left;
-            if (layoutDirection === 'horizontal') {
+            if (direction === 'horizontal') {
               child_left = index * (child_w + sash_size);
               child_top = 0;
               sash_left = (index + 1) * (child_w + sash_size) - sash_size;
@@ -88,7 +130,6 @@ export class Group extends React.Component<Props, State> {
                           left={child_left}
                           top={child_top}
                           contains={(child as ContainerData).panels}
-                          all_panel={(child as ContainerData).panels}
                           panel_manager={panel_manager}
                         />
                       );
@@ -96,8 +137,8 @@ export class Group extends React.Component<Props, State> {
                   </PanelContextConsumer>
                 ) : (
                   <Group
-                    layoutDirection={layoutDirection}
-                    layoutChildren={item.children}
+                    layoutDirection={(child as GroupData).direction}
+                    layoutChildren={(child as GroupData).children}
                     width={child_w}
                     height={child_h}
                     left={child_left}

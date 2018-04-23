@@ -4,14 +4,12 @@ type LayoutData = {
 
 type GroupDirection = 'vertical' | 'horizontal';
 type GroupData = {
-  wrap_radio?: number;
   direction: GroupDirection;
   children: ContainerData[] | GroupData[];
 };
 
 type ContainerData = {
   cur_id?: string;
-  wrap_radio?: number;
   panels: PanelData[];
 };
 

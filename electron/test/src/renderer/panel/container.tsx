@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { default as styled } from 'styled-components';
-import { Content } from './content';
+import { Content, DragStatus } from './content';
 import { PanelContextProvider } from './context';
 import { Panel } from './panel';
 import { Tab } from './tab';
@@ -86,8 +86,8 @@ export class Container extends React.Component<Props, State> {
   public startDragPanel = (id: string) => {
     this.props.panel_manager.setMovePanel(id, this);
   }; // tslint:disable-line:semicolon
-  public setDropPanel = () => {
-    this.props.panel_manager.setTargetContainer(this);
+  public setDropPanel = (drag_status: DragStatus) => {
+    this.props.panel_manager.setTargetContainer(this, drag_status);
   }; // tslint:disable-line:semicolon
   public endDragPanel = (id: string) => {
     this.props.panel_manager.movePanel();
