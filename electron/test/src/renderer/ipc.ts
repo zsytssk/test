@@ -22,7 +22,7 @@ export function emitToMain(cmd, data?) {
   });
 }
 
-export function initEvent() {
+export function connect() {
   /** 从main传过来reload命令 */
   ipcRenderer.on('reload', () => {
     log(__dirname);

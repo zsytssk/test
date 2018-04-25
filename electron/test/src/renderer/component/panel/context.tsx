@@ -42,14 +42,15 @@ export class PanelContextProvider extends React.Component<any, State> {
       if (!drag_status || drag_status === 'full') {
         return;
       }
-      return;
     }
 
     const panel = source_container.getPanel(move_panel_id);
     source_container.removePanel(move_panel_id);
-    target_container.addPanel(panel, true);
-    // target_container.addPanel(panel);
-    // target_container.setCur(move_panel_id);
+    if (drag_status == 'full') {
+      target_container.addPanel(panel, true);
+    } else {
+      target_container.groupContainer(drag_status, panel);
+    }
     this.reset();
   }
   public reset() {

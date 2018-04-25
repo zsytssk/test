@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { default as styled } from 'styled-components';
-import { getNodeOffset } from '../util';
+import { getNodeOffset } from '../../util';
 
 export type DragStatus = 'full' | 'left' | 'right' | 'default';
 type State = {
@@ -55,7 +55,7 @@ export class Content extends React.Component<Props, State> {
     if (type !== 'dragtab') {
       return false;
     }
-    this.props.setDropPanel(this.drag_status);
+    this.props.setDropPanel(this.state.drag_status);
     this.setDragStatus('default');
   }; // tslint:disable-line:semicolon
   private dragOver = (evt: React.DragEvent<HTMLElement>) => {

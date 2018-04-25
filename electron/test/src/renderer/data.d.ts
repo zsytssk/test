@@ -1,5 +1,5 @@
-type LayoutData = {
-  groups: GroupData[];
+type StoreState = {
+  layout_data: GroupData;
 };
 
 type GroupDirection = 'vertical' | 'horizontal';

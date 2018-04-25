@@ -1,3 +1,36 @@
+## 2018-04-24 10:24:36
+
+* context 中的数据如何放在 redux 中...
+
+* @ques 子 component 能使用 mapStateToProps 吗 dispatch
+
+* @ques 每一次改变 state 都会重新渲染整个 dom, 显然回有性能问题
+
+* @ques 这些方法如何转移到 redux 中 ??
+
+* @ques 如何完美的处理 state
+
+  * 哪些放在全局中, 哪些放在 component 里面??
+
+* @ques redux 的数据 如何在 dom 中渲染...
+
+  * 只是从最顶级的传下来吗??
+
+* @ques 我的目的是什么
+
+  * 目前的目的是最大限度的的尝试 redux react
+  * 包括理解和处理可能碰到的问题, 比方说性能问题..
+
+* @ques 如果 tab 内容为空, 如何清空 panel
+* @ques group 上面的数据会重置 container 上面的数据
+  * container remove panel 会给 group 重置回来...
+  * 必须要引入 redux 了...
+
+- 2018-04-23 17:16:45
+  * 事实上基本不可能在 ui 和 code 同时编辑代码
+  * 难点 不知道如何将 jsx 用结构写出来
+  * 难点 jsx 可以用很多中方式 渲染 但是我的 ui 哪里知道哪里需要修改...
+
 ## 2018-04-15 13:48:09
 
 * @note 我所有的 container 修改都是数据 调用 component 里面的 state 实在不方便

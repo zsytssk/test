@@ -16,10 +16,10 @@ type Props = {
   height: number;
   top: number;
   left: number;
+  index?: number;
 };
 
 // tslint:disable-next-line:variable-name
-
 export class Group extends React.Component<Props, State> {
   public state = {
     contains: [],
@@ -30,39 +30,55 @@ export class Group extends React.Component<Props, State> {
     const contains = this.props.layoutChildren;
     this.setState({ direction, contains });
   }
-  public async groupContainer(
-    data: ContainerData,
+  public groupContainer = async (
+    index: number,
     direction,
     panel_data: PanelData,
-  ) {
+  ) => {
     const contains = this.state.contains as ContainerData[];
-    const index = contains.findIndex(item => item === data);
+    const data = contains[index];
+    let wrap_direction = 'horizontal';
+    if (direction === 'top' || direction === 'bottom') {
+      wrap_direction = 'vertical';
+    }
     if (index === -1) {
       return;
     }
-    const new_contains = [];
+    const wrap_contains = [];
 
     /** 新创建的container的数据 */
     const new_container = {
-      panels: [],
+      panels: [panel_data],
     };
+
+    let new_contains = [];
+    if (direction === 'left' || direction === 'top') {
+      new_contains = [new_container, data];
+    } else {
+      new_contains = [data, new_container];
+    }
     const group_container = {
-      contains: [data, new_container],
-      direction,
+      children: new_contains,
+      direction: wrap_direction,
     };
-    new_contains.push(group_container);
-    const other_container = contains.find(item => item !== data);
+    wrap_contains[index] = group_container;
+    // tslint:disable-next-line:variable-name
+    const other_container = contains.find((_item, i) => i !== index);
     if (other_container) {
-      new_contains.push(other_container);
+      // tslint:disable-next-line:variable-name
+      const other_index = contains.findIndex((_item, i) => i !== index);
+      wrap_contains[other_index] = {
+        children: [other_container],
+      };
     }
 
     await this.setState({
       ...this.state,
-      contains: new_contains,
+      contains: wrap_contains,
     });
 
     return new_container;
-  }
+  };
   public render() {
     const { direction, contains } = this.state;
     const { width, height, top, left } = this.props;
@@ -129,6 +145,8 @@ export class Group extends React.Component<Props, State> {
                           height={child_h}
                           left={child_left}
                           top={child_top}
+                          index={index}
+                          groupContainer={this.groupContainer}
                           contains={(child as ContainerData).panels}
                           panel_manager={panel_manager}
                         />
@@ -143,6 +161,7 @@ export class Group extends React.Component<Props, State> {
                     height={child_h}
                     left={child_left}
                     top={child_top}
+                    index={index}
                   />
                 )}
                 {index < num_childs - 1 && (

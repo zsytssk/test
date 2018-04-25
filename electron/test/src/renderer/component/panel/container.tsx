@@ -3,7 +3,7 @@ import { default as styled } from 'styled-components';
 import { Content, DragStatus } from './content';
 import { PanelContextProvider } from './context';
 import { Panel } from './panel';
-import { Tab } from './tab';
+import { ConnectTab as Tab } from './tab';
 
 type State = {
   cur_id?: string;
@@ -18,6 +18,8 @@ type Props = {
   top: number;
   contains: PanelData[];
   panel_manager: PanelContextProvider;
+  index: number;
+  groupContainer: (...any) => any;
 };
 export class Container extends React.Component<Props, State> {
   public state = { contains: [] } as State;
@@ -89,8 +91,11 @@ export class Container extends React.Component<Props, State> {
   public setDropPanel = (drag_status: DragStatus) => {
     this.props.panel_manager.setTargetContainer(this, drag_status);
   }; // tslint:disable-line:semicolon
-  public endDragPanel = (id: string) => {
+  public endDragPanel = () => {
     this.props.panel_manager.movePanel();
+  }; // tslint:disable-line:semicolon
+  public groupContainer = (direction, panel_data: PanelData) => {
+    this.props.groupContainer(this.props.index, direction, panel_data);
   }; // tslint:disable-line:semicolon
   public render() {
     const { cur_id, contains } = this.state;
