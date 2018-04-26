@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { default as styled } from 'styled-components';
-import { Container } from './container';
+import { ConnectContainer as Container } from './container';
 import { PanelContextConsumer, PanelContextProvider } from './context';
 import { Sash } from './sash';
 
@@ -10,8 +10,7 @@ type State = {
 };
 
 type Props = {
-  layoutDirection: GroupDirection;
-  layoutChildren: ContainerData[] | GroupData[];
+  layoutData: GroupData;
   width: number;
   height: number;
   top: number;
@@ -26,9 +25,8 @@ export class Group extends React.Component<Props, State> {
     direction: 'horizontal',
   } as State;
   public componentDidMount() {
-    const direction = this.props.layoutDirection || 'horizontal';
-    const contains = this.props.layoutChildren;
-    this.setState({ direction, contains });
+    const { direction, children } = this.props.layoutData;
+    this.setState({ direction, contains: children });
   }
   public groupContainer = async (
     index: number,
@@ -147,7 +145,7 @@ export class Group extends React.Component<Props, State> {
                           top={child_top}
                           index={index}
                           groupContainer={this.groupContainer}
-                          contains={(child as ContainerData).panels}
+                          layoutData={child as ContainerData}
                           panel_manager={panel_manager}
                         />
                       );
@@ -155,8 +153,7 @@ export class Group extends React.Component<Props, State> {
                   </PanelContextConsumer>
                 ) : (
                   <Group
-                    layoutDirection={(child as GroupData).direction}
-                    layoutChildren={(child as GroupData).children}
+                    layoutData={child as GroupData}
                     width={child_w}
                     height={child_h}
                     left={child_left}

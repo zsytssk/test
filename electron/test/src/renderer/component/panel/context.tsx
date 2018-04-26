@@ -46,7 +46,7 @@ export class PanelContextProvider extends React.Component<any, State> {
 
     const panel = source_container.getPanel(move_panel_id);
     source_container.removePanel(move_panel_id);
-    if (drag_status == 'full') {
+    if (drag_status === 'full') {
       target_container.addPanel(panel, true);
     } else {
       target_container.groupContainer(drag_status, panel);

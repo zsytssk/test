@@ -30,8 +30,7 @@ export class App extends Component<Props, any> {
             height={client_height}
             left={0}
             top={0}
-            layoutChildren={layout_data.children}
-            layoutDirection={layout_data.direction}
+            layoutData={layout_data}
           />
         </PanelContextProvider>
       </Div>

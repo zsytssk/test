@@ -1,14 +1,16 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { default as styled } from 'styled-components';
+import { addPanel, removePanel } from '../../actions/actions';
 import { Content, DragStatus } from './content';
 import { PanelContextProvider } from './context';
 import { Panel } from './panel';
-import { ConnectTab as Tab } from './tab';
+import { Tab } from './tab';
 
 type State = {
   cur_id?: string;
   drag_status?: boolean;
-  contains: PanelData[];
+  panels: PanelData[];
 };
 
 type Props = {
@@ -16,53 +18,56 @@ type Props = {
   height: number;
   left: number;
   top: number;
-  contains: PanelData[];
   panel_manager: PanelContextProvider;
+  layoutData: ContainerData;
   index: number;
   groupContainer: (...any) => any;
+  removePanel: (...any) => any;
 };
 export class Container extends React.Component<Props, State> {
-  public state = { contains: [] } as State;
+  public state = { panels: [] } as State;
   public componentDidMount() {
-    const contains = this.props.contains.map(item => {
-      return { ...item };
-    });
-    const cur_id = contains[0].id;
-    this.setState({ cur_id, contains });
+    const { panels } = this.props.layoutData;
+    const cur_id = panels[0].id;
+    this.setState({ cur_id, panels });
   }
   public removePanel = (id: string) => {
-    let { cur_id, contains } = this.state;
+    let { cur_id, panels } = this.state;
 
-    const index = contains.findIndex(item => item.id === id);
-    if (index === -1) {
-      return;
-    }
-    if (id === cur_id) {
-      if (index < contains.length - 1) {
-        cur_id = contains[index + 1].id;
-      } else {
-        cur_id = contains[index - 1] ? contains[index - 1].id : '';
-      }
-    }
+    this.props.removePanel(
+      this.props.layoutData,
+      panels.find(item => item.id === id),
+    );
+    // const index = panels.findIndex(item => item.id === id);
+    // if (index === -1) {
+    //   return;
+    // }
+    // if (id === cur_id) {
+    //   if (index < panels.length - 1) {
+    //     cur_id = panels[index + 1].id;
+    //   } else {
+    //     cur_id = panels[index - 1] ? panels[index - 1].id : '';
+    //   }
+    // }
 
-    contains = contains.filter(item => item.id !== id);
-    this.setState({
-      ...this.state,
-      contains,
-      cur_id,
-    });
+    // panels = panels.filter(item => item.id !== id);
+    // this.setState({
+    //   ...this.state,
+    //   cur_id,
+    //   panels,
+    // });
   }; // tslint:disable-line:semicolon
   public addPanel = (data: PanelData, is_cur?: boolean) => {
-    const { contains } = this.state;
-    const is_contained = contains.find(item => item.id === data.id);
+    const { panels } = this.state;
+    const is_contained = panels.find(item => item.id === data.id);
     if (is_contained) {
       return;
     }
     const end_state = {} as {
-      contains: PanelData[];
+      panels: PanelData[];
       cur_id: string;
     };
-    end_state.contains = [...contains, data];
+    end_state.panels = [...panels, data];
 
     if (is_cur) {
       end_state.cur_id = data.id;
@@ -78,8 +83,8 @@ export class Container extends React.Component<Props, State> {
     this.setState({ ...this.state, cur_id: id });
   }; // tslint:disable-line:semicolon
   public getPanel = (id: string) => {
-    const { contains } = this.state;
-    const panel_item = contains.find(item => item.id === id);
+    const { panels } = this.state;
+    const panel_item = panels.find(item => item.id === id);
     if (!panel_item) {
       return;
     }
@@ -98,7 +103,7 @@ export class Container extends React.Component<Props, State> {
     this.props.groupContainer(this.props.index, direction, panel_data);
   }; // tslint:disable-line:semicolon
   public render() {
-    const { cur_id, contains } = this.state;
+    const { cur_id, panels } = this.state;
     const { width, height, top, left } = this.props;
 
     // tslint:disable-next-line:variable-name
@@ -120,13 +125,13 @@ export class Container extends React.Component<Props, State> {
       }
     `;
 
-    if (!contains.length) {
+    if (!panels.length) {
       return '';
     }
     return (
       <Div>
         <div className="header tabs title">
-          {contains.map(contain => {
+          {panels.map(contain => {
             const { content, ...props } = contain;
             return (
               <Tab
@@ -141,7 +146,7 @@ export class Container extends React.Component<Props, State> {
           })}
         </div>
         <Content className="con-container" setDropPanel={this.setDropPanel}>
-          {contains.map(contain => {
+          {panels.map(contain => {
             if (contain.id !== cur_id) {
               return;
             }
@@ -152,3 +157,16 @@ export class Container extends React.Component<Props, State> {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    removePanel: (container, panel) => {
+      dispatch(removePanel(container, panel));
+    },
+  };
+};
+
+// tslint:disable-next-line:variable-name
+export const ConnectContainer = connect(undefined, mapDispatchToProps)(
+  Container,
+);

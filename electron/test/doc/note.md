@@ -1,3 +1,34 @@
+## 2018-04-26 08:53:59
+
+* @ques removePanel addPanel 这一个个如何转化成 redux
+
+  * removePanel
+  * addPanel
+  * cur
+  * movePanel
+  * 其实这也不复杂 如何实现...
+
+* @ques 如何让这个在 chrome 也能跑
+
+- @ques 改变其中一个值并没有让 react 重新渲染
+
+  * 因为 reducer 没有返回一个全新的 state
+  * 可能要引入 immutable 了
+
+- removePanel 如果不是最顶级的如何处理...
+
+  * 如何定位 container...
+
+- @ques state model ctrl
+  * model --> state
+  * model <--- ctrl
+  * model 可以保存数据, 也可以从数据更新状态
+
+* 在一个 reducer 中去 dispatch 改变另一个..
+  * 这似乎是不合理的
+  * 实际上我真正有用的数据只是 layout_data
+  * PanelData 这种玩意直接放在内部的 state 里面就行了...
+
 ## 2018-04-24 10:24:36
 
 * context 中的数据如何放在 redux 中...

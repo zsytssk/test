@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
 import { default as styled } from 'styled-components';
-import { setMovePanel } from '../../actions/actions';
 // tslint:disable-next-line:variable-name
 const Div = styled.div`
   padding: 0 5px;
@@ -41,7 +39,7 @@ type Props = {
   removePanel: (id: string) => void;
   startDragPanel: (id: string) => void;
   endDragPanel: (id: string) => void;
-  onClick: () => void;
+  onClick?: () => void;
 };
 export class Tab extends React.Component<Props, any> {
   private close = (event: React.FormEvent<HTMLElement>) => {
@@ -83,14 +81,3 @@ export class Tab extends React.Component<Props, any> {
     );
   }
 }
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onClick: () => {
-      dispatch(setMovePanel());
-    },
-  };
-};
-
-// tslint:disable-next-line:variable-name
-export const ConnectTab = connect(undefined, mapDispatchToProps)(Tab);
