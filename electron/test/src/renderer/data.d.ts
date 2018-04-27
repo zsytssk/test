@@ -4,11 +4,13 @@ type StoreState = {
 
 type GroupDirection = 'vertical' | 'horizontal';
 type GroupData = {
+  id: string;
   direction: GroupDirection;
   children: ContainerData[] | GroupData[];
 };
 
 type ContainerData = {
+  id: string;
   cur_id?: string;
   panels: PanelData[];
 };

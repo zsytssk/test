@@ -1,8 +1,12 @@
+import { fromJS } from 'immutable';
 import { ADD_PANEL, REMOVE_PANEL } from '../actions/actions';
+import { generateRandomString } from '../util';
 
 const default_data = {
+  id: generateRandomString(),
   children: [
     {
+      id: generateRandomString(),
       panels: [
         { id: 'panel1', title: 'panel1', content: 'content1' },
         { id: 'panel2', title: 'panel2', content: 'content2' },
@@ -10,6 +14,7 @@ const default_data = {
       ],
     },
     {
+      id: generateRandomString(),
       panels: [
         { id: 'panel4', title: 'panel4', content: 'content4' },
         { id: 'panel5', title: 'panel5', content: 'content5' },
@@ -20,7 +25,7 @@ const default_data = {
   direction: 'vertical',
 } as GroupData;
 
-export function layoutReducer(state = default_data, action) {
+export function layoutReducer(state = fromJS(default_data), action) {
   switch (action.type) {
     case REMOVE_PANEL:
       return removePanel(state, action.payload.container, action.payload.panel);
@@ -30,26 +35,26 @@ export function layoutReducer(state = default_data, action) {
   return state;
 }
 
-function removePanel(
-  state: GroupData,
-  container: ContainerData,
-  panel: PanelData,
-) {
-  const containers = state.children as ContainerData[];
-  const container_index = containers.indexOf(container);
+function removePanel(state: any, container: ContainerData, panel: PanelData) {
+  const containers = state.get('children') as ContainerData[];
+  const container_index = containers.findIndex((item, index) => {
+    return item.get('id') === container.id;
+  });
   if (container_index === -1) {
-    return;
+    return state;
   }
   const panel_index = container.panels.indexOf(panel);
   if (panel_index === -1) {
-    return;
+    return state;
   }
-  container.panels.splice(panel_index, 1);
-
-  return state;
+  const new_panels = containers
+    .get(container_index)
+    .get('panels')
+    .delete(panel_index);
+  return state.setIn(['children', container_index, 'panels'], new_panels);
 }
 function addPanel(state, container, panel) {
-  const containers = state.children as ContainerData[];
+  const containers = state.get('children') as ContainerData[];
   const container_index = containers.indexOf(container);
   if (container_index === -1) {
     return;

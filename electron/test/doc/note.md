@@ -1,5 +1,19 @@
 ## 2018-04-26 08:53:59
 
+* @ques 操作起来太麻烦 immutable...
+
+  * 能不能朝着这个方向努力, 让事情变得 比较简单
+
+* @note immutable 太麻烦
+
+  * 定位一个值再去改变他太麻烦 能不能用函数式方程
+
+* @qeus immutable typescript
+
+* @note 这一个个太麻烦了, 我用自己的 model 更方便
+
+* @note 必须要一个特殊的标识 来表示 container 甚至是 group
+
 * @ques removePanel addPanel 这一个个如何转化成 redux
 
   * removePanel

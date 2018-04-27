@@ -39,7 +39,7 @@ export class App extends Component<Props, any> {
 }
 
 const mapStateToProps = (state: StoreState) => {
-  const { layout_data } = state;
+  const layout_data = state.get('layout_data').toJSON();
 
   return {
     layout_data,
