@@ -1,5 +1,6 @@
 import { fromJS } from 'immutable';
 import { ADD_PANEL, REMOVE_PANEL } from '../actions/actions';
+import { ImmutableType } from '../test';
 import { generateRandomString } from '../util';
 
 const default_data = {
@@ -35,8 +36,12 @@ export function layoutReducer(state = fromJS(default_data), action) {
   return state;
 }
 
-function removePanel(state: any, container: ContainerData, panel: PanelData) {
-  const containers = state.get('children') as ContainerData[];
+function removePanel(
+  state: ImmutableType<GroupData>,
+  container: ContainerData,
+  panel: PanelData,
+) {
+  const containers = state.get('children') as ImmutableType<ContainerData[]>;
   const container_index = containers.findIndex((item, index) => {
     return item.get('id') === container.id;
   });
@@ -53,17 +58,26 @@ function removePanel(state: any, container: ContainerData, panel: PanelData) {
     .delete(panel_index);
   return state.setIn(['children', container_index, 'panels'], new_panels);
 }
-function addPanel(state, container, panel) {
-  const containers = state.get('children') as ContainerData[];
-  const container_index = containers.indexOf(container);
+function addPanel(
+  state: ImmutableType<GroupData>,
+  container: ContainerData,
+  panel: PanelData,
+) {
+  const containers = state.get('children');
+  const container_index = containers.findIndex((item, index) => {
+    return item.get('id') === container.id;
+  });
   if (container_index === -1) {
-    return;
+    return state;
   }
   const panel_index = container.panels.indexOf(panel);
   if (panel_index !== -1) {
-    return;
+    return state;
   }
-  container.panels.push(panel);
+  const new_panels = containers
+    .get(container_index)
+    .get('panels')
+    .push(panel);
 
-  return state;
+  return state.setIn(['children', container_index, 'panels'], new_panels);
 }

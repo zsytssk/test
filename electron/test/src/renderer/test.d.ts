@@ -10,26 +10,30 @@ interface ImmutableList<T> extends List<any> {
 
 type ReturnType<T> = T extends (...args: any[]) => infer R ? R : any;
 
-type ImmutableType<T> = T extends any[]
+export type ImmutableType<T> = T extends any[]
   ? ImmutableList<T>
   : T extends object ? ImmutableMap<T> : T;
 
-const fruitData = [
-  {
-    name: {
-      x: 1,
-    },
-    numberOwned: 10,
-    best: true,
-  },
-  {
-    name: 'banana',
-    numberOwned: 0,
-    best: false,
-  },
-];
+export function getImu(immu_oobj, keys) {
+  let result = {};
+  for (let key in keys) {
+  }
+}
 
-const a: ImmutableType<fruitData>;
-const b = a.get(1);
+// const fruitData = [
+//   {
+//     name: 'dsfsdf',
+//     numberOwned: 10,
+//     best: true,
+//   },
+//   {
+//     name: 'banana',
+//     numberOwned: 0,
+//     best: false,
+//   },
+// ];
+
+// const a: ImmutableType<typeof fruitData>;
+// const b = a.get(1).get('name');
 // const a: ImmutableType<typeof fruitData>;
 // const b = a.get('name');

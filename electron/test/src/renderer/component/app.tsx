@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { default as styled } from 'styled-components';
+import { ImmutableType } from '../test';
 import { PanelContextProvider } from './panel/context';
 import { Group } from './panel/group';
 
@@ -15,7 +16,7 @@ const Div = styled.div`
 `;
 
 type Props = {
-  layout_data: GroupData;
+  layout_data: ImmutableType<GroupData>;
 };
 
 export class App extends Component<Props, any> {
@@ -38,8 +39,8 @@ export class App extends Component<Props, any> {
   }
 }
 
-const mapStateToProps = (state: StoreState) => {
-  const layout_data = state.get('layout_data').toJSON();
+const mapStateToProps = (state: ImmutableType<StoreState>) => {
+  const layout_data = state.get('layout_data');
 
   return {
     layout_data,

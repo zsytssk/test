@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { default as styled } from 'styled-components';
+import { ImmutableType } from '../../test';
 
 type Props = {
-  id: string;
-  title: string;
-  content: string;
+  panel: ImmutableType<PanelData>;
 };
 
 // tslint:disable-next-line:variable-name
@@ -17,7 +16,7 @@ const Div = styled.div`
 `;
 export class Panel extends React.Component<Props, any> {
   public render() {
-    const { content, ...other } = this.props;
-    return <Div {...other}>{content}</Div>;
+    const { panel } = this.props;
+    return <Div>{panel.get('content')}</Div>;
   }
 }

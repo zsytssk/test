@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { default as styled } from 'styled-components';
+import { ImmutableType } from '../../test';
 import { getNodeOffset } from '../../util';
 
 export type DragStatus = 'full' | 'left' | 'right' | 'default';

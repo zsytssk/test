@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { default as styled } from 'styled-components';
+import { ImmutableType } from '../../test';
 import { ConnectContainer as Container } from './container';
 import { PanelContextConsumer, PanelContextProvider } from './context';
 import { Sash } from './sash';
 
 type State = {
   direction: GroupDirection;
-  contains: ContainerData[] | GroupData[];
+  contains: ImmutableType<ContainerData[]> | ImmutableType<GroupData[]>;
 };
 
 type Props = {
-  layoutData: GroupData;
+  layoutData: ImmutableType<GroupData>;
   width: number;
   height: number;
   top: number;
@@ -21,19 +22,21 @@ type Props = {
 // tslint:disable-next-line:variable-name
 export class Group extends React.Component<Props, State> {
   public state = {
-    contains: [],
+    contains: [] as any,
     direction: 'horizontal',
   } as State;
-  public componentDidMount() {
-    const { direction, children } = this.props.layoutData;
-    this.setState({ direction, contains: children });
+  // tslint:disable-next-line:variable-name
+  public static getDerivedStateFromProps(nextProps: Props, _prevState: State) {
+    const direction = nextProps.layoutData.get('direction');
+    const children = nextProps.layoutData.get('children');
+    return { direction, contains: children };
   }
   public groupContainer = async (
     index: number,
     direction,
     panel_data: PanelData,
   ) => {
-    const contains = this.state.contains as ContainerData[];
+    const contains = this.state.contains as ImmutableType<ContainerData[]>;
     const data = contains[index];
     let wrap_direction = 'horizontal';
     if (direction === 'top' || direction === 'bottom') {
@@ -90,7 +93,7 @@ export class Group extends React.Component<Props, State> {
       top: ${top}px;
     `;
 
-    const num_childs = contains.length;
+    const num_childs = contains.size;
     const sash_nums = num_childs - 1;
     const sash_size = 5;
 
@@ -115,7 +118,7 @@ export class Group extends React.Component<Props, State> {
         {Array(num_childs)
           .fill('*')
           .map((item, index) => {
-            const child = contains[index];
+            const child = contains.get(index);
             let child_left;
             let child_top;
             let sash_top;
@@ -134,7 +137,7 @@ export class Group extends React.Component<Props, State> {
 
             return (
               <React.Fragment key={index}>
-                {(child as ContainerData).panels ? (
+                {(child as ImmutableType<ContainerData>).has('panels') ? (
                   <PanelContextConsumer>
                     {(panel_manager: PanelContextProvider) => {
                       return (
@@ -145,7 +148,7 @@ export class Group extends React.Component<Props, State> {
                           top={child_top}
                           index={index}
                           groupContainer={this.groupContainer}
-                          layoutData={child as ContainerData}
+                          layoutData={child as ImmutableType<ContainerData>}
                           panel_manager={panel_manager}
                         />
                       );
@@ -153,7 +156,7 @@ export class Group extends React.Component<Props, State> {
                   </PanelContextConsumer>
                 ) : (
                   <Group
-                    layoutData={child as GroupData}
+                    layoutData={child as ImmutableType<GroupData>}
                     width={child_w}
                     height={child_h}
                     left={child_left}

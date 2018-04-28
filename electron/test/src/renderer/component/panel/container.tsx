@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { default as styled } from 'styled-components';
 import { addPanel, removePanel } from '../../actions/actions';
+import { ImmutableType } from '../../test';
 import { Content, DragStatus } from './content';
 import { PanelContextProvider } from './context';
 import { Panel } from './panel';
@@ -10,7 +11,7 @@ import { Tab } from './tab';
 type State = {
   cur_id?: string;
   drag_status?: boolean;
-  panels: PanelData[];
+  panels: ImmutableType<PanelData[]>;
 };
 
 type Props = {
@@ -19,65 +20,30 @@ type Props = {
   left: number;
   top: number;
   panel_manager: PanelContextProvider;
-  layoutData: ContainerData;
+  layoutData: ImmutableType<ContainerData>;
   index: number;
   groupContainer: (...any) => any;
   removePanel: (...any) => any;
+  addPanel: (...any) => any;
 };
 export class Container extends React.Component<Props, State> {
-  public state = { panels: [] } as State;
-  public componentDidMount() {
-    const { panels } = this.props.layoutData;
-    const cur_id = panels[0].id;
-    this.setState({ cur_id, panels });
+  public state = { panels: [] as any } as State;
+  // tslint:disable-next-line:variable-name
+  public static getDerivedStateFromProps(nextProps, _prevState) {
+    const panels = nextProps.layoutData.get('panels');
+    const cur_id = _prevState.cur_id || panels.get(0).id;
+    return { cur_id, panels };
   }
   public removePanel = (id: string) => {
-    let { cur_id, panels } = this.state;
-
+    const { panels } = this.state;
     this.props.removePanel(
       this.props.layoutData,
       panels.find(item => item.id === id),
     );
-    // const index = panels.findIndex(item => item.id === id);
-    // if (index === -1) {
-    //   return;
-    // }
-    // if (id === cur_id) {
-    //   if (index < panels.length - 1) {
-    //     cur_id = panels[index + 1].id;
-    //   } else {
-    //     cur_id = panels[index - 1] ? panels[index - 1].id : '';
-    //   }
-    // }
-
-    // panels = panels.filter(item => item.id !== id);
-    // this.setState({
-    //   ...this.state,
-    //   cur_id,
-    //   panels,
-    // });
   }; // tslint:disable-line:semicolon
   public addPanel = (data: PanelData, is_cur?: boolean) => {
     const { panels } = this.state;
-    const is_contained = panels.find(item => item.id === data.id);
-    if (is_contained) {
-      return;
-    }
-    const end_state = {} as {
-      panels: PanelData[];
-      cur_id: string;
-    };
-    end_state.panels = [...panels, data];
-
-    if (is_cur) {
-      end_state.cur_id = data.id;
-    }
-    this.setState({
-      ...this.state,
-      ...end_state,
-    });
-
-    return true;
+    this.props.addPanel(this.props.layoutData, data);
   }; // tslint:disable-line:semicolon
   public setCur = (id: string) => {
     this.setState({ ...this.state, cur_id: id });
@@ -125,32 +91,31 @@ export class Container extends React.Component<Props, State> {
       }
     `;
 
-    if (!panels.length) {
+    if (!panels.size) {
       return '';
     }
     return (
       <Div>
         <div className="header tabs title">
-          {panels.map(contain => {
-            const { content, ...props } = contain;
+          {panels.map(panel => {
             return (
               <Tab
                 removePanel={this.removePanel}
                 startDragPanel={this.startDragPanel}
                 endDragPanel={this.endDragPanel}
                 setCur={this.setCur}
-                key={contain.id}
-                {...props}
+                key={panel.get('id')}
+                panel={panel}
               />
             );
           })}
         </div>
         <Content className="con-container" setDropPanel={this.setDropPanel}>
-          {panels.map(contain => {
-            if (contain.id !== cur_id) {
+          {panels.map(panel => {
+            if (panel.get('id') !== cur_id) {
               return;
             }
-            return <Panel key={contain.id} {...contain} />;
+            return <Panel key={panel.id} panel={panel} />;
           })}
         </Content>
       </Div>
@@ -162,6 +127,9 @@ const mapDispatchToProps = dispatch => {
   return {
     removePanel: (container, panel) => {
       dispatch(removePanel(container, panel));
+    },
+    addPanel: (container, panel) => {
+      dispatch(addPanel(container, panel));
     },
   };
 };
