@@ -30,15 +30,15 @@ export class Container extends React.Component<Props, State> {
   public state = { panels: [] as any } as State;
   // tslint:disable-next-line:variable-name
   public static getDerivedStateFromProps(nextProps, _prevState) {
-    const panels = nextProps.layoutData.get('panels');
-    const cur_id = _prevState.cur_id || panels.get(0).id;
+    const panels = nextProps.layoutData.get('children');
+    const cur_id = _prevState.cur_id || panels.get(0).get('id');
     return { cur_id, panels };
   }
   public removePanel = (id: string) => {
     const { panels } = this.state;
     this.props.removePanel(
       this.props.layoutData,
-      panels.find(item => item.id === id),
+      panels.find(item => item.get('id') === id),
     );
   }; // tslint:disable-line:semicolon
   public addPanel = (data: PanelData, is_cur?: boolean) => {
@@ -50,11 +50,7 @@ export class Container extends React.Component<Props, State> {
   }; // tslint:disable-line:semicolon
   public getPanel = (id: string) => {
     const { panels } = this.state;
-    const panel_item = panels.find(item => item.id === id);
-    if (!panel_item) {
-      return;
-    }
-    return panel_item;
+    return panels.find(item => item.get('id') === id);
   }; // tslint:disable-line:semicolon
   public startDragPanel = (id: string) => {
     this.props.panel_manager.setMovePanel(id, this);
@@ -112,10 +108,11 @@ export class Container extends React.Component<Props, State> {
         </div>
         <Content className="con-container" setDropPanel={this.setDropPanel}>
           {panels.map(panel => {
-            if (panel.get('id') !== cur_id) {
+            const panel_id = panel.get('id');
+            if (panel_id !== cur_id) {
               return;
             }
-            return <Panel key={panel.id} panel={panel} />;
+            return <Panel key={panel_id} panel={panel} />;
           })}
         </Content>
       </Div>
@@ -125,11 +122,11 @@ export class Container extends React.Component<Props, State> {
 
 const mapDispatchToProps = dispatch => {
   return {
-    removePanel: (container, panel) => {
-      dispatch(removePanel(container, panel));
-    },
     addPanel: (container, panel) => {
       dispatch(addPanel(container, panel));
+    },
+    removePanel: (container, panel) => {
+      dispatch(removePanel(container, panel));
     },
   };
 };

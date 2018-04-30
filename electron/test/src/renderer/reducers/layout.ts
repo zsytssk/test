@@ -4,26 +4,29 @@ import { ImmutableType } from '../test';
 import { generateRandomString } from '../util';
 
 const default_data = {
-  id: generateRandomString(),
   children: [
     {
-      id: generateRandomString(),
-      panels: [
+      children: [
         { id: 'panel1', title: 'panel1', content: 'content1' },
         { id: 'panel2', title: 'panel2', content: 'content2' },
         { id: 'panel3', title: 'panel3', content: 'content3' },
       ],
+      id: generateRandomString(),
+      type: 'container',
     },
     {
-      id: generateRandomString(),
-      panels: [
+      children: [
         { id: 'panel4', title: 'panel4', content: 'content4' },
         { id: 'panel5', title: 'panel5', content: 'content5' },
         { id: 'panel6', title: 'panel6', content: 'content6' },
       ],
+      id: generateRandomString(),
+      type: 'container',
     },
   ],
   direction: 'vertical',
+  id: generateRandomString(),
+  type: 'group',
 } as GroupData;
 
 export function layoutReducer(state = fromJS(default_data), action) {
@@ -38,46 +41,68 @@ export function layoutReducer(state = fromJS(default_data), action) {
 
 function removePanel(
   state: ImmutableType<GroupData>,
-  container: ContainerData,
-  panel: PanelData,
+  container: ImmutableType<ContainerData>,
+  panel: ImmutableType<PanelData>,
 ) {
-  const containers = state.get('children') as ImmutableType<ContainerData[]>;
-  const container_index = containers.findIndex((item, index) => {
-    return item.get('id') === container.id;
-  });
-  if (container_index === -1) {
+  const con_map = findConMap(state, container);
+  if (!con_map) {
     return state;
   }
-  const panel_index = container.panels.indexOf(panel);
+
+  const panel_index = container.get('children').findIndex(item => {
+    return item === panel;
+  });
   if (panel_index === -1) {
     return state;
   }
-  const new_panels = containers
-    .get(container_index)
-    .get('panels')
-    .delete(panel_index);
-  return state.setIn(['children', container_index, 'panels'], new_panels);
+  return state.deleteIn(con_map.concat(['children', panel_index]));
 }
+
 function addPanel(
   state: ImmutableType<GroupData>,
-  container: ContainerData,
-  panel: PanelData,
+  container: ImmutableType<ContainerData>,
+  panel: ImmutableType<PanelData>,
 ) {
-  const containers = state.get('children');
-  const container_index = containers.findIndex((item, index) => {
-    return item.get('id') === container.id;
-  });
-  if (container_index === -1) {
+  const con_map = findConMap(state, container);
+  if (!con_map) {
     return state;
   }
-  const panel_index = container.panels.indexOf(panel);
+
+  const panel_index = container.get('children').findIndex(item => {
+    return item === panel;
+  });
   if (panel_index !== -1) {
     return state;
   }
-  const new_panels = containers
-    .get(container_index)
-    .get('panels')
-    .push(panel);
+  const abs_map = con_map.concat(['children']);
+  return state.setIn(abs_map, container.get('children').push(panel));
+}
 
-  return state.setIn(['children', container_index, 'panels'], new_panels);
+function groupContainer(
+  state: ImmutableType<GroupData>,
+  container: ContainerData,
+  direction,
+  panel: PanelData,
+) {}
+
+function findConMap(state, container, map = []) {
+  if (state === container) {
+    return map;
+  }
+
+  const children = state.get('children');
+  if (!children) {
+    return;
+  }
+
+  const keys = children.keySeq();
+  map.push('children');
+  for (const key of keys) {
+    const has_map = findConMap(children.get(key), container, [...map, key]);
+    if (!has_map) {
+      continue;
+    }
+    return has_map;
+  }
+  return;
 }

@@ -3,16 +3,19 @@ type StoreState = {
 };
 
 type GroupDirection = 'vertical' | 'horizontal';
+type Contype = 'group' | 'container';
 type GroupData = {
   id: string;
   direction: GroupDirection;
   children: ContainerData[] | GroupData[];
+  type: Contype;
 };
 
 type ContainerData = {
   id: string;
   cur_id?: string;
-  panels: PanelData[];
+  children: PanelData[];
+  type: Contype;
 };
 
 type PanelData = {

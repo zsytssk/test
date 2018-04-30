@@ -1,3 +1,20 @@
+## 2018-04-30 11:14:47
+
+* list .push 能不能 pushIn
+
+  * 很深的数组添加一个对象, 就不用分两步
+    * 原两步 先找到 list list set setIn(.., new_list)
+
+* groupCOntainer
+  * 如何在其中创建一个新的 group..
+  * 原来的 add remove 我又如何能找的到目标的 container...
+  * container 需要一个地址...
+  * 我又如何找到目标的地址呢??
+
+- redux immutable.. 可以完成任务 但是真的很麻烦
+  * 而且整个的代码结构真的很复杂, 不是一目了然
+  * 写起来很累, 理解也很累 不是长久的方法
+
 ## 2018-04-26 08:53:59
 
 * @ques

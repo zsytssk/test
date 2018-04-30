@@ -137,7 +137,17 @@ export class Group extends React.Component<Props, State> {
 
             return (
               <React.Fragment key={index}>
-                {(child as ImmutableType<ContainerData>).has('panels') ? (
+                {(child as ImmutableType<ContainerData>).get('type') ===
+                'group' ? (
+                  <Group
+                    layoutData={child as ImmutableType<GroupData>}
+                    width={child_w}
+                    height={child_h}
+                    left={child_left}
+                    top={child_top}
+                    index={index}
+                  />
+                ) : (
                   <PanelContextConsumer>
                     {(panel_manager: PanelContextProvider) => {
                       return (
@@ -154,15 +164,6 @@ export class Group extends React.Component<Props, State> {
                       );
                     }}
                   </PanelContextConsumer>
-                ) : (
-                  <Group
-                    layoutData={child as ImmutableType<GroupData>}
-                    width={child_w}
-                    height={child_h}
-                    left={child_left}
-                    top={child_top}
-                    index={index}
-                  />
                 )}
                 {index < num_childs - 1 && (
                   <Sash
