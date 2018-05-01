@@ -2,41 +2,53 @@ export const REMOVE_PANEL = 'remove_panel';
 export const ADD_PANEL = 'add_panel';
 export const SET_CUR_PANEL = 'set_cur_panel';
 export const MOVE_PANEL = 'move_panel';
+export const GROUP_CONTAINER = 'group_container';
 
 export function removePanel(container, panel) {
   return {
-    type: REMOVE_PANEL,
     payload: {
       container,
       panel,
     },
+    type: REMOVE_PANEL,
   };
 }
 export function addPanel(container, panel) {
   return {
-    type: ADD_PANEL,
     payload: {
       container,
       panel,
     },
+    type: ADD_PANEL,
   };
 }
 export function setCurPanel(container, panel) {
   return {
-    type: SET_CUR_PANEL,
     payload: {
       container,
       panel,
     },
+    type: SET_CUR_PANEL,
   };
 }
 export function movePanel(target, source, panel) {
   return {
-    type: MOVE_PANEL,
     payload: {
-      target,
+      panel,
       source,
+      target,
+    },
+    type: MOVE_PANEL,
+  };
+}
+export function groupContainer(group, container, direction, panel) {
+  return {
+    payload: {
+      container,
+      direction,
+      group,
       panel,
     },
+    type: GROUP_CONTAINER,
   };
 }

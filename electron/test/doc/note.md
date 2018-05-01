@@ -1,5 +1,15 @@
 ## 2018-04-30 11:14:47
 
+* redux
+
+* test
+
+* immutablejs mergein
+
+* immutablejs list 如何初始化设置顺序
+
+  * `new_contains = [data, new_container];`
+
 * list .push 能不能 pushIn
 
   * 很深的数组添加一个对象, 就不用分两步

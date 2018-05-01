@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { default as styled } from 'styled-components';
 import { ImmutableType } from '../test';
 import { PanelContextProvider } from './panel/context';
-import { Group } from './panel/group';
+import { ConnectGroup } from './panel/group';
 
 const { Component } = React;
 
@@ -26,7 +26,7 @@ export class App extends Component<Props, any> {
     return (
       <Div>
         <PanelContextProvider>
-          <Group
+          <ConnectGroup
             width={client_width}
             height={client_height}
             left={0}

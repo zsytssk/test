@@ -25,6 +25,10 @@ type PanelData = {
   content: string;
 };
 
+interface LocalWindow extends window {
+  Immutable: any;
+}
+
 // const TEST_STATE = [
 //   { id: 'panel1', title: 'panel1', content: 'content1' },
 //   { id: 'panel2', title: 'panel2', content: 'content2' },

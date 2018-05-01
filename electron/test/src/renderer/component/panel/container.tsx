@@ -21,7 +21,6 @@ type Props = {
   top: number;
   panel_manager: PanelContextProvider;
   layoutData: ImmutableType<ContainerData>;
-  index: number;
   groupContainer: (...any) => any;
   removePanel: (...any) => any;
   addPanel: (...any) => any;
@@ -62,7 +61,7 @@ export class Container extends React.Component<Props, State> {
     this.props.panel_manager.movePanel();
   }; // tslint:disable-line:semicolon
   public groupContainer = (direction, panel_data: PanelData) => {
-    this.props.groupContainer(this.props.index, direction, panel_data);
+    this.props.groupContainer(this.props.layoutData, direction, panel_data);
   }; // tslint:disable-line:semicolon
   public render() {
     const { cur_id, panels } = this.state;

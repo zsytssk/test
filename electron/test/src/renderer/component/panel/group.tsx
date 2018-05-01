@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { default as styled } from 'styled-components';
+import { groupContainer } from '../../actions/actions';
 import { ImmutableType } from '../../test';
 import { ConnectContainer as Container } from './container';
 import { PanelContextConsumer, PanelContextProvider } from './context';
@@ -16,7 +18,7 @@ type Props = {
   height: number;
   top: number;
   left: number;
-  index?: number;
+  groupContainer: (...args) => any;
 };
 
 // tslint:disable-next-line:variable-name
@@ -32,53 +34,16 @@ export class Group extends React.Component<Props, State> {
     return { direction, contains: children };
   }
   public groupContainer = async (
-    index: number,
+    container: ImmutableType<ContainerData[]>,
     direction,
     panel_data: PanelData,
   ) => {
-    const contains = this.state.contains as ImmutableType<ContainerData[]>;
-    const data = contains[index];
-    let wrap_direction = 'horizontal';
-    if (direction === 'top' || direction === 'bottom') {
-      wrap_direction = 'vertical';
-    }
-    if (index === -1) {
-      return;
-    }
-    const wrap_contains = [];
-
-    /** 新创建的container的数据 */
-    const new_container = {
-      panels: [panel_data],
-    };
-
-    let new_contains = [];
-    if (direction === 'left' || direction === 'top') {
-      new_contains = [new_container, data];
-    } else {
-      new_contains = [data, new_container];
-    }
-    const group_container = {
-      children: new_contains,
-      direction: wrap_direction,
-    };
-    wrap_contains[index] = group_container;
-    // tslint:disable-next-line:variable-name
-    const other_container = contains.find((_item, i) => i !== index);
-    if (other_container) {
-      // tslint:disable-next-line:variable-name
-      const other_index = contains.findIndex((_item, i) => i !== index);
-      wrap_contains[other_index] = {
-        children: [other_container],
-      };
-    }
-
-    await this.setState({
-      ...this.state,
-      contains: wrap_contains,
-    });
-
-    return new_container;
+    this.props.groupContainer(
+      this.props.layoutData,
+      container,
+      direction,
+      panel_data,
+    );
   };
   public render() {
     const { direction, contains } = this.state;
@@ -139,13 +104,12 @@ export class Group extends React.Component<Props, State> {
               <React.Fragment key={index}>
                 {(child as ImmutableType<ContainerData>).get('type') ===
                 'group' ? (
-                  <Group
+                  <ConnectGroup
                     layoutData={child as ImmutableType<GroupData>}
                     width={child_w}
                     height={child_h}
                     left={child_left}
                     top={child_top}
-                    index={index}
                   />
                 ) : (
                   <PanelContextConsumer>
@@ -156,7 +120,6 @@ export class Group extends React.Component<Props, State> {
                           height={child_h}
                           left={child_left}
                           top={child_top}
-                          index={index}
                           groupContainer={this.groupContainer}
                           layoutData={child as ImmutableType<ContainerData>}
                           panel_manager={panel_manager}
@@ -180,3 +143,14 @@ export class Group extends React.Component<Props, State> {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    groupContainer: (...args) => {
+      dispatch(groupContainer(...args));
+    },
+  };
+};
+
+// tslint:disable-next-line:variable-name
+export const ConnectGroup = connect(undefined, mapDispatchToProps)(Group);
