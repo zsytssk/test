@@ -2,7 +2,13 @@ import * as React from 'react';
 import { default as styled } from 'styled-components';
 import { getNodeOffset } from '../../util';
 
-export type DragStatus = 'full' | 'left' | 'right' | 'default';
+export type DragStatus =
+  | 'full'
+  | 'left'
+  | 'right'
+  | 'top'
+  | 'bottom'
+  | 'default';
 type State = {
   drag_status: DragStatus;
 };
@@ -27,6 +33,14 @@ const Div = styled.div`
   & > .dragSign.right {
     width: 50%;
     right: 0;
+  }
+  & > .dragSign.bottom {
+    height: 50%;
+    bottom: 0;
+  }
+  & > .dragSign.top {
+    height: 50%;
+    top: 0;
   }
   & > * {
     pointer-events: none;
@@ -70,6 +84,10 @@ export class Content extends React.Component<Props, State> {
       this.setDragStatus('left');
     } else if (x > w * 3 / 4) {
       this.setDragStatus('right');
+    } else if (y < h / 4) {
+      this.setDragStatus('top');
+    } else if (y > h * 3 / 4) {
+      this.setDragStatus('bottom');
     } else {
       this.setDragStatus('full');
     }

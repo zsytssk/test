@@ -6,9 +6,14 @@ import { ConnectApp as App } from './component/app';
 import { connect } from './ipc';
 import { reducer } from './reducers/index';
 import { test } from './test/test';
+import { saveState } from './utils/localStorage';
 
 const container = document.getElementById('app');
 const store = createStore(reducer);
+
+store.subscribe(() => {
+  saveState(store.getState());
+});
 
 connect();
 render(

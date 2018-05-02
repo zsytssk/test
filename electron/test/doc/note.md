@@ -1,4 +1,25 @@
+## 2018-05-02 09:41:00
+
+* @todo 记录 cur_id
+
+- @bug
+  `ERROR in ./node_modules/7zip/index.js Module not found: Error: Can't resolve './package' in 'D:\zsytssk\github\test\electron\test\node_modules\7zip'`
+  `electron-devtools-installer`
+
 ## 2018-04-30 11:14:47
+
+* 如何记录这每次的布局信息
+
+* 每一次都要重新渲染整个页面 这个怎么处理..
+
+  * 比方说我关闭一个 panel 时, 只需要重新绘制他的 container
+  * 最好的情形是, 只将不需要的 panel 移除就可以了
+  * 而现在会重新绘制所有的 container panel, 最顶级的 group 并不会...
+  * ---
+  * 我不知道为什么会重新渲染
+  * 我也不知道如何阻止重新渲染
+
+* 如何简便的处理 immutable 数据
 
 * redux
 
@@ -24,9 +45,6 @@
 - redux immutable.. 可以完成任务 但是真的很麻烦
   * 而且整个的代码结构真的很复杂, 不是一目了然
   * 写起来很累, 理解也很累 不是长久的方法
-
-
-* 每一次都要重新渲染整个页面 这个怎么处理..
 
 ## 2018-04-26 08:53:59
 

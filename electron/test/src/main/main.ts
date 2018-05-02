@@ -7,7 +7,7 @@ import { sendToRenderer } from './ipc';
 let mainWindow: BrowserWindow;
 
 app.on('ready', () => {
-  mainWindow = new BrowserWindow({ width: 300, height: 300 });
+  mainWindow = new BrowserWindow({ width: 1000, height: 500 });
   const render_address =
     process.env.NODE_ENV !== 'production'
       ? 'http://localhost:8080/dist/renderer/'

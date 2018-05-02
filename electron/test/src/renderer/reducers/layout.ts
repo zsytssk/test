@@ -2,32 +2,29 @@ import { fromJS } from 'immutable';
 import { ADD_PANEL, GROUP_CONTAINER, REMOVE_PANEL } from '../actions/actions';
 import { ImmutableType } from '../test';
 import { generateRandomString } from '../util';
+import { loadState } from '../utils/localStorage';
 
-const default_data = {
-  children: [
-    {
-      children: [
-        { id: 'panel1', title: 'panel1', content: 'content1' },
-        { id: 'panel2', title: 'panel2', content: 'content2' },
-        { id: 'panel3', title: 'panel3', content: 'content3' },
-      ],
-      id: generateRandomString(),
-      type: 'container',
-    },
-    {
-      children: [
-        { id: 'panel4', title: 'panel4', content: 'content4' },
-        { id: 'panel5', title: 'panel5', content: 'content5' },
-        { id: 'panel6', title: 'panel6', content: 'content6' },
-      ],
-      id: generateRandomString(),
-      type: 'container',
-    },
-  ],
-  direction: 'vertical',
-  id: generateRandomString(),
-  type: 'group',
-} as GroupData;
+const default_data =
+  // loadState().layout_data ||
+  {
+    children: [
+      {
+        children: [
+          { id: 'panel1', title: 'panel1', content: 'content1' },
+          { id: 'panel2', title: 'panel2', content: 'content2' },
+          { id: 'panel3', title: 'panel3', content: 'content3' },
+          { id: 'panel4', title: 'panel4', content: 'content4' },
+          { id: 'panel5', title: 'panel5', content: 'content5' },
+          { id: 'panel6', title: 'panel6', content: 'content6' },
+        ],
+        id: generateRandomString(),
+        type: 'container',
+      },
+    ],
+    direction: 'vertical',
+    id: generateRandomString(),
+    type: 'group',
+  } as GroupData;
 
 export function layoutReducer(state = fromJS(default_data), action) {
   switch (action.type) {
@@ -66,7 +63,15 @@ function removePanel(
   }
   const new_children = children.delete(panel_index);
   if (new_children.size === 0) {
-    return state.deleteIn(con_map);
+    let new_state = state.deleteIn(con_map);
+    const group_map = con_map.splice(0, con_map.length - 2);
+
+    /** container 的容器group也是空的 直接清除 */
+    const group = new_state.getIn(group_map);
+    if (group && group.get('children').size === 0) {
+      new_state = new_state.deleteIn(group_map);
+    }
+    return new_state;
   } else {
     return state.setIn(con_map.concat(['children']), new_children);
   }
