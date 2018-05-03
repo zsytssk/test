@@ -5,8 +5,8 @@ import { generateRandomString } from '../util';
 import { loadState } from '../utils/localStorage';
 
 const default_data =
-  // loadState().layout_data ||
-  {
+  loadState().layout_data ||
+  ({
     children: [
       {
         children: [
@@ -24,7 +24,7 @@ const default_data =
     direction: 'vertical',
     id: generateRandomString(),
     type: 'group',
-  } as GroupData;
+  } as GroupData);
 
 export function layoutReducer(state = fromJS(default_data), action) {
   switch (action.type) {

@@ -1,16 +1,34 @@
 import * as React from 'react';
 import { default as styled } from 'styled-components';
+import { getNodeOffset } from '../../util';
 
 type Props = {
   width: number;
   height: number;
   left: number;
   top: number;
+  mouseDown: (...any) => void;
 };
 
-export class Sash extends React.Component<Props, any> {
+type State = {
+  width: number;
+  height: number;
+  left: number;
+  top: number;
+};
+
+export class Sash extends React.Component<Props, State> {
+  public state = {} as State;
+  // tslint:disable-next-line:variable-name
+  public static getDerivedStateFromProps(nextProps: Props, _prevState: State) {
+    const { left, width, top, height } = nextProps;
+    return { left, width, top, height };
+  }
+  private mouseDown = evt => {
+    this.props.mouseDown(evt);
+  };
   public render() {
-    const { left, width, top, height, ...other } = this.props;
+    const { left, width, top, height, ...other } = this.state;
     // tslint:disable-next-line:variable-name
     const Div = styled.div`
       cursor: ${left > top ? 'ew-resize' : 'ns-resize'};
@@ -20,7 +38,8 @@ export class Sash extends React.Component<Props, any> {
       top: ${top}px;
       position: absolute;
       left: ${left}px;
+      z-index: 10;
     `;
-    return <Div {...other} />;
+    return <Div {...other} onMouseDown={this.mouseDown} />;
   }
 }

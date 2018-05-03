@@ -10,6 +10,7 @@ import { Sash } from './sash';
 type State = {
   direction: GroupDirection;
   contains: ImmutableType<ContainerData[]> | ImmutableType<GroupData[]>;
+  split_pos: number;
 };
 
 type Props = {
@@ -21,13 +22,45 @@ type Props = {
   groupContainer: (...args) => any;
 };
 
-// tslint:disable-next-line:variable-name
 export class Group extends React.Component<Props, State> {
   public state = {
     contains: [] as any,
     direction: 'horizontal',
   } as State;
-  // tslint:disable-next-line:variable-name
+  private onDragSash = false;
+  private dragPos = { x: 0, y: 0 };
+  private distPos = { x: 0, y: 0 };
+  public mouseDown = evt => {
+    this.onDragSash = true;
+    this.dragPos = {
+      x: evt.pageX,
+      y: evt.pageY,
+    };
+  };
+  private mouseMove = evt => {
+    if (!this.onDragSash) {
+      return;
+    }
+    evt.preventDefault();
+    this.distPos = {
+      x: evt.pageX - this.dragPos.x,
+      y: evt.pageY - this.dragPos.y,
+    };
+    this.dragPos = {
+      x: evt.pageX,
+      y: evt.pageY,
+    };
+    let { top } = this.state;
+    top += this.distPos.y;
+    console.log(top);
+    this.setState({
+      ...this.state,
+      top,
+    });
+  };
+  private mouseEnd = evt => {
+    this.onDragSash = false;
+  };
   public static getDerivedStateFromProps(nextProps: Props, _prevState: State) {
     const direction = nextProps.layoutData.get('direction');
     const children = nextProps.layoutData.get('children');
@@ -79,7 +112,11 @@ export class Group extends React.Component<Props, State> {
     }
 
     return (
-      <Div>
+      <Div
+        onMouseMove={this.mouseMove}
+        onMouseUp={this.mouseEnd}
+        onMouseOut={this.mouseEnd}
+      >
         {Array(num_childs)
           .fill('*')
           .map((item, index) => {
@@ -134,6 +171,7 @@ export class Group extends React.Component<Props, State> {
                     height={sash_h}
                     top={sash_top}
                     left={sash_left}
+                    mouseDown={this.mouseDown}
                   />
                 )}
               </React.Fragment>
