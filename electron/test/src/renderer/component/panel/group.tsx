@@ -1,3 +1,4 @@
+import { List } from 'immutable';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { default as styled } from 'styled-components';
@@ -7,10 +8,12 @@ import { ConnectContainer as Container } from './container';
 import { PanelContextConsumer, PanelContextProvider } from './context';
 import { Sash } from './sash';
 
+const sash_size = 5;
+
 type State = {
   direction: GroupDirection;
   contains: ImmutableType<ContainerData[]> | ImmutableType<GroupData[]>;
-  split_pos: number;
+  split_radio: ImmutableType<number[]>;
 };
 
 type Props = {
@@ -26,22 +29,28 @@ export class Group extends React.Component<Props, State> {
   public state = {
     contains: [] as any,
     direction: 'horizontal',
+    split_radio: List([]),
   } as State;
-  private onDragSash = false;
+  private onDragSashIndex = -1;
   private dragPos = { x: 0, y: 0 };
   private distPos = { x: 0, y: 0 };
-  public mouseDown = evt => {
-    this.onDragSash = true;
+  public mouseDown = (evt, index: number) => {
+    this.onDragSashIndex = index;
     this.dragPos = {
       x: evt.pageX,
       y: evt.pageY,
     };
   };
   private mouseMove = evt => {
-    if (!this.onDragSash) {
+    const drag_index = this.onDragSashIndex;
+    if (drag_index === -1) {
       return;
     }
     evt.preventDefault();
+
+    const direction = this.state.direction;
+    const contains = this.state.contains;
+
     this.distPos = {
       x: evt.pageX - this.dragPos.x,
       y: evt.pageY - this.dragPos.y,
@@ -50,21 +59,52 @@ export class Group extends React.Component<Props, State> {
       x: evt.pageX,
       y: evt.pageY,
     };
-    let { top } = this.state;
-    top += this.distPos.y;
-    console.log(top);
+    let change_size;
+    let content_size;
+    if (direction === 'horizontal') {
+      change_size = this.distPos.x;
+      content_size = this.props.width;
+    } else {
+      content_size = this.props.height;
+      change_size = this.distPos.y;
+    }
+
+    let split_radio = this.state.split_radio;
+    let drag_radio = split_radio.get(drag_index);
+    let drag_pos =
+      drag_radio * (content_size - (contains.size - 1) * sash_size);
+
+    drag_pos = drag_pos + change_size;
+
+    drag_radio = drag_pos / (content_size - (contains.size - 1) * sash_size);
+
+    split_radio = split_radio.set(drag_index, drag_radio);
+
     this.setState({
       ...this.state,
-      top,
+      split_radio,
     });
   };
   private mouseEnd = evt => {
-    this.onDragSash = false;
+    const drag_index = this.onDragSashIndex;
+    if (drag_index === -1) {
+      return;
+    }
+    this.onDragSashIndex = -1;
   };
   public static getDerivedStateFromProps(nextProps: Props, _prevState: State) {
     const direction = nextProps.layoutData.get('direction');
     const children = nextProps.layoutData.get('children');
-    return { direction, contains: children };
+
+    let split_radio = nextProps.layoutData.get('split_radio') || List([]);
+    if (split_radio.size === 0) {
+      const arr = [];
+      for (let i = 0; i < children.size; i++) {
+        arr.push((i + 1) / children.size);
+      }
+      split_radio = List(arr);
+    }
+    return { direction, contains: children, split_radio };
   }
   public groupContainer = async (
     container: ImmutableType<ContainerData[]>,
@@ -79,7 +119,7 @@ export class Group extends React.Component<Props, State> {
     );
   };
   public render() {
-    const { direction, contains } = this.state;
+    const { direction, contains, split_radio } = this.state;
     const { width, height, top, left } = this.props;
 
     // tslint:disable-next-line:variable-name
@@ -93,22 +133,15 @@ export class Group extends React.Component<Props, State> {
 
     const num_childs = contains.size;
     const sash_nums = num_childs - 1;
-    const sash_size = 5;
 
-    let child_w;
-    let child_h;
     let sash_w;
     let sash_h;
     if (direction === 'horizontal') {
-      child_w = (width - sash_nums * sash_size) / num_childs;
-      child_h = height;
-      sash_w = 5;
+      sash_w = sash_size;
       sash_h = height;
     } else {
-      child_w = width;
-      child_h = (height - sash_nums * sash_size) / num_childs;
       sash_w = width;
-      sash_h = 5;
+      sash_h = sash_size;
     }
 
     return (
@@ -120,21 +153,33 @@ export class Group extends React.Component<Props, State> {
         {Array(num_childs)
           .fill('*')
           .map((item, index) => {
+            const item_radio = index > 0 ? split_radio.get(index - 1) : 0;
+            const sash_radio = split_radio.get(index);
             const child = contains.get(index);
             let child_left;
             let child_top;
+            let child_w;
+            let child_h;
             let sash_top;
             let sash_left;
             if (direction === 'horizontal') {
-              child_left = index * (child_w + sash_size);
+              child_left =
+                index > 0 ? item_radio * width + sash_size : item_radio * width;
               child_top = 0;
-              sash_left = (index + 1) * (child_w + sash_size) - sash_size;
+              sash_left = sash_radio * width;
               sash_top = 0;
+              child_w = sash_left - child_left;
+              child_h = height;
             } else {
-              child_top = index * (child_h + sash_size);
+              child_top =
+                index > 0
+                  ? item_radio * height + sash_size
+                  : item_radio * height;
               child_left = 0;
-              sash_top = (index + 1) * (child_h + sash_size) - sash_size;
+              sash_top = sash_radio * height;
               sash_left = 0;
+              child_h = sash_top - child_top;
+              child_w = width;
             }
 
             return (
@@ -172,6 +217,7 @@ export class Group extends React.Component<Props, State> {
                     top={sash_top}
                     left={sash_left}
                     mouseDown={this.mouseDown}
+                    index={index}
                   />
                 )}
               </React.Fragment>

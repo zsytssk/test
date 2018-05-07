@@ -3,6 +3,7 @@ import { default as styled } from 'styled-components';
 import { getNodeOffset } from '../../util';
 
 type Props = {
+  index: number;
   width: number;
   height: number;
   left: number;
@@ -11,6 +12,7 @@ type Props = {
 };
 
 type State = {
+  index: number;
   width: number;
   height: number;
   left: number;
@@ -21,11 +23,11 @@ export class Sash extends React.Component<Props, State> {
   public state = {} as State;
   // tslint:disable-next-line:variable-name
   public static getDerivedStateFromProps(nextProps: Props, _prevState: State) {
-    const { left, width, top, height } = nextProps;
-    return { left, width, top, height };
+    const { left, width, top, height, index } = nextProps;
+    return { left, width, top, height, index };
   }
   private mouseDown = evt => {
-    this.props.mouseDown(evt);
+    this.props.mouseDown(evt, this.state.index);
   };
   public render() {
     const { left, width, top, height, ...other } = this.state;
