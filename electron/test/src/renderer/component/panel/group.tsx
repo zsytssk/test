@@ -2,7 +2,7 @@ import { List } from 'immutable';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { default as styled } from 'styled-components';
-import { groupContainer } from '../../actions/actions';
+import { groupContainer, splitRadio } from '../../actions/actions';
 import { ImmutableType } from '../../test';
 import { ConnectContainer as Container } from './container';
 import { PanelContextConsumer, PanelContextProvider } from './context';
@@ -23,6 +23,7 @@ type Props = {
   top: number;
   left: number;
   groupContainer: (...args) => any;
+  splitRadio: (...args) => any;
 };
 
 export class Group extends React.Component<Props, State> {
@@ -90,6 +91,8 @@ export class Group extends React.Component<Props, State> {
     if (drag_index === -1) {
       return;
     }
+
+    this.props.splitRadio(this.props.layoutData, this.state.split_radio);
     this.onDragSashIndex = -1;
   };
   public static getDerivedStateFromProps(nextProps: Props, _prevState: State) {
@@ -232,6 +235,9 @@ const mapDispatchToProps = dispatch => {
   return {
     groupContainer: (...args) => {
       dispatch(groupContainer(...args));
+    },
+    splitRadio: (group, split_radio) => {
+      dispatch(splitRadio(group, split_radio));
     },
   };
 };

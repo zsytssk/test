@@ -1,5 +1,10 @@
 import { fromJS } from 'immutable';
-import { ADD_PANEL, GROUP_CONTAINER, REMOVE_PANEL } from '../actions/actions';
+import {
+  ADD_PANEL,
+  GROUP_CONTAINER,
+  REMOVE_PANEL,
+  SPLIT_RADIO,
+} from '../actions/actions';
 import { ImmutableType } from '../test';
 import { generateRandomString } from '../util';
 import { loadState } from '../utils/localStorage';
@@ -39,6 +44,12 @@ export function layoutReducer(state = fromJS(default_data), action) {
         action.payload.container,
         action.payload.direction,
         action.payload.panel,
+      );
+    case SPLIT_RADIO:
+      return splitRadio(
+        state,
+        action.payload.group,
+        action.payload.split_radio,
       );
   }
   return state;
@@ -152,6 +163,20 @@ function groupContainer(
     group_map.concat(['children']),
     fromJS(wrap_contains),
   );
+  return new_state;
+}
+
+function splitRadio(
+  state: ImmutableType<GroupData>,
+  group: ImmutableType<GroupData>,
+  split_radio: ImmutableType<number[]>,
+) {
+  const group_map = findConMap(state, group);
+  const new_state = state.setIn(
+    group_map.concat(['split_radio']),
+    fromJS(split_radio),
+  );
+
   return new_state;
 }
 
