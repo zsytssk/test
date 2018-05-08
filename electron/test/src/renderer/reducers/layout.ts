@@ -10,8 +10,8 @@ import { generateRandomString } from '../util';
 import { loadState } from '../utils/localStorage';
 
 const default_data =
-  loadState().layout_data ||
-  ({
+  // loadState().layout_data ||
+  {
     children: [
       {
         children: [
@@ -29,7 +29,9 @@ const default_data =
     direction: 'vertical',
     id: generateRandomString(),
     type: 'group',
-  } as GroupData);
+  } as GroupData;
+
+console.log(default_data);
 
 export function layoutReducer(state = fromJS(default_data), action) {
   switch (action.type) {
@@ -75,12 +77,21 @@ function removePanel(
   const new_children = children.delete(panel_index);
   if (new_children.size === 0) {
     let new_state = state.deleteIn(con_map);
+    const con_index = con_map[con_map.length - 1];
     const group_map = con_map.splice(0, con_map.length - 2);
 
+    new_state = removeSplitRadio(new_state, group_map, con_index);
     /** container 的容器group也是空的 直接清除 */
     const group = new_state.getIn(group_map);
     if (group && group.get('children').size === 0) {
       new_state = new_state.deleteIn(group_map);
+      if (group_map.length > 2) {
+        new_state = removeSplitRadio(
+          new_state,
+          group_map.splice(0, group_map.length - 2),
+          con_index,
+        );
+      }
     }
     return new_state;
   } else {
@@ -178,6 +189,23 @@ function splitRadio(
   );
 
   return new_state;
+}
+
+function removeSplitRadio(state, group_map, con_index) {
+  /** container 的容器group也是空的 直接清除 */
+  const group = state.getIn(group_map);
+  let split_radio = group.get('split_radio');
+  split_radio = split_radio && split_radio.toJSON();
+  if (split_radio && split_radio.length) {
+    const con_radio = split_radio.splice(con_index, 1)[0];
+    if (split_radio.length) {
+      if (con_index > 0) {
+        split_radio[con_index - 1] = con_radio;
+      }
+    }
+    state = state.setIn(group_map.concat(['split_radio']), fromJS(split_radio));
+  }
+  return state;
 }
 
 function findConMap(state, container, map = []) {
