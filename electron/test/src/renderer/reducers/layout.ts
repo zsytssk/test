@@ -31,8 +31,6 @@ const default_data =
     type: 'group',
   } as GroupData;
 
-console.log(default_data);
-
 export function layoutReducer(state = fromJS(default_data), action) {
   switch (action.type) {
     case REMOVE_PANEL:
@@ -74,29 +72,12 @@ function removePanel(
   if (panel_index === -1) {
     return state;
   }
-  const new_children = children.delete(panel_index);
-  if (new_children.size === 0) {
-    let new_state = state.deleteIn(con_map);
-    const con_index = con_map[con_map.length - 1];
-    const group_map = con_map.splice(0, con_map.length - 2);
 
-    new_state = removeSplitRadio(new_state, group_map, con_index);
-    /** container 的容器group也是空的 直接清除 */
-    const group = new_state.getIn(group_map);
-    if (group && group.get('children').size === 0) {
-      new_state = new_state.deleteIn(group_map);
-      if (group_map.length > 2) {
-        new_state = removeSplitRadio(
-          new_state,
-          group_map.splice(0, group_map.length - 2),
-          con_index,
-        );
-      }
-    }
-    return new_state;
-  } else {
-    return state.setIn(con_map.concat(['children']), new_children);
-  }
+  /** 删除目标panel */
+  state = state.deleteIn(con_map.concat(['children', panel_index]));
+
+  /** 向上遍历, 如果有children为空就删除这个item */
+  return removeSplitRadio(state, con_map);
 }
 
 function addPanel(
@@ -191,21 +172,39 @@ function splitRadio(
   return new_state;
 }
 
-function removeSplitRadio(state, group_map, con_index) {
+/** 删除没有子类的空节点 */
+function removeSplitRadio(state, address_map) {
   /** container 的容器group也是空的 直接清除 */
-  const group = state.getIn(group_map);
-  let split_radio = group.get('split_radio');
+  const address_item = state.getIn(address_map);
+  if (address_map.length <= 2) {
+    return state;
+  }
+  const children = address_item.get('children');
+  if (children.size !== 0) {
+    return state;
+  }
+
+  state = state.deleteIn(address_map);
+
+  const parent_map = address_map.slice(0, address_map.length - 2);
+  const parent = state.getIn(parent_map);
+
+  const cur_index = address_map[address_map.length - 2];
+  let split_radio = parent.get('split_radio');
   split_radio = split_radio && split_radio.toJSON();
   if (split_radio && split_radio.length) {
-    const con_radio = split_radio.splice(con_index, 1)[0];
+    const con_radio = split_radio.splice(cur_index, 1)[0];
     if (split_radio.length) {
-      if (con_index > 0) {
-        split_radio[con_index - 1] = con_radio;
+      if (cur_index > 0) {
+        split_radio[cur_index - 1] = con_radio;
       }
     }
-    state = state.setIn(group_map.concat(['split_radio']), fromJS(split_radio));
+    state = state.setIn(
+      parent_map.concat(['split_radio']),
+      fromJS(split_radio),
+    );
   }
-  return state;
+  return removeSplitRadio(state, parent_map);
 }
 
 function findConMap(state, container, map = []) {
