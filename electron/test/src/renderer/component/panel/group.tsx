@@ -95,7 +95,7 @@ export class Group extends React.Component<Props, State> {
     this.props.splitRadio(this.props.layoutData, this.state.split_radio);
     this.onDragSashIndex = -1;
   };
-  public static getDerivedStateFromProps(nextProps: Props, _prevState: State) {
+  public static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     const direction = nextProps.layoutData.get('direction');
     const children = nextProps.layoutData.get('children');
 

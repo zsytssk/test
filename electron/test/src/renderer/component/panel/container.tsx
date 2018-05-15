@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { default as styled } from 'styled-components';
 import { addPanel, removePanel } from '../../actions/actions';
 import { ImmutableType } from '../../test';
+import { AssetsFolderPanel } from '../assetsPanel/main';
 import { Content, DragStatus } from './content';
 import { PanelContextProvider } from './context';
 import { Panel } from './panel';
@@ -111,7 +112,11 @@ export class Container extends React.Component<Props, State> {
             if (panel_id !== cur_id) {
               return;
             }
-            return <Panel key={panel_id} panel={panel} />;
+            if (!panel.get('type')) {
+              return <Panel key={panel_id} panel={panel} />;
+            } else if (panel.get('type') === 'assets') {
+              return <AssetsFolderPanel key={panel_id} panel={panel} />;
+            }
           })}
         </Content>
       </Div>

@@ -1,18 +1,43 @@
 ## 2018-05-09 08:54:58
 
-* @ques 如何不断的递进将 splitRadio 清除
+* @qeus 每次都需要重绘页面所有的
+  * @ques 为什么会重绘??
+
+- @ques 层级结构如何处理
+
+  * 数据结构
+  * 样式
+
+- 继承的样式和自己的特殊样式如何处理
+
+  * ...
+
+- @ques 天啦, laya 里面每一个 panel 都是用 canvas 绘制的
+
+* @note assets_panel 资源 panel 用来放 laya 对应的资源
+  * @ques 如何将文件夹的层级结构表示出来
+  * @ques 不同的类型如何使用不同的图标
+  * @ques 如何同类型的多个文件合并成一个 item
+
+- @ques 如何不断的递进将 splitRadio 清除
 
   * 只有一个子类
 
-* @ques 如何子类不止
+- @ques 如何子类不止
 
-* @ques 如何判断子类 state 的深度
+- @ques 如何判断子类 state 的深度
 
-* @ques 删除中间多余的 group
+- @ques 删除中间多余的 group
+
   * 父类只有一个 children, 这把 这个 group 的父类换成自己
   * 这个我如何处理??
   * 我每次删除对象 查看他的兄弟节点是否是一个???
   * 如过兄弟节点只有一个 将自己换成他的子类
+  * ---
+  * 每次 groupContainer 都会导致 group 的层级变深
+  * removepanel 只会删除 group 而不会将加深的 group 删除
+
+- @ques 在一个 group 中无法创建超过两个的子集
 
 ## 2018-05-07 09:12:37
 

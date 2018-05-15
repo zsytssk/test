@@ -15,7 +15,12 @@ const default_data =
     children: [
       {
         children: [
-          { id: 'panel1', title: 'panel1', content: 'content1' },
+          {
+            content: 'content1',
+            id: 'panel1',
+            title: 'panel1',
+            type: 'assets',
+          },
           { id: 'panel2', title: 'panel2', content: 'content2' },
           { id: 'panel3', title: 'panel3', content: 'content3' },
           { id: 'panel4', title: 'panel4', content: 'content4' },

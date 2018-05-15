@@ -31,6 +31,14 @@ interface LocalWindow extends window {
   Immutable: any;
 }
 
+type AssetsType = 'folder' | 'img' | 'button';
+
+type AssetsPanelData = {
+  name: string;
+  type: AssetsType;
+  children?: AssetsPanelData[];
+};
+
 // const TEST_STATE = [
 //   { id: 'panel1', title: 'panel1', content: 'content1' },
 //   { id: 'panel2', title: 'panel2', content: 'content2' },

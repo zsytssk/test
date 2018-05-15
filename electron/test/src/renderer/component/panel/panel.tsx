@@ -14,8 +14,13 @@ const Div = styled.div`
   padding: 0 5px;
   line-height: 25px;
 `;
-export class Panel extends React.Component<Props, any> {
-  public render() {
+
+export function WrapDom(props) {
+  return <Div {...props} />;
+}
+
+export class Panel<P> extends React.Component<Props, any> {
+  public render(): any {
     const { panel } = this.props;
     return <Div>{panel.get('content')}</Div>;
   }
