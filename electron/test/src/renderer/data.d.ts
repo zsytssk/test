@@ -36,6 +36,7 @@ type AssetsType = 'folder' | 'img' | 'button';
 type AssetsPanelData = {
   name: string;
   type: AssetsType;
+  path: string;
   children?: AssetsPanelData[];
 };
 

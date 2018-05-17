@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Panel, WrapDom } from '../panel/panel';
 import { getAssets } from './getAssets';
+import { Item } from './item';
 
 type State = {
   data: AssetsPanelData;
@@ -20,6 +21,10 @@ export class AssetsFolderPanel extends Panel<State> {
     if (!data) {
       return '';
     }
-    return <WrapDom>{JSON.stringify(data)}</WrapDom>;
+    return (
+      <WrapDom>
+        <Item data={data} />
+      </WrapDom>
+    );
   }
 }

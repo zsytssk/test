@@ -8,10 +8,9 @@ type Props = {
 
 // tslint:disable-next-line:variable-name
 const Div = styled.div`
-  height: 100%;
   width: 100%;
   color: #fff;
-  padding: 0 5px;
+  padding: 0 10px 0 20px;
   line-height: 25px;
 `;
 

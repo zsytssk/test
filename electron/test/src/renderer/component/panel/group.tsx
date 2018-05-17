@@ -42,6 +42,9 @@ export class Group extends React.Component<Props, State> {
       y: evt.pageY,
     };
   };
+  // public shouldComponentUpdate() {
+  //   return false;
+  // }
   private mouseMove = evt => {
     const drag_index = this.onDragSashIndex;
     if (drag_index === -1) {

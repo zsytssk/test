@@ -1,18 +1,27 @@
 import * as fs from 'fs';
+import * as path from 'path';
 
-export function walkSync(dir, file_list?) {
-  if (dir[dir.length - 1] !== '/') {
-    dir = dir.concat('/');
-  }
+export function walkSync(dir) {
+  const dir_data = {
+    name: path.basename(dir),
+    path: dir,
+    type: 'folder',
+  } as AssetsPanelData;
 
+  const children = [];
   const files = fs.readdirSync(dir);
-  file_list = file_list || [];
   files.forEach(file => {
-    if (fs.statSync(dir + file).isDirectory()) {
-      file_list = walkSync(dir + file + '/', file_list);
+    const f_path = path.resolve(dir, file);
+    if (fs.statSync(f_path).isDirectory()) {
+      children.push(walkSync(f_path));
     } else {
-      file_list.push(dir + file);
+      children.push({
+        name: path.basename(f_path),
+        path: f_path,
+        tyle: 'file',
+      });
     }
   });
-  return file_list;
+  dir_data.children = children;
+  return dir_data;
 }

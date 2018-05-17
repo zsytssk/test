@@ -24,10 +24,10 @@ export function emitToMain(cmd, data?) {
 
 export function assetsFolder() {
   return emitToMain('test-getFolder').then(data => {
-    console.log(data);
     return data;
   });
 }
+
 export function connect() {
   /** 从main传过来reload命令 */
   ipcRenderer.on('reload', () => {
