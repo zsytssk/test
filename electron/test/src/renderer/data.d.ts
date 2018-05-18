@@ -40,6 +40,11 @@ type AssetsPanelData = {
   children?: AssetsPanelData[];
 };
 
+declare module '*.png' {
+  const value: string;
+  export default value;
+}
+
 // const TEST_STATE = [
 //   { id: 'panel1', title: 'panel1', content: 'content1' },
 //   { id: 'panel2', title: 'panel2', content: 'content2' },

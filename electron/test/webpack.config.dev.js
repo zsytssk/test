@@ -18,6 +18,13 @@ let common_config = {
           transpileOnly: true,
         },
       },
+      {
+        test: /\.(png|jpe?g|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'assets/[name].[ext]',
+        },
+      },
     ],
   },
   resolve: {
