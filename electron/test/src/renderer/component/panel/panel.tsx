@@ -12,6 +12,7 @@ const Div = styled.div`
   color: #fff;
   padding: 0 10px 0 20px;
   line-height: 25px;
+  position: relative;
 `;
 
 export function WrapDom(props) {

@@ -19,6 +19,8 @@ const Div = styled.div`
   color: #fff;
   padding: 0 5px;
   line-height: 25px;
+  position: relative;
+  z-index: 10;
   & > .wrap {
     padding-left: 20px;
     display: none;
@@ -30,6 +32,7 @@ const Div = styled.div`
   & i[class^='icon'] {
     display: inline-block;
     background-size: contain;
+    background-repeat: no-repeat;
     margin-right: 5px;
     vertical-align: middle;
     margin-top: -1px;
@@ -38,6 +41,9 @@ const Div = styled.div`
     width: 14px;
     height: 12px;
     background-image: url(${iconFolder});
+  }
+  & > .name {
+    cursor: pointer;
   }
   &.expand > .name > .icon-folder {
     background-image: url(${iconFolderExpand});
@@ -55,18 +61,19 @@ const Div = styled.div`
 export class Item extends React.Component<Props, State> {
   public state = {} as State;
   //   public static getDerivedStateFromProps(nextProps: Props, prevState: State) {}
-  public toggle = () {
+  public toggle = (evt: React.MouseEvent<HTMLElement>) => {
+    evt.stopPropagation();
     this.setState({
       expand: !this.state.expand,
     });
-  }
+  };
   public render() {
     const expand = this.state.expand;
     const asset_data = this.props.data;
     const children = asset_data.children;
     return (
-      <Div onClick={this.toggle} className={expand ? `expand` : ''}>
-        <div className="name">
+      <Div className={expand ? `expand` : ''}>
+        <div className="name" onClick={this.toggle}>
           {asset_data.type === 'folder' && <i className={`icon-arrow`} />}
           <i className={`icon-${asset_data.type}`} />
           {asset_data.name}

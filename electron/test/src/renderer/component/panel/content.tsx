@@ -22,7 +22,9 @@ const Div = styled.div`
     background-color: rgba(59, 66, 82, 0.6);
     height: 100%;
     width: 100%;
+    z-index: 11;
     visibility: hidden;
+    pointer-events: none;
   }
   & > .dragSign.show {
     visibility: visible;
@@ -41,9 +43,6 @@ const Div = styled.div`
   & > .dragSign.top {
     height: 50%;
     top: 0;
-  }
-  & > * {
-    pointer-events: none;
   }
 `;
 type Props = {
@@ -122,7 +121,7 @@ export class Content extends React.Component<Props, State> {
         {...other}
       >
         <div className={`dragSign ${show_class} ${position_class}`} />
-        {this.props.children}
+        {children}
       </Div>
     );
   }

@@ -16,12 +16,17 @@ const default_data =
       {
         children: [
           {
+            content: 'content2',
+            id: 'panel2',
+            title: 'panel2',
+            type: 'canvas',
+          },
+          {
             content: 'content1',
             id: 'panel1',
             title: 'panel1',
             type: 'assets',
           },
-          { id: 'panel2', title: 'panel2', content: 'content2' },
           { id: 'panel3', title: 'panel3', content: 'content3' },
           { id: 'panel4', title: 'panel4', content: 'content4' },
           { id: 'panel5', title: 'panel5', content: 'content5' },
