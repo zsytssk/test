@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "lib": ["es2016", "dom"],
+    "sourceMap": false,
+    "target": "esnext",
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "module": "CommonJS"
+  }
+}
