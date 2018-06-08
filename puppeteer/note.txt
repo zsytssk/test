@@ -1,12 +1,24 @@
+## click position
+
+- https://github.com/GoogleChrome/puppeteer/issues/1232
+
+## 2018-06-06 09:18:12
+
+- @note 相互交流获得的经验...
+
+* @ques puppeteer evaluate 如何传递参数...
+
+- puppeteer wait page render complete
+
 ## 2018-06-01 09:19:31
 
-* 错误信息
-  * `UnhandledPromiseRejectionWarning: Error: Evaluation failed: TypeError: MutationObserver is not a constructor`
+- 错误信息
+  - `UnhandledPromiseRejectionWarning: Error: Evaluation failed: TypeError: MutationObserver is not a constructor`
 
-- 截图 一个元素
+* 截图 一个元素
 
-- 在页面执行一段代码
+* 在页面执行一段代码
 
-- 模拟事件点击页面一个地方
+* 模拟事件点击页面一个地方
 
-* jest 如何相互结合
+- jest 如何相互结合

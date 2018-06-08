@@ -21,7 +21,6 @@ async function main() {
       return 1;
     });
   }, resultsSelector);
-  console.log(links.join('\n'));
   await page.screenshot({ path: 'demo.png' });
   await browser.close();
 }
