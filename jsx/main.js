@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const preact = require("preact");
-let { h } = preact;
-let a = (h("div", { className: "test" },
-    h("span", null, "sdfsdfsdfsf")));
+const createElement_1 = require("./jsx/createElement");
+let a = (createElement_1.createElement("div", { className: "test" },
+    createElement_1.createElement("span", null, "sdfsdfsdfsf")));

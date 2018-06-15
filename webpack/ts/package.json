@@ -1,17 +1,29 @@
 {
-  "name": "webpack_test",
-  "main": "index.js",
+  "author": "zsytssk@gmail.com",
+  "contributors": [],
+  "license": "UNLICENSED",
+  "name": "bomb_dog",
   "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
   "scripts": {
     "webpack_dev": "webpack --colors --config webpack.config.dev.js",
-    "webpack_dev_server": "webpack-dev-server --colors --config webpack.config.dev.js",
-    "webpack_release": "webpack --config  webpack.config.rel.js"
+    "webpack-dev-server_dev": "webpack-dev-server --colors --config webpack.config.dev.js",
+    "webpack_release": "webpack --config  webpack.config.prod.js",
+    "release_js": "node ./script/releaseFile/main.js release_js",
+    "release_libs": "node ./script/releaseFile/main.js release_libs",
+    "release_light": "node ./script/releaseFile/main.js release_light",
+    "release_all": "node ./script/releaseFile/main.js release_all"
   },
   "devDependencies": {
-    "redux": "^3.7.2",
-    "ts-loader": "^3.0.3",
-    "typescript": "^2.6.2",
-    "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.7.1"
+    "ts-loader": "^4.3.1",
+    "typescript": "^2.9.1",
+    "webpack": "^4.11.1",
+    "webpack-cli": "^3.0.2",
+    "webpack-dev-server": "^3.1.4"
   }
 }

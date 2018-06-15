@@ -1,14 +1,15 @@
 {
-  "compilerOptions": {
-    "target": "es6",
-    "allowJs": true,
-    "sourceMap": true,
-    "outFile": "./dist/main.min.js",
-    "rootDir": "./src",
-    "module": "system",
-    "skipLibCheck": true,
-    "moduleResolution": "node",
-    "skipDefaultLibCheck": true
-  },
-  "include": ["./src", "./typings"]
+    "compilerOptions": {
+        "allowJs": true,
+        "experimentalDecorators": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "rootDir": "src",
+        "skipDefaultLibCheck": true,
+        "skipLibCheck": true,
+        "sourceMap": false,
+        "target": "es6",
+        "watch": true
+    },
+    "include": ["src", "typings", "laya/libs"]
 }
