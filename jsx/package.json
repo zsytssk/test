@@ -13,11 +13,7 @@
   "scripts": {
     "webpack_dev": "webpack --colors --config webpack.config.dev.js",
     "webpack-dev-server_dev": "webpack-dev-server --colors --config webpack.config.dev.js",
-    "webpack_release": "webpack --config  webpack.config.prod.js",
-    "release_js": "node ./script/releaseFile/main.js release_js",
-    "release_libs": "node ./script/releaseFile/main.js release_libs",
-    "release_light": "node ./script/releaseFile/main.js release_light",
-    "release_all": "node ./script/releaseFile/main.js release_all"
+    "webpack_release": "webpack --config  webpack.config.prod.js"
   },
   "devDependencies": {
     "ts-loader": "^4.3.1",

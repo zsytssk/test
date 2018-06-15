@@ -6,7 +6,9 @@
     "allowJs": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "jsx": "react",
+    "jsxFactory": "createElement"
   },
   "include": ["./src"]
 }

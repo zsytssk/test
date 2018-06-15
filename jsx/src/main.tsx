@@ -4,3 +4,5 @@ let a = (
     <span>sdfsdfsdfsf</span>
   </div>
 );
+
+console.log(a);
