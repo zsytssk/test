@@ -1,15 +1,17 @@
 {
-    "compilerOptions": {
-        "allowJs": true,
-        "experimentalDecorators": true,
-        "module": "esnext",
-        "moduleResolution": "node",
-        "rootDir": "src",
-        "skipDefaultLibCheck": true,
-        "skipLibCheck": true,
-        "sourceMap": false,
-        "target": "es6",
-        "watch": true
-    },
-    "include": ["src", "typings", "laya/libs"]
+  "compilerOptions": {
+    "allowJs": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "rootDir": "src",
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "target": "es6",
+    "jsx": "react",
+    "jsxFactory": "createElement",
+    "watch": true
+  },
+  "include": ["src"]
 }
