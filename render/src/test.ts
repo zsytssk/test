@@ -5,7 +5,7 @@ const a = new ComA();
 const b = new ComB();
 
 a.addChild(b);
-a.addChild('hello');
+// a.addChild('hello');
 
 // tslint:disable-next-line:no-console
-console.log(a.render());
+console.log(a.draw());

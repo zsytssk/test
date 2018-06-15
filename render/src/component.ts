@@ -2,12 +2,18 @@ export abstract class BaseCtrl {
     public readonly name: string;
     private parent: BaseCtrl;
     private children = [] as BaseCtrl[];
+    private node;
     public render() {
         return '';
     }
+    public getRenderNode() {
+        this.node = this.render();
+    }
     public draw() {
+        this.getRenderNode();
         const child_list = this.children;
         const draw = [];
+        draw.push(this.node);
         for (const child of child_list) {
             draw.push(child.draw());
         }
