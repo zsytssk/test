@@ -10,7 +10,7 @@
     "sourceMap": false,
     "target": "es6",
     "jsx": "react",
-    "jsxFactory": "createElement",
+    "jsxFactory": "h",
     "watch": true
   },
   "include": ["src"]
