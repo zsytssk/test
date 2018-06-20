@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "rootDir": "src",
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "target": "es6",
+    "jsx": "react",
+    "jsxFactory": "h",
+    "watch": true
+  },
+  "include": ["src"]
+}

@@ -1,0 +1,29 @@
+{
+  "author": "zsytssk@gmail.com",
+  "contributors": [],
+  "license": "UNLICENSED",
+  "name": "bomb_dog",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "webpack_dev": "webpack --colors --config webpack.config.dev.js",
+    "webpack-dev-server_dev": "webpack-dev-server --colors --config webpack.config.dev.js",
+    "webpack_release": "webpack --config  webpack.config.prod.js"
+  },
+  "dependencies": {
+    "konva": "^2.1.5",
+    "sat": "^0.7.1"
+  },
+  "devDependencies": {
+    "ts-loader": "^4.3.1",
+    "typescript": "^2.9.1",
+    "webpack": "^4.11.1",
+    "webpack-cli": "^3.0.2",
+    "webpack-dev-server": "^3.1.4"
+  }
+}
