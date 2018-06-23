@@ -1,29 +1,30 @@
 {
-  "author": "zsytssk@gmail.com",
-  "contributors": [],
-  "license": "UNLICENSED",
-  "name": "bomb_dog",
-  "version": "1.0.0",
-  "private": true,
-  "description": "",
-  "main": "index.js",
-  "directories": {
-    "doc": "doc"
-  },
-  "scripts": {
-    "webpack_dev": "webpack --colors --config webpack.config.dev.js",
-    "webpack-dev-server_dev": "webpack-dev-server --colors --config webpack.config.dev.js",
-    "webpack_release": "webpack --config  webpack.config.prod.js",
-    "release_js": "node ./script/releaseFile/main.js release_js",
-    "release_libs": "node ./script/releaseFile/main.js release_libs",
-    "release_light": "node ./script/releaseFile/main.js release_light",
-    "release_all": "node ./script/releaseFile/main.js release_all"
-  },
-  "devDependencies": {
-    "ts-loader": "^4.3.1",
-    "typescript": "^2.9.1",
-    "webpack": "^4.11.1",
-    "webpack-cli": "^3.0.2",
-    "webpack-dev-server": "^3.1.4"
-  }
+    "author": "zsytssk@gmail.com",
+    "contributors": [],
+    "license": "UNLICENSED",
+    "name": "webpack_test",
+    "version": "1.0.0",
+    "private": true,
+    "description": "",
+    "main": "index.js",
+    "directories": {
+        "doc": "doc"
+    },
+    "scripts": {
+        "webpack-dev": "webpack --mode development",
+        "webpack-dev-server": "webpack-dev-server --mode development",
+        "webpack-prod": "webpack --mode production"
+    },
+    "devDependencies": {
+        "ts-loader": "^4.3.1",
+        "tslint": "^5.10.0",
+        "tslint-config-prettier": "^1.13.0",
+        "typescript": "^2.9.1",
+        "webpack": "^4.11.1",
+        "webpack-cli": "^3.0.2",
+        "webpack-dev-server": "^3.1.4"
+    },
+    "dependencies": {
+        "es6-promise": "^4.2.4"
+    }
 }
