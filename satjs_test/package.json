@@ -16,7 +16,7 @@
     "webpack_release": "webpack --config  webpack.config.prod.js"
   },
   "dependencies": {
-    "konva": "^2.1.5",
+    "konva": "^2.1.6",
     "sat": "^0.7.1"
   },
   "devDependencies": {
