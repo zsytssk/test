@@ -7,9 +7,9 @@
         "rootDir": "src",
         "skipDefaultLibCheck": true,
         "skipLibCheck": true,
-        "sourceMap": false,
+        "sourceMap": true,
         "target": "es6",
         "watch": true
     },
-    "include": ["src", "typings", "laya/libs"]
+    "include": ["src"]
 }
