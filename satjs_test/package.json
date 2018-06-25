@@ -17,7 +17,8 @@
   },
   "dependencies": {
     "konva": "^2.1.6",
-    "sat": "^0.7.1"
+    "sat": "^0.7.1",
+    "wolfy87-eventemitter": "^5.2.4"
   },
   "devDependencies": {
     "ts-loader": "^4.3.1",

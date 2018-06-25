@@ -1,6 +1,7 @@
 import { initStage } from './knova';
-import { collision } from './collision';
+// import { collision } from './collision';
+import { rockerSprite } from './rockerSprite';
 // import { vector } from './vector';
 
 let stage = initStage();
-collision(stage);
+rockerSprite(stage);
