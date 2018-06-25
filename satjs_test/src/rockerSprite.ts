@@ -51,5 +51,17 @@ export function rockerSprite(stage) {
     group.add(inner_node);
     layer.add(group);
     stage.draw();
+
+    group.addEventListener('touchstart', evt => {
+      const { x, y } = evt.target;
+      console.log(evt);
+    });
+    group.addEventListener('touchmove', evt => {
+      console.log(evt);
+    });
+    group.addEventListener('touchend', evt => {
+      console.log(evt);
+    });
+    console.log();
   });
 }
