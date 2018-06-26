@@ -1,4 +1,4 @@
-import { fromJS } from 'immutable';
+  import { fromJS } from 'immutable';
 import {
   ADD_PANEL,
   GROUP_CONTAINER,
