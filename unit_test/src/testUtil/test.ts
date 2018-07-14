@@ -1,6 +1,6 @@
-import { log, logErr, group, groupErr } from './utils';
+import { group, groupEnd, log, logErr } from './utils';
 
-function assert(express) {
+export function assert(express) {
     if (!express) {
         throw Error();
     }
@@ -14,11 +14,10 @@ type TestItem = {
     err?: Error;
 };
 export function describe(msg, func: FunTest) {
-    console.group(msg);
     const test = new TestNode(msg, func);
     test.run();
-    console.groupEnd();
 }
+type BoundType = 'before_all' | 'after_all' | 'after_each' | 'before_each';
 
 class TestNode {
     private msg: string;
@@ -53,10 +52,20 @@ class TestNode {
         });
     }
     private runTest() {
-        const test_list = this.test_list;
+        const {
+            test_list,
+            after_all,
+            before_all,
+            before_each,
+            after_each,
+        } = this;
+
+        group(`${this.msg}:>`);
+        this.runBind('before_all');
         for (const item of test_list) {
             const { msg, func } = item;
             let a;
+            this.runBind('before_each');
             try {
                 a = func();
                 item.success = true;
@@ -64,32 +73,30 @@ class TestNode {
             } catch (err) {
                 item.err = err;
                 item.success = false;
-
                 this.fail_num++;
             }
-        }
-        let log_group = group;
-        if (this.fail_num) {
-            log_group = groupErr;
-        }
-        log_group(
-            `${this.msg}, total:${test_list.length}; sucess:${
-                this.sucess_num
-            }, fail:${this.fail_num}`
-        );
-        for (const item of test_list) {
-            const { msg, success, err } = item;
-            if (success) {
+            if (item.success) {
                 log(`${msg} [✓]`);
             } else {
-                logErr(`${msg} [x]`, err);
+                logErr(`${msg} [x]`, item.err);
             }
+            this.runBind('after_each');
         }
+        this.runBind('after_all');
 
-        console.groupEnd();
+        log(
+            `total:${test_list.length}; sucess:${this.sucess_num}, fail:${
+                this.fail_num
+            }`
+        );
+
+        groupEnd();
     }
-    public assert(express) {
-        assert(express);
+    private runBind(type: BoundType) {
+        const funs = this[type];
+        for (const fun of funs) {
+            fun();
+        }
     }
     public run() {
         this.func(this);

@@ -15,6 +15,7 @@ function createLog(type?, msg_type?) {
 }
 
 export const log = createLog();
-export const group = createLog('group');
-export const groupErr = createLog('group', 'error');
+export const group = createLog('groupCollapsed');
+export const groupEnd = createLog('groupEnd');
+export const groupErr = createLog('groupCollapsed', 'error');
 export const logErr = createLog('error');
