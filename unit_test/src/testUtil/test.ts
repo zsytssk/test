@@ -52,13 +52,7 @@ class TestNode {
         });
     }
     private runTest() {
-        const {
-            test_list,
-            after_all,
-            before_all,
-            before_each,
-            after_each,
-        } = this;
+        const { test_list } = this;
 
         group(`${this.msg}:>`);
         this.runBind('before_all');
@@ -83,8 +77,12 @@ class TestNode {
             this.runBind('after_each');
         }
         this.runBind('after_all');
+        let log_fun = log;
+        if (this.fail_num) {
+            log_fun = logErr;
+        }
 
-        log(
+        log_fun(
             `total:${test_list.length}; sucess:${this.sucess_num}, fail:${
                 this.fail_num
             }`

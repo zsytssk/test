@@ -1,13 +1,7 @@
 {
-  "presets": ["es2015"],
-  "env": {
-    "targets": {
-      "browsers": ["last 2 versions", "safari >= 7"]
-    },
-    "development": {
-      "plugins": []
-    },
-    "modules": "commonjs"
-  },
-  "plugins": []
+  "presets": ["@babel/preset-env", "@babel/preset-typescript"],
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-transform-typescript"
+  ]
 }

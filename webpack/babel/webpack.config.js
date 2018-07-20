@@ -1,48 +1,47 @@
 "use strict";
-exports.__esModule = true;
-var path = require("path");
-var webpack = require("webpack");
-var WebpackNotifierPlugin = require("webpack-notifier");
-var env = process.env.NODE_ENV || 'development';
-var definePlugin = new webpack.DefinePlugin({
-    __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true'))
-});
-var config = {
-    entry: {
-        app: [
-            // 'babel-polyfill',
-            path.resolve(__dirname, 'dist/main.js')
-        ]
-    },
-    devtool: 'eval-source-map',
-    output: {
-        pathinfo: true,
-        path: __dirname + '/dist',
-        filename: 'bundle.js'
-    },
-    watch: true,
-    plugins: [
-        definePlugin,
-        new WebpackNotifierPlugin({
-            excludeWarnings: true
-        })
-    ],
-    module: {
-        rules: [
-            { test: /\.js$/, use: ['babel-loader'], include: path.join(__dirname, 'dist') }
-        ]
-    },
-    devServer: {
-        historyApiFallback: false,
-        inline: true
-    },
-    node: {
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty'
-    },
-    resolve: {
-        alias: {}
-    }
+const path = require("path");
+
+let common_config = {
+  entry: ["./src/main.js"],
+  output: {
+    filename: "main.js",
+    path: path.join(__dirname, "dist")
+  },
+  resolve: {
+    extensions: [".jsx", ".js", ".ts"]
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|ts)$/,
+        loader: "babel-loader",
+        options: {
+          presets: ["@babel/preset-env"]
+        }
+      }
+    ]
+  }
 };
-exports["default"] = config;
+
+const dev_config = {
+  devtool: "cheap-module-eval-source-map",
+  watch: true,
+  devServer: {
+    contentBase: path.join(__dirname, "dist")
+  }
+};
+
+const prod_ts_compile_option = {
+  target: "es5",
+  sourceMap: false,
+  lib: ["dom", "es5", "es2015.promise"]
+};
+
+module.exports = (env, argv) => {
+  if (argv.mode === "development") {
+    return Object.assign(common_config, dev_config);
+  } else {
+    // common_config.module.rules[0].options. = prod_ts_compile_option;
+    return common_config;
+  }
+};

@@ -9,11 +9,6 @@ async function main() {
             console.log('beforeEach');
         });
         it.test('test1', () => {
-            console.log(
-                new Error().stack
-                    .replace('Error\n', '')
-                    .replace(/[^\n]+at[^\n]/g, '')
-            );
             assert(1 + 1 === 2);
         });
         it.test('test2', () => {
