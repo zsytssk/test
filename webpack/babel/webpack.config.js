@@ -10,14 +10,12 @@ let common_config = {
   resolve: {
     extensions: [".jsx", ".js", ".ts"]
   },
+  watch: true,
   module: {
     rules: [
       {
         test: /\.(js|ts)$/,
-        loader: "babel-loader",
-        options: {
-          presets: ["@babel/preset-env"]
-        }
+        loader: "babel-loader"
       }
     ]
   }
@@ -31,17 +29,10 @@ const dev_config = {
   }
 };
 
-const prod_ts_compile_option = {
-  target: "es5",
-  sourceMap: false,
-  lib: ["dom", "es5", "es2015.promise"]
-};
-
 module.exports = (env, argv) => {
   if (argv.mode === "development") {
     return Object.assign(common_config, dev_config);
   } else {
-    // common_config.module.rules[0].options. = prod_ts_compile_option;
     return common_config;
   }
 };

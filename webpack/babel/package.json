@@ -1,9 +1,10 @@
 {
-  "name": "webpack-babel-es6",
+  "name": "webpack-babel",
   "version": "0.0.1",
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.54",
     "@babel/plugin-proposal-class-properties": "^7.0.0-beta.54",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.54",
     "@babel/plugin-transform-typescript": "^7.0.0-beta.54",
     "@babel/preset-env": "^7.0.0-beta.54",
     "@babel/preset-typescript": "^7.0.0-beta.54",
@@ -16,5 +17,8 @@
     "webpack-dev": "webpack --mode development",
     "webpack-dev-server": "webpack-dev-server --mode development",
     "webpack-prod": "webpack --mode production"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.54"
   }
 }

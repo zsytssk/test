@@ -1,18 +1,21 @@
 ## .babelrc
 
-- presets
+- Cannot find module '@babel/preset-runtime'
+  - core-js/library/fn/promise.js
+
+* presets
   - production、
   * development
 
-* ts 配置升级
+- ts 配置升级
 
-- env
+* env
 
-- @ques 如何在开发的时候只使用 es6 生产的时候使用 es5
+* @ques 如何在开发的时候只使用 es6 生产的时候使用 es5
 
   - polyfill 如何加入...
 
-- @ques @babel/plugin-syntax-dynamic-import"
+* @ques @babel/plugin-syntax-dynamic-import"
   @babel/plugin-transform-classes
 
 https://babeljs.io/docs/en/next/babelrc.html
