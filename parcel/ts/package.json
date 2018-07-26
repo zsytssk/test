@@ -1,20 +1,19 @@
 {
-  "author": "zsytssk",
-  "license": "MIT",
-  "name": "parcel-test",
+  "name": "ts",
   "version": "1.0.0",
-  "description": "TypeScript app with parcel bundler.",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "parcel serve index.html",
-    "build": "cross-env NODE_ENV=production parcel build src/main.ts --public-url .",
-    "watch": "parcel watch src/main.ts",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "start": "parcel start src/main.ts --out-dir laya --open"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "cross-env": "^5.1.1",
-    "gh-pages": "^1.1.0",
-    "parcel-bundler": "^1.5.0",
-    "typescript": "^2.6.2"
+    "parcel-bundler": "^1.9.7",
+    "typescript": "^2.9.2"
+  },
+  "dependencies": {
+    "rxjs": "^6.2.2"
   }
 }

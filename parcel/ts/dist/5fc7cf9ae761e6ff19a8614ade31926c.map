@@ -1,1 +1,0 @@
-{"version":3,"sources":["src\\main.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;IACE,KAAK,CAAC,CAAC,CAAC,CAAC;IACT,IAAI,EAAE,CAAC;AACT,CAAC;AACD,IAAI,EAAE,CAAC","file":"5fc7cf9ae761e6ff19a8614ade31926c.map","sourcesContent":["function main() {\r\n  alert(1);\r\n  test();\r\n}\r\nmain();\r\n"]}
