@@ -258,12 +258,14 @@ var Main = (function (_super) {
      * Click the button
      */
     Main.prototype.onButtonClick = function (e) {
-        var panel = new eui.Panel();
-        panel.title = "Title";
+        var panel = new eui.Component();
+        panel.skinName = 'resource/eui_skins/NewTest.exml';
         panel.horizontalCenter = 0;
         panel.verticalCenter = 0;
+        console.log(panel);
         this.addChild(panel);
     };
     return Main;
 }(eui.UILayer));
 __reflect(Main.prototype, "Main");
+//# sourceMappingURL=Main.js.map

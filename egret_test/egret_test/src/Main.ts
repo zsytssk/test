@@ -26,58 +26,59 @@
 //  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 //////////////////////////////////////////////////////////////////////////////////////
+import './Test';
 
+import { AssetAdapter } from './AssetAdapter';
+import { LoadingUI } from './LoadingUI';
+import { platform } from './Platform';
+import { ThemeAdapter } from './ThemeAdapter';
+import { extend } from './utils/zutil';
 class Main extends eui.UILayer {
-
-
     protected createChildren(): void {
         super.createChildren();
 
-        egret.lifecycle.addLifecycleListener((context) => {
+        egret.lifecycle.addLifecycleListener(context => {
             // custom lifecycle plugin
-        })
+        });
 
         egret.lifecycle.onPause = () => {
             egret.ticker.pause();
-        }
+        };
 
         egret.lifecycle.onResume = () => {
             egret.ticker.resume();
-        }
+        };
 
         //inject the custom material parser
         //注入自定义的素材解析器
         let assetAdapter = new AssetAdapter();
-        egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
-        egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
-
+        egret.registerImplementation('eui.IAssetAdapter', assetAdapter);
+        egret.registerImplementation('eui.IThemeAdapter', new ThemeAdapter());
 
         this.runGame().catch(e => {
             console.log(e);
-        })
+        });
     }
 
     private async runGame() {
-        await this.loadResource()
+        await this.loadResource();
         this.createGameScene();
-        const result = await RES.getResAsync("description_json")
+        const result = await RES.getResAsync('description_json');
         this.startAnimation(result);
         await platform.login();
         const userInfo = await platform.getUserInfo();
         console.log(userInfo);
-
     }
 
     private async loadResource() {
         try {
             const loadingView = new LoadingUI();
             this.stage.addChild(loadingView);
-            await RES.loadConfig("resource/default.res.json", "resource/");
+            await RES.loadConfig('/default.res.json', '../resource/');
             await this.loadTheme();
-            await RES.loadGroup("preload", 0, loadingView);
+            await RES.loadGroup('preload', 0, loadingView);
             this.stage.removeChild(loadingView);
-        }
-        catch (e) {
+        } catch (e) {
             console.error(e);
         }
     }
@@ -86,12 +87,18 @@ class Main extends eui.UILayer {
         return new Promise((resolve, reject) => {
             // load skin theme configuration file, you can manually modify the file. And replace the default skin.
             //加载皮肤主题配置文件,可以手动修改这个文件。替换默认皮肤。
-            let theme = new eui.Theme("resource/default.thm.json", this.stage);
-            theme.addEventListener(eui.UIEvent.COMPLETE, () => {
-                resolve();
-            }, this);
-
-        })
+            let theme = new eui.Theme(
+                '../resource/default.thm.json',
+                this.stage
+            );
+            theme.addEventListener(
+                eui.UIEvent.COMPLETE,
+                () => {
+                    resolve();
+                },
+                this
+            );
+        });
     }
 
     private textfield: egret.TextField;
@@ -100,7 +107,7 @@ class Main extends eui.UILayer {
      * Create scene interface
      */
     protected createGameScene(): void {
-        let sky = this.createBitmapByName("bg_jpg");
+        let sky = this.createBitmapByName('bg_jpg');
         this.addChild(sky);
         let stageW = this.stage.stageWidth;
         let stageH = this.stage.stageHeight;
@@ -114,7 +121,7 @@ class Main extends eui.UILayer {
         topMask.y = 33;
         this.addChild(topMask);
 
-        let icon: egret.Bitmap = this.createBitmapByName("egret_icon_png");
+        let icon: egret.Bitmap = this.createBitmapByName('egret_icon_png');
         this.addChild(icon);
         icon.x = 26;
         icon.y = 33;
@@ -128,12 +135,11 @@ class Main extends eui.UILayer {
         line.y = 61;
         this.addChild(line);
 
-
         let colorLabel = new egret.TextField();
         colorLabel.textColor = 0xffffff;
         colorLabel.width = stageW - 172;
-        colorLabel.textAlign = "center";
-        colorLabel.text = "Hello Egret";
+        colorLabel.textAlign = 'center';
+        colorLabel.text = 'Hello Egret';
         colorLabel.size = 24;
         colorLabel.x = 172;
         colorLabel.y = 80;
@@ -151,11 +157,15 @@ class Main extends eui.UILayer {
         this.textfield = textfield;
 
         let button = new eui.Button();
-        button.label = "Click!";
+        button.label = 'Click!';
         button.horizontalCenter = 0;
         button.verticalCenter = 0;
         this.addChild(button);
-        button.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onButtonClick, this);
+        button.addEventListener(
+            egret.TouchEvent.TOUCH_TAP,
+            this.onButtonClick,
+            this
+        );
     }
     /**
      * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
@@ -188,9 +198,9 @@ class Main extends eui.UILayer {
             // Switch to described content
             textfield.textFlow = textFlow;
             let tw = egret.Tween.get(textfield);
-            tw.to({ "alpha": 1 }, 200);
+            tw.to({ alpha: 1 }, 200);
             tw.wait(2000);
-            tw.to({ "alpha": 0 }, 200);
+            tw.to({ alpha: 0 }, 200);
             tw.call(change, this);
         };
 
@@ -203,9 +213,21 @@ class Main extends eui.UILayer {
      */
     private onButtonClick(e: egret.TouchEvent) {
         let panel = new eui.Panel();
-        panel.title = "Title";
+        // panel.skinName = '/resource/eui_skins/NewTest.exml';
+        panel.title = 'hello world'
         panel.horizontalCenter = 0;
         panel.verticalCenter = 0;
+        console.log(panel);
         this.addChild(panel);
+
+        panel.alpha = 0;
+        panel.scaleX = 0.2;
+        panel.scaleY = 0.2;
+
+        egret.Tween.get( panel, {onChangeObj:panel } )
+            .to( {alpha:1, scaleX: 1, scaleY: 1}, 200 , egret.Ease.backOut );
+
     }
 }
+
+extend(Main, undefined, 'Main');

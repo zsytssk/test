@@ -1,15 +1,8 @@
 {
-    "author": "zsytssk@gmail.com",
-    "contributors": [],
-    "license": "UNLICENSED",
-    "name": "webpack_test",
+    "name": "egret_test",
     "version": "1.0.0",
-    "private": true,
     "description": "",
     "main": "index.js",
-    "directories": {
-        "doc": "doc"
-    },
     "scripts": {
         "webpack-dev": "webpack --mode development",
         "webpack-dev-server": "webpack-dev-server --mode development",
@@ -26,5 +19,8 @@
     },
     "dependencies": {
         "es6-promise": "^4.2.4"
-    }
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
 }
