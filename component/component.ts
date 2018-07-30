@@ -1,3 +1,5 @@
+import { BaseEvent } from './event';
+
 type Comps = Component[];
 
 interface ClassConstructor<T> extends Function {
@@ -5,9 +7,10 @@ interface ClassConstructor<T> extends Function {
   prototype: T;
 }
 
-export class ComponentWrap {
+export class ComponentWrap extends BaseEvent {
   private components = [] as Comps;
   constructor(comps?: Component[]) {
+    super();
     if (comps) {
       this.addComponents(comps);
     }

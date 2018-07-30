@@ -1,51 +1,50 @@
-import { Component, ComponentWrap } from './component';
-import { callFunc, createRandomString, log } from './utils';
+import { createRandomString, log } from './utils';
 
-type i_hook_other_event = {
+type HooOtherEvent = {
   /** 绑定对象id, 用于在清除的时候进行对比 */
   other_id: string;
   /** 绑定对象name, 用于展示 */
   other_name: string;
   /** 清除绑定事件 */
-  off: FunVoid;
+  off: FuncVoid;
   /** 事件名称 */
   event: string;
 };
 
-type i_hook_other_events = i_hook_other_event[];
-type t_hook_fun_item = {
-  /** 监听事件 */
-  listener: FunListener;
-  /** 是否执行一次 */
+type HookFunItem = {
+  /**  监听事件  */
+  listener: FuncListener;
+  /**  是否执行一次  */
   once: boolean;
-  /** 清除事件函数绑定 */
-  off: FunVoid;
+  /**  清除事件函数绑定  */
+  off: FuncVoid;
 };
-type t_hook_funs = {
-  [x: string]: t_hook_fun_item[];
+type HookFunS = {
+  [x: string]: HookFunItem[];
 };
 
-type FunVoid = () => void;
-type FunListener = (data: any) => void;
-
+export const cmd = {
+  destroy: 'destroy',
+};
 /** 事件基础类 */
-export class BaseEvent extends Component {
+export abstract class BaseEvent {
   /** id:> 每一个对象在创建时都会创建一个唯一id */
-  public readonly id = createRandomString();
+  public id: string;
   /** 是否销毁, 用于在销毁之后 有异步函数进入, 阻止其继续执行 */
   public is_destroyed: boolean = false;
-  protected hook_funs: t_hook_funs = {};
+  protected hook_funs: HookFunS = {};
   /** 绑定在别人身上的事件, 保存在这里用于销毁时 找到绑定的目标 去取消这些事件的绑定 */
-  protected hook_other_funs = [] as i_hook_other_events;
+  protected hook_other_funs = [] as HooOtherEvent[];
   /** 储存所有的timetimeout interval 在destroy的时候清除 */
   protected timeout_list: number[] = [];
   protected interval_list: number[] = [];
   public readonly name: string = 'base_event';
+  /** 事件基础类, 创建随机id */
   constructor() {
-    super();
+    this.id = createRandomString();
   }
-  /** 监听事件 */
-  public on(event_name: string, listener: FunListener, once?: boolean) {
+  /**  监听事件  */
+  public on(event_name: string, listener: FuncListener, once?: boolean) {
     if (typeof listener !== 'function') {
       log(`${this.name} bind ${event_name} with not a function`);
       return;
@@ -66,8 +65,8 @@ export class BaseEvent extends Component {
       off,
     };
   }
-  /** 监听一次事件 */
-  public once(event_name: string, listener: FunListener) {
+  /**  监听一次事件  */
+  public once(event_name: string, listener: FuncListener) {
     return this.on(event_name, listener, true);
   }
   /**
@@ -103,7 +102,7 @@ export class BaseEvent extends Component {
    * @param event_name 事件名称
    * @param track_info 索引方法的常量 可以是function或者绑定的token
    */
-  public off(event_name: string, track_info?: FunListener | string) {
+  public off(event_name: string, track_info?: FuncListener | string) {
     /** off all func bind event */
     if (!track_info) {
       this.hook_funs[event_name] = [];
@@ -122,16 +121,16 @@ export class BaseEvent extends Component {
       }
     }
   }
-  /** 撤销所有事件绑定 */
+  /**  撤销所有事件绑定  */
   protected offAll() {
     this.hook_funs = {};
   }
 
-  /** 在其他的model或者ctrl上面绑定事件处理函数 */
-  public bindOtherEvent(
+  /**  在其他的model或者ctrl上面绑定事件处理函数 */
+  protected bindOtherEvent(
     other: BaseEvent,
     event_name: string,
-    callback?: FunListener,
+    callback?: FuncListener,
     once?: boolean,
   ) {
     if (!other) {
@@ -148,7 +147,7 @@ export class BaseEvent extends Component {
     return bind_info;
   }
   /** 取消在其他的baseEvent绑定的事件处理 */
-  protected offOtherEvent(otherObj) {
+  protected offOtherEvent(otherObj: BaseEvent) {
     if (!otherObj) {
       return;
     }
@@ -159,7 +158,7 @@ export class BaseEvent extends Component {
       const other_id = hook_item.other_id;
       const off = hook_item.off;
 
-      if (other_id !== otherObj._id) {
+      if (other_id !== otherObj.id) {
         continue;
       }
 
@@ -177,61 +176,8 @@ export class BaseEvent extends Component {
     }
     this.hook_other_funs = [];
   }
-  /**
-   * 创建setTimeout, destroy时自动清除
-   * @param fun 执行函数
-   * @param time 延迟时间
-   */
-  protected createTimeout(fun: FunVoid, time: number) {
-    const time_out = window.setTimeout(() => {
-      callFunc(fun);
-      this.clearTimeout(time_out);
-    }, time);
-    this.timeout_list.push(time_out);
-    return time_out;
-  }
-  /**
-   * 创建setInterval
-   * @param fun 执行函数
-   * @param time 时间间隔
-   */
-  protected createInterval(fun: FunVoid, time: number) {
-    const interval = setInterval(fun, time);
-    this.interval_list.push(interval);
-    return interval;
-  }
-  /** 清除time_out setinterval */
-  protected clearTimeout(time_out) {
-    const timeout_list = this.timeout_list;
-    const interval_list = this.interval_list;
-
-    let index = timeout_list.indexOf(time_out);
-    if (index !== -1) {
-      timeout_list.splice(index, 1);
-      return;
-    }
-
-    index = interval_list.indexOf(time_out);
-    if (index !== -1) {
-      interval_list.splice(index, 1);
-      return;
-    }
-  }
-  /** 清除time_out setinterval */
-  protected clearAllTimeout() {
-    const timeout_list = this.timeout_list;
-    const interval_list = this.interval_list;
-    for (const item of timeout_list) {
-      clearTimeout(item);
-    }
-    for (const item of interval_list) {
-      clearInterval(item);
-    }
-    this.timeout_list = [];
-    this.interval_list = [];
-  }
   public destroy() {
-    this.clearAllTimeout();
+    this.trigger(cmd.destroy);
     this.offAllOtherEvent();
     this.offAll();
     this.is_destroyed = true;
