@@ -7,7 +7,7 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "rootDir": "src",
-    "module": "es6",
+    "module": "esnext",
     "moduleResolution": "node"
   },
   "include": ["src", "typings"]

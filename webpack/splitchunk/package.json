@@ -4,11 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "webpack-dev": "webpack --config webpack.config.dev.js",
-    "webpack-dev-server": "webpack-dev-server --config webpack.config.dev.js",
-    "webpack-prod": "webpack --config webpack.config.prod.js"
+    "webpack-dev": "webpack --mode development",
+    "webpack-dev-server": "webpack-dev-server --mode development",
+    "webpack-prod": "webpack --mode production"
   },
-  "sideEffects": ["./src/main.ts"],
   "author": "",
   "license": "ISC",
   "devDependencies": {
