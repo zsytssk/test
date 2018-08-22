@@ -1,10 +1,8 @@
-import(/* webpackPreload: true */ /* webpackChunkName: "test" */ "lodash");
-
+alert(1);
 import isArray from "lodash/isArray";
 import { createStore } from "redux";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/observable/from";
-
 function test() {
   console.log(isArray);
   let a = [1, 2, 3, 4, 5];
@@ -23,8 +21,10 @@ test();
 
 document.getElementsByTagName("button")[0].addEventListener("click", () => {
   console.time(`load`);
-  import("lodash").then(test => {
-    console.log(test);
-    console.timeEnd(`load`);
-  });
+  import(/* webpackPreload: true */ /* webpackChunkName: "test" */ "lodash").then(
+    test => {
+      console.log(test);
+      console.timeEnd(`load`);
+    }
+  );
 });
