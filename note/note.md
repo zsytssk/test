@@ -15,9 +15,7 @@
   - 游戏开始的时候将变量传过去
   - 然后将重要的计算在那边计算
   - web worker 能支持 共享对象吗 应该不行啊
-  - 蒙哥说的 是什么 放到 web worker 中...
-
-- markdown lint config
+  - @imp 蒙哥说的 是什么 放到 web worker 中...
 
 ## 2018-08-18 10:00:49
 
