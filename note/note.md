@@ -2,11 +2,22 @@
 
 ## 2018-08-18 11:57:22
 
+- @ques markdown lint config
+
+  - [config](https://github.com/markdownlint/markdownlint/issues/67)
+  - [creating_styles](https://github.com/markdownlint/markdownlint/blob/master/docs/creating_styles.md)
+
+- @ques 能不能做成 pwa
+- @ques indexDb
+
 - web worker
+
   - 游戏开始的时候将变量传过去
   - 然后将重要的计算在那边计算
   - web worker 能支持 共享对象吗 应该不行啊
   - 蒙哥说的 是什么 放到 web worker 中...
+
+- markdown lint config
 
 ## 2018-08-18 10:00:49
 

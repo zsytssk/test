@@ -1,4 +1,3 @@
-alert(1);
 import isArray from "lodash/isArray";
 import { createStore } from "redux";
 import { Observable } from "rxjs/Observable";
