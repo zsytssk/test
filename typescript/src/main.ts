@@ -1,14 +1,18 @@
-type PT<T> = T extends Function ? never : T;
-
-type NoFunProps<T> = {
-    [k in keyof T]-?: T[k] extends Function ? never : k;
-}[keyof T]
-type ExcludeFun<T> = {
-    -readonly [k in NoFunProps<T>]: T[k]
+function testable(Class): typeof Class {
+  return (...args) => {
+    console.log(args);
+    return new Class(...args);
+  };
 }
 
-type T = ExcludeFun<Laya.Node>;
-type pt = PT<keyof Laya.Node>;
+@testable
+class MyTestableClass {
+  dd = 1;
+  constructor(...args) {
+    console.log(args);
+  }
+  // ...
+}
 
-type Diff<T, U> = T extends U ? never : T;
-type T30 = Diff<"_a" | "b" | "c" | "d", "a" | "c" | "f">;
+const a = new MyTestableClass(1, 2, 3);
+console.log(a.dd);

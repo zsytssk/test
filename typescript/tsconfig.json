@@ -9,10 +9,8 @@
     "outDir": "dist",
     "rootDir": "src",
     "module": "esnext",
+    "experimentalDecorators": true,
     "moduleResolution": "node"
   },
-  "include": [
-    "src",
-    "typings"
-  ]
+  "include": ["src", "typings"]
 }
