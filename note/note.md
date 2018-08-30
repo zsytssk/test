@@ -1,4 +1,44 @@
-# ddd
+<!-- markdownlint-disable MD041 -->
+
+- cdn 负载纵横
+
+- bridge 桥接
+
+  - 如何将实现和联系分离
+
+- `await getBridge('card_heap_ctrl')`
+
+  - BridgeCLass('card', card)
+  - 将事件发送出去, 取消所有对外部的依赖
+  - 通过 bridge 类, 来处理所有的依赖关系...
+
+- @ques compound component
+
+  - component 如何组合 component manager []?
+
+- @note To support external linking, component interfaces should specify
+
+  - the shape of imports
+  - @ques 怎么把对外界的依赖 interface 化
+
+- markdown disable file
+
+- @ques prettier markdown 乱换行
+
+- development of large programs and deployment of components
+
+  - 大型软件开发的经验
+
+- 大型软件开发
+
+  - @ques 如何依赖抽象 不依赖具体的实现
+
+  - 最大限度的复用 + 健壮 + 适应变化
+
+  - 复用 多态 封装 | 重复 + 依赖
+
+  - 简洁创建对象 工厂创建
+    - 减少对具体类的依赖
 
 ## 2018-08-18 11:57:22
 
@@ -20,34 +60,36 @@
 ## 2018-08-18 10:00:49
 
 - @ques 这些对我有什么用
+
   - 比方说我做一个 ui, 里面要引入一个 js 中的 class
   - 其实我的 ui 只是一段 js 代码, 我要自动补全, 我发送请求给 lsp
   - 将 lsp 返回的显示在 ui 编辑器中, 编辑器选择之后, 自动生成相应的 js 代码...
 
-* @ques tsc -p
+- @ques tsc -p
 
 - 怎么 request
+
   - 如果是 http 协议 我怎么知道 在什么端口呢??
   - ...
   - 我不知道在什么端口啊
 
-* vscode-jsonrpc
+- vscode-jsonrpc
 
-* @ques 如果我想在语言解析一个文件 或者一个 project 如何处理..
+- @ques 如果我想在语言解析一个文件 或者一个 project 如何处理..
 
 - @ques 我如何建立一个 node 和 server, 又如何相互的联系呢??
 
 - 我又如何将这打包成一个 extension 呢
 
-## lsp 如何解析一个文件...
+## lsp 如何解析一个文件
 
 - 定义的变量 class function
 
-* vscode 大纲 如何实现这些功能...
+- vscode 大纲 如何实现这些功能...
 
   - executeDocumentSymbolProvider
 
-* Language Server Protocol getSymbol document
+- Language Server Protocol getSymbol document
   - textDocument/documentSymbol
 
 -| Language Server Protocol 到底是怎么做的
@@ -55,7 +97,7 @@
 
 - @ques executeCommand 能运行哪些 command
 
-* @ques tsc 应该自带 ts lsp 怎么没有啊
+- @ques tsc 应该自带 ts lsp 怎么没有啊
 
 - 编辑器上的选择摸个类 怎么放映到代码上...
 
@@ -63,12 +105,12 @@
 
 - gitlab 分组
 
-* gitlab-ci 是什么
+- gitlab-ci 是什么
 
-* gitlab flow
+- gitlab flow
 
-* Git 项目测试人员 Reporter
+- Git 项目测试人员 Reporter
 
-* 在一个分支上如何提醒团队成员
+- 在一个分支上如何提醒团队成员
 
 - merge request dev zhangjunqing

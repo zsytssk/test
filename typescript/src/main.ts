@@ -34,6 +34,10 @@ class ClassB {
   private unBindCtrl() {}
 }
 
+interface B {
+  bindCtrl(): void;
+}
+
 @inject(ClassB)
 class CtrlA extends BaseEvent {
   dd = 1;
