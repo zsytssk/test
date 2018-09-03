@@ -1,10 +1,12 @@
-import { Observable, Observer, Subscriber } from 'rxjs/Rx';
-import { log } from './utils';
+import { of } from 'rxjs/observable/of';
+import { concatMap, map } from 'rxjs/operators';
 
-// 立即发出值， 然后每5秒发出值
-const source = Observable.timer(0, 5000);
-// 当 source 发出值时切换到新的内部 observable，发出新的内部 observable 所发出的值
-const example = source.switchMap(( z``) => Observable.interval(500));
-// 输出: 0,1,2,3,4,5,6,7,8,9...0,1,2,3,4,5,6,7,8
-// tslint:disable-next-line:no-console
-const subscribe = example.subscribe(val => console.log(val));
+// 发出 'Hello'
+const source2 = of('world');
+const source1 = of('Hello');
+// 映射成 promise 并发出结果
+const example = source1.pipe(
+  concatMap(val1 => source2.pipe(map(val2 => `${val1} ${val2}`))),
+);
+// 输出: 'Hello World From Promise'
+example.subscribe(val => console.log(val));

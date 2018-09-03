@@ -1,4 +1,20 @@
+- UML
+
+  - code to UML
+  - 如何写 UML
+
+- @imp 各部分都使用 socket, 我如何将他们分离出来
+
+- Elm 如何组织代码
+
+  - 函数式编程的优点
+  - 缺点 组织大型代码
+
+- @imp component 如何复用代码...
+
 <!-- markdownlint-disable MD041 -->
+
+- 炸弹狗 code review
 
 - cdn 负载纵横
 
@@ -11,6 +27,8 @@
   - BridgeCLass('card', card)
   - 将事件发送出去, 取消所有对外部的依赖
   - 通过 bridge 类, 来处理所有的依赖关系...
+
+- 将一切都变得加单已用的 api..
 
 - @ques compound component
 
