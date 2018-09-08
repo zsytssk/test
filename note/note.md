@@ -1,16 +1,37 @@
-- UML
+## seat mvc
+
+- @note view 直接继承 event 就可以了, 或者什么都不用继承...
+
+  - 对上的依赖如何处理...
+
+- @ques findCardByModel...
+
+* @ques git subtree 能不能 sub folder
+
+* 我能不能自己做一个 dom 的展示而不是一个 laya 项目
+
+  - laya 实际的需求
+
+* 保证所有的功能
+
+* @imp mvc
+
+  - v 就像现在的 model 一样不知道其他的所有一切, 只管渲染页面
+  - c 就是页面的联系, 游戏的业务逻辑...
+
+* UML
 
   - code to UML
   - 如何写 UML
 
-- @imp 各部分都使用 socket, 我如何将他们分离出来
+* @imp 各部分都使用 socket, 我如何将他们分离出来
 
-- Elm 如何组织代码
+* Elm 如何组织代码
 
   - 函数式编程的优点
   - 缺点 组织大型代码
 
-- @imp component 如何复用代码...
+* @imp component 如何复用代码...
 
 <!-- markdownlint-disable MD041 -->
 
