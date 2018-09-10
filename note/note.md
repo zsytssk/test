@@ -1,3 +1,42 @@
+## game mvc
+
+- 代码不是最新的...
+
+- ctrl
+
+  - 事件绑定
+  - localIdToServer
+
+- @ques view 需要哪些方法
+
+  - this.node 也不一定
+
+- @ques 事件绑定 到底放在哪里??
+
+- getDockerView 这一个个有很多的代码是相同的能不能合并
+
+  - getItem('name')..
+  - 创建的方法参数不一样
+  - ...
+  - 不一定要 link 来保存所有的参数了...
+  - 而且这一个个写很多遍也很烦
+  - ...
+  - 但是可以保证 class 只有在需要的时候才会被创建!!!!
+
+- @ques model view 是否需要在 ctrl 内部还是外部去创建...
+
+  - 内部可以封装
+  - 但是 seatView 无法在 seatCtrl 中去创建
+    - seatView 是在 roomView 中创建的, seatCtrl 不知道 roomView...
+
+- @note 大部分的 ctrl 是没有 model 对应可以直接转换为 view
+
+- @ques roomView reset
+  - 如果是按需 reset, 那么这些 ctrl 根本就不知道创建了几个
+  - 怎么知道哪些需要 reset 呢..
+  - 子类去监听父类的 reset 事件
+    - 这是在 view 身上, view 根本就不是树的结构...
+
 ## seat mvc
 
 - @note view 直接继承 event 就可以了, 或者什么都不用继承...
