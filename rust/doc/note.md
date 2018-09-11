@@ -1,3 +1,31 @@
+## 2018-09-11 09:08:01
+
+- @note 耳朵
+
+- @ques &arr 怎么可以 for
+
+- @ques 整除英文
+
+- rust 支持 switch 吗 好像有 match
+
+- 下面这段代码怎么会报错, 将 a 初始化之后就可以了(a = 0) 这是为什么
+
+```rust
+let number = 14;
+let mut a: i32;
+
+    // println!("{}", a);
+    if number <= 5 {
+        a = number;
+    } else if number > 5 {
+        a = number % 5;
+    }
+
+    println!("{}", a);
+```
+
+## 2018-09-11 09:43:00
+
 - `control flow`
 
 - tslint used value
