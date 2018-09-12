@@ -1,5 +1,49 @@
 ## 2018-09-11 09:08:01
 
+- @play
+
+  - 找房子
+  - xi dtiror
+  - ...
+  - @ques rust ownership 是如何发明的
+
+- @keyword
+
+  - ownership
+  - lifetime
+  - move
+  - copy
+  - ***
+  - reference
+    - invalid reference
+  - trait
+  - scalar values 单量...
+    - integer Boolean floating character Tuples for above
+  - compound value 组合...
+
+- @ques 增加流动 减少导致不流动的原因
+
+* @ques memory 控制 引用计数...
+
+  - 引用计数 为什么会消耗性能
+
+* @note literals
+
+* heap 上面的数据到底是怎么排列的...
+
+* @ques rust 如何做大型项目 @google
+  - 有没有已经的大型项目了...
+
+- @note mvc m v 相互独立可以移动到任何地方...
+
+  - 简单的项目直接使用 view 就可以了
+
+- @note 直接访问对象的属性 为什么还比服务器 memory..慢..
+
+- @ques heap 为什么不能动态的组织, 保持密集排布...
+
+- @ques vscode rust auto complete
+
 - @note 耳朵
 
 - @ques &arr 怎么可以 for
