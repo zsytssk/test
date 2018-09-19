@@ -1,19 +1,38 @@
 ## 2018-09-14 09:18:29
 
-- @ques println! macro 这个如何去处理...
+- @note Control Flow
+- @note Modules mod
+
+  - Controlling Visibility with pub
+
+- @ques data oriented program
+
+- @note 能不能在 binary crate 定义 mod
+
+- @note 移动纠正 144
+
+  - 停止纠正...
+
+- 不同种族的人士在一起和谐相处... 伟大的国家...
+
+- @note 检测我的修改 explodingDog
+
+  - ...
+
+* @ques println! macro 这个如何去处理...
 
   - `#[derive(Debug)]` 这些功能(derive annotation)到底是如何实现的...
   - ..
 
-- @ques 为什么 rust 没有 class 拿到是 borrow check
+* @ques 为什么 rust 没有 class 拿到是 borrow check
 
-- rust 支持 json 吗
+* rust 支持 json 吗
 
-- @ques `let slice:[i32, 2]` 怎么定义数组的类型+个数
+* @ques `let slice:[i32, 2]` 怎么定义数组的类型+个数
 
-- @ques 如何从 String::from("hello") 去掉几个字母
+* @ques 如何从 String::from("hello") 去掉几个字母
 
-* @ques s 是 String 类型, slice: &str, para_s: &String 类型为什么, a: str 可以自动转换
+- @ques s 是 String 类型, slice: &str, para_s: &String 类型为什么, a: str 可以自动转换
   一个 string 为什么有那么多的类型
 
 ```rs
