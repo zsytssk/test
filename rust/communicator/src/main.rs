@@ -1,7 +1,25 @@
-extern crate communicator;
-
-use communicator::client::connect as con_client_connect;
+#[derive(Debug)]
+enum SpreadsheetCell {
+    Int(i32),
+    Float(f64),
+    Text(String),
+}
 
 fn main() {
-    con_client_connect();
+    let mut v = vec![
+        SpreadsheetCell::Int(3),
+        SpreadsheetCell::Float(3.0),
+        SpreadsheetCell::Text(String::from("blue")),
+    ];
+    for i in (0..3) {
+        match v[i] {
+            ::Float(_) => {
+                let a = v.swap_remove(i);
+                println!("{:?}", a);
+                break;
+            }
+            _ => {}
+        }
+    }
+    println!("{:?}", v);
 }
