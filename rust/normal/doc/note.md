@@ -1,5 +1,9 @@
 ## 2018-09-14 09:18:29
 
+- @ques 怎么在数组中找到一个元素...
+
+  - 怎么合并一个数组...
+
 - @ques rust conditional paramer
 
 - @note
