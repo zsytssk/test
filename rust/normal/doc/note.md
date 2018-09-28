@@ -1,5 +1,26 @@
 ## 2018-09-14 09:18:29
 
+- @ques rust conditional paramer
+
+- @note
+
+  - `teams.iter().zip(scores.iter()).collect()` 这个为什么必须定义类型才能转化
+  - collect 可以转变成很多的类型...
+
+- @note 华为语音笔记
+
+- @note vscode new feature
+
+- @ques vscode select
+
+- @thk state setState 这种方式来组织属性
+
+  - 目标属性 + 实现属性...
+
+- @ques 怎么将所有人拉到一起去沟通一下...
+
+  - 将 merge request 准备好...
+
 - 我改你的东西 你肯定会生气
 
   - 有没有改进...
