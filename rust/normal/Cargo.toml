@@ -1,7 +1,11 @@
 [package]
-name = "rust"
+name = "rust_test"
 version = "0.1.0"
 authors = ["zsytssk <zsytssk@gmail.com>"]
+
+[lib]
+name = "mylib"
+path = "src/lib.rs"
 
 [dependencies]
 rand="0.5.5"

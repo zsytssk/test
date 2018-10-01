@@ -1,17 +1,40 @@
-use std::fs::File;
-use std::io::ErrorKind;
+extern crate mylib;
+extern crate rand;
+
+use mylib::Guess;
+use rand::Rng;
+use std::cmp::Ordering;
+use std::io;
 
 fn main() {
-    let path = "../hello.txt";
-    let f = File::open(&path).map_err(|error| {
-        if error.kind() == ErrorKind::NotFound {
-            File::create(&path).unwrap_or_else(|error| {
-                panic!("Tried to create file but there was a problem: {:?}", error);
-            });
-        } else {
-            panic!("There was a problem opening the file: {:?}", error);
-        }
-    });
+    println!("Guess the number!");
+    println!("please input your guess.");
 
-    println!("11 {:?}", f);
+    let secret_number = rand::thread_rng().gen_range(1, 101);
+
+    loop {
+        let mut guess = String::new();
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("fail to read line!");
+
+        let guess: Guess = match guess.trim().parse() {
+            Ok(num) => Guess::new(num),
+            Err(_) => {
+                println!("please input a number!");
+                continue;
+            }
+        };
+
+        println!("You guessed: {:?}", guess);
+
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("Too small!"),
+            Ordering::Greater => println!("Too big!"),
+            Ordering::Equal => {
+                println!("Too equal!");
+                break;
+            }
+        }
+    }
 }
