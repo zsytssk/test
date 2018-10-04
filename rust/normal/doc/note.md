@@ -1,72 +1,78 @@
 ## 2018-09-14 09:18:29
 
-- @note 练胆子: 滑板...
+- 抽象的作用...
+  - generic 能不能用在汉语上
 
-- @ques match ... 实在是太多了 难道不烦吗
+* 能不能将下面的 改成 I32 也能调用...
+  `impl Point<f32> { fn distance_from_origin(&self) -> f32 { (self.x.powi(2) + self.y.powi(2)).sqrt() } }`
+
+* @note 练胆子: 滑板...
+
+* @ques match ... 实在是太多了 难道不烦吗
 
   - 没有 error scope 吗
 
-- @note 一个变量引用是否还合理和 error 本身是类似的问题
+* @note 一个变量引用是否还合理和 error 本身是类似的问题
 
   - 只不过我在每次调用的地方都写这些逻辑实在是太重复了
   - 如果有方法将这些集中处理就很好的解决了...
 
-- @note 国家权利和义务...
+* @note 国家权利和义务...
 
-- @note 记录伸展
+* @note 记录伸展
 
-- @ques rust 能不能将错误处理放在统一的地方...
+* @ques rust 能不能将错误处理放在统一的地方...
 
-- @note rust 国内原
+* @note rust 国内原
 
   - window 本地配置
 
-- @note 国内 rust 升级版本..
+* @note 国内 rust 升级版本..
 
-- @note
+* @note
 
   - 手机 chrome 升级
   - 锐龙 笔记本 怎么样...
   - 6000 左右笔记本...
 
-- @ques 怎么在数组中找到一个元素...
+* @ques 怎么在数组中找到一个元素...
 
   - 怎么合并一个数组...
 
-- @ques rust conditional paramer
+* @ques rust conditional paramer
 
-- @note
+* @note
 
   - `teams.iter().zip(scores.iter()).collect()` 这个为什么必须定义类型才能转化
   - collect 可以转变成很多的类型...
 
-- @note 华为语音笔记
+* @note 华为语音笔记
 
-- @note vscode new feature
+* @note vscode new feature
 
-- @ques vscode select
+* @ques vscode select
 
-- @thk state setState 这种方式来组织属性
+* @thk state setState 这种方式来组织属性
 
   - 目标属性 + 实现属性...
 
-- @ques 怎么将所有人拉到一起去沟通一下...
+* @ques 怎么将所有人拉到一起去沟通一下...
 
   - 将 merge request 准备好...
 
-- 我改你的东西 你肯定会生气
+* 我改你的东西 你肯定会生气
 
   - 有没有改进...
 
-- component 只放在属性上面 属性太多要一个个的访问
+* component 只放在属性上面 属性太多要一个个的访问
 
   - 直接在 components 中可以直接访问
 
-- a.getComponent(Class)....
+* a.getComponent(Class)....
 
   - 统一的 api, 统一的访问方式...
 
-- 比方说 life 属性可能有多个方法会用到, 但是这些方法并不是每一个都用的到..
+* 比方说 life 属性可能有多个方法会用到, 但是这些方法并不是每一个都用的到..
 
   - 那么如果我将一个属性和方法绑定, 其他的方法使用这个属性就比较麻烦了
     - 其他的就依赖这个 component...
@@ -76,57 +82,57 @@
   - 真正的属性其实很少, 很多都是为了实现这个功能而添加属性...
   - 功能动态添加 多个功能公用属性...
 
-- 功能...
+* 功能...
 
   - 动作+属性
   - register_com
 
-- @note 最完美的形式 无法再减少一点
+* @note 最完美的形式 无法再减少一点
 
-- 面向对象的缺点
+* 面向对象的缺点
 
   - 对象太多的属性...
   - 继承链
 
-  ***
+  ---
 
   - 将东西分离....
 
-- 禅道
+* 禅道
 
-- @note Control Flow
-- @note Modules mod
+* @note Control Flow
+* @note Modules mod
 
   - Controlling Visibility with pub
 
-- @ques data oriented program
+* @ques data oriented program
 
-- @note 能不能在 binary crate 定义 mod
+* @note 能不能在 binary crate 定义 mod
 
-- @note 移动纠正 144
+* @note 移动纠正 144
 
   - 停止纠正...
 
-- 不同种族的人士在一起和谐相处... 伟大的国家...
+* 不同种族的人士在一起和谐相处... 伟大的国家...
 
-- @note 检测我的修改 explodingDog
+* @note 检测我的修改 explodingDog
 
   - ...
 
-- @ques println! macro 这个如何去处理...
+* @ques println! macro 这个如何去处理...
 
   - `#[derive(Debug)]` 这些功能(derive annotation)到底是如何实现的...
   - ..
 
-- @ques 为什么 rust 没有 class 拿到是 borrow check
+* @ques 为什么 rust 没有 class 拿到是 borrow check
 
-- rust 支持 json 吗
+* rust 支持 json 吗
 
-- @ques `let slice:[i32, 2]` 怎么定义数组的类型+个数
+* @ques `let slice:[i32, 2]` 怎么定义数组的类型+个数
 
-- @ques 如何从 String::from("hello") 去掉几个字母
+* @ques 如何从 String::from("hello") 去掉几个字母
 
-- @ques s 是 String 类型, slice: &str, para_s: &String 类型为什么, a: str 可以自动转换
+* @ques s 是 String 类型, slice: &str, para_s: &String 类型为什么, a: str 可以自动转换
   一个 string 为什么有那么多的类型
 
 ```rs

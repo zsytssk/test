@@ -1,40 +1,14 @@
 extern crate mylib;
-extern crate rand;
 
-use mylib::Guess;
-use rand::Rng;
-use std::cmp::Ordering;
-use std::io;
+use mylib::{Summary, Tweet};
 
 fn main() {
-    println!("Guess the number!");
-    println!("please input your guess.");
+    let tweet = Tweet {
+        username: String::from("horse_ebooks"),
+        content: String::from("of course, as you probably already know, people"),
+        reply: false,
+        retweet: false,
+    };
 
-    let secret_number = rand::thread_rng().gen_range(1, 101);
-
-    loop {
-        let mut guess = String::new();
-        io::stdin()
-            .read_line(&mut guess)
-            .expect("fail to read line!");
-
-        let guess: Guess = match guess.trim().parse() {
-            Ok(num) => Guess::new(num),
-            Err(_) => {
-                println!("please input a number!");
-                continue;
-            }
-        };
-
-        println!("You guessed: {:?}", guess);
-
-        match guess.cmp(&secret_number) {
-            Ordering::Less => println!("Too small!"),
-            Ordering::Greater => println!("Too big!"),
-            Ordering::Equal => {
-                println!("Too equal!");
-                break;
-            }
-        }
-    }
+    println!("1 new tweet: {}", tweet.summarize());
 }

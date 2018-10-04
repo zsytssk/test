@@ -1,22 +1,39 @@
-use std::cmp::Ordering;
+pub trait Summary {
+    fn summarize_author(&self) -> String;
 
-#[derive(Debug)]
-pub struct Guess {
-    value: u32,
+    fn summarize(&self) -> String {
+        format!("(Read more from {}...)", self.summarize_author())
+    }
 }
 
-impl Guess {
-    pub fn new(value: u32) -> Guess {
-        if value < 1 || value > 100 {
-            panic!("Guess value must be between 1 and 100, got {}.", value);
-        }
+pub struct NewsArticle {
+    pub headline: String,
+    pub location: String,
+    pub author: String,
+    pub content: String,
+}
 
-        Guess { value }
+impl Summary for NewsArticle {
+    fn summarize_author(&self) -> String {
+        format!("@{}", self.author)
     }
-    pub fn value(&self) -> u32 {
-        self.value
+    fn summarize(&self) -> String {
+        format!("{}, by {} ({})", self.headline, self.author, self.location)
     }
-    pub fn cmp(&self, num: &u32) -> Ordering {
-        self.value.cmp(num)
+}
+
+pub struct Tweet {
+    pub username: String,
+    pub content: String,
+    pub reply: bool,
+    pub retweet: bool,
+}
+
+impl Summary for Tweet {
+    fn summarize_author(&self) -> String {
+        format!("@{}", self.username)
+    }
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.username, self.content)
     }
 }
