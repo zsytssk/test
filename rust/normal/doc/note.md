@@ -1,3 +1,38 @@
+## 2018-10-05 09:55:42
+
+- generic lifetime
+
+- [input lifetimes][output lifetimes]
+
+* @ques 下面不行 将 string2 换成 "xyz"就可以为什么
+
+```ts
+let string1 = String::from("abcd");
+let result: &str;
+{
+    let string2 = String::from("xyz");
+
+    result = longest(string1.as_str(), string2.as_str());
+}
+println!("The longest string is {}", result);
+```
+
+- @ques 下面函数如何返回&T
+
+```rs
+fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
+    let mut largest = list[0];
+
+    for &item in list.iter() {
+        if item > largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+```
+
 ## 2018-09-14 09:18:29
 
 - 抽象的作用...
