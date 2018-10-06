@@ -1,5 +1,9 @@
 ## 2018-10-05 09:55:42
 
+- @note mcTree assetsLoader 加载跳动
+
+  - 可以累加 整个完成时的百分比...
+
 - generic lifetime
 
 - [input lifetimes][output lifetimes]
