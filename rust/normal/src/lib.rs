@@ -37,3 +37,20 @@ impl Summary for Tweet {
         format!("{}: {}", self.username, self.content)
     }
 }
+
+pub struct Guess {
+    value: u32,
+}
+
+impl Guess {
+    pub fn new(value: u32) -> Guess {
+        if value < 1 || value > 100 {
+            panic!("Guess value out 1..100");
+        }
+
+        Guess { value }
+    }
+    pub fn test(&self) {
+        println!("this is a test");
+    }
+}

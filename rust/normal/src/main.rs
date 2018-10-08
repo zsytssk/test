@@ -10,16 +10,20 @@ impl Guess {
 
         Guess { value }
     }
+    fn test(&self) {
+        println!("this is a test");
+    }
 }
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
-    fn it_works() -> Result<(), String> {
-        if 2 + 2 == 5 {
-            Ok(())
-        } else {
-            Err(String::from("two plus two does not equal four"))
-        }
+    fn it_works() {
+        let guess = Guess::new(10);
+        guess.test();
     }
 }
+
+fn main() {}
