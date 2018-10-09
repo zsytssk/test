@@ -1,3 +1,3 @@
-import("../crate/pkg").then(module => {
+import("../crate/src/lib.rs").then(module => {
   module.run();
 });

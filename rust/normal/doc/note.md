@@ -1,5 +1,16 @@
 ## 2018-10-05 09:55:42
 
+- vscode cmd 命令
+
+- 打包 vscode
+
+  - @note 标记 vscode 的 setting...
+  - 大小...
+
+- @note rust game 贪食蛇...
+
+  - ripgrep 的使用
+
 - @note mcTree assetsLoader 加载跳动
 
   - 可以累加 整个完成时的百分比...
