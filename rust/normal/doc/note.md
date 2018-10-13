@@ -1,3 +1,53 @@
+## 2018-10-13 10:42:59
+
+- @ques 为什么有时候编译半天没有效果...
+
+- @async
+
+  - @ques Arc<Self> 是做什么的...
+  - @ques async 支持 promise 的所有选项吗
+
+- @ques deepsea 服务器卡住了, 是不是 前端发给服务器的命令 不是
+
+  - render 的数据需要一个个 传递 太累了
+    - 为什么不做一个全局变量
+
+- @ques 碰撞检测 是如何处理的..
+- 位置如何更新...
+
+  - 移除最后一个元素, 在前面添加一个元素...
+
+- rust 1.30 什么新功能
+
+- @ques 为什么要 game 和 snake 各自有一个独立的 gl
+
+- @ques Snake_Piece 是做什么的
+
+- 用户操作放在一个独立的地方...
+
+- @ques 刷新的时间如何设置的?? 怎么没有看到...
+
+  - events.next 的时间间隔是多少...
+  - Events::new(EventSettings::new()).ups
+  - 10 ms
+
+- @ques 为什么 rust 用文件夹来组织 model 而不是 像 js 一样 export ....
+
+- gitlab 如何看自己写了多少代码 ???
+
+- @ques render_args
+  - 为什么需要 game.render 需要这个额外的参数...
+
+* @ques 有没有 borrow check 的例子...
+
+- @ques 能不能用 rust 写些脚本 例如 本地服务器 webpack... 性能会很好吗?
+
+- @ques 蛇是如何画在页面中的, 又是如何进行碰撞的检测的...
+
+- @ques 这种本地跑的东西如何调试...
+
+* @ques 能不能将一个大的计算任务分成很多小块...
+
 ## 2018-10-05 09:55:42
 
 - vscode cmd 命令
