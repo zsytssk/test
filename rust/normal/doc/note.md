@@ -1,6 +1,18 @@
 ## 2018-10-13 10:42:59
 
+- found staticlib `std` instead of rlib or dylib
+
+- github action
+
+- @ques rust 自动补全实在是太慢了...
+
+- @ques rust 编译文件 默认 文件夹到底是什么...
+
+- @ques rust 静态文件服务器..
+
 - @ques 为什么有时候编译半天没有效果...
+
+- @ques 像 command 一样查找模块...
 
 - @async
 

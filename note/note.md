@@ -1,8 +1,66 @@
+## 伸展
+
+- 压抑
+
+- 回避
+
+  - 选择遗忘...
+
+- 紧张
+
+  - 本性无法伸展
+  -
+
+- 额外的地方来表达游戏的数据...
+
+  - type data 真正的 class 只是具体的实现...
+
+- @ques behave 可以只关联 data 的一个属性...
+
+  - 可以对多个属性使用同一个 behave, findBehave(data, class);
+  - 比方说 从数组中寻找 删除一个对象...
+  - 能不能是一组属性呢...
+  - 将对象的任意组合属性 扔给一个 behave 去操作...
+  - 需要一个名称去寻找这个 behave..
+  - 如果是一个基本类型就需要将自己传进去...
+
+- @ques 每次我都需要到数组中寻找一个 hehave 会不会消耗性能呢
+
+- @ques behave 能不能再包含 behave 呢...
+
+- @ques 将初始化 behave 的代码放在 data 中, 会不会不清晰...
+
+## 2018-10-16 09:06:54
+
+- @ques 重复如何去做...
+
+  - 如果 只有三个要三个重复我如何去做
+  - copy 我无法 copy 啊
+  - 用 scrollRect 控制显示的, 看着像显示 3 个其实只有一个...
+    - 好像可行
+    - 用隐藏所有来控制重复效果...
+    - scrollRect 为负数会出问题..
+
+- vscode indent mardown 2
+
+- laya scrollRect 负数
+
+- @ques 如果跳跃前进如何处理
+
+- 多页切换 只能 复制节点
+  - 如何复制节点 itemRender array
+  - 必须支持简单的形式...
+  - 支持两种模式 一种原来的单页切换
+  - 一种是多页切换 itemRender...
+
 ## 2018-10-15 09:00:27
 
 - @ques 上个星期六的 bug 如何处理...
 
-- @ques 能不能将 compose 去掉..
+- @ques 能不能将 compose 去掉.. compose
+
+  - compose --> data --> compose 这样的结构实在多余
+  - data --> data 这样比较好...
 
 - @ques 能不能将真正有意义的数据 和为了实现而创建的数据 分开
 

@@ -7,7 +7,7 @@
       "type": "shell",
       "label": "runCmd",
       "command": "cargo",
-      "args": ["run", "searchstring", "example-filename.txt"],
+      "args": ["run", "searchstring", "./hello.txt"],
       "problemMatcher": ["$rustc"]
     }
   ]
