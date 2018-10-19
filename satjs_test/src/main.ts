@@ -4,4 +4,5 @@ import { rockerSprite } from './rocker/rockerSprite';
 import { vector } from './vector';
 
 let stage = initStage();
-rockerSprite(stage);
+// rockerSprite(stage);
+vector(stage);

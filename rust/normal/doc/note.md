@@ -1,3 +1,37 @@
+## 2018-10-19 09:15:47
+
+- @ques 像捕鱼中的对象引用能在 rust 中实现吗???
+
+- @ques @todo 如何检测一个值被清楚了
+
+  - 监听 drop 事件...
+  - 做一个例子
+
+- @ques `Result<[&str], &'static str>` 就会有一个 compile time not know size err
+
+  - `[&str]` 换成 `Vec<&str>` 就不报错了...
+
+- lifeTime 只能在外面传过来, 或者本地 copy 没有更好的方法
+  - copy 能不用就不用, 太消耗性能了
+
+* @ques 哪些类型拥有 static lifetime
+  - string iter `let a: &str = "sdfsdf";`
+  - 在函数中定义的
+  - 下面函数结束 a 还存在吗, 应该不存在了
+  - &str 到底是什么意思, 对"str"的引用??
+
+```rs
+fn test() {
+  let a = "sddsfsdf";
+}
+```
+
+- @note lifetime 最大的问题应该是 对一个整体的部分的借用...
+
+- rust 常用的数据类型
+
+-
+
 ## 2018-10-13 10:42:59
 
 - found staticlib `std` instead of rlib or dylib

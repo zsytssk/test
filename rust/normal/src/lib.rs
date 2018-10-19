@@ -12,7 +12,7 @@ impl Config {
     }
 }
 
-pub fn search(args: &[String]) -> Result<&str, &'static str> {
+pub fn search(args: &[String]) -> Result<Vec<String>, &str> {
     if args.len() != 3 {
         return Err("args len not fit!");
     }
@@ -25,9 +25,14 @@ pub fn search(args: &[String]) -> Result<&str, &'static str> {
     let contents =
         fs::read_to_string(config.filename).expect("Something went wrong reading the file");
 
-    println!("{}", contents);
+    let mut results = Vec::new();
+    for line in contents.lines() {
+        if line.contains(&config.query) {
+            results.push(line.to_string());
+        }
+    }
 
-    return Ok("123");
+    return Ok(results);
 }
 
 #[cfg(test)]
