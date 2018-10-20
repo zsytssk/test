@@ -1,5 +1,13 @@
 ## 2018-10-19 09:15:47
 
+- run 为什么不需要设置错误返回??
+
+  - Result 本身就是一个自定义类型
+
+- @ques string to bool
+
+- fs::read_to_string 的错误处理...
+
 - @ques 像捕鱼中的对象引用能在 rust 中实现吗???
 
 - @ques @todo 如何检测一个值被清楚了
