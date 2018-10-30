@@ -1,3 +1,20 @@
+## 2018-10-27 10:06:03
+
+- ? 环境变量
+
+  > sdfsdf
+
+- @ques rust read all file
+
+- @ques rust 复制文件的速度
+  > rust copy 文件
+  > 异步 + 多进程
+
+---
+
+- @ques rust cmd
+  > sdfsd
+
 ## 2018-10-19 09:15:47
 
 - run 为什么不需要设置错误返回??

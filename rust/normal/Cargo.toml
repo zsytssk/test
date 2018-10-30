@@ -3,7 +3,4 @@ name = "test"
 version = "0.1.0"
 authors = ["me <zsytssk@gmail.com>"]
 
-[lib]
-name = "mylib"
-
 [dependencies]

@@ -1,39 +1,74 @@
+## 2018-10-30 09:12:09
+
+- @note dop 一切都变成对数据的处理和组织
+
+- @ques sql_lite
+
+- lifetime 在大型项目中如何使用
+
+  - 循环引用...
+
+- rust 闭包不需要类型信息, 因为编译器已经知道他的类型信息了
+  - 这是什么鬼??
+
+## 2018-10-27 10:27:50
+
+- runCode with env
+
+* deepSea dynamic import
+
+  - 浏览器 support
+
+* 自己写一个图片打包工具 打包 ui
+  > sdfsdf
+
+---
+
+- 如果打包的 ui 是 js 模块可以 import 可以不用这样最好
+
+- 图片打包工具
+  > [node-optipng](https://www.npmjs.com/package/optipng)
+  - [oxipng](https://github.com/shssoichiro/oxipng)
+
+## 2018-10-27 09:56:12
+
+- model 将 observer 发给 ctrl, 如果 model 需要 ctrl 操作, 就 observer.next....
+  > model 和 ctrl 的 双向交互...
+
 ## 伸展
 
 - 紧张 --> 本能想缓解 --> 无法释放 --> 什么导致无法释放
+  > 寻找这个力 --> 顺应这个力的作用--> 本能的释放这个力..
+  > 历史波形的运动 --> 原始的起点什么都没有 --> 慢慢的上升...
 
-  - 寻找这个力 --> 顺应这个力的作用--> 本能的释放这个力..
-  - 历史波形的运动 --> 原始的起点什么都没有 --> 慢慢的上升...
+* 压抑
 
-- 压抑
+* 回避
 
-- 回避
+  > 选择遗忘...
 
-  - 选择遗忘...
-
-- 紧张
+* 紧张
 
   - 本性无法伸展
-  -
 
-- 额外的地方来表达游戏的数据...
+* 额外的地方来表达游戏的数据...
 
   - type data 真正的 class 只是具体的实现...
 
-- @ques behave 可以只关联 data 的一个属性...
+* @ques behave 可以只关联 data 的一个属性...
 
-  - 可以对多个属性使用同一个 behave, findBehave(data, class);
-  - 比方说 从数组中寻找 删除一个对象...
-  - 能不能是一组属性呢...
-  - 将对象的任意组合属性 扔给一个 behave 去操作...
-  - 需要一个名称去寻找这个 behave..
-  - 如果是一个基本类型就需要将自己传进去...
+  > 可以对多个属性使用同一个 behave, findBehave(data, class);
+  > 比方说 从数组中寻找 删除一个对象...
+  > 能不能是一组属性呢...
+  > 将对象的任意组合属性 扔给一个 behave 去操作...
+  > 需要一个名称去寻找这个 behave..
+  > 如果是一个基本类型就需要将自己传进去...
 
-- @ques 每次我都需要到数组中寻找一个 hehave 会不会消耗性能呢
+* @ques 每次我都需要到数组中寻找一个 hehave 会不会消耗性能呢
 
-- @ques behave 能不能再包含 behave 呢...
+* @ques behave 能不能再包含 behave 呢...
 
-- @ques 将初始化 behave 的代码放在 data 中, 会不会不清晰...
+* @ques 将初始化 behave 的代码放在 data 中, 会不会不清晰...
 
 ## 2018-10-16 09:06:54
 

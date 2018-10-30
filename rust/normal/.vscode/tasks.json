@@ -7,8 +7,14 @@
       "type": "shell",
       "label": "runCmd",
       "command": "cargo",
-      "args": ["run", "hello", "./hello1.txt", "true"],
-      "problemMatcher": ["$rustc"]
+      "args": ["run", "hello", "./hello.txt", "true"],
+      "problemMatcher": ["$rustc"],
+      "options": {
+        "env": {
+          "CASE_INSENSITIVE": "true",
+          "TEST": "true"
+        }
+      }
     }
   ]
 }

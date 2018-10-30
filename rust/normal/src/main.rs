@@ -1,24 +1,82 @@
-extern crate mylib;
+use std::thread;
+use std::time::Duration;
 
-use std::process;
+struct Cacher<T>
+where
+    T: Fn(u32) -> u32,
+{
+    arg: Option<u32>,
+    calculation: T,
+    value: Option<u32>,
+}
 
-use mylib::*;
-use std::env;
+impl<T> Cacher<T>
+where
+    T: Fn(u32) -> u32,
+{
+    fn new(calculation: T) -> Cacher<T> {
+        Cacher {
+            arg: None,
+            calculation,
+            value: None,
+        }
+    }
+    fn value(&mut self, arg: u32) -> u32 {
+        let mut result: u32;
+        if self.arg == None || arg != self.arg.unwrap() {
+            result = (self.calculation)(arg);
+            self.value = Some(result);
+        }
+
+        match self.value {
+            Some(v) => {
+                result = v;
+            }
+            None => {
+                result = (self.calculation)(arg);
+                self.value = Some(result);
+            }
+        }
+
+        result
+    }
+}
 
 fn main() {
-    let a = "sdsdf";
-    let args: Vec<String> = env::args().collect();
+    let simulated_user_specified_val = 35;
+    let simulated_random_number = 7;
 
-    let query = args[1].clone();
-    let filename = args[2].clone();
-    let case_sensitive: bool = args[3].parse().unwrap();
+    generate_workout(simulated_user_specified_val, simulated_random_number);
+}
 
-    let lines = match run(query, filename, case_sensitive) {
-        Ok(val) => val,
-        Err(e) => {
-            panic!("{:?}", e);
+fn generate_workout(intensity: u32, random_number: u32) {
+    let mut expensive_result = Cacher::new(|num| {
+        println!("calculating slowly...");
+        thread::sleep(Duration::from_secs(2));
+        num
+    });
+
+    if intensity < 25 {
+        println!("today, do {} pushups", expensive_result.value(intensity));
+        println!("Next, do {} situps!", expensive_result.value(intensity));
+    } else {
+        if random_number == 3 {
+            println!("take a break tody! remember to stay hydrated!");
+        } else {
+            println!(
+                "today run for {} minites!",
+                expensive_result.value(intensity)
+            )
         }
-    };
+    }
+}
 
-    println!("{:?}", lines);
+#[test]
+fn call_with_different_values() {
+    let mut c = Cacher::new(|a| a);
+
+    let v1 = c.value(1);
+    let v2 = c.value(2);
+
+    assert_eq!(v2, 2);
 }
