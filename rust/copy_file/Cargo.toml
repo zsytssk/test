@@ -1,0 +1,11 @@
+[package]
+name = "copy_file"
+version = "0.1.0"
+authors = ["zsytssk <zsytssk@gmail.com>"]
+edition = "2018"
+
+[lib]
+name = "mylib"
+
+[dependencies]
+fs_extra = "1.1.0"

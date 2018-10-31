@@ -1,12 +1,33 @@
 ## 2018-10-27 10:06:03
 
-- ? 环境变量
+- @todo
+
+  - 先一层
+  - recursive
+  - ***
+  - @ques mk folder
+  - recursive copy folder
+  - thread
+
+- @ques 怎么建一个 Error 包裹已经存在的 error
+  - 下面这种形式怎么不行...
+  ```rs
+  // pub enum CopyError {
+  //     String,
+  //     ioErr(io::Error),
+  // }
+  // pub type CopyResult = Result<(), CopyError>;
+  ```
+
+* rust `if !false` 这能不能工作
+
+* ? 环境变量
 
   > sdfsdf
 
-- @ques rust read all file
+* @ques rust read all file
 
-- @ques rust 复制文件的速度
+* @todo @ques rust 复制文件的速度
   > rust copy 文件
   > 异步 + 多进程
 

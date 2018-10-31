@@ -1,11 +1,14 @@
 {
-	"folders": [
-		{
-			"path": "D:\\zsytssk\\github\\test\\rust\\normal"
-		},
-		{
-			"path": "D:\\zsytssk\\github\\test\\note"
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "path": "D:\\zsytssk\\github\\test\\rust\\normal"
+    },
+    {
+      "path": "D:\\zsytssk\\github\\test\\note"
+    },
+    {
+      "path": "D:\\zsytssk\\github\\test\\rust\\copy_file"
+    }
+  ],
+  "settings": {}
 }
