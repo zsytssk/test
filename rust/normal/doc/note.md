@@ -1,6 +1,6 @@
 ## 2018-10-27 10:06:03
 
-- @ques
+- @ques 跨 thread lifetime 如何处理...
 
 - rust main send to thread
 
