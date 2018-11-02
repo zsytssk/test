@@ -1,15 +1,16 @@
 extern crate mylib;
 
-use std::ffi::OsStr;
-use std::path::Path;
+use std::time::SystemTime;
 
 use mylib::*;
 
 fn main() {
+    let now = SystemTime::now();
+
     copy(
-        "C:/Users/zhangshiyang/Desktop/test/src",
-        "C:/Users/zhangshiyang/Desktop/test/dist",
+        "C:/Users/zhangshiyang/.vscode/extensions".to_string(),
+        "C:/Users/zhangshiyang/Desktop/test/dist".to_string(),
     );
-    // let dist_path = Path::new("C:/Users/zhangshiyang/Desktop/test");
-    // let src_path = Path::new("C:/Users/zhangshiyang/.vscode/extensions");
+
+    println!("{}", now.elapsed().unwrap().as_secs());
 }

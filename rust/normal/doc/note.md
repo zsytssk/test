@@ -1,6 +1,28 @@
 ## 2018-10-27 10:06:03
 
-- @todo
+- @ques
+
+- rust main send to thread
+
+- ## thread 里面直接调用 外面的方法 copy 不会有问题?
+  - 有问题 为什么是 lifetime 报错...
+
+* @ques 为什么异步比同步还快呢...
+
+  - 快 4 ~ 5 倍
+  - 能不能同时复制三个文件...
+
+* @ques rust 有没有大文件限制...
+
+* @ques 这一大堆的错误 怎么处理
+
+  - 一个个的 unwrap 很麻烦
+
+* @note 这好像速度没有变快, 这主要是 io 性能
+
+  - 如果我将 ls 中 cp 变成多个同时经行能不能变快
+
+* @todo
 
   - 先一层
   - recursive
@@ -9,7 +31,12 @@
   - recursive copy folder
   - thread
 
-- @ques 怎么建一个 Error 包裹已经存在的 error
+* @qeus 这到底有多快...
+
+  - 这是 io 的请求和语言本身的处理速度应该没有关系
+  - 也许 thread 可以加快...
+
+* @ques 怎么建一个 Error 包裹已经存在的 error
   - 下面这种形式怎么不行...
   ```rs
   // pub enum CopyError {
@@ -19,15 +46,15 @@
   // pub type CopyResult = Result<(), CopyError>;
   ```
 
-* rust `if !false` 这能不能工作
+- rust `if !false` 这能不能工作
 
-* ? 环境变量
+- ? 环境变量
 
   > sdfsdf
 
-* @ques rust read all file
+- @ques rust read all file
 
-* @todo @ques rust 复制文件的速度
+- @todo @ques rust 复制文件的速度
   > rust copy 文件
   > 异步 + 多进程
 
