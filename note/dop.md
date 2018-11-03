@@ -19,6 +19,8 @@
 
 * 面向数据编程
 
+- @note 如果可以将任意的 data 组合成一个大 data, 那么更牛 b
+
 ## 理念
 
 - "composition over inheritance" 组合>继承
