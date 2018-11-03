@@ -1,3 +1,43 @@
+## 2018-11-03 10:20:06
+
+- @ques 如何传递 thread
+
+- `std::sync::mpsc::Receiver<std::fs::DirEntry>` cannot be shared between threads safely
+
+- @todo
+
+  - futures
+  - thread
+
+- 可以跨越 thread ?? why
+
+```rs
+thread::spawn(|| {
+    for i in 1..10 {
+        println!("spawn thread: {}", i);
+        thread::sleep(Duration::from_millis(1))
+    }
+});
+```
+
+- @ques rust canvas..
+
+- @ques 如何确定 thread 的个数...
+
+- @note thread 可以调用 main 的 fun
+
+- @ques thread 只能跑 一个 function 这种东西吗
+
+  - 能不能跑整个环境...
+
+- @ques 我怎么确定我的 tx 在前 rx 在后, rx 一定收到 tx 的信息
+
+  - 现在是如果 rx 没有收到信息, 进程就会卡住...
+  - rx 确保自己一定收到 tx 的信息...
+  - tx 的信息必须拥有 ownership
+
+- @note 所有东西都可以通过 threa 传递 只不过需要 onwership
+
 ## 2018-10-27 10:06:03
 
 - @ques 跨 thread lifetime 如何处理...

@@ -40,19 +40,24 @@ pub fn copy(src: String, dist: String) -> CopyResult {
 
     for entry in items {
         if let Ok(entry) = entry {
-            let metadata = fs::metadata(entry.path()).unwrap();
-            if metadata.is_dir() {
-                copy(
-                    entry.path().to_str().unwrap().to_string(),
-                    dist_path
-                        .join(entry.file_name())
-                        .to_str()
-                        .unwrap()
-                        .to_string(),
-                );
-                continue;
-            }
-            fs::copy(entry.path(), dist_path.join(entry.file_name()));
+            let clone_dist = Arc::new(dist_path).clone();
+            let arc_entry = Arc::new(entry);
+            let clone_entry = arc_entry.clone();
+
+            thread::spawn(move || {
+                let metadata = fs::metadata(clone_entry.path()).unwrap();
+                if metadata.is_dir() {
+                    copy(
+                        clone_entry.path().to_str().unwrap().to_string(),
+                        clone_dist
+                            .join(clone_entry.file_name())
+                            .to_str()
+                            .unwrap()
+                            .to_string(),
+                    );
+                }
+                fs::copy(clone_entry.path(), dist_path.join(clone_entry.file_name()));
+            });
         }
     }
     Ok(())
