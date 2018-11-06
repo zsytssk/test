@@ -1,3 +1,23 @@
+## 2018-11-05 09:58:15
+
+- @ques rust trait 能不能 添加属性
+
+- @ques ts 能不能获取对象属性的类型
+
+  - ts class function type
+
+- 星期六心态
+
+- 历史专责中的邓小平... 89
+
+- 我改做什么... 网瘾中心
+
+* @ques 如何写一个 js engine...
+
+* @ques 将自己的 evernote 东西转到 git 上面...
+  - github 年费
+    > coding
+
 ## 2018-10-30 09:12:09
 
 - @note dop 一切都变成对数据的处理和组织
