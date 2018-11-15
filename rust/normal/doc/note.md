@@ -1,3 +1,71 @@
+## 2018-11-15 09:24:03
+
+- @note Rc
+  - 多个 immutable owner
+- @note RefCell
+  - 把 immutable 变成 mutable
+  - 这有什么实际的意义除了 demo 上面的?
+
+## 2018-11-08 09:23:27
+
+- @ques 为什么
+  - `let list = Cons(1, Cons(2, Cons(3, Nil)));` 这个不行
+  - `Cons(i32, Box<List>),` 这样就行了呢??
+
+* 下面代码是什么意思?
+
+```rs
+let buffer: &mut [i32];
+let coefficients: [i64; 12];
+let qlp_shift: i16;
+
+for i in 12..buffer.len() {
+    let prediction = coefficients.iter()
+                                 .zip(&buffer[i - 12..i])
+                                 .map(|(&c, &s)| c * s as i64)
+                                 .sum::<i64>() >> qlp_shift;
+    let delta = buffer[i];
+    buffer[i] = prediction as i32 + delta;
+}
+```
+
+## 2018-11-07 09:14:39
+
+- @ques `for in` 能不能不 move 使用引用...
+
+  - 我还想用原来的 iter 怎么办...
+  - 必须要先 clone 一个吗??, 这也是太扯了..
+  - 能不能在多线程的时候才开启 ownership...
+  - Vec 可以 for in
+
+- @ques 我怎么让编辑器知道 data 的 behave 的
+
+- @ques filter 中的 x 为什么是一个双引用...
+
+  - `v1_iter.filter(|x| **x == 1).collect()`
+
+- @ques 如何设置 rust 函数的返回类型
+
+  - `v1_iter.sum::<i32>()`
+
+- rust vscode 自动补全为什么用不了...
+
+- v1_iter 为什么必须是 mut
+  - next 要改变他的 index..
+  - for in 做了什么处理 让他不要... 基本上是一样的实现啊
+
+```rs
+let mut v1_iter = v1.iter();
+assert_eq!(v1_iter.next(), Some(&1));
+```
+
+```rs
+// 这个为什么不需要...
+for val in v1_iter {
+    println!("Got: {}", val);
+}
+```
+
 ## 2018-11-03 10:20:06
 
 - @ques 如何传递 thread

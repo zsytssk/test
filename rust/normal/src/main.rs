@@ -1,82 +1,81 @@
-use std::thread;
-use std::time::Duration;
+pub trait Messenger {
+    fn send(&self, msg: &str);
+}
 
-struct Cacher<T>
+pub struct LimitTracker<'a, T: 'a + Messenger> {
+    messenger: &'a T,
+    value: usize,
+    max: usize,
+}
+
+impl<'a, T> LimitTracker<'a, T>
 where
-    T: Fn(u32) -> u32,
+    T: Messenger,
 {
-    arg: Option<u32>,
-    calculation: T,
-    value: Option<u32>,
-}
-
-impl<T> Cacher<T>
-where
-    T: Fn(u32) -> u32,
-{
-    fn new(calculation: T) -> Cacher<T> {
-        Cacher {
-            arg: None,
-            calculation,
-            value: None,
+    pub fn new(messenger: &T, max: usize) -> LimitTracker<T> {
+        LimitTracker {
+            messenger,
+            value: 0,
+            max,
         }
     }
-    fn value(&mut self, arg: u32) -> u32 {
-        let mut result: u32;
-        if self.arg == None || arg != self.arg.unwrap() {
-            result = (self.calculation)(arg);
-            self.value = Some(result);
-        }
 
-        match self.value {
-            Some(v) => {
-                result = v;
+    pub fn set_value(&mut self, value: usize) {
+        self.value = value;
+
+        let percentage_of_max = self.value as f64 / self.max as f64;
+
+        if percentage_of_max >= 0.75 && percentage_of_max < 0.9 {
+            self.messenger
+                .send("Warning: You've used up over 75% of your quota!");
+        } else if percentage_of_max >= 0.9 && percentage_of_max < 1.0 {
+            self.messenger
+                .send("Urgent warning: You've used up over 90% of your quota!");
+        } else if percentage_of_max >= 1.0 {
+            self.messenger.send("Error: You are over your quota!");
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::cell::RefCell;
+
+    struct MockMessenger {
+        sent_messages: RefCell<Vec<String>>,
+    }
+
+    impl MockMessenger {
+        fn new() -> MockMessenger {
+            MockMessenger {
+                sent_messages: RefCell::new(vec![]),
             }
-            None => {
-                result = (self.calculation)(arg);
-                self.value = Some(result);
-            }
-        }
-
-        result
-    }
-}
-
-fn main() {
-    let simulated_user_specified_val = 35;
-    let simulated_random_number = 7;
-
-    generate_workout(simulated_user_specified_val, simulated_random_number);
-}
-
-fn generate_workout(intensity: u32, random_number: u32) {
-    let mut expensive_result = Cacher::new(|num| {
-        println!("calculating slowly...");
-        thread::sleep(Duration::from_secs(2));
-        num
-    });
-
-    if intensity < 25 {
-        println!("today, do {} pushups", expensive_result.value(intensity));
-        println!("Next, do {} situps!", expensive_result.value(intensity));
-    } else {
-        if random_number == 3 {
-            println!("take a break tody! remember to stay hydrated!");
-        } else {
-            println!(
-                "today run for {} minites!",
-                expensive_result.value(intensity)
-            )
         }
     }
+
+    impl Messenger for MockMessenger {
+        fn send(&self, message: &str) {
+            let mut one_borrow = self.sent_messages.borrow_mut();
+            let mut two_borrow = self.sent_messages.borrow_mut();
+
+            one_borrow.push(String::from(message));
+            two_borrow.push(String::from(message));
+        }
+    }
+
+    #[test]
+    fn it_sends_an_over_75_percent_warning_message() {
+        let mock_messenger = MockMessenger::new();
+        let mut limit_tracker = LimitTracker::new(&mock_messenger, 100);
+
+        limit_tracker.set_value(80);
+        let a = mock_messenger.sent_messages.borrow();
+        println!("{:?}", a);
+
+        assert_eq!(a.len(), 1);
+    }
+
 }
 
-#[test]
-fn call_with_different_values() {
-    let mut c = Cacher::new(|a| a);
-
-    let v1 = c.value(1);
-    let v2 = c.value(2);
-
-    assert_eq!(v2, 2);
-}
+fn main() {}

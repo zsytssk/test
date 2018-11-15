@@ -1,28 +1,38 @@
-use std::sync::mpsc;
-use std::thread;
-use std::time::Duration;
-
-trait Print {
-    fn print(&self);
+struct Counter {
+    count: u32,
 }
 
-#[derive(Debug)]
-struct Test {
-    val: i32,
-}
-impl Print for Test {
-    fn print(&self) {
-        println!("{}", self.val);
+impl Counter {
+    fn new() -> Counter {
+        Counter { count: 0 }
     }
 }
 
-impl Test {
-    fn print1(&self) {
-        self.print();
+impl Iterator for Counter {
+    type Item = u32;
+    fn next(&mut self) -> Option<Self::Item> {
+        self.count += 1;
+
+        if self.count < 6 {
+            Some(self.count)
+        } else {
+            None
+        }
     }
 }
 
 fn main() {
-    let a = Test { val: 10 };
-    a.print1();
+    // let a = Counter::new();
+    let a = vec![1, 2, 3];
+    // loop {
+    //     if let Some(v) = a.next() {
+    //         println!("{:?}", v);
+    //     } else {
+    //         break;
+    //     }
+    // }
+    for v in &a {
+        println!("{}", v);
+    }
+    println!("{:?}", a.iter().sum::<u32>())
 }
