@@ -1,38 +1,16 @@
-struct Counter {
-    count: u32,
-}
+use std::time::Instant;
 
-impl Counter {
-    fn new() -> Counter {
-        Counter { count: 0 }
-    }
-}
-
-impl Iterator for Counter {
-    type Item = u32;
-    fn next(&mut self) -> Option<Self::Item> {
-        self.count += 1;
-
-        if self.count < 6 {
-            Some(self.count)
-        } else {
-            None
-        }
-    }
-}
+extern crate mylib;
+use mylib::run;
 
 fn main() {
-    // let a = Counter::new();
-    let a = vec![1, 2, 3];
-    // loop {
-    //     if let Some(v) = a.next() {
-    //         println!("{:?}", v);
-    //     } else {
-    //         break;
-    //     }
-    // }
-    for v in &a {
-        println!("{}", v);
-    }
-    println!("{:?}", a.iter().sum::<u32>())
+    let now = Instant::now();
+    let dist = String::from("C:/Users/zhangshiyang/.vscode/extensions");
+    let src = String::from("C:/Users/zhangshiyang/Desktop/test/extensions");
+
+    // let dist = String::from("C:\\Users\\zhangshiyang\\Desktop\\test\\src\\save.7z");
+    // let src = String::from("C:\\Users\\zhangshiyang\\Desktop\\test\\src\\save-copy.7z");
+
+    run(dist.clone(), src.clone());
+    println!("{}", now.elapsed().as_secs());
 }

@@ -1,3 +1,15 @@
+## 2018-11-17 10:20:42
+
+- @ques cargo bench
+
+- @ques 循环引用超过多少就 panic?
+
+- @ques 关系 变化 functional program, data program
+
+- [q] rust Rc RefCell Weak .. 都是为了解决实际问题的...
+
+* @ques 函数式编程的样子是???
+
 ## 2018-11-15 09:24:03
 
 - @note Rc

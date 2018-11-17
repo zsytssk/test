@@ -13,17 +13,27 @@ pub enum CopyErr {
 
 pub type CopyResult = Result<(), CopyErr>;
 
-pub fn copy(src: String, dist: String) -> CopyResult {
-    let src_path = Path::new(src.as_str());
-    let dist_path = Path::new(dist.as_str());
+pub fn run(src: String, dist: String) -> CopyResult {
+    let src_path = Path::new(src.as_str()).to_path_buf();
+    let dist_path = Path::new(dist.as_str()).to_path_buf();
 
-    if !src_path.exists() {
+    return copy(src_path, dist_path);
+}
+
+fn copy(src: PathBuf, dist: PathBuf) -> CopyResult {
+    if !src.exists() {
         let err_msg = format!("{:?} dont exists", src);
         return Err(CopyErr::string_err(err_msg));
     }
 
-    if !dist_path.exists() {
-        match create_dir_all(&dist_path) {
+    let metadata = fs::metadata(&src).unwrap();
+    if metadata.is_file() {
+        fs::copy(src, dist);
+        return Ok(());
+    }
+
+    if !dist.exists() {
+        match create_dir_all(&dist) {
             Ok(val) => val,
             Err(e) => {
                 return Err(CopyErr::io_err(e));
@@ -31,34 +41,37 @@ pub fn copy(src: String, dist: String) -> CopyResult {
         };
     }
 
-    let items = match fs::read_dir(src_path) {
+    let items = match fs::read_dir(src) {
         Ok(val) => val,
         Err(e) => {
             return Err(CopyErr::io_err(e));
         }
     };
 
+    let arc_dist = Arc::new(dist);
+    let mut thread_handles = vec![];
     for entry in items {
         if let Ok(entry) = entry {
-            let clone_dist = Arc::new(dist_path).clone();
             let arc_entry = Arc::new(entry);
-            let clone_entry = arc_entry.clone();
+            let clone_entry = Arc::clone(&arc_entry);
+            let clone_dist = Arc::clone(&arc_dist);
 
-            thread::spawn(move || {
+            let handler = thread::spawn(move || {
                 let metadata = fs::metadata(clone_entry.path()).unwrap();
                 if metadata.is_dir() {
-                    copy(
-                        clone_entry.path().to_str().unwrap().to_string(),
-                        clone_dist
-                            .join(clone_entry.file_name())
-                            .to_str()
-                            .unwrap()
-                            .to_string(),
-                    );
+                    copy(clone_entry.path(), clone_dist.join(clone_entry.file_name()));
+                    return;
                 }
-                fs::copy(clone_entry.path(), dist_path.join(clone_entry.file_name()));
+                fs::copy(clone_entry.path(), clone_dist.join(clone_entry.file_name()));
             });
+
+            thread_handles.push(handler);
         }
     }
+
+    for handle in thread_handles {
+        handle.join();
+    }
+
     Ok(())
 }
