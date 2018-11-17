@@ -1,5 +1,19 @@
 ## 2018-11-17 15:54:26
 
+- @ques `thread::spawn(*first_fn);`
+
+  - 这怎么处理 `dyn std::ops::Fn()` cannot be sent between threads safely
+
+- 我想想创建一个 thread pool, 可以将代码闭包传进去
+
+  - 在 pool 中定义 thread 的个数...
+  - 每次运行结束去拿保存的闭包运行...
+  - 超过个数就等待...
+
+- @ques generic type 怎么定义类型...
+
+  - `calc_pool::CalcPool::new()`
+
 - @ques Path::new(src.as_str())
 
   - 为什么是一个 `&std::path::Path`
