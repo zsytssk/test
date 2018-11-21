@@ -1,3 +1,22 @@
+## 2018-11-20 09:22:35
+
+- @note 将所有复杂的地方全部列举出来...
+
+  - rc 多个 immutable owner | arc thread
+    - strong_count weak_count
+  - RefCell --> immutable -> mutable
+  - Mutex + arc --> mutable thread share data..
+
+- Box<T>
+  - 知道内存占用.., eg list
+
+* Refcel
+
+- @ques 什么是 deadlock
+  '
+
+- @ques lock 怎么没有 unlock 的地方...
+
 ## 2018-11-17 10:20:42
 
 - @ques cargo bench
