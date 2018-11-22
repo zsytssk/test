@@ -1,3 +1,16 @@
+## 2018-11-22 09:21:24
+
+- @qeus 将这些通信用异步处理是不是更有效率...
+  - 所有 block thread 都是浪费时间...
+
+* @ques 如何为 mpsc::channel 手动设置类型...
+
+* @ques tx.send(val) 一个个的 send receive 就可以 for in 很奇怪, rx impl iterator
+
+* @ques 怎么看一个 struct 有没有 impl 一个 trait 呢?
+
+* @qeus 如何 clone tx
+
 ## 2018-11-20 09:22:35
 
 - @note 将所有复杂的地方全部列举出来...
