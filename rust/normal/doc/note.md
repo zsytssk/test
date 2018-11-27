@@ -1,3 +1,13 @@
+## 2018-11-27 09:25:13
+
+- rust 2018
+
+- @ques ADT/PoD
+  - https://www.atjiang.com/data-structures-using-python-ADT/
+  - https://zh.wikipedia.org/wiki/POD_(%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1)
+  - and any references between the data records will be of a form of an ID (number, uuid, or a deterministic hash).
+  - t typically closely resembles or actually is backed by a relational database: Vectors or HashMaps storing bulk of the data by Index or ID
+
 ## 2018-11-22 09:21:24
 
 - @qeus 将这些通信用异步处理是不是更有效率...
