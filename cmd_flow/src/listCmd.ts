@@ -12,13 +12,17 @@ import {
 const file =
   'file:///D:/zsytssk/other/test/vscode-extension-samples-master/cmd-flow/doc/cmd.md';
 export async function getCmdList(): Promise<CmdSymbols> {
-  const uri = Uri.parse(file);
-  try {
-    const doc = await workspace.openTextDocument(uri);
-    return getCmdListFromDoc(doc);
-  } catch (err) {
-    console.log(err);
+  const cur_doc = window.activeTextEditor.document;
+  if (cur_doc.languageId !== 'markdown') {
+    return [];
   }
+  return getCmdListFromDoc(cur_doc);
+  // const uri = Uri.parse(file);
+  // try {
+  //   const doc = await workspace.openTextDocument(uri);
+  // } catch (err) {
+  //   console.log(err);
+  // }
 }
 
 type Code = {
@@ -49,6 +53,9 @@ export async function getCmdListFromDoc(doc): Promise<CmdSymbols> {
     const name_match = name.match(nameRegExp);
     name = name_match[1];
     const { codes, opt } = getCmdInfoFromSymbol(doc, item);
+    if (!codes.length && !opt) {
+      continue;
+    }
     result.push({ name, codes, opt });
   }
 
@@ -68,39 +75,38 @@ function getCmdInfoFromSymbol(doc: TextDocument, symbol: Symbol): CmdInfo {
   const result = {
     codes: [],
   } as CmdInfo;
+
   const { range } = symbol;
   const text = doc.getText(range);
   const opt_match = text.match(OptRegExp);
   const code_match = text.match(CodeRegExp);
 
-  if (!code_match) {
-    return result;
-  }
-  const code_str = code_match[1];
-  const code_str_arr = code_str.split(/\r?\n/g);
-  for (let item of code_str_arr) {
-    if (item === '') {
-      continue;
+  if (code_match) {
+    const code_str = code_match[1];
+    const code_str_arr = code_str.split(/\r?\n/g);
+    for (let item of code_str_arr) {
+      if (item === '') {
+        continue;
+      }
+      const match_item = item.match(CodeItemRegExp);
+      if (!match_item) {
+        continue;
+      }
+      const text = match_item[1];
+      const wait = Number(match_item[3]) || 0.5;
+      result.codes.push({
+        text,
+        wait,
+      });
     }
-    const match_item = item.match(CodeItemRegExp);
-    if (!match_item) {
-      continue;
-    }
-    const text = match_item[1];
-    const wait = Number(match_item[3]) || 0.5;
-    result.codes.push({
-      text,
-      wait,
-    });
   }
 
   /** opt */
-  if (!opt_match) {
-    return result;
+  if (opt_match) {
+    const opt_str = opt_match[1];
+    const opt = JSON.parse(opt_str);
+    result.opt = opt;
   }
-  const opt_str = opt_match[1];
-  const opt = JSON.parse(opt_str);
-  result.opt = opt;
 
   return result;
 }

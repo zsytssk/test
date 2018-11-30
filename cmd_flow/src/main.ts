@@ -5,6 +5,11 @@ import { getCmdList } from './listCmd';
 export async function main() {
   const cmd_list = await getCmdList();
 
+  if (!cmd_list.length) {
+    window.showInformationMessage('cant find cmd_flow in this file!');
+    return;
+  }
+
   const input_list = [];
   for (let cmd of cmd_list) {
     input_list.push(cmd.name);
