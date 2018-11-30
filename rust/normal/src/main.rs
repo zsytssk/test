@@ -1,23 +1,28 @@
-use std::sync::{Arc, Mutex};
-use std::thread;
+trait Print {
+    fn print(&self);
+}
+
+impl Print for i32 {
+    fn print(&self) {
+        println!("{}", self);
+    }
+}
+
+impl Print for i64 {
+    fn print(&self) {
+        println!("{}", self);
+    }
+}
 
 fn main() {
-    let counter = Arc::new(Mutex::new(vec![]));
-    let mut handles = vec![];
+    let x = 0i32;
+    let y = 10i64;
+    x.print(); // 0
+    y.print(); // 10
 
-    for _ in 0..10 {
-        let counter = Arc::clone(&counter);
-        let handle = thread::spawn(move || {
-            let mut num = counter.lock().unwrap();
+    let data: [Box<Print>; 2] = [Box::new(20i32), Box::new(30i32)];
 
-            num.push(1);
-        });
-        handles.push(handle);
+    for val in &data {
+        val.print();
     }
-
-    for handle in handles {
-        handle.join().unwrap();
-    }
-
-    println!("{:?}", *counter.lock().unwrap());
 }
