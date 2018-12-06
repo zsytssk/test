@@ -1,18 +1,23 @@
-import { fixCanvas } from './utils';
+import { fixCanvas } from '../core/utils';
 
 const canvas = document.getElementById('canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d');
 
 fixCanvas(canvas);
 
-const img = new Image();
-img.onload = () => {
-    ctx.drawImage(img, 0, 0);
-    ctx.beginPath();
-    ctx.moveTo(30, 96);
-    ctx.lineTo(70, 66);
-    ctx.lineTo(103, 76);
-    ctx.lineTo(170, 15);
-    ctx.stroke();
-};
-img.src = 'https://mdn.mozillademos.org/files/5397/rhino.jpg';
+ctx.translate(100, 100);
+const num = 100;
+const sin = Math.sin((Math.PI / num) * 2);
+const cos = Math.cos((Math.PI / num) * 2);
+for (let i = 0; i <= num - 1; i++) {
+    const c = Math.floor((16777215 / num) * i);
+    const style = `#${c.toString(16)}`;
+    console.log(style);
+    ctx.fillStyle = style;
+    ctx.fillRect(0, 0, 100, 3);
+    ctx.transform(cos, sin, -sin, cos, 0, 0);
+}
+
+ctx.setTransform(-1, 0, 0, 1, 100, 100);
+ctx.fillStyle = 'rgba(255, 128, 255, 0.5)';
+ctx.fillRect(0, 50, 100, 100);

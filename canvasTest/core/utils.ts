@@ -1,5 +1,5 @@
 export function fixCanvas(canvas: HTMLCanvasElement) {
-    setType(canvas, {
+    setStyle(canvas, {
         position: 'absolute',
         left: 0,
         top: 0,
@@ -13,7 +13,7 @@ export function fixCanvas(canvas: HTMLCanvasElement) {
     });
 }
 
-export function setType(node: HTMLElement, style: {}) {
+export function setStyle(node: HTMLElement, style: {}) {
     for (const key in style) {
         if (!style.hasOwnProperty(key)) {
             continue;
