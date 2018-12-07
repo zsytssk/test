@@ -1,3 +1,17 @@
+## 2018-12-07 09:18:57
+
+-   @ques transform 什么意思
+
+-   @note globalCompositeOperation 颜色叠加 滤镜
+
+-   @note clip mask
+
+-   @ques [公转图](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations)
+
+    -   公转图 太阳照不到地方变黑怎么处理的
+
+-   @ques drawImage dx dy 是什么意思
+
 ## 2018-12-06 09:28:21
 
 -   ? 如何只将需要的清除掉...
@@ -15,6 +29,8 @@
 -   @ques 如果发布到 npm, 能不能是 ts+js 版本
 
 -   @ques 颜色的十六进制如何转换...
+
+-   @ques ffffff != 255*255*255
 
 ## 2018-12-06 09:28:18
 

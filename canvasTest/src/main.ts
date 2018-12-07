@@ -1,23 +1,55 @@
-import { fixCanvas } from '../core/utils';
+import { fixCanvas } from '../lightCanvas/utils';
 
 const canvas = document.getElementById('canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d');
 
 fixCanvas(canvas);
-
-ctx.translate(100, 100);
-const num = 100;
-const sin = Math.sin((Math.PI / num) * 2);
-const cos = Math.cos((Math.PI / num) * 2);
-for (let i = 0; i <= num - 1; i++) {
-    const c = Math.floor((16777215 / num) * i);
-    const style = `#${c.toString(16)}`;
-    console.log(style);
-    ctx.fillStyle = style;
-    ctx.fillRect(0, 0, 100, 3);
-    ctx.transform(cos, sin, -sin, cos, 0, 0);
+const sun = new Image();
+const moon = new Image();
+const earth = new Image();
+function init() {
+    sun.src = 'https://mdn.mozillademos.org/files/1456/Canvas_sun.png';
+    moon.src = 'https://mdn.mozillademos.org/files/1443/Canvas_moon.png';
+    earth.src = 'https://mdn.mozillademos.org/files/1429/Canvas_earth.png';
+    window.requestAnimationFrame(draw);
 }
+init();
+function draw() {
+    ctx.globalCompositeOperation = 'destination-over';
+    ctx.clearRect(0, 0, 300, 300); // clear canvas
 
-ctx.setTransform(-1, 0, 0, 1, 100, 100);
-ctx.fillStyle = 'rgba(255, 128, 255, 0.5)';
-ctx.fillRect(0, 50, 100, 100);
+    ctx.fillStyle = 'rgba(0, 0, 255, 0.4)';
+    ctx.strokeStyle = 'rgba(0, 153, 255, 0.4)';
+    ctx.save();
+    ctx.translate(150, 150);
+
+    // Earth
+    const time = new Date();
+    ctx.rotate(
+        ((2 * Math.PI) / 60) * time.getSeconds() +
+            ((2 * Math.PI) / 60000) * time.getMilliseconds()
+    );
+    ctx.translate(105, 0);
+    ctx.fillRect(0, -12, 40, 24); // Shadow
+    ctx.drawImage(earth, -12, -12);
+
+    // Moon
+    ctx.save();
+    ctx.rotate(
+        ((2 * Math.PI) / 6) * time.getSeconds() +
+            ((2 * Math.PI) / 6000) * time.getMilliseconds()
+    );
+    ctx.translate(0, 40.5);
+    ctx.drawImage(moon, -3.5, -3.5);
+    ctx.restore();
+
+    ctx.restore();
+
+    ctx.beginPath();
+    ctx.arc(150, 150, 105, 0, Math.PI * 2, false); // Earth orbit
+    ctx.stroke();
+
+    ctx.drawImage(sun, 0, 0, 300, 300);
+
+    window.requestAnimationFrame(draw);
+}
