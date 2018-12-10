@@ -1,3 +1,14 @@
+## 2018-12-10 10:51:50
+
+-   数组每一个元素不一样, infer 所有 而不全部都是相同的...
+
+    -   array last item
+
+-   @ques generic type 为什么不能引用他自己
+    -   https://github.com/Microsoft/TypeScript/issues/6230
+    -   可能是 type 不知道什么时候停止...
+    -   也许可以像函数对自己调用一样, 超过次数就会报错
+
 ## 2018-12-07 09:18:57
 
 -   @ques transform 什么意思
