@@ -1,3 +1,39 @@
+## 2018-12-17 09:13:37
+
+-   @todo image
+
+    -   位置
+    -   旋转
+    -   alpha...
+
+-   @ques load image
+
+-   @ques 如何在 dop 上面组织代码
+
+    -   保证同样的 api
+    -   代码的公用...
+
+-   @note displayInStage --> parent
+
+-   @ques 先考虑最优的实现, 然后考虑兼容 laya 的接口...
+
+## 2018-12-11 09:45:34
+
+-   @todo canvas 接收 data 然后渲染数据
+
+-   @ques dop call
+
+    -   无法自动补全
+    -   没有好的方法去执行
+
+-   ## @ques 如何索引 this type
+
+    -   call 中通过 this 索引 this.behave type ...
+
+*   学习步骤
+    -   先核心 再慢慢补齐周边...
+    -   学习 --> 练习 --> 学习
+
 ## 2018-12-10 16:31:36
 
 -   @ques 凡人休闲装 爬虫 下载
@@ -21,11 +57,11 @@
 
 -   @note clip mask
 
--   @ques [公转图](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations)
+*   @ques [公转图](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations)
 
     -   公转图 太阳照不到地方变黑怎么处理的
 
--   @ques drawImage dx dy 是什么意思
+*   @ques drawImage dx dy 是什么意思
 
 ## 2018-12-06 09:28:21
 

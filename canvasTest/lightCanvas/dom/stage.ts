@@ -1,8 +1,8 @@
 import { Data } from '../../dop/data';
 import { LcNode, NodeType } from './node';
 
-export class Image extends Data implements LcNode {
-    public is_top = false;
+export class Stage extends Data implements LcNode {
+    public is_top = true;
     public type = 'stage' as NodeType;
     public width: number = 0;
     public height: number = 0;

@@ -1,4 +1,4 @@
-import { Behave, Data } from '../lightCanvas/utils/data';
+import { Behave, Data } from '../dop/data';
 
 class DataTest extends Data {
     public d = true;
@@ -24,14 +24,17 @@ class BehaveTest3 extends Behave<DataTest> {
     }
 }
 
-type B = ClassPropOrMethod<DataTest, 'addBehaves'>;
+const a = new DataTest();
+a.call('test')();
 
-// type T1 = BehaveTest1 & BehaveTest2;
-type T1 = ClassesPropOrMethod<DataTest['behaves']>;
-type T = ClassPropOrMethod<T1, 'test1'>;
-// Pick<T, Exclude<keyof T, "tag">>
-// Extract<keyof Foo, string>
+// type B = ClassPropOrMethod<DataTest, 'addBehaves'>;
 
-// function getValue<T, K extends keyof T>(obj: T, key: K): T[K] {
-//     return obj[key];
-// }
+// // type T1 = BehaveTest1 & BehaveTest2;
+// type T1 = ClassesPropOrMethod<DataTest['behaves']>;
+// type T = ClassPropOrMethod<T1, 'test1'>;
+// // Pick<T, Exclude<keyof T, "tag">>
+// // Extract<keyof Foo, string>
+
+// // function getValue<T, K extends keyof T>(obj: T, key: K): T[K] {
+// //     return obj[key];
+// // }

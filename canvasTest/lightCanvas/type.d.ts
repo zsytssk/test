@@ -22,12 +22,8 @@ declare module '*.json' {
 
 /** 抽取class的属性... */
 type ClassProps<T> = { [k in keyof T]?: T[k] extends Function ? never : T[k] };
-type ClassMethods<T, U> = {
-    [k in keyof T]?: T[k] extends Function
-        ? k extends U
-            ? T[k]
-            : never
-        : never
+type ClassMethods<T> = {
+    [k in keyof T]?: T[k] extends Function ? T[k] : never
 };
 
 type ClassPropOrMethod<T, K extends keyof T> = T[K];

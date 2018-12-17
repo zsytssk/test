@@ -17,6 +17,7 @@
         "variable-name": [true, "allow-snake-case"],
         "max-classes-per-file": [true, 5],
         "member-ordering": [false],
+        "ban-types": [false],
         "object-literal-key-quotes": [true, "never"],
         "interface-name": [true, "never-prefix"],
         "object-literal-sort-keys": false

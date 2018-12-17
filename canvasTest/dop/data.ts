@@ -1,5 +1,11 @@
+type CallTemp = {
+    [key: string]: Function;
+};
+
 export class Data {
     protected behaves: Behave[] = [];
+    /** 执行函数的缓存 */
+    protected call_temp: CallTemp = {};
     constructor(...behaves: Behave[]) {
         this.addBehaves(...behaves);
     }
