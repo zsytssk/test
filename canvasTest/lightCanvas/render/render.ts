@@ -1,5 +1,9 @@
-import { Stage } from '../dom/stage';
+import { ctx, draw } from '../canvas/canvas';
 
-function render() {
-    window.requestAnimationFrame(render);
+export function render(canvas: HTMLCanvasElement, stage: Stage) {
+    draw(stage, canvas);
+
+    window.requestAnimationFrame(time => {
+        render(canvas, stage);
+    });
 }

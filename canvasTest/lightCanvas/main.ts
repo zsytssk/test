@@ -1,6 +1,11 @@
-import { LcNode } from './re';
+import { Stage } from './api/stage';
+import { render } from './render/render';
 
-const canvas = document.getElementById('canvas') as HTMLCanvasElement;
-export const stage = new Stage();
+export let stage: Stage;
+export function init() {
+    stage = new Stage();
+    const canvas = document.getElementById('canvas') as HTMLCanvasElement;
+    render(canvas, stage);
 
-render(stage);
+    return stage;
+}

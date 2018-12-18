@@ -16,20 +16,26 @@
 
 -   @ques 能不能使用 面向对象作为接口, 核心计算使用 dop !!
 
+-   @ques 3d 和 2d 如何区分
+
 ## 代码的结构
 
--   dom --> render (canvas | webgl)
+-   api --> data --> render (canvas | webgl)
 
--   dom 组织所有的数据 - dop
+    -   相互独立
+
+-   api: 是独立 抽出给外层调用, 面向对象的方式组织
+
+    -   用于填充数据...
+    -   方便外层调用
+    -   最好兼容 laya 接口
+
+-   dom: 绘制 ui 所需的数据 - dop
 
     -   相当于虚拟 dom
     -   层级结构 各层各种数据
+    -   最精简的结构, 最快的渲染
 
--   render(canvas| webgl) -- 函数式
+-   render: (canvas| webgl) -- 函数式
 
     -   调用 canvas webgl 渲染 页面
-
-*   @ques api 层独立功能 抽出 api 给外层调用, 面向对象
-    -   需要吗 ? 应该是要的
-
--   dom 和 render 相互独立

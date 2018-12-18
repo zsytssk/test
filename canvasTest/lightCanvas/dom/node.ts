@@ -8,5 +8,4 @@ export interface LcNode {
     x: number;
     y: number;
     alpha: number;
-    children: LcNode[];
 }
