@@ -4,7 +4,10 @@ export class Node {
     public width = 0;
     public height = 0;
     public alpha = 1;
-    protected children = [] as Node[];
+    public pivotX = 0;
+    public pivotY = 0;
+    public rotation = 0;
+    public children = [] as Node[];
     protected parent: Node;
     public name: string;
     public is_top = false;

@@ -21,3 +21,11 @@ export function setStyle(node: HTMLElement, style: {}) {
         node.style[key] = style[key];
     }
 }
+
+export function degreeToAngle(degrees) {
+    return (degrees * Math.PI) / 180;
+}
+/**弧度转化为角度*/
+export function angleTodegree(angle) {
+    return (angle * 180) / Math.PI;
+}

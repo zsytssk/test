@@ -1,11 +1,11 @@
 import { Stage } from './api/stage';
 import { render } from './render/render';
+import { fixCanvas } from './utils/utils';
 
 export let stage: Stage;
-export function init() {
+export function init(canvas: HTMLCanvasElement) {
     stage = new Stage();
-    const canvas = document.getElementById('canvas') as HTMLCanvasElement;
     render(canvas, stage);
-
+    fixCanvas(canvas);
     return stage;
 }

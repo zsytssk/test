@@ -1,4 +1,5 @@
-import { ctx, draw } from '../canvas/canvas';
+import { Stage } from '../api/stage';
+import { draw } from '../canvas/canvas';
 
 export function render(canvas: HTMLCanvasElement, stage: Stage) {
     draw(stage, canvas);

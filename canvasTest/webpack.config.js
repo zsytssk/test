@@ -27,7 +27,7 @@ const dev_config = {
     devtool: 'eval-source-map',
     watch: true,
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
+        contentBase: path.join(__dirname, './'),
     },
 };
 

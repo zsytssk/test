@@ -1,3 +1,23 @@
+## other
+
+-   @ques 像 react 一样 分成几块渲染, wait...
+
+    -   如果可以将 api 转化成 data, 我的 render 可以像 react 一样拆分成几部分
+
+-   @ques 怎么记录 ctx translate 几次 rotate 几次
+
+    -   能不能合并 translate
+    -   @imp 将 rotation translate 转换成一次的函数...
+        -   应该可以, 但是数学要求..
+        -   能不能抄 laya 的代码
+        -   还是学习这部分的知识...
+
+-   @ques 怎么将 api 转化成 data
+    -   比方说 rotation 这需要转化为 angle, 在设置的时候可以直接修改
+    -   等到 render 的时候才将这些数据进行渲染...
+
+## 2018-12-19 10:03:38
+
 -   @ques ts 如何抽取 数组中元素的 key
 
     -   找到 data.behaves 中第一个元素拥有 的属性

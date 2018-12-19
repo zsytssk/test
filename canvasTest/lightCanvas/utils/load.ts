@@ -2,15 +2,22 @@ export type LoadType = 'Image';
 export type ReturnType = HTMLImageElement | string;
 
 const res_map = {};
-export async function load(url: string, type: LoadType): Promise<ReturnType> {
-    let result: ReturnType = res_map[url];
-    if (result) {
-        return result;
+export type LoadItem = {
+    url: string;
+    type: LoadType;
+};
+export async function load(res_list: LoadItem[]): Promise<ReturnType> {
+    for (const item of res_list) {
+        const { url, type } = item;
+        let result: ReturnType = res_map[url];
+        if (result) {
+            return result;
+        }
+        if (type === 'Image') {
+            result = await loadImage(url);
+        }
+        res_map[url] = result;
     }
-    if (type === 'Image') {
-        result = await loadImage(url);
-    }
-    return result;
 }
 
 function loadImage(url: string): Promise<HTMLImageElement> {
