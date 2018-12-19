@@ -13,16 +13,18 @@ load(res).then(() => {
     const earth = new Image();
     earth.skin = './image/Canvas_earth.png';
     sun.addChild(earth);
-    earth.x = -12;
-    earth.y = -12;
-    earth.pivotX = 105;
-    earth.pivotY = 0;
-
-    setInterval(() => {
-        earth.rotation = earth.rotation + 1;
-    }, 1000 / 60);
+    earth.x = 100;
+    earth.y = 100;
+    earth.pivotX = 150;
+    earth.pivotY = 150;
 
     const moon = new Image();
     moon.skin = './image/Canvas_moon.png';
     earth.addChild(moon);
+    moon.y = 40.5;
+
+    setInterval(() => {
+        earth.rotation = earth.rotation + 1;
+        moon.rotation = earth.rotation + 1;
+    }, 1000 / 60);
 });

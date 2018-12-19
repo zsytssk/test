@@ -1,11 +1,10 @@
 export type NodeType = 'image' | 'stage' | 'box' | 'label';
 
-export interface LcNode {
-    is_top: boolean;
-    width: number;
-    height: number;
-    type: NodeType;
-    x: number;
-    y: number;
-    alpha: number;
+export class NodeData {
+    public transform: number[];
+    public type: NodeType;
+    public children: NodeData[];
+    public setTransform(transform: number[]) {
+        this.transform = transform;
+    }
 }

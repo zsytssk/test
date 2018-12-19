@@ -11,6 +11,37 @@
 
 -   @ques load 同时加载多个 retry 几次...
 
+-   @ques x, y.. 这些的改变都要重新计算 transform
+
+    -   能不能做成 decorator
+    -   decorator this.xxx
+    -   不用每次都去改变, 只要在编译的时候运行下就可以了
+
+-   @ques compress p-map
+
+-   @ques 怎么使用 decorator 改变 node 的属性 每次调用
+    -   calcTransform
+
+```js
+export function callThisFun(target: Node, key, descriptor) {
+    return {
+        ...descriptor,
+        get: () => {
+            return target[`_${key}`];
+        },
+        set: val => {
+            target[`_${key}`] = val;
+        },
+    };
+}
+```
+
+-   @ques ts `[number, number, number, number, number, number]`
+
+    -   怎么定义
+
+-   @ques 像 laya 一样的去定位呢...
+
 ## 2018-12-18 09:58:51
 
 -   @ques 这一大堆的 dom api 相同的名字 真的很烦 如何处理

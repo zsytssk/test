@@ -1,9 +1,14 @@
+import { NodeData } from '../dom/node';
+import { degreeToAngle } from '../utils/utils';
+
 export class Node {
     public x: number = 0;
     public y: number = 0;
     public width = 0;
     public height = 0;
     public alpha = 1;
+    public scaleX = 1;
+    public scaleY = 1;
     public pivotX = 0;
     public pivotY = 0;
     public rotation = 0;
@@ -11,6 +16,7 @@ export class Node {
     protected parent: Node;
     public name: string;
     public is_top = false;
+    public data: NodeData;
     public addChild(child: Node) {
         const { children } = this;
         children.push(child);
@@ -69,5 +75,21 @@ export class Node {
             children[i].destroy();
         }
         this.children = [];
+    }
+    public calcTransform() {
+        const { x, y, pivotX, pivotY, rotation, scaleX, scaleY } = this;
+        const angle = degreeToAngle(rotation);
+        const m = [
+            Math.cos(angle) * scaleX,
+            Math.sin(angle) * scaleX,
+            -Math.sin(angle) * scaleY,
+            Math.cos(angle) * scaleY,
+            0,
+            0,
+        ] as [number, number, number, number, number, number];
+        m[4] = pivotX - x * m[0] - y * m[2];
+        m[5] = pivotY - x * m[1] - y * m[3];
+
+        return m;
     }
 }
