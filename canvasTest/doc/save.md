@@ -3,6 +3,7 @@
 -   @ques 像 react 一样 分成几块渲染, wait...
 
     -   如果可以将 api 转化成 data, 我的 render 可以像 react 一样拆分成几部分
+    -   全部换成一个 translate 数据格式
 
 -   @ques 怎么记录 ctx translate 几次 rotate 几次
 
@@ -18,11 +19,13 @@
 
 ## 2018-12-19 10:03:38
 
--   @ques ts 如何抽取 数组中元素的 key
+-   @ques dop ts 如何抽取 数组中元素的 key
 
     -   找到 data.behaves 中第一个元素拥有 的属性
 
 -   @ques 能不能将 dom 的修改独立出来, 每次只是计算这些内容...
+
+    -   将修改元素的地址记录, 然后每次通过这个, 去遍历重绘
 
 -   @ques 如何在 dop 上面组织代码
     -   保证同样的 api
