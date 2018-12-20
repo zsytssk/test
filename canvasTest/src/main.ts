@@ -8,14 +8,15 @@ load(res).then(() => {
     const stage = init(canvas);
     const sun = new Image();
     sun.skin = './image/Canvas_sun.png';
-    sun.x = 0;
-    sun.y = 0;
+    sun.x = 100;
+    sun.y = 100;
     sun.pivotX = 150;
     sun.pivotY = 150;
     stage.addChild(sun);
 
-    setInterval(() => {
-        sun.rotation = sun.rotation + 1;
-        // moon.rotation = earth.rotation + 1;
-    }, 1000 / 60);
+    function draw() {
+        // sun.rotation = sun.rotation + 1;
+        // window.requestAnimationFrame(draw);
+    }
+    draw();
 });

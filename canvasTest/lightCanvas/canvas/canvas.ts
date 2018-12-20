@@ -24,7 +24,7 @@ export function draw(node: Node, canvas?: HTMLCanvasElement) {
 }
 
 export function drawImage(img: Image) {
-    const { skin, x, y, pivotX, pivotY } = img;
+    const { skin } = img;
     const img_ele = getRes(skin);
     if (img_ele) {
         let { width, height } = img;
@@ -32,6 +32,6 @@ export function drawImage(img: Image) {
             width = img_ele.width;
             height = img_ele.height;
         }
-        ctx.drawImage(img_ele, x - pivotX, y - pivotY, width, height);
+        ctx.drawImage(img_ele, 0, 0, width, height);
     }
 }

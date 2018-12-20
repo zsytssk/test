@@ -52,3 +52,15 @@ function rotate(radians) {
     matrix[3] = m22;
 }
 ```
+
+```js
+const rad = degreeToAngle(rotation);
+const s = Math.cos(rad);
+const c = Math.sin(rad);
+m[0] = c * scaleX;
+m[1] = s * scaleX;
+m[2] = -s * scaleY;
+m[3] = c * scaleY;
+m[4] = x - pivotX * m[0] + pivotY * m[2];
+m[5] = y - pivotX * m[2] + pivotY * m[3];
+```

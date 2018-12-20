@@ -17,7 +17,8 @@
     -   https://github.com/konvajs/konva/blob/d48868621cee57729f3e55a8fd9a0b12bf9408cf/src/Util.js
 
 *   @ques 位置如何处理
-    -   pivotX pivotY
+    -   旋转的中心点
+    -   绘制开始点...
 
 ## 2018-12-19 09:20:12
 
