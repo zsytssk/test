@@ -5,6 +5,20 @@
     -   scale
     -   alpha...
 
+## 2018-12-19 19:59:38
+
+-   @ques 如何清理 canvas 如何 cache canvas
+
+    -   `_drawCachedSceneCanvas`
+
+-   @ques 如何将坐标...转化成 transform
+    -   canvas transform order
+    -   origin
+    -   https://github.com/konvajs/konva/blob/d48868621cee57729f3e55a8fd9a0b12bf9408cf/src/Util.js
+
+*   @ques 位置如何处理
+    -   pivotX pivotY
+
 ## 2018-12-19 09:20:12
 
 -   @ques 如何获取图片的大小..

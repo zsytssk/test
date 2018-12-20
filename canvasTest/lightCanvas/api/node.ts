@@ -78,17 +78,37 @@ export class Node {
     }
     public calcTransform() {
         const { x, y, pivotX, pivotY, rotation, scaleX, scaleY } = this;
-        const angle = degreeToAngle(rotation);
-        const m = [
-            Math.cos(angle) * scaleX,
-            Math.sin(angle) * scaleX,
-            -Math.sin(angle) * scaleY,
-            Math.cos(angle) * scaleY,
-            0,
-            0,
-        ] as [number, number, number, number, number, number];
-        m[4] = pivotX - x * m[0] - y * m[2];
-        m[5] = pivotY - x * m[1] - y * m[3];
+        const m = [1, 0, 0, 1, 0, 0] as [
+            number,
+            number,
+            number,
+            number,
+            number,
+            number
+        ];
+
+        // rotate
+        const rad = degreeToAngle(rotation);
+        const c = Math.cos(rad);
+        const s = Math.sin(rad);
+        const m11 = m[0] * c + m[2] * s;
+        const m12 = m[1] * c + m[3] * s;
+        const m21 = m[0] * -s + m[2] * c;
+        const m22 = m[1] * -s + m[3] * c;
+        m[0] = m11;
+        m[1] = m12;
+        m[2] = m21;
+        m[3] = m22;
+
+        // translate
+        m[4] += m[0] * pivotX + m[2] * pivotY;
+        m[5] += m[1] * pivotX + m[3] * pivotY;
+
+        // scale
+        m[0] *= scaleX;
+        m[1] *= scaleX;
+        m[2] *= scaleY;
+        m[3] *= scaleY;
 
         return m;
     }
