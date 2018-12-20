@@ -4,7 +4,6 @@ const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
     entry: './src/main.ts',
-    devtool: 'eval-source-map',
     watch: true,
     output: {
         filename: 'main.js',
@@ -27,4 +26,7 @@ module.exports = {
         ],
     },
     target: 'node',
+    node: {
+        __dirname: true,
+    },
 };

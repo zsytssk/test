@@ -8,7 +8,7 @@
         "skipDefaultLibCheck": true,
         "skipLibCheck": true,
         "sourceMap": true,
-        "target": "es6",
+        "target": "esnext",
         "watch": true
     },
     "include": ["src"]
