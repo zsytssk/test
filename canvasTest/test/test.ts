@@ -1,40 +1,26 @@
-import { Behave, Data } from '../dop/data';
+import { fixCanvas } from '../lightCanvas/utils/utils';
 
-class DataTest extends Data {
-    public d = true;
-    protected behaves: [BehaveTest1, BehaveTest2, BehaveTest3];
+const canvas = document.getElementById('canvas') as HTMLCanvasElement;
+const ctx = canvas.getContext('2d');
+
+fixCanvas(canvas);
+const sun = new Image();
+sun.src = './image/test.png';
+
+testPivot();
+
+function testPivot() {
+    let rotation = 0;
+    setInterval(() => {
+        ctx.save();
+        ctx.clearRect(0, 0, 500, 500);
+        ctx.save();
+        ctx.translate(128 / 2, 128 / 2);
+        rotation += Math.PI / 400;
+        ctx.rotate(rotation);
+        ctx.translate(-128 / 2, -128 / 2);
+        ctx.drawImage(sun, 0, 0, 128, 128);
+        ctx.restore();
+        ctx.restore();
+    }, 1000 / 60);
 }
-
-class BehaveTest1 extends Behave<DataTest> {
-    public test1() {
-        return 1;
-    }
-    public testc(x: number) {
-        return true;
-    }
-}
-class BehaveTest2 extends Behave<DataTest> {
-    public tes1() {
-        return 1;
-    }
-}
-class BehaveTest3 extends Behave<DataTest> {
-    public tes1() {
-        return 1;
-    }
-}
-
-const a = new DataTest();
-a.call('test')();
-
-// type B = ClassPropOrMethod<DataTest, 'addBehaves'>;
-
-// // type T1 = BehaveTest1 & BehaveTest2;
-// type T1 = ClassesPropOrMethod<DataTest['behaves']>;
-// type T = ClassPropOrMethod<T1, 'test1'>;
-// // Pick<T, Exclude<keyof T, "tag">>
-// // Extract<keyof Foo, string>
-
-// // function getValue<T, K extends keyof T>(obj: T, key: K): T[K] {
-// //     return obj[key];
-// // }

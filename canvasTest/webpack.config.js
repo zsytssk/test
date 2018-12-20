@@ -2,9 +2,12 @@
 const path = require('path');
 
 let common_config = {
-    entry: ['./src/main.ts'],
+    entry: {
+        main: './src/main.ts',
+        test: './test/test.ts',
+    },
     output: {
-        filename: 'main.js',
+        filename: '[name].js',
         path: path.join(__dirname, 'dist'),
     },
     resolve: {

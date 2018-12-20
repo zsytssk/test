@@ -1,16 +1,21 @@
-export function fixCanvas(canvas: HTMLCanvasElement) {
+type Listener = (width: number, height: number) => void;
+
+export function fixCanvas(canvas: HTMLCanvasElement, listener?: Listener) {
     setStyle(canvas, {
         position: 'absolute',
         left: 0,
         top: 0,
     });
 
-    canvas.width = document.documentElement.clientWidth;
-    canvas.height = document.documentElement.clientHeight;
-    window.addEventListener('resize', () => {
-        canvas.width = document.documentElement.clientWidth;
-        canvas.height = document.documentElement.clientHeight;
-    });
+    window.addEventListener('resize', canvasFullScreen);
+    canvasFullScreen();
+
+    function canvasFullScreen() {
+        const { clientWidth, clientHeight } = document.documentElement;
+        canvas.width = clientWidth;
+        canvas.height = clientHeight;
+        listener(clientWidth, clientHeight);
+    }
 }
 
 export function setStyle(node: HTMLElement, style: {}) {

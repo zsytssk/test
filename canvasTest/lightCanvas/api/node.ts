@@ -87,6 +87,9 @@ export class Node {
             number
         ];
 
+        m[4] += m[0] * (x + pivotX) + m[2] * (y + pivotY);
+        m[5] += m[1] * (x + pivotX) + m[3] * (y + pivotY);
+
         // rotate
         const rad = degreeToAngle(rotation);
         const c = Math.cos(rad);
@@ -99,10 +102,6 @@ export class Node {
         m[1] = m12;
         m[2] = m21;
         m[3] = m22;
-
-        // translate
-        m[4] += m[0] * pivotX + m[2] * pivotY;
-        m[5] += m[1] * pivotX + m[3] * pivotY;
 
         // scale
         m[0] *= scaleX;
