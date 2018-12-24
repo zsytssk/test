@@ -8,15 +8,26 @@ load(res).then(() => {
     const stage = init(canvas);
     const sun = new Image();
     sun.skin = './image/Canvas_sun.png';
-    sun.x = 100;
-    sun.y = 100;
+    sun.x = 150;
+    sun.y = 150;
     sun.pivotX = 150;
     sun.pivotY = 150;
+    sun.scaleX = 0.8;
+    sun.scaleY = 0.8;
     stage.addChild(sun);
 
-    function draw() {
-        // sun.rotation = sun.rotation + 1;
-        // window.requestAnimationFrame(draw);
-    }
-    draw();
+    const earth = new Image();
+    earth.skin = './image/Canvas_earth.png';
+    earth.x = 150;
+    earth.y = 150;
+    earth.pivotX = 80;
+    earth.pivotY = 80;
+    sun.addChild(earth);
+
+    // function draw() {
+    //     sun.rotation = sun.rotation + 0.1;
+    //     earth.rotation = earth.rotation + 1;
+    //     window.requestAnimationFrame(draw);
+    // }
+    // draw();
 });

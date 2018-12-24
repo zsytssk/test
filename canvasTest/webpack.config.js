@@ -1,5 +1,6 @@
 'use strict';
 const path = require('path');
+const webpack = require('webpack');
 
 let common_config = {
     entry: {
@@ -31,7 +32,9 @@ const dev_config = {
     watch: true,
     devServer: {
         contentBase: path.join(__dirname, './'),
+        hot: true,
     },
+    plugins: [new webpack.HotModuleReplacementPlugin()],
 };
 
 const prod_config = {

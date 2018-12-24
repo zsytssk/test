@@ -1,9 +1,34 @@
+## 2018-12-24 10:07:40
+
+-   @ques 能不能核心模块只完成必要的部分
+    -   image + text
+    -   其他的功能像 react 的 component 一样
+        -   list clip ....
+
+## 2018-12-24 10:07:36
+
 -   @todo image
 
     -   位置
     -   旋转
     -   scale
     -   alpha...
+
+## 2018-12-24 09:17:03
+
+-   @ques scale 要不要对位置产生影响
+
+    -   对自己的位置不产生影响, 对子节点产生影响
+
+-   @ques 能不能像将 render 变成 laya function queue
+
+    -   一个个的分开, 这样更有条理...
+
+-   @ques 如何让 test 和代码独立...
+    -   资源也相互的独立??
+        -   图片不依赖 image 中的
+        -   单独有 test 所用的资源, 不会收正式代码影响
+    -   很容易的切换 url change?
 
 ## 2018-12-19 19:59:38
 
@@ -19,6 +44,7 @@
 *   @ques 位置如何处理
     -   旋转的中心点
     -   绘制开始点...
+    -   three.js [https://threejs.org/examples/#webgl_animation_cloth](https://threejs.org/examples/#webgl_animation_cloth)
 
 ## 2018-12-19 09:20:12
 

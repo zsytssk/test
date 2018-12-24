@@ -12,8 +12,12 @@ export function draw(node: Node, canvas?: HTMLCanvasElement) {
         ctx.clearRect(0, 0, width, height);
     }
     ctx.save();
+    const { pivotX, pivotY } = node;
+    const alpha = node.getAlpha();
+    ctx.globalAlpha = alpha;
     const transform = node.calcTransform();
     ctx.transform(...transform);
+    ctx.translate(-pivotX, -pivotY);
     if (node instanceof Image) {
         drawImage(node as Image);
     }

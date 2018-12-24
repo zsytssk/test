@@ -77,7 +77,7 @@ export class Node {
         this.children = [];
     }
     public calcTransform() {
-        const { x, y, pivotX, pivotY, rotation, scaleX, scaleY } = this;
+        const { x, y, rotation, scaleX, scaleY } = this;
         const m = [1, 0, 0, 1, 0, 0] as [
             number,
             number,
@@ -87,8 +87,8 @@ export class Node {
             number
         ];
 
-        m[4] += m[0] * (x + pivotX) + m[2] * (y + pivotY);
-        m[5] += m[1] * (x + pivotX) + m[3] * (y + pivotY);
+        m[4] += m[0] * x + m[2] * y;
+        m[5] += m[1] * x + m[3] * y;
 
         // rotate
         const rad = degreeToAngle(rotation);
@@ -110,5 +110,12 @@ export class Node {
         m[3] *= scaleY;
 
         return m;
+    }
+    public getAlpha() {
+        if (!this.parent) {
+            return this.alpha;
+        }
+        const parent_alpha = this.parent.getAlpha();
+        return this.alpha * parent_alpha;
     }
 }
