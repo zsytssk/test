@@ -1,8 +1,8 @@
+import { Image } from '../lightCanvas/api/image';
 import { Text } from '../lightCanvas/api/text';
 import { init } from '../lightCanvas/main';
 import { load } from '../lightCanvas/utils/load';
 import { res } from './res';
-import { Image } from '../lightCanvas/api/image';
 
 async function main() {
     await load(res);
@@ -18,7 +18,7 @@ async function main() {
     stage.addChild(moon);
 
     const hello = new Text();
-    hello.text = '我是';
+    hello.text = '刘小勇是sb';
     hello.align = 'right';
     hello.valign = 'bottom';
     hello.fontSize = 50;
