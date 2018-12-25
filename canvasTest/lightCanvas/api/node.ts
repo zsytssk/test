@@ -2,6 +2,8 @@ import { NodeData } from '../dom/node';
 import { degreeToAngle } from '../utils/utils';
 
 export class Node {
+    public name: string;
+    public data: NodeData;
     public x: number = 0;
     public y: number = 0;
     public width = 0;
@@ -15,9 +17,7 @@ export class Node {
     public visible = true;
     public children = [] as Node[];
     protected parent: Node;
-    public name: string;
     public is_top = false;
-    public data: NodeData;
     public addChild(child: Node) {
         const { children } = this;
         children.push(child);
@@ -61,7 +61,6 @@ export class Node {
         }
         return;
     }
-    /** 获得ctrl子元素的个数 */
     public get numChildren(): number {
         return this.children.length;
     }

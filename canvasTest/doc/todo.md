@@ -1,4 +1,5 @@
 -   @todo Text
+    -   bold worldWrap
 -   @todo graphic
 -   @todo mask
 -   @todo filter

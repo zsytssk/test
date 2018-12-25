@@ -3,25 +3,50 @@
 
 ## 2018-12-24 10:07:40
 
--   @ques fillText 的位置很奇怪
+-   @ques 字的位置有问题
 
--   @ques 需要做什么兼容代码 @蒙哥
+    -   有点靠左上
 
--   @ques 将没有实现的属性全部加上 ?
+-   @bug 图片的资源没有加载 怎么办
 
--   @ques measureText 是做什么的
+-   cache
+    -   createImageData()
+    -   getImageData()
+    -   putImageData()
 
--   @ques 如何将数据抽离出来 | 怎么提升渲染逻辑
+*   @ques 怎么绘制 node 的范围
+
+    -   backgroundColor
+
+*   @ques 要不要将 child ... 从 node 中分离出来
+
+    -   这不是关键 最方便就可以了
+
+*   @ques 怎么从一张大图中找小图...
+
+*   @ques ui 编辑器, 直接拖拽 本地生成的 ui
+
+    -   list 可以 直接拖拽 item
+
+*   @ques fillText 的位置很奇怪
+
+*   @ques 需要做什么兼容代码 @蒙哥
+
+*   @ques 将没有实现的属性全部加上 ?
+
+*   @ques measureText 是做什么的
+
+*   @ques 如何将数据抽离出来 | 怎么提升渲染逻辑
 
     -   减少不必要的计算 合并计算
 
-*   @ques 如果 data 要能抽离出来, canvas webgl 要使用相同的数据结构
+-   @ques 如果 data 要能抽离出来, canvas webgl 要使用相同的数据结构
 
-*   @ques 将所有的数据结构 使用一级数组会不会性能高些
+-   @ques 将所有的数据结构 使用一级数组会不会性能高些
 
-*   @ques api 要能支持 wasm
+-   @ques api 要能支持 wasm
 
-*   @ques 能不能将 jsx 直接打包成 node 节点,
+-   @ques 能不能将 jsx 直接打包成 node 节点,
     -   这样只在开发的时候需要 jsx 逻辑, 真正发布的时候就不需要了...
     -   节省大量的发布代码...
 

@@ -8,6 +8,7 @@ let ctx: CanvasRenderingContext2D;
 export function draw(node: Node, canvas?: HTMLCanvasElement) {
     if (canvas) {
         ctx = canvas.getContext('2d');
+        initCtx(ctx);
     }
     if (node.is_top) {
         const { width, height } = node;
@@ -30,6 +31,9 @@ export function draw(node: Node, canvas?: HTMLCanvasElement) {
     }
     ctx.restore();
 }
+
+/** 初始化ctx */
+export function initCtx(ctx: CanvasRenderingContext2D) {}
 
 export function drawImage(ctx: CanvasRenderingContext2D, img: Image) {
     const { skin } = img;
