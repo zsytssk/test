@@ -5,6 +5,8 @@
 
 -   @ques fillText 的位置很奇怪
 
+-   @ques 需要做什么兼容代码 @蒙哥
+
 -   @ques 将没有实现的属性全部加上 ?
 
 -   @ques measureText 是做什么的
@@ -13,20 +15,13 @@
 
     -   减少不必要的计算 合并计算
 
--   @ques 能不能核心模块只完成必要的部分
+*   @ques 如果 data 要能抽离出来, canvas webgl 要使用相同的数据结构
 
-    -   image + text
-    -   其他的功能像 react 的 component 一样
-        -   list clip ....
-        -   就像 rust 的核心库+lib+第三方库的形式
+*   @ques 将所有的数据结构 使用一级数组会不会性能高些
 
--   @ques 如果 data 要能抽离出来, canvas webgl 要使用相同的数据结构
+*   @ques api 要能支持 wasm
 
--   @ques 将所有的数据结构 使用一级数组会不会性能高些
-
--   @ques api 要能支持 wasm
-
--   @ques 能不能将 jsx 直接打包成 node 节点,
+*   @ques 能不能将 jsx 直接打包成 node 节点,
     -   这样只在开发的时候需要 jsx 逻辑, 真正发布的时候就不需要了...
     -   节省大量的发布代码...
 

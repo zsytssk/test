@@ -1,5 +1,12 @@
 ## other
 
+-   @ques core + lib
+
+    -   就像 rust 的核心库+lib+第三方库的形式
+    -   core:> image + text
+    -   lib:> list clip ....
+        -   其他的功能像 react 的 component 一样
+
 -   @ques 像 react 一样 分成几块渲染, wait...
 
     -   如果可以将 api 转化成 data, 我的 render 可以像 react 一样拆分成几部分
