@@ -7,7 +7,7 @@ export class Text extends Node {
     public fontSize: number;
     public bold: boolean;
     public color: string;
-    public align: string;
+    public align: CanvasTextAlign = 'left';
     public overflow: string;
     public italic: boolean;
     public wordWrap: boolean;
