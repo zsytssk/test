@@ -1,4 +1,4 @@
-import { LoadItem } from '../../lightCanvas/utils/load';
+import { LoadItem } from '../lightCanvas/utils/load';
 
 export const res: LoadItem[] = [
     {
@@ -11,6 +11,10 @@ export const res: LoadItem[] = [
     },
     {
         url: './image/Canvas_earth.png',
+        type: 'Image',
+    },
+    {
+        url: './image/test.jpg',
         type: 'Image',
     },
 ];

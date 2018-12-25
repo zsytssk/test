@@ -1,3 +1,18 @@
+-   @todo Text
+-   @todo graphic
+-   @todo mask
+-   @todo filter
+-   @todo clip list ...
+-   @todo 鼠标事件...
+
+*   @todo 属性
+    -   node
+        -   skew
+        -   visible
+    -   image
+        -   sizeGrid
+        -   gray
+
 ## img
 
 ## node

@@ -12,6 +12,7 @@ export class Node {
     public pivotX = 0;
     public pivotY = 0;
     public rotation = 0;
+    public visible = true;
     public children = [] as Node[];
     protected parent: Node;
     public name: string;
@@ -110,12 +111,5 @@ export class Node {
         m[3] *= scaleY;
 
         return m;
-    }
-    public getAlpha() {
-        if (!this.parent) {
-            return this.alpha;
-        }
-        const parent_alpha = this.parent.getAlpha();
-        return this.alpha * parent_alpha;
     }
 }

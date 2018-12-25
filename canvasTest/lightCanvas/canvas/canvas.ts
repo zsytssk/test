@@ -1,8 +1,10 @@
 import { Image } from '../api/image';
 import { Node } from '../api/node';
+import { Text } from '../api/text';
 import { getRes } from '../utils/load';
+import { drawText } from './drawText';
 
-export let ctx: CanvasRenderingContext2D;
+let ctx: CanvasRenderingContext2D;
 export function draw(node: Node, canvas?: HTMLCanvasElement) {
     if (canvas) {
         ctx = canvas.getContext('2d');
@@ -12,14 +14,16 @@ export function draw(node: Node, canvas?: HTMLCanvasElement) {
         ctx.clearRect(0, 0, width, height);
     }
     ctx.save();
-    const { pivotX, pivotY } = node;
-    const alpha = node.getAlpha();
-    ctx.globalAlpha = alpha;
+    const { pivotX, pivotY, alpha } = node;
+    ctx.globalAlpha *= alpha;
     const transform = node.calcTransform();
     ctx.transform(...transform);
     ctx.translate(-pivotX, -pivotY);
     if (node instanceof Image) {
-        drawImage(node as Image);
+        drawImage(ctx, node as Image);
+    }
+    if (node instanceof Text) {
+        drawText(ctx, node as Text);
     }
     for (const item of node.children) {
         draw(item);
@@ -27,7 +31,7 @@ export function draw(node: Node, canvas?: HTMLCanvasElement) {
     ctx.restore();
 }
 
-export function drawImage(img: Image) {
+export function drawImage(ctx: CanvasRenderingContext2D, img: Image) {
     const { skin } = img;
     const img_ele = getRes(skin);
     if (img_ele) {
