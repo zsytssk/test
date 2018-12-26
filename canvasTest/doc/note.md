@@ -1,9 +1,15 @@
 -   @todo Graphics
+
     -   clipRect drawCircle drawCurves drawLine drawLines drawPath
     -   drawPie drawPoly drawRect
     -   alpha scale...
 
+-   @ques 如何独立出 data 层
+    -   绘制需要哪些数据, 将这些数据最简化的形式组织
+
 ## 2018-12-26 09:20:08
+
+-   @ques buffer shader 是什么鬼
 
 -   @ques 这 canvas api 都比较简单, 最难的地方可能是
 

@@ -2,8 +2,8 @@ import { Image } from '../api/image';
 import { Node } from '../api/node';
 import { Text } from '../api/text';
 import { getRes } from '../utils/load';
-import { drawText } from './drawText';
 import { drawGraphics } from './drawGraphic';
+import { drawText } from './drawText';
 
 let ctx: CanvasRenderingContext2D;
 export function draw(node: Node, canvas?: HTMLCanvasElement) {

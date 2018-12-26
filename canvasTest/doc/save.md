@@ -32,7 +32,7 @@
         -   有没有可能像 ps 一样
         -   https://framer.com/
         -   https://blocsapp.com/
-        - https://proto.io/
+        -   https://proto.io/
         -   直接搜索 设置属性
         -   widget 随意组合
         -   根据选中的对象 显示操作
@@ -76,7 +76,7 @@
     -   方便外层调用
     -   最好兼容 laya 接口
 
--   dom: 绘制 ui 所需的数据 - dop
+-   data: 绘制 ui 所需的数据 - dop
 
     -   相当于虚拟 dom
     -   层级结构 各层各种数据
