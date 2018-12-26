@@ -39,3 +39,5 @@ type DeepPartial<T> = {
 };
 
 type RecursivePartial<T> = { [P in keyof T]?: T[P] | RecursivePartial<T[P]> };
+
+type CanvasStyle = string | CanvasGradient | CanvasPattern;

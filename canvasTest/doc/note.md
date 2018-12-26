@@ -1,7 +1,25 @@
--   @todo Text
-    -   size color position align...
+-   @todo Graphics
+    -   clipRect drawCircle drawCurves drawLine drawLines drawPath
+    -   drawPie drawPoly drawRect
+    -   alpha scale...
+
+## 2018-12-26 09:20:08
+
+-   @ques graphic 只是为了绘制形状了
+    -   线条 矩形 圆 扇形 ...
+
+*   @ques 怎么在 ie 上面报错???
+    -   也许是 sourcemap
+
+-   @ques number !== Number
 
 ## 2018-12-24 10:07:40
+
+-   @note ctx.save 可以记下 font...所有的一切
+
+    -   @ques ctx.save 到底能记下哪些属性
+
+-   @ques texture 缓存
 
 -   @todo italic bold
 

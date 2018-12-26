@@ -1,10 +1,10 @@
 -   @todo Text
-    -   bold worldWrap
--   @todo graphic
+    -   worldWrap leading padding
+-   @todo graphic 只是为了绘制形状
 -   @todo mask
+-   @todo 鼠标事件...
 -   @todo filter
 -   @todo clip list ...
--   @todo 鼠标事件...
 
 *   @todo 属性
     -   node

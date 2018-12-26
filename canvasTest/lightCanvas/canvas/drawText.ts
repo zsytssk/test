@@ -10,6 +10,8 @@ export function drawText(ctx: CanvasRenderingContext2D, node: Text) {
         color,
         align,
         valign,
+        italic,
+        bold,
         width,
         height,
     } = node;
@@ -36,7 +38,6 @@ export function drawText(ctx: CanvasRenderingContext2D, node: Text) {
 
     ctx.textBaseline = valign;
     ctx.textAlign = align;
-    ctx.font = `${fontSize}px ${font}`;
 
     if (stroke) {
         ctx.strokeStyle = strokeColor;
@@ -44,6 +45,10 @@ export function drawText(ctx: CanvasRenderingContext2D, node: Text) {
         ctx.miterLimit = 2;
         ctx.strokeText(text, x, y);
     }
+
+    ctx.font = `${italic ? 'italic' : ''} ${
+        bold ? 'bold' : ''
+    } ${fontSize}px ${font}`;
     ctx.fillStyle = color;
     ctx.fillText(text, x, y);
 }

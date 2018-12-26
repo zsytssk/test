@@ -32,9 +32,11 @@
         -   有没有可能像 ps 一样
         -   https://framer.com/
         -   https://blocsapp.com/
+        - https://proto.io/
         -   直接搜索 设置属性
         -   widget 随意组合
         -   根据选中的对象 显示操作
+        -   像画图一样中间是图纸旁边是工具, 图纸很大
     -   像 react shadow dom 一样组织 ui
     -   直接拖拽本地模块
 

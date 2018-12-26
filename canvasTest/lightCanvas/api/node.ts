@@ -1,5 +1,6 @@
 import { NodeData } from '../dom/node';
 import { degreeToAngle } from '../utils/utils';
+import { Graphics } from './graphics';
 
 export class Node {
     public name: string;
@@ -15,6 +16,7 @@ export class Node {
     public pivotY = 0;
     public rotation = 0;
     public visible = true;
+    public graphics: Graphics;
     public children = [] as Node[];
     protected parent: Node;
     public is_top = false;
