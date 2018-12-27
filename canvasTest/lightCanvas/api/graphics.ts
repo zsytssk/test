@@ -1,29 +1,58 @@
 // https://layaair.ldc.layabox.com/api/?category=Core&class=laya.display.Graphics
 export type LineParams = [number, number, number, number, CanvasStyle, number];
-export type RectParams = [
-    number,
-    number,
-    number,
-    number,
-    CanvasStyle,
-    CanvasStyle,
-    number
-];
+
+// prettier-ignore
+export type RectParams = [ number, number, number, number, CanvasStyle, CanvasStyle, number ];
+
+// prettier-ignore
+export type PathParams = [ number, number, Point[], CanvasStyle, CanvasStyle, number ];
+
+// prettier-ignore
+export type ArcParams = [ number, number, number, number, number, boolean, CanvasStyle, CanvasStyle, number ];
+
+type GraphicsType = 'line' | 'rect' | 'arc' | 'poly' | 'path';
+
+type GrahpicsItem = {
+    type: GraphicsType;
+    params: LineParams | RectParams | ArcParams | PathParams;
+};
+
 export class Graphics {
     public alpha: number = 1;
-    public lines: LineParams[] = [];
-    public rects: RectParams[] = [];
+    public graphics_list: GrahpicsItem[] = [];
     public drawLine(
         fromX: number,
         fromY: number,
         toX: number,
         toY: number,
         lineColor: CanvasStyle,
-        lineWidth: number = 1
+        lineWidth: number = 1,
     ) {
-        this.lines.push([fromX, fromY, toX, toY, lineColor, lineWidth]);
+        this.graphics_list.push({
+            type: 'line',
+            params: [fromX, fromY, toX, toY, lineColor, lineWidth],
+        });
     }
-    public drawLines(alpha: number) {}
+    public drawPath(
+        x: number,
+        y: number,
+        points: Point[],
+        lineColor?: CanvasStyle,
+        lineWidth: number = 1,
+    ) {
+        // prettier-ignore
+        this.graphics_list.push({
+            type: 'path',
+            params: [
+                x,
+                y,
+                points,
+                ,
+                lineColor,
+                lineWidth,
+            ] as PathParams,
+        });
+    }
     public drawCurves(alpha: number) {}
     public drawRect(
         x: number,
@@ -32,14 +61,65 @@ export class Graphics {
         height: number,
         fillColor?: CanvasStyle,
         lineColor?: CanvasStyle,
-        lineWidth: number = 1
+        lineWidth: number = 1,
     ) {
-        this.rects.push([x, y, width, height, fillColor, lineColor, lineWidth]);
+        // prettier-ignore
+        this.graphics_list.push({
+            type: 'rect',
+            params: [x, y, width, height, fillColor, lineColor, lineWidth],
+        });
     }
-    public drawPoly(alpha: number) {}
-    public drawCircle(alpha: number) {}
-    public drawPie(alpha: number) {}
-    public drawPath(alpha: number) {}
+    public drawPoly(
+        x: number,
+        y: number,
+        points: Point[],
+        fillColor?: CanvasStyle,
+        lineColor?: CanvasStyle,
+        lineWidth: number = 1,
+    ) {
+        this.graphics_list.push({
+            type: 'poly',
+            params: [
+                x,
+                y,
+                points,
+                fillColor,
+                lineColor,
+                lineWidth,
+            ] as PathParams,
+        });
+    }
+    public drawCircle(
+        x: number,
+        y: number,
+        radius: number,
+        fillColor?: CanvasStyle,
+        lineColor?: CanvasStyle,
+        lineWidth: number = 1,
+    ) {
+        // prettier-ignore
+        this.graphics_list.push({
+            type: 'arc',
+            params: [x, y, radius, 0, Math.PI * 2, true, fillColor, lineColor, lineWidth] as ArcParams,
+        });
+    }
+    public drawPie(
+        x: number,
+        y: number,
+        radius: number,
+        sAngle: number,
+        eAngle: number,
+        clockWise?: boolean,
+        fillColor?: CanvasStyle,
+        lineColor?: CanvasStyle,
+        lineWidth: number = 1,
+    ) {
+        // prettier-ignore
+        this.graphics_list.push({
+            type: 'arc',
+            params: [x, y, radius, sAngle, eAngle, clockWise, fillColor, lineColor, lineWidth] as ArcParams,
+        });
+    }
     public setAlpha(alpha: number) {
         this.alpha = alpha;
     }

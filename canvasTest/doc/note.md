@@ -1,11 +1,13 @@
 -   @todo Graphics
 
-    -   clipRect drawCircle drawCurves drawLine drawLines drawPath
-    -   drawPie drawPoly drawRect
-    -   alpha scale...
+    -   drawPoly drawPath drawCurves
+    -   alpha
 
 -   @ques 如何独立出 data 层
+
     -   绘制需要哪些数据, 将这些数据最简化的形式组织
+
+-   @ques 能不能将 graphics 直接映射到 ctx 的方法上
 
 ## 2018-12-26 09:20:08
 
