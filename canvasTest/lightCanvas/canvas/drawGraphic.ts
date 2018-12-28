@@ -30,7 +30,6 @@ export function drawGraphics(
         }
         ctx.restore();
     }
-
     ctx.restore();
 }
 

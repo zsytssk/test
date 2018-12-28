@@ -1,68 +1,131 @@
-const canvas = document.getElementById('canvas') as HTMLCanvasElement;
-const gl = canvas.getContext('webgl');
-gl.viewport(0, 0, canvas.width, canvas.height);
+/* eslint no-console:0 consistent-return:0 */
+'use strict';
 
-function createSquare(gl: WebGLRenderingContext) {
-    const vertexBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+function createShader(gl, type, source) {
+    const shader = gl.createShader(type);
+    gl.shaderSource(shader, source);
+    gl.compileShader(shader);
+    const success = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
+    if (success) {
+        return shader;
+    }
 
-    // prettier-ignore
-    const verts = [
-        .5, .5, 0.0,
-        -.5, .5, 0.0,
-        .5, -.5, 0.0,
-        -.5, -.5, 0.0,
-    ];
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verts), gl.STATIC_DRAW);
-
-    const square = {
-        buffer: vertexBuffer,
-        vertSize: 3,
-        nVerts: 4,
-        promtype: gl.TRIANGLE_STRIP,
-    };
-
-    return square;
+    console.log(gl.getShaderInfoLog(shader));
+    gl.deleteShader(shader);
 }
 
-function initMatrics() {
-    // prettier-ignore
-    const modelViewMatrix = new Float32Array([
-        1, 0, 0, 0,
-        0, 1, 0, 0,
-        0, 0, 1, 0,
-        0, 0, -3.333, 1,
-    ]);
+function createProgram(gl, vertexShader, fragmentShader) {
+    const program = gl.createProgram();
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    gl.linkProgram(program);
+    const success = gl.getProgramParameter(program, gl.LINK_STATUS);
+    if (success) {
+        return program;
+    }
 
-    // prettier-ignore
-    const projectionViewMatrix = new Float32Array([
-        2.41421, 0, 0, 0,
-        0, 2.41421, 0, 0,
-        0, 0, -1.002002, -1,
-        0, 0, -0.2002002, 0,
-    ]);
+    console.log(gl.getProgramInfoLog(program));
+    gl.deleteProgram(program);
 }
 
-// @ques 怎么使用外部定义的变量projectionViewMatrix
-const vertexShaderSource = `
-    attribute vec3 vertexPos;
-    uniform mat4 modelViewMatrix;
-    uniform mat4 projectionMatrix;
-    void main(void) {
-        gl_Position = projectionMatrix * modelViewMatrix *Vec4(vertexPos, 1.0);
+function main() {
+    // Get A WebGL context
+    const canvas = document.getElementById('canvas') as HTMLCanvasElement;
+    const gl = canvas.getContext('webgl');
+    if (!gl) {
+        return;
     }
-`;
 
-const fragmentShaderSource = `
-    void main(void) {
-        gl_FragColor = vec4(1.0, 1.0, 1.0,1.0);
+    // Get the strings for our GLSL shaders
+    const vertexShaderSource = `
+    // an attribute will receive data from a buffer
+    attribute vec4 a_position;
+
+    // all shaders have a main function
+    void main() {
+
+      // gl_Position is a special variable a vertex shader
+      // is responsible for setting
+      gl_Position = a_position;
     }
-`;
+    `;
+    const fragmentShaderSource = `
+    // fragment shaders don't have a default precision so we need
+    // to pick one. mediump is a good default
+    precision mediump float;
 
-function draw(gl: WebGLRenderingContext, obj) {
-    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    void main() {
+      // gl_FragColor is a special variable a fragment shader
+      // is responsible for setting
+      gl_FragColor = vec4(1, 0, 0.5, 1); // return redish-purple
+    }
+    `;
+
+    // create GLSL shaders, upload the GLSL source, compile the shaders
+    const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+    const fragmentShader = createShader(
+        gl,
+        gl.FRAGMENT_SHADER,
+        fragmentShaderSource,
+    );
+
+    // Link the two shaders into a program
+    const program = createProgram(gl, vertexShader, fragmentShader);
+
+    // look up where the vertex data needs to go.
+    const positionAttributeLocation = gl.getAttribLocation(
+        program,
+        'a_position',
+    );
+
+    // Create a buffer and put three 2d clip space points in it
+    const positionBuffer = gl.createBuffer();
+
+    // Bind it to ARRAY_BUFFER (think of it as ARRAY_BUFFER = positionBuffer)
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+
+    const positions = [0, 0, 0, 0.5, 0.5, 0];
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+
+    // code above this line is initialization code.
+    // code below this line is rendering code.
+
+    // Tell WebGL how to convert from clip space to pixels
+    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
+    // Clear the canvas
+    gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
-    gl.bindBuffer(gl.ARRAY_BUFFER, obj.buffer);
-    gl.useProgram(shaderProgram);
+    // Tell it to use our program (pair of shaders)
+    gl.useProgram(program);
+
+    // Turn on the attribute
+    gl.enableVertexAttribArray(positionAttributeLocation);
+
+    // Bind the position buffer.
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+
+    // Tell the attribute how to get data out of positionBuffer (ARRAY_BUFFER)
+    const size = 2; // 2 components per iteration
+    const type = gl.FLOAT; // the data is 32bit floats
+    const normalize = false; // don't normalize the data
+    const stride = 0; // 0 = move forward size * sizeof(type) each iteration to get the next position
+    const offset = 0; // start at the beginning of the buffer
+    gl.vertexAttribPointer(
+        positionAttributeLocation,
+        size,
+        type,
+        normalize,
+        stride,
+        offset,
+    );
+
+    // draw
+    const primitiveType = gl.TRIANGLES;
+    const count = 3;
+
+    gl.drawArrays(primitiveType, offset, count);
 }
+
+main();

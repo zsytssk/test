@@ -1,7 +1,7 @@
 -   @todo Text
     -   worldWrap leading padding
--   @todo graphic 只是为了绘制形状
-    -   圆 扇形 多边形
+-   ## @todo graphic 只是为了绘制形状
+    -   drawCurves
 -   @todo mask
 -   @todo 鼠标事件...
 -   @todo filter

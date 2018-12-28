@@ -1,7 +1,6 @@
 -   @todo Graphics
 
-    -   drawPoly drawPath drawCurves
-    -   alpha
+    -   drawCurves
 
 -   @ques 如何独立出 data 层
 
@@ -9,7 +8,13 @@
 
 -   @ques 能不能将 graphics 直接映射到 ctx 的方法上
 
+-   纹理 [Texture](https://layaair.ldc.layabox.com/api/?category=Core&class=laya.resource.Texture)
+
 ## 2018-12-26 09:20:08
+
+-   @ques 如何进行性能测试 检测修改对性能有没有影响
+
+    -   对函数的调用时间测试
 
 -   @ques buffer shader 是什么鬼
 
