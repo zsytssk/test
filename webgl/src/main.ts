@@ -39,14 +39,17 @@ function main() {
     // Get the strings for our GLSL shaders
     const vertexShaderSource = `
     // an attribute will receive data from a buffer
-    attribute vec4 a_position;
+    attribute vec2 a_position;
+    uniform vec2 u_resolution;
 
     // all shaders have a main function
     void main() {
-
-      // gl_Position is a special variable a vertex shader
-      // is responsible for setting
-      gl_Position = a_position;
+        vec2 zeroToOne = a_position / u_resolution;
+        vec2 zeroToTwo = zeroToOne * 2.0;
+        vec2 clipSpace = zeroToTwo - 1.0;
+        // gl_Position is a special variable a vertex shader
+        // is responsible for setting
+        gl_Position = vec4(clipSpace, 0, 1);
     }
     `;
     const fragmentShaderSource = `
@@ -57,7 +60,7 @@ function main() {
     void main() {
       // gl_FragColor is a special variable a fragment shader
       // is responsible for setting
-      gl_FragColor = vec4(1, 0, 0.5, 1); // return redish-purple
+      gl_FragColor = vec4(0, 0, 0, 0.5); // return redish-purple
     }
     `;
 
@@ -84,7 +87,7 @@ function main() {
     // Bind it to ARRAY_BUFFER (think of it as ARRAY_BUFFER = positionBuffer)
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
-    const positions = [0, 0, 0, 0.5, 0.5, 0];
+    const positions = [0, 0, 0, 1, 1, 1];
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
 
     // code above this line is initialization code.

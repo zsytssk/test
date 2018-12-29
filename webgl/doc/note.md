@@ -1,5 +1,29 @@
 https://github.com/toji/glmatrix
 
+## 2018-12-29 09:16:21
+
+-   下面这句话是什么意思
+    `Because we set primitiveType to gl.TRIANGLES, each time our vertex shader is run 3 times WebGL will draw a triangle based on the 3 values we set gl_Position to.`
+
+-   @ques positions 如何存贮 如何使用
+
+    -   ??
+    -   bindBuffer 中只有一个数据
+    -   vertexAttribPointer 配置好数据的格式,
+    -   gl 自己 buffer 中找到数据
+    -   将他传给 a_position
+        -   positionAttributeLocation
+
+*   @ques enableVertexAttribArray
+
+*   @ques gl.getShaderParameter(shader, gl.COMPILE_STATUS)
+
+    -   gl 这种运算能用异步吗
+
+*   @ques GLSL programs 什么意思
+    -   GL Shader Language
+    -   written in a very strictly typed C/C++ like language -运行 显示页面
+
 ## 2018-12-28 09:48:35
 
 -   @ques 小米包 进不去自定义房间

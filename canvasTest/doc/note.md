@@ -10,6 +10,16 @@
 
 -   纹理 [Texture](https://layaair.ldc.layabox.com/api/?category=Core&class=laya.resource.Texture)
 
+## 2018-12-28 11:11:15
+
+-   @ques 能不能将所有的 render 全部放到对应的 node 中
+
+    -   这样打包代码没有 image 就不会打包 drawImage 部分..
+    -   当然方法要存对象上独立出来, 防止每一个对象都有一个方法消耗内存
+
+-   @note 所有的渲染其实都是 texture | text
+    -   能否将图片变化成 texture
+
 ## 2018-12-26 09:20:08
 
 -   @ques 如何进行性能测试 检测修改对性能有没有影响
