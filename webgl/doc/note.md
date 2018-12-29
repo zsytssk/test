@@ -1,6 +1,10 @@
 https://github.com/toji/glmatrix
 
+-   将初始化代码和 render 代码分离出来
+
 ## 2018-12-29 09:16:21
+
+-   怎么麻烦如何调用 webgl 接口去绘制图片 text...
 
 -   下面这句话是什么意思
     `Because we set primitiveType to gl.TRIANGLES, each time our vertex shader is run 3 times WebGL will draw a triangle based on the 3 values we set gl_Position to.`
