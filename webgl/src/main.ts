@@ -38,29 +38,33 @@ function main() {
 
     // Get the strings for our GLSL shaders
     const vertexShaderSource = `
-    // an attribute will receive data from a buffer
-    attribute vec2 a_position;
+    attribute vec4 a_position;
+
     uniform vec2 u_resolution;
 
-    // all shaders have a main function
     void main() {
-        vec2 zeroToOne = a_position / u_resolution;
-        vec2 zeroToTwo = zeroToOne * 2.0;
-        vec2 clipSpace = zeroToTwo - 1.0;
-        // gl_Position is a special variable a vertex shader
-        // is responsible for setting
-        gl_Position = vec4(clipSpace, 0, 1);
+       // convert the position from pixels to 0.0 to 1.0
+       vec2 zeroToOne = a_position.xy / u_resolution;
+
+       // convert from 0->1 to 0->2
+       vec2 zeroToTwo = zeroToOne * 2.0;
+
+       // convert from 0->2 to -1->+1 (clipspace)
+       vec2 clipSpace = zeroToTwo - 1.0;
+
+       gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
     }
     `;
     const fragmentShaderSource = `
     // fragment shaders don't have a default precision so we need
     // to pick one. mediump is a good default
     precision mediump float;
+    uniform vec4 u_color;
 
     void main() {
       // gl_FragColor is a special variable a fragment shader
       // is responsible for setting
-      gl_FragColor = vec4(0, 0, 0, 0.5); // return redish-purple
+      gl_FragColor = u_color; // return redish-purple
     }
     `;
 
@@ -81,13 +85,28 @@ function main() {
         'a_position',
     );
 
+    // look up where the vertex data needs to go.
+    const resolutionUniformLocation = gl.getUniformLocation(
+        program,
+        'u_resolution',
+    );
+    const colorUniformLocation = gl.getUniformLocation(program, 'u_color');
+
     // Create a buffer and put three 2d clip space points in it
     const positionBuffer = gl.createBuffer();
 
     // Bind it to ARRAY_BUFFER (think of it as ARRAY_BUFFER = positionBuffer)
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
-    const positions = [0, 0, 0, 1, 1, 1];
+    // prettier-ignore
+    const positions = [
+        10, 20,
+        80, 20,
+        10, 30,
+        10, 30,
+        80, 20,
+        80, 30,
+    ];
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
 
     // code above this line is initialization code.
@@ -123,12 +142,55 @@ function main() {
         stride,
         offset,
     );
+    gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
 
-    // draw
-    const primitiveType = gl.TRIANGLES;
-    const count = 3;
+    // draw 50 random rectangles in random colors
+    for (let ii = 0; ii < 5; ++ii) {
+        // Setup a random rectangle
+        // This will write to positionBuffer because
+        // its the last thing we bound on the ARRAY_BUFFER
+        // bind point
+        setRectangle(
+            gl,
+            randomInt(100),
+            randomInt(100),
+            randomInt(100),
+            randomInt(100),
+        );
 
-    gl.drawArrays(primitiveType, offset, count);
+        // Set a random color.
+        gl.uniform4f(
+            colorUniformLocation,
+            Math.random(),
+            Math.random(),
+            Math.random(),
+            1,
+        );
+
+        // Draw the rectangle.
+        const primitiveType = gl.TRIANGLES;
+        const offset = 0;
+        const count = 6;
+        gl.drawArrays(primitiveType, offset, count);
+    }
+}
+
+// Returns a random integer from 0 to range - 1.
+function randomInt(range) {
+    return Math.floor(Math.random() * range);
+}
+
+// Fill the buffer with the values that define a rectangle.
+function setRectangle(gl, x, y, width, height) {
+    const x1 = x;
+    const x2 = x + width;
+    const y1 = y;
+    const y2 = y + height;
+    gl.bufferData(
+        gl.ARRAY_BUFFER,
+        new Float32Array([x1, y1, x2, y1, x1, y2, x1, y2, x2, y1, x2, y2]),
+        gl.STATIC_DRAW,
+    );
 }
 
 main();

@@ -1,3 +1,24 @@
+-   理解 顶点作色器 网格作色器
+
+    -   `vec2 zeroToOne = a_position.xy / u_resolution;`
+    -   `vec4(clipSpace * vec2(1, -1), 0, 1)`
+    -   这两句话是什么意思
+
+-   需要自己写作色器吗
+    -   因该是需要的...
+
+## 2019-01-02 09:19:15
+
+-   @ques 画一个矩形为什么使用 6 个点
+
+    -   只会画三角形 画两个三角形就是矩形
+
+-   @ques 怎么将 webgl 的坐标转换成和 canvas 一致
+
+    -   能否实现和 canvas api 一致
+
+-   webgl 绘制就是在 shader 中定义好变量, 然后再用 js 去改变 然后绘制...
+
 https://github.com/toji/glmatrix
 
 -   将初始化代码和 render 代码分离出来
