@@ -1,10 +1,29 @@
--   理解 顶点作色器 网格作色器
+-   @ques 三角形 矩形
+
+## 2019-01-03 09:26:51
+
+-   @ques clipspace vertices
+
+    -   https://codepen.io/pen/?&editable=true&editors=101
+
+-   We define “varyings” for each value we want to pass from the vertex shader to the fragment shader.
+
+    -   “varyings” 的意义
+
+-   @ques count = 3, 取三个数据 画一个三角形 count=6 取 6 格数据画两个三角形??
+
+-   vertex shader 索取的数据是同时三个 还是一个个的取呢
+
+    -   应该是 一个个的取, 一个个的分析 一个个的传给 fragment shader
+
+-   @ques 理解 顶点作色器 网格作色器
 
     -   `vec2 zeroToOne = a_position.xy / u_resolution;`
     -   `vec4(clipSpace * vec2(1, -1), 0, 1)`
     -   这两句话是什么意思
 
--   需要自己写作色器吗
+-   @ques 需要自己写作色器吗
+
     -   因该是需要的...
 
 ## 2019-01-02 09:19:15
