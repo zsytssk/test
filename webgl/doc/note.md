@@ -1,4 +1,14 @@
--   @ques 三角形 矩形
+-   @ques 图片
+
+## 2019-01-04 09:41:27
+
+-   texture --> varying
+
+-   texture2d texture3d
+
+-   texture text graphic
+
+-   @ques laya stat 中的 cache draw ?? 是什么意思
 
 ## 2019-01-03 09:26:51
 

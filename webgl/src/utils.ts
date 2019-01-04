@@ -77,3 +77,16 @@ export function setStyle(node: HTMLElement, style: {}) {
         node.style[key] = style[key];
     }
 }
+
+export function loadImage(url): Promise<HTMLImageElement> {
+    return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.src = url; // MUST BE SAME DOMAIN!!!
+        image.onload = () => {
+            resolve(image);
+        };
+        image.onerror = () => {
+            resolve(image);
+        };
+    });
+}

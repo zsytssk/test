@@ -11,25 +11,28 @@ export function drawTriangle(gl: WebGLRenderingContext) {
     const vertexShaderSource = `
         attribute vec2 a_position;
 
-        varying vec4 v_color;
+        uniform vec2 u_resolution;
 
         void main() {
-            // Multiply the position by the matrix.
-            gl_Position = vec4(vec3(a_position, 1).xy, 0, 1);
+        // convert the rectangle from pixels to 0.0 to 1.0
+        vec2 zeroToOne = a_position / u_resolution;
 
-            // Convert from clipspace to colorspace.
-            // Clipspace goes -1.0 to +1.0
-            // Colorspace goes from 0.0 to 1.0
-            v_color = gl_Position * 0.5 + 0.5;
+        // convert from 0->1 to 0->2
+        vec2 zeroToTwo = zeroToOne * 2.0;
+
+        // convert from 0->2 to -1->+1 (clipspace)
+        vec2 clipSpace = zeroToTwo - 1.0;
+
+        gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
         }
     `;
     const fragmentShaderSource = `
         precision mediump float;
 
-        varying vec4 v_color;
+        uniform vec4 u_color;
 
         void main() {
-            gl_FragColor = v_color;
+            gl_FragColor = u_color;
         }
     `;
 
@@ -42,17 +45,27 @@ export function drawTriangle(gl: WebGLRenderingContext) {
         'a_position',
     );
 
-    // Create a buffer.
+    // look up uniform locations
+    const resolutionUniformLocation = gl.getUniformLocation(
+        program,
+        'u_resolution',
+    );
+    const colorUniformLocation = gl.getUniformLocation(program, 'u_color');
+
+    // Create a buffer and put three 2d clip space points in it
     const positionBuffer = gl.createBuffer();
+
+    // Bind it to ARRAY_BUFFER (think of it as ARRAY_BUFFER = positionBuffer)
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
-    // Set Geometry.
-    setGeometry(gl);
+    const positions = [0, 0, 200, 0, 0, 200];
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
 
     // Tell WebGL how to convert from clip space to pixels
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
-    // Clear the canvas.
+    // Clear the canvas
+    gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     // Tell it to use our program (pair of shaders)
@@ -79,29 +92,13 @@ export function drawTriangle(gl: WebGLRenderingContext) {
         offset,
     );
 
-    // Compute the matrix
-    // let matrix = m3.projection(gl.canvas.clientWidth, gl.canvas.clientHeight);
-    // matrix = m3.translate(matrix, translation[0], translation[1]);
-    // matrix = m3.rotate(matrix, angleInRadians);
-    // matrix = m3.scale(matrix, scale[0], scale[1]);
+    // set the resolution
+    gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
+    gl.uniform4f(colorUniformLocation, 0, 0, 0, 0.5);
 
-    // // Set the matrix.
-    // gl.uniformMatrix3fv(matrixLocation, false, matrix);
-
-    // Draw the geometry.
+    // draw
     const primitiveType = gl.TRIANGLES;
     offset = 0;
     const count = 3;
     gl.drawArrays(primitiveType, offset, count);
-}
-
-// Fill the buffer with the values that define a triangle.
-// Note, will put the values in whatever buffer is currently
-// bound to the ARRAY_BUFFER bind point
-function setGeometry(gl) {
-    gl.bufferData(
-        gl.ARRAY_BUFFER,
-        new Float32Array([0, -100, 150, 125, -175, 100]),
-        gl.STATIC_DRAW,
-    );
 }
