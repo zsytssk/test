@@ -1,14 +1,44 @@
--   @ques 图片
+-   @todo
+
+    -   图片 2d -> pos | scale | rotation | pivot
+    -   text 2d -> ...
+    -   shape 2d --> ...
+    -   3d ...
+
+## 2019-01-07 09:07:23
+
+-   @ques todo 伸展
+
+    -   吃肉
+    -   意识 给自己 准备 --> 感觉的流淌
+
+-   @ques select text vscode
+
+-   @ques `precision mediump float;`
+
+-   @ques 怎么把图片换一个位置
+
+-   @ques Vertex Shader's --> clipspace coordinates
+
+-   @ques float, vec2, vec3, vec4, mat2, mat3, and mat4 分别是什么样子的
+
+-   @ques gl.uniform4fv(offsetLoc, [1, 0, 0, 0]); 这代表什么意思
+
+-   @ques 一个游戏中那么多的 shader 怎么处理
+    -   laya 的 shader 是怎么设置的???
 
 ## 2019-01-04 09:41:27
 
--   texture --> varying
+-   texture --> varying 传递变量
 
--   texture2d texture3d
+-   texture text shape
+    -   2d 3d
+    -   shape --> line-线 面-plane 立方体
+        -   这个总称叫形状吗
 
--   texture text graphic
+*   texture text graphic
 
--   @ques laya stat 中的 cache draw ?? 是什么意思
+*   @ques laya stat 中的 cache draw ?? 是什么意思
 
 ## 2019-01-03 09:26:51
 
