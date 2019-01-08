@@ -9,6 +9,7 @@ export function drawRect(gl: WebGLRenderingContext) {
     attribute vec4 a_position;
 
     uniform vec2 u_resolution;
+    varying vec4 v_;
 
     void main() {
        // convert the position from pixels to 0.0 to 1.0

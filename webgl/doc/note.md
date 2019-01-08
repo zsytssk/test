@@ -5,6 +5,23 @@
     -   shape 2d --> ...
     -   3d ...
 
+## 2019-01-08 09:05:47
+
+-   @ques shader 本身支持 module, 我怎么在其中 import
+
+-   config.glslangValidatorPath
+
+-   @ques webpack glsl
+
+    -   直接使用 text 类型
+    -   .glsl 语法
+
+-   glsl 语法 挺强大的吗
+
+    -   `T sin(T angle)`
+
+-   @ques v_positionWithOffset 的具体作用
+
 ## 2019-01-07 09:07:23
 
 -   @ques todo 伸展

@@ -3,8 +3,9 @@
 
 import { testDraw } from './test';
 import { initWebGl } from './utils';
+import { drawImage } from './image';
 
 (() => {
     const gl = initWebGl();
-    testDraw(gl);
+    drawImage(gl);
 })();
