@@ -5,7 +5,13 @@
     -   shape 2d --> ...
     -   3d ...
 
+-   https://webglfundamentals.org/webgl/lessons/webgl-2d-matrices.html
+
 ## 2019-01-08 09:05:47
+
+-   webglLessonsUI 的工具其实蛮有用的
+
+-   @todo
 
 -   @ques shader 本身支持 module, 我怎么在其中 import
 
