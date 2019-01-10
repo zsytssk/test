@@ -2,9 +2,7 @@
 
 ```json
 {
-    "name": "test-terminal",
-    "cwd": "D:\\zsytssk\\other\\coding\\note",
-    "is_task": true
+    "cwd": "D:\\zsytssk\\github\\test\\canvasTest"
 }
 ```
 

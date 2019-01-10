@@ -7,6 +7,30 @@
 
 -   https://webglfundamentals.org/webgl/lessons/webgl-2d-matrices.html
 
+## 2019-01-10 09:43:20
+
+-   @ques webgl2d 的游戏我还缺少什么
+
+    -   文字 -- 还不会
+    -   @ques 坐标的转换我现在可以了吗 -- 应该可以了
+        -   translate scale rotation...
+    -   @ques 图片的绘制 -- 没有试过
+    -   @ques 形状 -> 应该可行
+        -   所有图形都可以用三角形来代替
+        -   多边形如何画 --> 多个三角形围绕一个圆心 边就是多边形的边... 中心点在其中任意取
+
+*   @todo [学习]矩阵的算法
+
+    -   二维矩阵
+
+*   @todo [学习][着色器](https://thebookofshaders.com/)
+
+*   @ques math projection 的实际意义
+
+    -   怎么将原来的像素投影到 clipspace
+
+*   @save clipspace 是(-1, 1)坐标轴
+
 ## 2019-01-08 09:05:47
 
 -   webglLessonsUI 的工具其实蛮有用的
