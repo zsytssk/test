@@ -2,7 +2,8 @@
 
 ```json
 {
-    "cwd": "D:\\zsytssk\\github\\test\\canvasTest"
+    "cwd": "D:\\zsytssk\\github\\test\\canvasTest",
+    "completeClose": true
 }
 ```
 
