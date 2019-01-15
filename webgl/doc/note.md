@@ -5,7 +5,7 @@
     -   shape 2d --> ...
     -   3d ...
 
--   https://webglfundamentals.org/webgl/lessons/webgl-2d-matrices.html
+-   学习 test.ts
 
 ## 2019-01-10 09:43:20
 

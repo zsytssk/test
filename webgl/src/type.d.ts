@@ -1,2 +1,4 @@
 declare module '*.glsl';
-declare var webglLessonsUI;
+declare const webglUtils;
+declare const primitives;
+declare const m4;
