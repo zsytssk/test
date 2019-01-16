@@ -5,7 +5,46 @@
     -   shape 2d --> ...
     -   3d ...
 
--   学习 test.ts
+https://webglfundamentals.org/webgl/lessons/webgl-text-texture.html
+
+https://webglfundamentals.org/webgl/lessons/webgl-2d-drawimage.html
+
+## 2019-01-16 09:12:59
+
+-   @ques webgl text <--- texture <--- canvas fillText 来处理
+
+    -   这好麻烦啊
+
+-   matrix 三维计算...
+
+-   @imp createProgramInfo 可以 获取 shader 中的变量 这挺好用的...
+
+-   @note 可以使用不同的 shader
+
+-   @ques 可以 webgl 和 canvas 混用??
+
+-   @ques 能不能将 webglutil 转换成 es 模块...
+
+*   @ques 三维太复杂了 许多概念 + 运算
+
+*   @ques 位置 + rotation 如何确定
+
+*   @ques 这一大堆 m4 是做什么?
+
+    -   @ques 在哪里转化 matrix
+
+*   @ques `Compute the camera's matrix` 什么意思
+
+    -   相机位置 我还没有概念...
+
+*   @ques 下面代码什么意思
+    `gl.enable(gl.CULL_FACE); gl.enable(gl.DEPTH_TEST);`
+
+*   cameraMatrix --> viewMatrix --> viewProjectionMatrix --> u_matrix
+
+### save
+
+-   在什么地方绘制立方体的 `primitives.createCubeVertices(10)`
 
 ## 2019-01-10 09:43:20
 
@@ -22,14 +61,12 @@
 *   @todo [学习]矩阵的算法
 
     -   二维矩阵
+    -   @ques math projection 的实际意义
+        -   怎么将原来的像素投影到 clipspace
 
 *   @todo [学习][着色器](https://thebookofshaders.com/)
 
-*   @ques math projection 的实际意义
-
-    -   怎么将原来的像素投影到 clipspace
-
-*   @save clipspace 是(-1, 1)坐标轴
+-   @save clipspace 是(-1, 1)坐标轴
 
 ## 2019-01-08 09:05:47
 

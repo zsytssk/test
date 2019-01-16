@@ -2,81 +2,44 @@ import * as fragmentShaderSource from './fragment.glsl';
 import * as vertexShaderSource from './vertex.glsl';
 
 export function testDraw(gl: WebGLRenderingContext) {
-    const createFlattenedVertices = (gl, vertices) => {
-        return webglUtils.createBufferInfoFromArrays(
-            gl,
-            primitives.makeRandomVertexColors(
-                primitives.deindexVertices(vertices),
-                {
-                    vertsPerColor: 6,
-                    rand: (ndx, channel) => {
-                        return channel < 3
-                            ? (128 + Math.random() * 128) | 0
-                            : 255;
-                    },
-                },
-            ),
-        );
-    };
-
-    const sphereBufferInfo = createFlattenedVertices(
-        gl,
-        primitives.createSphereVertices(10, 12, 6),
-    );
+    // const sphereBufferInfo = createFlattenedVertices(
+    //     gl,
+    //     primitives.createSphereVertices(10, 12, 6),
+    // );
     const cubeBufferInfo = createFlattenedVertices(
         gl,
         primitives.createCubeVertices(20),
     );
-    const coneBufferInfo = createFlattenedVertices(
-        gl,
-        primitives.createTruncatedConeVertices(10, 0, 20, 12, 1, true, false),
-    );
+    // const coneBufferInfo = createFlattenedVertices(
+    //     gl,
+    //     primitives.createTruncatedConeVertices(10, 0, 20, 12, 1, true, false),
+    // );
 
     const programInfo = webglUtils.createProgramInfo(gl, [
         vertexShaderSource,
         fragmentShaderSource,
     ]);
 
-    function degToRad(d) {
-        return (d * Math.PI) / 180;
-    }
-
-    const cameraAngleRadians = degToRad(0);
-    const fieldOfViewRadians = degToRad(60);
-    const cameraHeight = 50;
+    // const cameraAngleRadians = degToRad(0);
+    const fieldOfViewRadians = degToRad(70);
+    // const cameraHeight = 50;
 
     // Uniforms for each object.
-    const sphereUniforms = {
-        u_colorMult: [0.5, 1, 0.5, 1],
-        u_matrix: m4.identity(),
-    };
+    // const sphereUniforms = {
+    //     u_colorMult: [0.5, 1, 0.5, 1],
+    //     u_matrix: m4.identity(),
+    // };
     const cubeUniforms = {
-        u_colorMult: [1, 0.5, 0.5, 1],
+        u_colorMult: [0, 0.5, 0.5, 1],
         u_matrix: m4.identity(),
     };
-    const coneUniforms = {
-        u_colorMult: [0.5, 0.5, 1, 1],
-        u_matrix: m4.identity(),
-    };
-    const sphereTranslation = [0, 0, 0];
-    const cubeTranslation = [-40, 0, 0];
-    const coneTranslation = [40, 0, 0];
-
-    function computeMatrix(
-        viewProjectionMatrix,
-        translation,
-        xRotation,
-        yRotation,
-    ) {
-        let matrix = m4.translate(
-            viewProjectionMatrix,
-            translation[0],
-            translation[1],
-            translation[2],
-        );
-        matrix = m4.xRotate(matrix, xRotation);
-        return m4.yRotate(matrix, yRotation);
-    }
+    // const coneUniforms = {
+    //     u_colorMult: [0.5, 0.5, 1, 1],
+    //     u_matrix: m4.identity(),
+    // };
+    // const sphereTranslation = [0, 0, 0];
+    const cubeTranslation = [0, 0, 0];
+    // const coneTranslation = [40, 0, 0];
 
     requestAnimationFrame(drawScene);
 
@@ -105,7 +68,7 @@ export function testDraw(gl: WebGLRenderingContext) {
         );
 
         // Compute the camera's matrix using look at.
-        const cameraPosition = [0, 0, 100];
+        const cameraPosition = [0, 0, 200];
         const target = [0, 0, 0];
         const up = [0, 1, 0];
         const cameraMatrix = m4.lookAt(cameraPosition, target, up);
@@ -115,31 +78,31 @@ export function testDraw(gl: WebGLRenderingContext) {
 
         const viewProjectionMatrix = m4.multiply(projectionMatrix, viewMatrix);
 
-        const sphereXRotation = time;
-        const sphereYRotation = time;
+        // const sphereXRotation = time;
+        // const sphereYRotation = time;
         const cubeXRotation = -time;
         const cubeYRotation = time;
-        const coneXRotation = time;
-        const coneYRotation = -time;
+        // const coneXRotation = time;
+        // const coneYRotation = -time;
 
         // ------ Draw the sphere --------
 
         gl.useProgram(programInfo.program);
 
-        // Setup all the needed attributes.
-        webglUtils.setBuffersAndAttributes(gl, programInfo, sphereBufferInfo);
+        // // Setup all the needed attributes.
+        // webglUtils.setBuffersAndAttributes(gl, programInfo, sphereBufferInfo);
 
-        sphereUniforms.u_matrix = computeMatrix(
-            viewProjectionMatrix,
-            sphereTranslation,
-            sphereXRotation,
-            sphereYRotation,
-        );
+        // sphereUniforms.u_matrix = computeMatrix(
+        //     viewProjectionMatrix,
+        //     sphereTranslation,
+        //     sphereXRotation,
+        //     sphereYRotation,
+        // );
 
-        // Set the uniforms we just computed
-        webglUtils.setUniforms(programInfo, sphereUniforms);
+        // // Set the uniforms we just computed
+        // webglUtils.setUniforms(programInfo, sphereUniforms);
 
-        gl.drawArrays(gl.TRIANGLES, 0, sphereBufferInfo.numElements);
+        // gl.drawArrays(gl.TRIANGLES, 0, sphereBufferInfo.numElements);
 
         // ------ Draw the cube --------
 
@@ -158,23 +121,57 @@ export function testDraw(gl: WebGLRenderingContext) {
 
         gl.drawArrays(gl.TRIANGLES, 0, cubeBufferInfo.numElements);
 
-        // ------ Draw the cone --------
+        // // ------ Draw the cone --------
 
-        // Setup all the needed attributes.
-        webglUtils.setBuffersAndAttributes(gl, programInfo, coneBufferInfo);
+        // // Setup all the needed attributes.
+        // webglUtils.setBuffersAndAttributes(gl, programInfo, coneBufferInfo);
 
-        coneUniforms.u_matrix = computeMatrix(
-            viewProjectionMatrix,
-            coneTranslation,
-            coneXRotation,
-            coneYRotation,
-        );
+        // coneUniforms.u_matrix = computeMatrix(
+        //     viewProjectionMatrix,
+        //     coneTranslation,
+        //     coneXRotation,
+        //     coneYRotation,
+        // );
 
-        // Set the uniforms we just computed
-        webglUtils.setUniforms(programInfo, coneUniforms);
+        // // Set the uniforms we just computed
+        // webglUtils.setUniforms(programInfo, coneUniforms);
 
-        gl.drawArrays(gl.TRIANGLES, 0, coneBufferInfo.numElements);
+        // gl.drawArrays(gl.TRIANGLES, 0, coneBufferInfo.numElements);
 
         requestAnimationFrame(drawScene);
     }
+}
+
+function createFlattenedVertices(gl, vertices) {
+    return webglUtils.createBufferInfoFromArrays(
+        gl,
+        primitives.makeRandomVertexColors(
+            primitives.deindexVertices(vertices),
+            {
+                vertsPerColor: 6,
+                rand: (ndx, channel) => {
+                    return channel < 3 ? (128 + Math.random() * 128) | 0 : 255;
+                },
+            },
+        ),
+    );
+}
+function degToRad(d) {
+    return (d * Math.PI) / 180;
+}
+
+function computeMatrix(
+    viewProjectionMatrix,
+    translation,
+    xRotation,
+    yRotation,
+) {
+    let matrix = m4.translate(
+        viewProjectionMatrix,
+        translation[0],
+        translation[1],
+        translation[2],
+    );
+    matrix = m4.xRotate(matrix, xRotation);
+    return m4.yRotate(matrix, yRotation);
 }

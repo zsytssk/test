@@ -4,12 +4,13 @@
 
     -   减少不必要的计算
     -   合并函数计算
+    -   避免重复计算, 只会引用用到的变量
 
 -   @ques core + lib
 
     -   就像 rust 的核心库+lib+第三方库的形式
-    -   core:> image + text
-    -   lib:> list clip ....
+    -   core:> texture2d + text2d + graphic2d
+    -   lib:> image list clip ....
         -   其他的功能像 react 的 component 一样
 
 -   @ques 像 react 一样 分成几块渲染, wait...
