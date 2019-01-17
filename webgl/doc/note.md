@@ -9,6 +9,26 @@ https://webglfundamentals.org/webgl/lessons/webgl-text-texture.html
 
 https://webglfundamentals.org/webgl/lessons/webgl-2d-drawimage.html
 
+## 2019-01-17 08:55:51
+
+-   @ques 怎么从一张大图中抽出小图 生成 texture
+
+-   @ques webgl 和 canvas 提供相同的 api
+
+-   webgl + canvas 要一样通过渲染测试
+
+## 2019-01-16 19:30:33
+
+-   @save 绘制 text
+
+```js
+const canvas = document.createElement('canvas');
+const ctx = canvas.getContext('2d');
+temp2.fillStyle = '#fff';
+temp2.fillText('hello', 100, 100);
+canvas.toDataURL('image/png');
+```
+
 ## 2019-01-16 09:12:59
 
 -   @ques webgl text <--- texture <--- canvas fillText 来处理

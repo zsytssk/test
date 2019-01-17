@@ -4,9 +4,9 @@
 
 'use strict';
 
-import * as fragmentShaderSource from './shader/textureFragment.glsl';
-import * as vertexShaderSource from './shader/textureVertex.glsl';
-import { createProgram, loadImage } from './utils';
+import { createProgram, loadImage } from '../utils';
+import * as fragmentShaderSource from './fragment.glsl';
+import * as vertexShaderSource from './vertex.glsl';
 
 export async function drawImage(gl: WebGLRenderingContext) {
     // Link the two shaders into a program
@@ -64,17 +64,16 @@ export async function drawImage(gl: WebGLRenderingContext) {
     // lookup uniforms
     const resolutionLocation = gl.getUniformLocation(program, 'u_resolution');
 
-    // Tell WebGL how to convert from clip space to pixels
-    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-
-    // Clear the canvas
-    gl.clearColor(0, 0, 0, 0);
-    gl.clear(gl.COLOR_BUFFER_BIT);
-
-    // Tell it to use our program (pair of shaders)
-    gl.useProgram(program);
-
     {
+        // Tell WebGL how to convert from clip space to pixels
+        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
+        // Clear the canvas
+        gl.clearColor(0, 0, 0, 0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+
+        // Tell it to use our program (pair of shaders)
+        gl.useProgram(program);
         // Turn on the position attribute
         gl.enableVertexAttribArray(positionLocation);
 
@@ -95,15 +94,14 @@ export async function drawImage(gl: WebGLRenderingContext) {
             stride,
             offset,
         );
+    }
 
+    {
         // Turn on the teccord attribute
         gl.enableVertexAttribArray(texcoordLocation);
 
         // Bind the position buffer.
         gl.bindBuffer(gl.ARRAY_BUFFER, texcoordBuffer);
-    }
-
-    {
         // Tell the position attribute how to get data out of positionBuffer (ARRAY_BUFFER)
         const size = 2; // 2 components per iteration
         const type = gl.FLOAT; // the data is 32bit floats

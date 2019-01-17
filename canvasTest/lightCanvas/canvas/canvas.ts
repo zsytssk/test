@@ -1,7 +1,6 @@
 import { Image } from '../api/image';
 import { Node } from '../api/node';
 import { Text } from '../api/text';
-import { getRes } from '../utils/load';
 import { drawGraphics } from './drawGraphic';
 import { drawText } from './drawText';
 
@@ -25,7 +24,7 @@ export function draw(node: Node, canvas?: HTMLCanvasElement) {
         drawGraphics(ctx, graphics);
     }
     if (node instanceof Image) {
-        drawImage(ctx, node as Image);
+        drawTexture(ctx, node as Image);
     }
     if (node instanceof Text) {
         drawText(ctx, node as Text);
@@ -39,15 +38,9 @@ export function draw(node: Node, canvas?: HTMLCanvasElement) {
 /** 初始化ctx */
 export function initCtx(ctx: CanvasRenderingContext2D) {}
 
-export function drawImage(ctx: CanvasRenderingContext2D, img: Image) {
-    const { skin } = img;
-    const img_ele = getRes(skin);
-    if (img_ele) {
-        let { width, height } = img;
-        if (!width && !height) {
-            width = img_ele.width;
-            height = img_ele.height;
-        }
-        ctx.drawImage(img_ele, 0, 0, width, height);
-    }
+export function drawTexture(ctx: CanvasRenderingContext2D, img: Image) {
+    const { texture } = img;
+
+    const { width, height, image } = texture;
+    ctx.drawImage(image, 0, 0, width, height);
 }

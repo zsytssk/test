@@ -1,7 +1,10 @@
 import * as fragmentShaderSource from './fragment.glsl';
 import * as vertexShaderSource from './vertex.glsl';
 
-export function testDraw(gl: WebGLRenderingContext) {
+export function testDraw(
+    gl: WebGLRenderingContext,
+    ctx: CanvasRenderingContext2D,
+) {
     // const sphereBufferInfo = createFlattenedVertices(
     //     gl,
     //     primitives.createSphereVertices(10, 12, 6),
@@ -137,6 +140,8 @@ export function testDraw(gl: WebGLRenderingContext) {
         // webglUtils.setUniforms(programInfo, coneUniforms);
 
         // gl.drawArrays(gl.TRIANGLES, 0, coneBufferInfo.numElements);
+
+        ctx.fillText('hello world', 100, 100);
 
         requestAnimationFrame(drawScene);
     }

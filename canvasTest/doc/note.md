@@ -1,3 +1,18 @@
+-   https://pixijs.io/examples/#/demos/cacheAsBitmap.js
+
+    -   性能
+
+-   @ques 如何重复渲染 texture
+
+    -   https://riptutorial.com/html5-canvas/example/15184/createpattern--creates-a-path-styling-object-
+    -   `context.fillStyle = ptrn;`
+
+    -   如何扭曲图片....
+
+-   @note 超出不绘制
+
+    -   `ctx.rect(0, 0, 150, 100);`
+
 -   @todo Graphics
 
     -   drawCurves
