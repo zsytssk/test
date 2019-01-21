@@ -1,29 +1,34 @@
--   https://pixijs.io/examples/#/demos/cacheAsBitmap.js
+-   @ques 3d 最复杂可能就是光照了...
+
+-   @ques skew 如何实现
+
+*   https://pixijs.io/examples/#/demos/cacheAsBitmap.js
 
     -   性能
+    -   有没有可能将 绘制转化成图片, 将没有变化的全部转化成图片 直接渲染这图片就可以了
 
--   @ques 如何重复渲染 texture
+*   @ques 如何重复渲染 texture
 
     -   https://riptutorial.com/html5-canvas/example/15184/createpattern--creates-a-path-styling-object-
     -   `context.fillStyle = ptrn;`
 
     -   如何扭曲图片....
 
--   @note 超出不绘制
+*   @note 超出不绘制
 
     -   `ctx.rect(0, 0, 150, 100);`
 
--   @todo Graphics
+*   @todo Graphics
 
     -   drawCurves
 
--   @ques 如何独立出 data 层
+*   @ques 如何独立出 data 层
 
     -   绘制需要哪些数据, 将这些数据最简化的形式组织
 
--   @ques 能不能将 graphics 直接映射到 ctx 的方法上
+*   @ques 能不能将 graphics 直接映射到 ctx 的方法上
 
--   纹理 [Texture](https://layaair.ldc.layabox.com/api/?category=Core&class=laya.resource.Texture)
+*   纹理 [Texture](https://layaair.ldc.layabox.com/api/?category=Core&class=laya.resource.Texture)
 
 ## 2018-12-28 11:11:15
 

@@ -18,3 +18,4 @@
 -   https://simonsarris.com/increasing-performance-by-caching-paths-on-canvas/
 -   https://stackoverflow.com/questions/31255241/how-to-cache-static-canvas-areas-in-order-to-gain-performance
 -   https://stackoverflow.com/questions/7674421/html5-canvas-better-to-re-draw-objects-or-use-bitmaps
+-   https://www.html5rocks.com/en/tutorials/canvas/performance/#toc-ref

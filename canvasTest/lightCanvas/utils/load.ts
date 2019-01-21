@@ -20,7 +20,7 @@ export async function load(res_list: LoadItem[]): Promise<ReturnType> {
     }
 }
 
-function loadImage(url: string): Promise<HTMLImageElement> {
+export function loadImage(url: string): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
         const img = new Image();
         img.src = url;

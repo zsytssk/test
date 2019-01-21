@@ -5,8 +5,8 @@
 'use strict';
 
 import { createProgram, loadImage } from '../utils';
-import * as fragmentShaderSource from './fragment.glsl';
-import * as vertexShaderSource from './vertex.glsl';
+import * as fragmentShaderSource from './ImageFragment.glsl';
+import * as vertexShaderSource from './ImageVertex.glsl';
 
 export async function drawImage(gl: WebGLRenderingContext) {
     // Link the two shaders into a program

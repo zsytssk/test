@@ -9,6 +9,11 @@ https://webglfundamentals.org/webgl/lessons/webgl-text-texture.html
 
 https://webglfundamentals.org/webgl/lessons/webgl-2d-drawimage.html
 
+## 2019-01-21 09:07:36
+
+-   gl.COLOR_BUFFER_BIT
+-   能不能给 webgl 设置其他颜色
+
 ## 2019-01-17 08:55:51
 
 -   @ques 怎么从一张大图中抽出小图 生成 texture

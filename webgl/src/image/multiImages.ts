@@ -4,17 +4,17 @@
 
 'use strict';
 
-import { createProgram, loadImage } from '../utils';
+import { createProgram } from '../utils';
 import * as fragmentShaderSource from './multiImagesFragment.glsl';
 import * as vertexShaderSource from './multiImagesVertex.glsl';
 
-export async function draw(gl: WebGLRenderingContext) {
+export async function drawMultiImages(gl: WebGLRenderingContext) {
     // Link the two shaders into a program
     const program = createProgram(gl, vertexShaderSource, fragmentShaderSource);
 
     // look up where the vertex data needs to go.
     const positionLocation = gl.getAttribLocation(program, 'a_position');
-    const texcoordLocation = gl.getAttribLocation(program, 'a_texCoord');
+    const texcoordLocation = gl.getAttribLocation(program, 'a_texcoord');
 
     const matrixLocation = gl.getUniformLocation(program, 'u_matrix');
     const textureLocation = gl.getUniformLocation(program, 'u_texture');
@@ -73,14 +73,18 @@ export async function draw(gl: WebGLRenderingContext) {
         drawInfos.push(drawInfo);
     }
 
-    function drawImage(
-        gl: WebGLRenderingContext,
-        tex,
-        texWidth,
-        texHeight,
-        dstX,
-        dstY,
-    ) {
+    let then = 0;
+    function render(time) {
+        const now = time * 0.001;
+        const deltaTime = Math.min(0.1, now - then);
+        then = now;
+        update(deltaTime);
+        draw();
+        requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+
+    function drawImage(tex, texWidth, texHeight, dstX, dstY) {
         gl.bindTexture(gl.TEXTURE_2D, tex);
         gl.useProgram(program);
 
@@ -107,6 +111,40 @@ export async function draw(gl: WebGLRenderingContext) {
         gl.uniformMatrix4fv(matrixLocation, false, matrix);
         gl.uniform1i(textureLocation, 0);
         gl.drawArrays(gl.TRIANGLES, 0, 6);
+    }
+
+    function draw() {
+        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        drawInfos.forEach(drawInfo => {
+            drawImage(
+                drawInfo.textureInfo.texture,
+                drawInfo.textureInfo.width,
+                drawInfo.textureInfo.height,
+                drawInfo.x,
+                drawInfo.y,
+            );
+        });
+    }
+
+    function update(deltaTime) {
+        drawInfos.forEach(drawInfo => {
+            drawInfo.x += drawInfo.dx * speed * deltaTime;
+            drawInfo.y += drawInfo.dy * speed * deltaTime;
+
+            if (drawInfo.x < 0) {
+                drawInfo.dx = 1;
+            }
+            if (drawInfo.x > gl.canvas.width) {
+                drawInfo.dx = -1;
+            }
+            if (drawInfo.y < 0) {
+                drawInfo.dy = 1;
+            }
+            if (drawInfo.y > gl.canvas.height) {
+                drawInfo.dy = -1;
+            }
+        });
     }
 }
 
@@ -148,26 +186,6 @@ function loadImageAndCreateTextureInfo(gl: WebGLRenderingContext, url: string) {
             img,
         );
     });
-    img.src = 'url';
+    img.src = url;
     return textureInfo;
-}
-
-function update(gl, deltaTime, speed, drawInfos) {
-    drawInfos.forEach(drawInfo => {
-        drawInfo.x += drawInfo.dx * speed * deltaTime;
-        drawInfo.y += drawInfo.dy * speed * deltaTime;
-
-        if (drawInfo.x < 0) {
-            drawInfo.dx = 1;
-        }
-        if (drawInfo.x > gl.canvas.width) {
-            drawInfo.dx = -1;
-        }
-        if (drawInfo.y < 0) {
-            drawInfo.dy = 1;
-        }
-        if (drawInfo.y > gl.canvas.height) {
-            drawInfo.dy = -1;
-        }
-    });
 }
