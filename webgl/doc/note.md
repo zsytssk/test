@@ -1,13 +1,28 @@
 -   @todo
-
-    -   图片 2d -> pos | scale | rotation | pivot
-    -   text 2d -> ...
+    -   pos | scale | rotation | pivot
     -   shape 2d --> ...
+    -   图片 2d ->
+    -   text 2d -> ...
     -   3d ...
 
 https://webglfundamentals.org/webgl/lessons/webgl-text-texture.html
 
 https://webglfundamentals.org/webgl/lessons/webgl-2d-drawimage.html
+
+-   @ques 如何设置文字的大小 定位
+
+## 2019-01-23 09:19:06
+
+-   @ques 绘制的字体问什么那么破碎
+
+attempt to access out of range vertices in attribute 0
+
+-   @ques 如果用 webgl 画文字, 文字超出范围我怎么处理
+    -   因为要先在 canvas 上画, 难以自己文字占用空间的大小...
+    -   @ques 即使是在 canvas 中我又如何知道文字占用空间的大小呢
+    -   如果知道大小那就只是 图片的相对定位而已
+    -   裁剪 png
+    -   `const w = utils_ctx.measureText(text); const h = parseInt(utils_ctx.font);`
 
 ## 2019-01-21 09:07:36
 

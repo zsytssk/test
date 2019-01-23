@@ -45,6 +45,7 @@ gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
 -   @ques 将(-1, 1) 坐标系转化成 canvas 坐标, 为什么这个 function 就可以做到
 
     -   `matrix = m3.projection(gl.canvas.clientWidth, gl.canvas.clientHeight);`
+    -   projection 到底是做什么的
 
 -   vertex shader -> vertex positions
 
@@ -56,8 +57,6 @@ gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
 
 *   gl.drawArrays | gl.drawElements
     -   绘制方法
-
--
 
 -   Attributes and Buffers
 

@@ -1,11 +1,5 @@
-## webpack-dev
-
-```json1
-{
-    "completeClose": true
-}
-```
+## webgl
 
 ```bash
-npm run webpack-dev
+start D:\zsytssk\github\note
 ```

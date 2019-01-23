@@ -58,8 +58,8 @@ export async function drawMultiImages(gl: WebGLRenderingContext) {
         loadImageAndCreateTextureInfo(gl, '/dist/image/keyboard.jpg'),
     ];
     const drawInfos = [];
-    const numToDraw = 9;
-    const speed = 60;
+    const numToDraw = 1;
+    const speed = 100;
 
     for (let ii = 0; ii < numToDraw; ii++) {
         const drawInfo = {
@@ -84,7 +84,13 @@ export async function drawMultiImages(gl: WebGLRenderingContext) {
     }
     requestAnimationFrame(render);
 
-    function drawImage(tex, texWidth, texHeight, dstX, dstY) {
+    function drawImage(
+        tex: WebGLTexture,
+        texWidth: any,
+        texHeight: any,
+        dstX: any,
+        dstY: any,
+    ) {
         gl.bindTexture(gl.TEXTURE_2D, tex);
         gl.useProgram(program);
 
@@ -129,19 +135,22 @@ export async function drawMultiImages(gl: WebGLRenderingContext) {
 
     function update(deltaTime) {
         drawInfos.forEach(drawInfo => {
+            const {
+                textureInfo: { width, height },
+            } = drawInfo;
             drawInfo.x += drawInfo.dx * speed * deltaTime;
             drawInfo.y += drawInfo.dy * speed * deltaTime;
 
             if (drawInfo.x < 0) {
                 drawInfo.dx = 1;
             }
-            if (drawInfo.x > gl.canvas.width) {
+            if (drawInfo.x > gl.canvas.width - width) {
                 drawInfo.dx = -1;
             }
             if (drawInfo.y < 0) {
                 drawInfo.dy = 1;
             }
-            if (drawInfo.y > gl.canvas.height) {
+            if (drawInfo.y > gl.canvas.height - height) {
                 drawInfo.dy = -1;
             }
         });

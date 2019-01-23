@@ -1,8 +1,10 @@
+## 提取基本的绘制方法
+
+-   @ques text image graphics ...
+
 ## 做一个
 
 https://webglfundamentals.org/webgl/lessons/webgl-less-code-more-fun.html
-
-## read
 
 https://webglfundamentals.org/webgl/lessons/webgl-how-it-works.html
 
