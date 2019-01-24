@@ -14,6 +14,7 @@ https://webglfundamentals.org/webgl/lessons/webgl-2d-drawimage.html
 ## 2019-01-23 09:19:06
 
 -   @ques 绘制的字体问什么那么破碎
+    -   没有设置大小的缘故
 
 attempt to access out of range vertices in attribute 0
 

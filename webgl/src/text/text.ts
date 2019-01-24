@@ -65,8 +65,8 @@ export function drawText(gl: WebGLRenderingContext) {
 
         const texture = createTextTexture(gl, {
             text: 'hello',
-            width: 200,
-            height: 200,
+            width: 500,
+            height: 300,
         });
 
         drawTexture(texture, 0, 0);

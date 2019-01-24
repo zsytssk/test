@@ -6,14 +6,17 @@ function createTextImage(text: string, width: number, height: number) {
         utils_ctx = canvas.getContext('2d');
     }
     utils_ctx.clearRect(0, 0, width, height);
-    utils_ctx.font = '50px monospace';
+    utils_ctx.font = '100px monospace';
+    const w = utils_ctx.measureText(text).width;
+    const h = parseInt(utils_ctx.font) * 1.2;
+    utils_ctx.canvas.width = w;
+    utils_ctx.canvas.height = h;
+    utils_ctx.font = '100px monospace';
     utils_ctx.fillStyle = 'red';
-    utils_ctx.textAlign = 'center';
-    utils_ctx.textBaseline = 'middle';
+    utils_ctx.textAlign = 'left';
+    utils_ctx.textBaseline = 'top';
     utils_ctx.fillStyle = 'red';
-    const w = utils_ctx.measureText(text);
-    const h = parseInt(utils_ctx.font);
-    utils_ctx.fillText(text, width / 2, height / 2);
+    utils_ctx.fillText(text, 0, 0);
     return {
         image: utils_ctx.canvas,
         height: h,
