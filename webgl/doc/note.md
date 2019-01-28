@@ -1,6 +1,6 @@
 -   @todo
-    -   pos | scale | rotation | pivot
     -   shape 2d --> ...
+    -   pos | scale | rotation | pivot
     -   图片 2d ->
     -   text 2d -> ...
     -   3d ...
@@ -10,6 +10,17 @@ https://webglfundamentals.org/webgl/lessons/webgl-text-texture.html
 https://webglfundamentals.org/webgl/lessons/webgl-2d-drawimage.html
 
 -   @ques 如何设置文字的大小 定位
+
+## 2019-01-28 09:45:42
+
+-   @ques program
+
+    -   各种 program 保存, 然后使用...
+    -   快速读取 program 中的值...
+    -   设置数据...
+    -   绘制
+
+-   @ques 如何使用透明度...
 
 ## 2019-01-23 09:19:06
 
