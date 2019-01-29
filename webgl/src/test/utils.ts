@@ -9,7 +9,7 @@ type ProgramInfo = {
     matrixLocation: WebGLUniformLocation;
     colorLocation: WebGLUniformLocation;
 };
-let program_info = {} as ProgramInfo;
+let program_info: ProgramInfo;
 export function getProgramInfo(gl: WebGLRenderingContext) {
     if (!program_info) {
         // Link the two shaders into a program

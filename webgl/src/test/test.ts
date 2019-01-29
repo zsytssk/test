@@ -1,5 +1,6 @@
 import { createProgram } from '../utils';
 import * as fragmentShaderSource from './fragment.glsl';
+import { drawLine } from './triangle';
 import * as vertexShaderSource from './vertex.glsl';
 
 export function testDraw(gl: WebGLRenderingContext) {
@@ -14,5 +15,8 @@ export function testDraw(gl: WebGLRenderingContext) {
         // Clear the canvas
         gl.clearColor(0, 0, 0, 0);
         gl.clear(gl.COLOR_BUFFER_BIT);
+        drawLine(gl, [100, 100, 300, 100, [0, 0, 0, 1], 20]);
+        requestAnimationFrame(drawScene);
     }
+    requestAnimationFrame(drawScene);
 }

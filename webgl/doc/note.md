@@ -11,6 +11,25 @@ https://webglfundamentals.org/webgl/lessons/webgl-2d-drawimage.html
 
 -   @ques 如何设置文字的大小 定位
 
+-   paper js 垂直向量
+
+## 2019-01-29 09:24:17
+
+-   @ques 宽度为 1 的线段如何画
+
+    -   @ques triangle 能设置点为 0.5 吗
+    -   webgl drawLine
+
+-   js 向量计算的库
+
+-   @ques color 转化 red -->rgba
+
+-   @ques stroke 如何处理
+
+-   @ques 其实有大部分的相似 只有
+    -   bufferData
+    -   drawArrays count 的区别
+
 ## 2019-01-28 09:45:42
 
 -   @ques program
