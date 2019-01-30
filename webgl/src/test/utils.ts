@@ -2,7 +2,7 @@ import { createProgram } from '../utils';
 import * as fragmentShaderSource from './fragment.glsl';
 import * as vertexShaderSource from './vertex.glsl';
 
-type ProgramInfo = {
+export type ProgramInfo = {
     program: WebGLProgram;
     positionLocation: number;
     positionBuffer: WebGLBuffer;
