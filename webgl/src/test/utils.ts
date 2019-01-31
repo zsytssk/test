@@ -9,9 +9,9 @@ export type ProgramInfo = {
     matrixLocation: WebGLUniformLocation;
     colorLocation: WebGLUniformLocation;
 };
-let program_info: ProgramInfo;
+let programInfo: ProgramInfo;
 export function getProgramInfo(gl: WebGLRenderingContext) {
-    if (!program_info) {
+    if (!programInfo) {
         // Link the two shaders into a program
         const program = createProgram(
             gl,
@@ -26,7 +26,7 @@ export function getProgramInfo(gl: WebGLRenderingContext) {
         // Create a buffer and put three 2d clip space points in it
         const positionBuffer = gl.createBuffer();
 
-        program_info = {
+        programInfo = {
             program,
             positionLocation,
             positionBuffer,
@@ -35,7 +35,7 @@ export function getProgramInfo(gl: WebGLRenderingContext) {
         };
     }
 
-    return program_info;
+    return programInfo;
 }
 
 export const m3 = {
@@ -106,3 +106,75 @@ export const m3 = {
         return m3.multiply(m, m3.scaling(sx, sy));
     },
 };
+
+type DrawInfo = {
+    position: number[];
+    color: number[];
+    translation: number[];
+    rotation: number;
+    scale: number[];
+    count?: number;
+};
+export function draw(
+    gl: WebGLRenderingContext,
+    program_info: ProgramInfo,
+    draw_info: DrawInfo,
+) {
+    const {
+        program,
+        positionLocation,
+        positionBuffer,
+        matrixLocation,
+        colorLocation,
+    } = program_info;
+    const { position, color, translation, rotation, scale, count } = draw_info;
+    // Bind the position buffer.
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+
+    gl.useProgram(program);
+
+    // Turn on the attribute
+    gl.enableVertexAttribArray(positionLocation);
+
+    // Bind the position buffer.
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+
+    // prettier-ignore
+    gl.bufferData(
+        gl.ARRAY_BUFFER,
+        new Float32Array([
+            ...position,
+        ]),
+        gl.STATIC_DRAW,
+    );
+
+    // Tell the attribute how to get data out of positionBuffer (ARRAY_BUFFER)
+    const size = 2; // 2 components per iteration
+    const type = gl.FLOAT; // the data is 32bit floats
+    const normalize = false; // don't normalize the data
+    const stride = 0; // 0 = move forward size * sizeof(type) each iteration to get the next position
+    let offset = 0; // start at the beginning of the buffer
+    gl.vertexAttribPointer(
+        positionLocation,
+        size,
+        type,
+        normalize,
+        stride,
+        offset,
+    );
+
+    // Compute the matrices
+    let matrix = m3.projection(gl.canvas.clientWidth, gl.canvas.clientHeight);
+    matrix = m3.translate(matrix, translation[0], translation[1]);
+    matrix = m3.rotate(matrix, rotation);
+    matrix = m3.scale(matrix, scale[0], scale[1]);
+
+    // Set the matrix.
+    gl.uniformMatrix3fv(matrixLocation, false, matrix);
+    gl.uniform4fv(colorLocation, color);
+
+    // draw
+    const primitiveType = gl.TRIANGLES;
+    offset = 0;
+    gl.drawArrays(primitiveType, offset, count || 3);
+}

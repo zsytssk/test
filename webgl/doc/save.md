@@ -1,3 +1,5 @@
+-   @ques color 转化 red -->rgba
+
 ## webgl 2d 的游戏我还缺少什么
 
     -   文字 -- 还不会
