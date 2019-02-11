@@ -1,46 +1,42 @@
-import { Image } from '../api/image';
-import { Node } from '../api/node';
-import { Text } from '../api/text';
 import { drawGraphics } from './drawGraphic';
 import { drawText } from './drawText';
+import { drawTexture } from './drawTexture';
 
-let ctx: CanvasRenderingContext2D;
-export function draw(node: Node, canvas?: HTMLCanvasElement) {
+const engine = {
+    save,
+    restore,
+    clear,
+    setAlpha,
+    transform,
+    translate,
+    drawTexture,
+    drawGraphics,
+    drawText,
+};
+export let ctx: CanvasRenderingContext2D;
+export function initEngine(canvas?: HTMLCanvasElement) {
     if (canvas) {
         ctx = canvas.getContext('2d');
-        initCtx(ctx);
     }
-    if (node.is_top) {
-        const { width, height } = node;
-        ctx.clearRect(0, 0, width, height);
-    }
+    return engine;
+}
+
+export function save() {
     ctx.save();
-    const { pivotX, pivotY, alpha, graphics } = node;
-    ctx.globalAlpha *= alpha;
-    const transform = node.calcTransform();
-    ctx.transform(...transform);
-    ctx.translate(-pivotX, -pivotY);
-    if (graphics) {
-        drawGraphics(ctx, graphics);
-    }
-    if (node instanceof Image) {
-        drawTexture(ctx, node as Image);
-    }
-    if (node instanceof Text) {
-        drawText(ctx, node as Text);
-    }
-    for (const item of node.children) {
-        draw(item);
-    }
+}
+export function restore() {
     ctx.restore();
 }
 
-/** 初始化ctx */
-export function initCtx(ctx: CanvasRenderingContext2D) {}
-
-export function drawTexture(ctx: CanvasRenderingContext2D, img: Image) {
-    const { texture } = img;
-
-    const { width, height, image } = texture;
-    ctx.drawImage(image, 0, 0, width, height);
+export function clear(x: number, y: number, width: number, height: number) {
+    ctx.clearRect(0, 0, width, height);
+}
+export function setAlpha(alpha: number) {
+    ctx.globalAlpha *= alpha;
+}
+export function transform(matrix: number[]) {
+    ctx.transform(...matrix);
+}
+export function translate(x, y) {
+    ctx.translate(x, y);
 }

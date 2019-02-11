@@ -1,34 +1,17 @@
-import { Graphics } from '../lightCanvas/api/graphics';
-import { Text } from '../lightCanvas/api/text';
-import { init } from '../lightCanvas/main';
+import { destroy, init, Opt } from '../lightCanvas/main';
 import { load } from '../lightCanvas/utils/load';
-import { res } from './res';
+import { setLogo } from './setLogo';
+import { NodeData, startScene, xmlToNode } from './startScene';
 
-async function main() {
-    await load(res);
-    const canvas = document.getElementById('canvas') as HTMLCanvasElement;
-    const stage = init(canvas);
+export type StartPot = Opt & {
+    logo?: string;
+    xml: NodeData;
+};
+function start(width: number, height: number, start_opt?: StartPot) {
+    const { logo, xml, ...opt } = start_opt;
+    const { stage } = init(width, height, opt);
+    setLogo(logo, width, height);
 
-    const hello2 = new Text();
-    const graphics2 = new Graphics();
-    hello2.graphics = graphics2;
-    graphics2.drawPoly(
-        250 / 2,
-        100 / 2,
-        [{ x: 0, y: 0 }, { x: 100, y: 0 }, { x: 0, y: 100 }],
-        undefined,
-        'red',
-    );
-    hello2.text = 'hello2 world';
-    hello2.align = 'center';
-    hello2.valign = 'middle';
-    hello2.font = 'SimSun';
-    hello2.fontSize = 30;
-    hello2.color = '#fff';
-    hello2.x = 100;
-    hello2.y = 300;
-    hello2.width = 250;
-    hello2.height = 100;
-    stage.addChild(hello2);
+    return startScene(stage);
 }
-main();
+export { load, xmlToNode, start, destroy };

@@ -2,38 +2,36 @@ import {
     ArcParams,
     Graphics,
     LineParams,
-    RectParams,
     PathParams,
-} from '../api/graphics';
+    RectParams,
+} from '../node/graphics';
+import { ctx } from './canvas';
 
-export function drawGraphics(
-    ctx: CanvasRenderingContext2D,
-    graphics: Graphics,
-) {
+export function drawGraphics(graphics: Graphics) {
     const { graphics_list, alpha } = graphics;
 
     ctx.save();
-    ctx.globalAlpha = alpha;
+    ctx.globalAlpha *= alpha;
     for (const item of graphics_list) {
         ctx.save();
         const { type, params } = item;
         if (type === 'line') {
-            drawLine(ctx, params as LineParams);
+            drawLine(params as LineParams);
         } else if (type === 'path') {
-            drawPath(ctx, params as PathParams, false);
+            drawPath(params as PathParams, false);
         } else if (type === 'rect') {
-            drawRect(ctx, params as RectParams);
+            drawRect(params as RectParams);
         } else if (type === 'poly') {
-            drawPath(ctx, params as PathParams, true);
+            drawPath(params as PathParams, true);
         } else if (type === 'arc') {
-            drawArc(ctx, params as ArcParams);
+            drawArc(params as ArcParams);
         }
         ctx.restore();
     }
     ctx.restore();
 }
 
-function drawLine(ctx: CanvasRenderingContext2D, params: LineParams) {
+function drawLine(params: LineParams) {
     const [fromX, fromY, toX, toY, lineColor, lineWidth] = params;
     ctx.lineWidth = lineWidth;
     ctx.strokeStyle = lineColor;
@@ -41,7 +39,7 @@ function drawLine(ctx: CanvasRenderingContext2D, params: LineParams) {
     ctx.lineTo(toX, toY);
     ctx.stroke();
 }
-function drawRect(ctx: CanvasRenderingContext2D, params: RectParams) {
+function drawRect(params: RectParams) {
     const [x, y, width, height, fillColor, lineColor, lineWidth] = params;
     if (lineWidth) {
         ctx.lineWidth = lineWidth;
@@ -58,7 +56,7 @@ function drawRect(ctx: CanvasRenderingContext2D, params: RectParams) {
         ctx.stroke();
     }
 }
-function drawArc(ctx: CanvasRenderingContext2D, params: ArcParams) {
+function drawArc(params: ArcParams) {
     const [
         x,
         y,
@@ -89,11 +87,7 @@ function drawArc(ctx: CanvasRenderingContext2D, params: ArcParams) {
     }
 }
 
-function drawPath(
-    ctx: CanvasRenderingContext2D,
-    params: PathParams,
-    is_poly: boolean,
-) {
+function drawPath(params: PathParams, is_poly: boolean) {
     const [x, y, points, fillColor, lineColor, lineWidth] = params;
 
     if (lineWidth) {

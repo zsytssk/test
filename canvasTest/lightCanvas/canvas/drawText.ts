@@ -1,6 +1,7 @@
-import { Text } from '../api/text';
+import { Text } from '../node/text';
+import { ctx } from './canvas';
 
-export function drawText(ctx: CanvasRenderingContext2D, node: Text) {
+export function drawText(node: Text) {
     const {
         stroke,
         strokeColor,
@@ -39,6 +40,10 @@ export function drawText(ctx: CanvasRenderingContext2D, node: Text) {
     ctx.textBaseline = valign;
     ctx.textAlign = align;
 
+    ctx.font = `${italic ? 'italic' : ''} ${
+        bold ? 'bold' : ''
+    } ${fontSize}px ${font}`;
+    ctx.fillStyle = color;
     if (stroke) {
         ctx.strokeStyle = strokeColor;
         ctx.lineWidth = stroke;
@@ -46,9 +51,5 @@ export function drawText(ctx: CanvasRenderingContext2D, node: Text) {
         ctx.strokeText(text, x, y);
     }
 
-    ctx.font = `${italic ? 'italic' : ''} ${
-        bold ? 'bold' : ''
-    } ${fontSize}px ${font}`;
-    ctx.fillStyle = color;
     ctx.fillText(text, x, y);
 }

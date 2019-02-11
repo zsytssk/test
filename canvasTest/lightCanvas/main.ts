@@ -1,42 +1,56 @@
-import { Graphics } from './api/graphics';
-import { Stage } from './api/stage';
-import { render } from './render/render';
-import { fixCanvas } from './utils/utils';
+import { stopWatchCanvas, watchCanvas } from './event/watchCanvas';
+import { Stage } from './node/stage';
+import { render, stopRender } from './render/render';
+import { clearImg } from './utils/imageMap';
+import { clearRes } from './utils/load';
+import { interval } from './utils/timer';
+import { setProps } from './utils/utils';
 
-export let stage: Stage;
-export function init(canvas: HTMLCanvasElement, width: number, height: number) {
-    stage = new Stage();
-    render(canvas, stage);
-    stage.width = width;
-    stage.height = height;
-    fixCanvas(canvas, (w: number, h: number) => {
-        let rotation = false;
-        if (h > w) {
-            rotation = true;
-            const t = h;
-            h = w;
-            w = t;
-        }
-        const scale_x = w / width;
-        const scale_y = h / height;
-        const scale = Math.min(scale_x, scale_y);
-        stage.scaleX = scale;
-        stage.scaleY = scale;
-        stage.pivotX = width / 2;
-        stage.pivotY = height / 2;
+type State = {
+    canvas: HTMLCanvasElement;
+    stage: Stage;
+    base_path: string;
+    bg_color: string;
+    screen_mode: ScreenMode;
+};
+type ScreenMode = 'horizontal' | 'vertical';
+export type Opt = {
+    screen_mode?: ScreenMode;
+    canvas?: HTMLCanvasElement;
+    base_path?: string;
+    bg_color?: string;
+};
+export let state = {
+    base_path: '',
+    bg_color: 'black',
+    screen_mode: 'horizontal',
+} as State;
 
-        if (rotation) {
-            stage.rotation = 90;
-            stage.x = h / 2;
-            stage.y = w / 2;
-        } else {
-            stage.rotation = 0;
-            stage.x = w / 2;
-            stage.y = h / 2;
-        }
-        console.log(w / 2, h / 2);
-        stage.graphics = new Graphics();
-        stage.graphics.drawRect(0, 0, width, height, 'red');
+export function init(width: number, height: number, opt: Opt) {
+    let { canvas } = opt;
+    if (!canvas) {
+        canvas = document.createElement('canvas');
+        document.body.appendChild(canvas);
+    }
+    const stage = new Stage();
+    setProps(state, {
+        ...opt,
+        canvas,
+        stage,
     });
-    return stage;
+
+    render(canvas, stage, interval);
+    watchCanvas(canvas, stage, width, height);
+    return state;
+}
+
+export function destroy() {
+    const { canvas, stage } = state;
+    clearRes();
+    clearImg();
+    stopRender();
+    stopWatchCanvas();
+    stage.destroy();
+    canvas.parentNode.removeChild(canvas);
+    state = undefined;
 }
