@@ -1,4 +1,8 @@
--   @ques color 转化 red -->rgba
+-   @ques 凹多边形如何处理...
+
+    -   可以分割为多个凸多边形 - 我从外观上可以分割, 但是几何上如何处理, 胆码如何处理
+
+-   @ques color 转化 red --> rgba
 
 ## webgl 2d 的游戏我还缺少什么
 

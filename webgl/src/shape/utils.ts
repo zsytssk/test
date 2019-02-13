@@ -178,3 +178,14 @@ export function draw(
     offset = 0;
     gl.drawArrays(primitiveType, offset, count || 3);
 }
+
+export function getPolygonPoints(r: number, n: number) {
+    const points = [];
+    for (let i = 0; i < n; i++) {
+        const degree = (Math.PI * 2 * i) / n;
+        const x = Math.cos(degree) * r;
+        const y = Math.sin(degree) * r;
+        points.push(x, y);
+    }
+    return points;
+}

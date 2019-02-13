@@ -127,7 +127,15 @@ export function draw(
         matrixLocation,
         colorLocation,
     } = program_info;
-    const { position, color, translation, rotation, scale, count } = draw_info;
+    const {
+        position,
+        color,
+        translation,
+        rotation,
+        scale,
+        count,
+        pivot,
+    } = draw_info;
     // Bind the position buffer.
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
@@ -168,6 +176,7 @@ export function draw(
     matrix = m3.translate(matrix, translation[0], translation[1]);
     matrix = m3.rotate(matrix, rotation);
     matrix = m3.scale(matrix, scale[0], scale[1]);
+    matrix = m3.translate(matrix, -pivot[0], -pivot[1]);
 
     // Set the matrix.
     gl.uniformMatrix3fv(matrixLocation, false, matrix);
@@ -177,4 +186,15 @@ export function draw(
     const primitiveType = gl.TRIANGLES;
     offset = 0;
     gl.drawArrays(primitiveType, offset, count || 3);
+}
+
+export function getPolygonPoints(r: number, n: number) {
+    const points = [];
+    for (let i = 0; i < n; i++) {
+        const degree = (Math.PI * 2 * i) / n;
+        const x = Math.cos(degree) * r;
+        const y = Math.sin(degree) * r;
+        points.push(x, y);
+    }
+    return points;
 }
