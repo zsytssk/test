@@ -7,6 +7,36 @@
 
 *   @ques 图形旋转
 
+-   @todo m3 移动到 lightCanvas
+    -   pivot 不用放到 render 中, 直接计算 matrix 就可以了
+
+## 2019-02-14 09:14:30
+
+-   @todo getProgram(gl, type)
+    -   @note 要将所有的 glsl 放在一起...
+
+*   @ques 如何获取 glsl 中的所有变量
+
+    -   utils 中有....
+    -   drawMultiThing
+
+```js
+webglUtils.createProgramInfo;
+webglUtils.createUniformSetters;
+webglUtils.createAttributeSetters;
+
+gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
+gl.getActiveUniform(program, ii);
+```
+
+-   @ques 画多个东西使用同一个 program 会不会有问题...
+
+-   @todo webpack-dev-server change file
+
+-   @ques 如何优化 matrix 的逻辑
+
+-   project 应该放到 gsl 中
+
 ## 2019-02-13 09:25:19
 
 -   @ques 旋转设置的位置 应该放在哪?

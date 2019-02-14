@@ -1,4 +1,4 @@
-import { draw, getProgramInfo, getPolygonPoints } from './utils';
+import { drawShape, getPolygonPoints, getProgramInfo, m3 } from './utils';
 
 export function testDraw(gl: WebGLRenderingContext) {
     const translation = [300, 300];
@@ -15,23 +15,22 @@ export function testDraw(gl: WebGLRenderingContext) {
         gl.clear(gl.COLOR_BUFFER_BIT);
         const points = getPolygonPoints(100, 10);
         const pivot = [0, 0];
-        drawPoly(gl, [300, 300, points, [1, 0, 0, 1]], {
-            scale,
-            rotation,
-            pivot,
-        });
+
+        let matrix = m3.translate(
+            m3.identity(),
+            translation[0],
+            translation[1],
+        );
+        matrix = m3.rotate(matrix, rotation);
+        matrix = m3.scale(matrix, scale[0], scale[1]);
+        matrix = m3.translate(matrix, -pivot[0], -pivot[1]);
+        drawPoly(gl, [0, 0, points, [1, 0, 0, 1]], matrix);
         requestAnimationFrame(drawScene);
     }
     drawScene();
     requestAnimationFrame(drawScene);
 }
-type Transform = {
-    translation: number[];
-    scale: number[];
-    pivot: number[];
-    rotation: number;
-};
-function drawPoly(gl: WebGLRenderingContext, params, transform: Transform) {
+function drawPoly(gl: WebGLRenderingContext, params, matrix: number[]) {
     const [x, y, points, fillColor, lineColor, lineWidth] = params;
     const inner = [];
     for (let i = 0; i < points.length - 3; i += 4) {
@@ -50,7 +49,7 @@ function drawPoly(gl: WebGLRenderingContext, params, transform: Transform) {
             getPointIndex(points, i + 4),
             getPointIndex(points, i + 5),
         ];
-        drawTriangle(gl, [x, y, triangle, fillColor], transform);
+        drawTriangle(gl, [x, y, triangle, fillColor], matrix);
         inner.push(getPointIndex(points, i + 4), getPointIndex(points, i + 5));
         // drawTriangle(gl, [100, 100, [0, 0, 30, 10, 60, 0], [1, 0, 0, 1]]);
 
@@ -61,10 +60,10 @@ function drawPoly(gl: WebGLRenderingContext, params, transform: Transform) {
         drawTriangle(
             gl,
             [x, y, inner, fillColor, lineColor, lineWidth],
-            transform,
+            matrix,
         );
     } else if (inner.length > 6) {
-        drawPoly(gl, [x, y, inner, fillColor, lineColor, lineWidth], transform);
+        drawPoly(gl, [x, y, inner, fillColor, lineColor, lineWidth], matrix);
     }
 }
 function getPointIndex(points, index) {
@@ -74,30 +73,26 @@ function getPointIndex(points, index) {
     return points[index];
 }
 
-function drawTriangle(gl: WebGLRenderingContext, params, transform: Transform) {
+function drawTriangle(gl: WebGLRenderingContext, params, matrix: number[]) {
     const [x, y, points, fillColor, lineColor, lineWidth] = params;
     const position = [];
     for (let i = 0; i < points.length; i += 2) {
         position.push(points[i], points[i + 1]);
     }
     const program_info = getProgramInfo(gl);
-    const { translation, scale, rotation, pivot } = transform;
     if (fillColor) {
         const color = [...fillColor];
         const count = 3;
-        draw(gl, program_info, {
+        drawShape(gl, program_info, {
             position,
             color,
-            translation,
-            rotation,
-            scale,
-            pivot,
             count,
+            matrix,
         });
     }
 }
 
-function drawArc(gl: WebGLRenderingContext, params, transform: Transform) {
+function drawArc(gl: WebGLRenderingContext, params, matrix: number[]) {
     const [x, y, radius, sAngle, eAngle, fillColor] = params;
 
     const points = [];
@@ -108,7 +103,7 @@ function drawArc(gl: WebGLRenderingContext, params, transform: Transform) {
         const px = Math.cos(angle) * radius;
         const py = Math.sin(angle) * radius;
         points.push(px + x, py + y);
-        drawTriangle(gl, [x, y, [x, y, px, py], fillColor], transform);
+        drawTriangle(gl, [x, y, [x, y, px, py], fillColor], matrix);
     }
     for (let i = 0; i < points.length - 3; i += 2) {
         const p = [
@@ -119,6 +114,6 @@ function drawArc(gl: WebGLRenderingContext, params, transform: Transform) {
             points[i + 2],
             points[i + 3],
         ];
-        drawTriangle(gl, [x, y, p, fillColor], transform);
+        drawTriangle(gl, [x, y, p, fillColor], matrix);
     }
 }

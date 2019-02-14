@@ -1,5 +1,5 @@
-import { Image } from '../../lightCanvas/dom/image';
-import { Stage } from '../../lightCanvas/dom/stage';
+import { Image } from '../../lightCanvas/node/image';
+import { Stage } from '../../lightCanvas/node/stage';
 
 export async function testAlphaGrid(stage: Stage) {
     const num = 10;

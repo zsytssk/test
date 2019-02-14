@@ -5,9 +5,9 @@ import { Node } from '../lightCanvas/node/node';
 import { Stage } from '../lightCanvas/node/stage';
 import { Text } from '../lightCanvas/node/text';
 import { convertXMLToNode } from '../lightCanvas/utils/convertXmlToNode';
+import { tweenProps } from '../lightCanvas/utils/tweenProps';
 import { setProps } from '../lightCanvas/utils/utils';
 import { pop as pop_xml } from './xml';
-import { tweenProps } from '../lightCanvas/utils/tween';
 
 export type NodeData = {
     scene: string;

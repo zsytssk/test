@@ -20,19 +20,23 @@ export type Engine = {
 
 let engine: Engine;
 let requestId;
+let renderStage;
 export function render(canvas: HTMLCanvasElement, stage: Node, tick: FuncVoid) {
     if (!engine) {
         engine = initEngine(canvas);
     }
-    function renderStage() {
+    renderStage = function step() {
         renderNode(stage);
         tick();
-        requestId = requestAnimationFrame(renderStage);
-    }
+        requestId = requestAnimationFrame(step);
+    };
     requestId = requestAnimationFrame(renderStage);
 }
 export function stopRender() {
     cancelAnimationFrame(requestId);
+}
+export function startRender() {
+    renderStage();
 }
 
 function renderNode(node: Node) {
@@ -44,14 +48,11 @@ function renderNode(node: Node) {
     if (!node.visible) {
         return;
     }
-    const { matrix, pivotX, pivotY, alpha, graphics } = node;
+    const { matrix, alpha, graphics } = node;
     if (alpha !== 1) {
         engine.setAlpha(alpha);
     }
     engine.transform(matrix);
-    if (pivotX || pivotY) {
-        engine.translate(-pivotX, -pivotY);
-    }
     if (graphics) {
         engine.drawGraphics(graphics);
     }

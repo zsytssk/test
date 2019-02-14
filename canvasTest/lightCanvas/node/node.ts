@@ -2,6 +2,7 @@ import { Event } from '../event/event';
 import { degreeToAngle, throttleSyncCallToOne, watch } from '../utils/utils';
 import { EventDispatcher } from './eventDispatcher';
 import { Graphics } from './graphics';
+import { m3 } from '../utils/m3';
 
 export type NodeType = 'Image' | 'Node' | 'Text';
 export class Node extends EventDispatcher {
@@ -107,40 +108,15 @@ export class Node extends EventDispatcher {
         super.destroy();
     }
     public calcTransform() {
-        const { x, y, rotation, scaleX, scaleY } = this;
-        const m = [1, 0, 0, 1, 0, 0] as [
-            number,
-            number,
-            number,
-            number,
-            number,
-            number
-        ];
-
-        m[4] += m[0] * x + m[2] * y;
-        m[5] += m[1] * x + m[3] * y;
-
-        // rotate
+        const { x, y, rotation, scaleX, scaleY, pivotX, pivotY } = this;
         const rad = degreeToAngle(rotation);
-        const c = Math.cos(rad);
-        const s = Math.sin(rad);
-        const m11 = m[0] * c + m[2] * s;
-        const m12 = m[1] * c + m[3] * s;
-        const m21 = m[0] * -s + m[2] * c;
-        const m22 = m[1] * -s + m[3] * c;
-        m[0] = m11;
-        m[1] = m12;
-        m[2] = m21;
-        m[3] = m22;
+        let matrix = m3.translate(m3.identity(), x, y);
+        matrix = m3.rotate(matrix, rad);
+        matrix = m3.scale(matrix, scaleX, scaleY);
+        matrix = m3.translate(matrix, -pivotX, -pivotY);
 
-        // scale
-        m[0] *= scaleX;
-        m[1] *= scaleX;
-        m[2] *= scaleY;
-        m[3] *= scaleY;
-
-        this.matrix = m;
-        return m;
+        this.matrix = m3.toM2(matrix);
+        return matrix;
     }
     public globalToLocal(p: Point) {
         const { pivotX, pivotY, is_top } = this;

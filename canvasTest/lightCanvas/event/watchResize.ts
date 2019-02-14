@@ -1,4 +1,5 @@
 import { state as GlobalState } from '../main';
+import { startRender, stopRender } from '../render/render';
 import { setProps, setStyle } from '../utils/utils';
 import { triggerResizeEvent } from './triggerEvent';
 
@@ -47,7 +48,7 @@ export function stopWatchResize() {
     window.removeEventListener('resize', onResize, false);
     state = undefined;
 }
-
+let timeout;
 function onResize() {
     const { screen_mode } = GlobalState;
     const {
@@ -58,9 +59,11 @@ function onResize() {
 
     canvas.height = 0;
     canvas.width = 0;
+    stopRender();
 
+    clearTimeout(timeout);
     /** 大小先设置为0,0 然后再去重设, 不这样页面在浏览器旋转之后canvas 无法填充满页面  */
-    setTimeout(() => {
+    timeout = setTimeout(() => {
         let canvas_is_rotate = false;
 
         let nw = client_w;
@@ -116,5 +119,7 @@ function onResize() {
             canvas_scale,
             canvas_is_rotate,
         } as ResizeInfo);
+
+        startRender();
     }, 100);
 }

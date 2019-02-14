@@ -1,10 +1,10 @@
 /* eslint no-console:0 consistent-return:0 */
 'use strict';
 
-import { testDraw } from './test/test';
+import { drawMatrix } from './matrix/matrix';
 import { initWebGl } from './utils';
 
 (() => {
     const gl = initWebGl();
-    testDraw(gl);
+    drawMatrix(gl);
 })();

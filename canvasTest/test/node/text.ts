@@ -1,6 +1,6 @@
-import { Image } from '../../lightCanvas/api/image';
-import { Stage } from '../../lightCanvas/api/stage';
-import { Text } from '../../lightCanvas/api/text';
+import { Image } from '../../lightCanvas/node/image';
+import { Stage } from '../../lightCanvas/node/stage';
+import { Text } from '../../lightCanvas/node/text';
 
 export function testText(stage: Stage) {
     const moon = new Image();

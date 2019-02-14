@@ -1,5 +1,5 @@
-import { Image } from '../../lightCanvas/api/image';
-import { Stage } from '../../lightCanvas/api/stage';
+import { Image } from '../../lightCanvas/node/image';
+import { Stage } from '../../lightCanvas/node/stage';
 
 export function testPos(stage: Stage) {
     for (let i = 0; i < 20; i++) {
