@@ -20,7 +20,9 @@ export class Node extends EventDispatcher {
     public scaleX = 1;
     @watch('calcTransform')
     public scaleY = 1;
+    @watch('calcTransform')
     public pivotX = 0;
+    @watch('calcTransform')
     public pivotY = 0;
     @watch('calcTransform')
     public rotation = 0;
