@@ -97,18 +97,7 @@ export function drawShape(gl: WebGLRenderingContext, draw_info: DrawInfo) {
     const offset = 0;
     gl.drawArrays(primitiveType, offset, count || 3);
 }
-export function drawTexture(
-    gl: WebGLRenderingContext,
-    program_info: ProgramInfo,
-    draw_info: DrawInfo,
-) {
-    const {
-        program,
-        positionLocation,
-        positionBuffer,
-        matrixLocation,
-        colorLocation,
-    } = program_info;
+export function drawTexture(gl: WebGLRenderingContext, draw_info: DrawInfo) {
     const { position, color, matrix, count } = draw_info;
     // Bind the position buffer.
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
