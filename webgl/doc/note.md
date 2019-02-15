@@ -10,6 +10,10 @@
 -   @todo m3 移动到 lightCanvas
     -   pivot 不用放到 render 中, 直接计算 matrix 就可以了
 
+## 2019-02-15 09:39:20
+
+-   ## @ques 如何方便的时候 glsl 的值
+
 ## 2019-02-14 09:14:30
 
 -   @todo getProgram(gl, type)
@@ -26,7 +30,9 @@ webglUtils.createUniformSetters;
 webglUtils.createAttributeSetters;
 
 gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
+gl.getProgramParameter(program, gl.ACTIVE_ATTRIBUTES);
 gl.getActiveUniform(program, ii);
+gl.gl.getActiveAttrib(program, ii);
 ```
 
 -   @ques 画多个东西使用同一个 program 会不会有问题...

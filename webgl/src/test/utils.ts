@@ -1,63 +1,4 @@
-import { createProgram } from '../utils';
-import * as shapeFragmentShaderSource from './shapeFragment.glsl';
-import * as shapeVertexShaderSource from './shapeVertex.glsl';
-import * as textureFragmentShaderSource from './textureFragment.glsl';
-import * as textureVertexShaderSource from './textureVertex.glsl';
-
-const glsl_map = {
-    shape: {
-        vertex: shapeVertexShaderSource,
-        fragment: shapeFragmentShaderSource,
-    },
-    texture: {
-        vertex: textureVertexShaderSource,
-        fragment: textureFragmentShaderSource,
-    },
-};
-
-export type ProgramInfo = {
-    program: WebGLProgram;
-    positionLocation: number;
-    positionBuffer: WebGLBuffer;
-    matrixLocation: WebGLUniformLocation;
-    colorLocation: WebGLUniformLocation;
-    textureBuffer?: WebGLBuffer;
-    textureLocation?: WebGLUniformLocation;
-};
-export type ProgramMap = {
-    [key: string]: ProgramInfo;
-};
-const program_map: ProgramMap = {};
-export function getProgramInfo(
-    gl: WebGLRenderingContext,
-    type: string,
-): ProgramInfo {
-    if (!program_map[type]) {
-        // Link the two shaders into a program
-        const program = createProgram(
-            gl,
-            vertexShaderSource,
-            fragmentShaderSource,
-        );
-
-        // look up where the vertex data needs to go.
-        const positionLocation = gl.getAttribLocation(program, 'a_position');
-        const matrixLocation = gl.getUniformLocation(program, 'u_matrix');
-        const colorLocation = gl.getUniformLocation(program, 'u_color');
-        // Create a buffer and put three 2d clip space points in it
-        const positionBuffer = gl.createBuffer();
-
-        programInfo = {
-            program,
-            positionLocation,
-            positionBuffer,
-            matrixLocation,
-            colorLocation,
-        };
-    }
-
-    return programInfo;
-}
+import { getProgramInfo } from './glslUtil';
 
 export const m3 = {
     projection(width, height) {
@@ -134,53 +75,13 @@ type DrawInfo = {
     matrix: number[];
     count?: number;
 };
-export function drawShape(
-    gl: WebGLRenderingContext,
-    program_info: ProgramInfo,
-    draw_info: DrawInfo,
-) {
-    const {
-        program,
-        positionLocation,
-        positionBuffer,
-        matrixLocation,
-        colorLocation,
-    } = program_info;
+export function drawShape(gl: WebGLRenderingContext, draw_info: DrawInfo) {
     const { position, color, matrix, count } = draw_info;
-    // Bind the position buffer.
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    const program_info = getProgramInfo(gl, 'shape');
 
-    gl.useProgram(program);
-
-    // Turn on the attribute
-    gl.enableVertexAttribArray(positionLocation);
-
-    // Bind the position buffer.
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-
-    // prettier-ignore
-    gl.bufferData(
-        gl.ARRAY_BUFFER,
-        new Float32Array([
-            ...position,
-        ]),
-        gl.STATIC_DRAW,
-    );
-
-    // Tell the attribute how to get data out of positionBuffer (ARRAY_BUFFER)
-    const size = 2; // 2 components per iteration
-    const type = gl.FLOAT; // the data is 32bit floats
-    const normalize = false; // don't normalize the data
-    const stride = 0; // 0 = move forward size * sizeof(type) each iteration to get the next position
-    let offset = 0; // start at the beginning of the buffer
-    gl.vertexAttribPointer(
-        positionLocation,
-        size,
-        type,
-        normalize,
-        stride,
-        offset,
-    );
+    program_info.set('a_position', {
+        value: new Float32Array([...position]),
+    });
 
     // Compute the matrices
     let matrix_gl = m3.projection(
@@ -189,14 +90,11 @@ export function drawShape(
     );
 
     matrix_gl = m3.multiply(matrix_gl, matrix);
+    program_info.set('u_matrix', matrix_gl);
+    program_info.set('u_color', color);
 
-    // Set the matrix.
-    gl.uniformMatrix3fv(matrixLocation, false, matrix_gl);
-    gl.uniform4fv(colorLocation, color);
-
-    // draw
     const primitiveType = gl.TRIANGLES;
-    offset = 0;
+    const offset = 0;
     gl.drawArrays(primitiveType, offset, count || 3);
 }
 export function drawTexture(

@@ -79,11 +79,10 @@ function drawTriangle(gl: WebGLRenderingContext, params, matrix: number[]) {
     for (let i = 0; i < points.length; i += 2) {
         position.push(points[i], points[i + 1]);
     }
-    const program_info = getProgramInfo(gl);
     if (fillColor) {
         const color = [...fillColor];
         const count = 3;
-        drawShape(gl, program_info, {
+        drawShape(gl, {
             position,
             color,
             count,

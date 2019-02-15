@@ -3,8 +3,9 @@
 
 import { drawMatrix } from './matrix/matrix';
 import { initWebGl } from './utils';
+import { testDraw } from './test/test';
 
 (() => {
     const gl = initWebGl();
-    drawMatrix(gl);
+    testDraw(gl);
 })();
