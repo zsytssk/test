@@ -69,13 +69,13 @@ export const m3 = {
     },
 };
 
-type DrawInfo = {
+type ShapeInfo = {
     position: number[];
     color: number[];
     matrix: number[];
     count?: number;
 };
-export function drawShape(gl: WebGLRenderingContext, draw_info: DrawInfo) {
+export function drawShape(gl: WebGLRenderingContext, draw_info: ShapeInfo) {
     const { position, color, matrix, count } = draw_info;
     const program_info = getProgramInfo(gl, 'shape');
 
@@ -97,42 +97,24 @@ export function drawShape(gl: WebGLRenderingContext, draw_info: DrawInfo) {
     const offset = 0;
     gl.drawArrays(primitiveType, offset, count || 3);
 }
-export function drawTexture(gl: WebGLRenderingContext, draw_info: DrawInfo) {
-    const { position, color, matrix, count } = draw_info;
-    // Bind the position buffer.
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
-    gl.useProgram(program);
+type TextureInfo = {
+    texture: WebGLTexture;
+    width: number;
+    height: number;
+    matrix: number[];
+    count?: number;
+};
+export function drawTexture(gl: WebGLRenderingContext, draw_info: TextureInfo) {
+    const { texture, matrix, width, height } = draw_info;
+    const program_info = getProgramInfo(gl, 'texture');
 
-    // Turn on the attribute
-    gl.enableVertexAttribArray(positionLocation);
-
-    // Bind the position buffer.
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-
-    // prettier-ignore
-    gl.bufferData(
-        gl.ARRAY_BUFFER,
-        new Float32Array([
-            ...position,
-        ]),
-        gl.STATIC_DRAW,
-    );
-
-    // Tell the attribute how to get data out of positionBuffer (ARRAY_BUFFER)
-    const size = 2; // 2 components per iteration
-    const type = gl.FLOAT; // the data is 32bit floats
-    const normalize = false; // don't normalize the data
-    const stride = 0; // 0 = move forward size * sizeof(type) each iteration to get the next position
-    let offset = 0; // start at the beginning of the buffer
-    gl.vertexAttribPointer(
-        positionLocation,
-        size,
-        type,
-        normalize,
-        stride,
-        offset,
-    );
+    program_info.set('a_position', {
+        value: new Float32Array(getRectanglePoints(100, 100, width, height)),
+    });
+    program_info.set('a_texcoord', {
+        value: new Float32Array([0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1]),
+    });
 
     // Compute the matrices
     let matrix_gl = m3.projection(
@@ -141,15 +123,51 @@ export function drawTexture(gl: WebGLRenderingContext, draw_info: DrawInfo) {
     );
 
     matrix_gl = m3.multiply(matrix_gl, matrix);
+    program_info.set('u_matrix', matrix_gl);
 
-    // Set the matrix.
-    gl.uniformMatrix3fv(matrixLocation, false, matrix_gl);
-    gl.uniform4fv(colorLocation, color);
+    program_info.set('u_texture', texture);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+}
 
-    // draw
-    const primitiveType = gl.TRIANGLES;
-    offset = 0;
-    gl.drawArrays(primitiveType, offset, count || 3);
+export function createTexture(
+    gl: WebGLRenderingContext,
+    image: TexImageSource,
+) {
+    const texture = gl.createTexture();
+    const { width, height } = image;
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.texImage2D(
+        gl.TEXTURE_2D,
+        0,
+        gl.RGBA,
+        1,
+        1,
+        0,
+        gl.RGBA,
+        gl.UNSIGNED_BYTE,
+        new Uint8Array([0, 0, 255, 255]),
+    );
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+
+    return {
+        texture,
+        width,
+        height,
+    };
+}
+export function loadImage(url: string): Promise<HTMLImageElement> {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.addEventListener('load', () => {
+            return resolve(img);
+        });
+        img.src = url;
+    });
 }
 
 export function getPolygonPoints(r: number, n: number) {
@@ -161,4 +179,12 @@ export function getPolygonPoints(r: number, n: number) {
         points.push(x, y);
     }
     return points;
+}
+
+function getRectanglePoints(x, y, width, height) {
+    const x1 = x;
+    const x2 = x + width;
+    const y1 = y;
+    const y2 = y + height;
+    return [x1, y1, x2, y1, x1, y2, x1, y2, x2, y1, x2, y2];
 }

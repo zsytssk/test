@@ -36,9 +36,8 @@ export type TextureData = {
 };
 export function createTextTexture(
     gl: WebGLRenderingContext,
-    { text, width, height }: TextData,
+    image: TexImageSource,
 ): TextureData {
-    const { image, width: w, height: h } = createTextImage(text, width, height);
     const tex = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, tex);
     gl.texImage2D(

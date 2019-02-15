@@ -17,6 +17,7 @@ const glsl_map = {
 export type ProgramInfo = {
     program: WebGLProgram;
     set: Function;
+    keys: string[];
 };
 export type ProgramMap = {
     [key: string]: ProgramInfo;
@@ -30,6 +31,7 @@ export function getProgramInfo(
     let program_info = program_map[type];
     if (!program_info) {
         const set_map = {};
+        const keys = [];
         const set = (key, ...params) => {
             set_map[key](...params);
         };
@@ -48,16 +50,19 @@ export function getProgramInfo(
             const { name } = info;
             const index = gl.getUniformLocation(program, name);
             set_map[name] = createUniformSetter(gl, index, info);
+            keys.push(name);
         }
         for (let i = 0; i < attributes; i++) {
             const { name } = gl.getActiveAttrib(program, i);
             const index = gl.getAttribLocation(program, name);
             const buffer = gl.createBuffer();
             set_map[name] = createAttribSetter(gl, index, buffer);
+            keys.push(name);
         }
         program_info = {
             program,
             set,
+            keys,
         };
 
         program_map[type] = program_info;
@@ -192,11 +197,22 @@ function createUniformSetter(
             gl.uniformMatrix4fv(location, false, v);
         };
     }
-    if ((type === gl.SAMPLER_2D || type === gl.SAMPLER_CUBE) && isArray) {
-        return undefined;
-    }
     if (type === gl.SAMPLER_2D || type === gl.SAMPLER_CUBE) {
-        return undefined;
+        return texture => {
+            gl.uniform1i(location, 0);
+            gl.activeTexture(gl.TEXTURE0);
+            gl.bindTexture(getBindPointForSamplerType(gl, type), texture);
+        };
+    }
+    return undefined;
+}
+
+function getBindPointForSamplerType(gl: WebGLRenderingContext, type: number) {
+    if (type === gl.SAMPLER_2D) {
+        return gl.TEXTURE_2D;
+    }
+    if (type === gl.SAMPLER_CUBE) {
+        return gl.TEXTURE_CUBE_MAP;
     }
     return undefined;
 }

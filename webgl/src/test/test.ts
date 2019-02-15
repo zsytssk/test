@@ -1,9 +1,22 @@
-import { drawShape, getPolygonPoints, getProgramInfo, m3 } from './utils';
+import {
+    drawShape,
+    getPolygonPoints,
+    m3,
+    loadImage,
+    drawTexture,
+} from './utils';
+import { createTexture } from './utils';
 
 export function testDraw(gl: WebGLRenderingContext) {
     const translation = [300, 300];
     const scale = [1, 1];
     let rotation = 0;
+    const pivot = [0, 0];
+
+    let texture_info;
+    loadImage('/dist/image/star.jpg').then(image => {
+        texture_info = createTexture(gl, image);
+    });
 
     function drawScene() {
         rotation += 0.01;
@@ -13,9 +26,8 @@ export function testDraw(gl: WebGLRenderingContext) {
         // Clear the canvas
         gl.clearColor(0, 0, 0, 0);
         gl.clear(gl.COLOR_BUFFER_BIT);
-        const points = getPolygonPoints(100, 10);
-        const pivot = [0, 0];
 
+        const points = getPolygonPoints(100, 10);
         let matrix = m3.translate(
             m3.identity(),
             translation[0],
@@ -25,6 +37,22 @@ export function testDraw(gl: WebGLRenderingContext) {
         matrix = m3.scale(matrix, scale[0], scale[1]);
         matrix = m3.translate(matrix, -pivot[0], -pivot[1]);
         drawPoly(gl, [0, 0, points, [1, 0, 0, 1]], matrix);
+
+        let matrix2 = m3.translate(
+            m3.identity(),
+            translation[0] + 200,
+            translation[1],
+        );
+        matrix2 = m3.rotate(matrix2, rotation);
+        matrix2 = m3.scale(matrix2, scale[0], scale[1]);
+        matrix2 = m3.translate(matrix2, -pivot[0], -pivot[1]);
+
+        if (texture_info) {
+            drawTexture(gl, {
+                ...texture_info,
+                matrix: m3.identity(),
+            });
+        }
         requestAnimationFrame(drawScene);
     }
     drawScene();

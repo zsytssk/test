@@ -5,12 +5,19 @@
     -   text 2d -> ...
     -   3d ...
 
-*   @ques 图形旋转
+*   @ques 图片旋转
 
 -   @todo m3 移动到 lightCanvas
+
     -   pivot 不用放到 render 中, 直接计算 matrix 就可以了
 
+-   @ques 图片没有定位没有旋转
+
 ## 2019-02-15 09:39:20
+
+-   @ques 没有显示图片, 可能是图片设置有问题 可能是位置有问题...
+
+    -   drawImage 参数一个个的删除...
 
 -   ## @ques 如何方便的时候 glsl 的值
 
