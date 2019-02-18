@@ -5,15 +5,30 @@
     -   text 2d -> ...
     -   3d ...
 
-*   @ques 图片旋转
+*   @ques text 2d 定位旋转
+
+-   @ques 图片没有定位没有旋转
+
+    -   webgl 图片旋转
+
+-   @ques webgl 的代码结构重构
+    -   test/utils 为中心
+    -   engine/draw....
+
+## 2019-02-18 09:40:28
+
+-   @ques fps 很低??
+    -   在什么地方有多余的计算...
+    -   @ques 是不是可以将所有的图片放在一个数组中 在一个函数中渲染
+    -   从 js 到 webgl 这个过程消耗性能
+    -   ***
+    -   drawMultiImage
+
+## 2019-02-15 09:39:20
 
 -   @todo m3 移动到 lightCanvas
 
     -   pivot 不用放到 render 中, 直接计算 matrix 就可以了
-
--   @ques 图片没有定位没有旋转
-
-## 2019-02-15 09:39:20
 
 -   @ques 没有显示图片, 可能是图片设置有问题 可能是位置有问题...
 

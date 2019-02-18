@@ -110,7 +110,7 @@ export function drawTexture(gl: WebGLRenderingContext, draw_info: TextureInfo) {
     const program_info = getProgramInfo(gl, 'texture');
 
     program_info.set('a_position', {
-        value: new Float32Array(getRectanglePoints(100, 100, width, height)),
+        value: new Float32Array(getRectanglePoints(0, 0, width, height)),
     });
     program_info.set('a_texcoord', {
         value: new Float32Array([0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1]),
