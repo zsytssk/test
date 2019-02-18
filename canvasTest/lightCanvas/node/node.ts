@@ -1,8 +1,8 @@
 import { Event } from '../event/event';
-import { degreeToAngle, throttleSyncCallToOne, watch } from '../utils/utils';
+import { m3 } from '../utils/m3';
+import { degreeToAngle, watch } from '../utils/utils';
 import { EventDispatcher } from './eventDispatcher';
 import { Graphics } from './graphics';
-import { m3 } from '../utils/m3';
 
 export type NodeType = 'Image' | 'Node' | 'Text';
 export class Node extends EventDispatcher {
@@ -13,8 +13,8 @@ export class Node extends EventDispatcher {
     public y: number = 0;
     public centerX: number;
     public centerY: number;
-    public width;
-    public height;
+    public width: number;
+    public height: number;
     public alpha = 1;
     @watch('calcTransform')
     public scaleX = 1;

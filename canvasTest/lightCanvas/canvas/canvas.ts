@@ -37,6 +37,3 @@ export function setAlpha(alpha: number) {
 export function transform(matrix: number[]) {
     ctx.transform(...matrix);
 }
-export function translate(x, y) {
-    ctx.translate(x, y);
-}

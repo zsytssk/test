@@ -12,7 +12,6 @@ export type Engine = {
     clear(x: number, y: number, width: number, height: number): void;
     setAlpha(alpha: number): void;
     transform(matrix: number[]): void;
-    translate(x: number, y: number): void;
     drawTexture(texture: Texture): void;
     drawGraphics(graphics: Graphics): void;
     drawText(txt: Text): void;
@@ -25,10 +24,10 @@ export function render(canvas: HTMLCanvasElement, stage: Node, tick: FuncVoid) {
     if (!engine) {
         engine = initEngine(canvas);
     }
-    renderStage = function step() {
+    renderStage = () => {
         renderNode(stage);
         tick();
-        requestId = requestAnimationFrame(step);
+        requestId = requestAnimationFrame(renderStage);
     };
     requestId = requestAnimationFrame(renderStage);
 }

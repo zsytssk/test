@@ -17,7 +17,7 @@ type HookFunItem = {
     /**  清除事件函数绑定  */
     off: FuncVoid;
 };
-type HookFunS = {
+type HookFunList = {
     [x: string]: HookFunItem[];
 };
 
@@ -31,9 +31,9 @@ export abstract class EventDispatcher {
     public id: string;
     /** 是否销毁, 用于在销毁之后 有异步函数进入, 阻止其继续执行 */
     public destroyed: boolean = false;
-    protected hook_funs: HookFunS = {};
+    protected hook_fun_list: HookFunList = {};
     /** 绑定在别人身上的事件, 保存在这里用于销毁时 找到绑定的目标 去取消这些事件的绑定 */
-    protected hook_other_funs = [] as HookOtherEvent[];
+    protected hook_other_fun_list = [] as HookOtherEvent[];
     /** 事件基础类, 创建随机id */
     constructor() {
         this.id = createRandomString();
@@ -43,8 +43,8 @@ export abstract class EventDispatcher {
         if (typeof listener !== 'function') {
             return;
         }
-        if (!this.hook_funs[event_name]) {
-            this.hook_funs[event_name] = [];
+        if (!this.hook_fun_list[event_name]) {
+            this.hook_fun_list[event_name] = [];
         }
         const off = () => {
             this.off(event_name, listener);
@@ -57,7 +57,7 @@ export abstract class EventDispatcher {
         /** 添加在列表前面, 执行从后面执行 确保先添加的限执行
          * 之所以要这样是因为 event 遇到 once 要删除必须要从后面遍历 才能保证所有的都执行了
          */
-        this.hook_funs[event_name].unshift(bind_obj);
+        this.hook_fun_list[event_name].unshift(bind_obj);
         return {
             off,
         };
@@ -72,10 +72,10 @@ export abstract class EventDispatcher {
      * @param data 传过去的数据
      */
     public event(event_name: string, data?) {
-        if (!this.hook_funs[event_name]) {
+        if (!this.hook_fun_list[event_name]) {
             return;
         }
-        const hook_event_funs = this.hook_funs[event_name];
+        const hook_event_funs = this.hook_fun_list[event_name];
         for (let len = hook_event_funs.length, i = len - 1; i >= 0; i--) {
             /** 如果trigger destroy 就会导致别的ctrl|model绑定在这里的事件在执行listener
              * 就会全部清除, 这时候hook_event_funs为空, 执行下面的代码就会报错
@@ -101,10 +101,10 @@ export abstract class EventDispatcher {
     public off(event_name: string, track_info?: FuncListener | string) {
         /** off all func bind event */
         if (!track_info) {
-            this.hook_funs[event_name] = [];
+            this.hook_fun_list[event_name] = [];
             return;
         }
-        const hook_list = this.hook_funs[event_name];
+        const hook_list = this.hook_fun_list[event_name];
         if (!hook_list) {
             return;
         }
@@ -119,10 +119,10 @@ export abstract class EventDispatcher {
     }
     /**  撤销所有事件绑定  */
     protected offAll() {
-        this.hook_funs = {};
+        this.hook_fun_list = {};
     }
 
-    /**  在其他的model或者ctrl上面绑定事件处理函数 */
+    /** 在其他的上面绑定事件处理函数 */
     protected bindOtherEvent(
         other: EventDispatcher,
         event_name: string,
@@ -138,7 +138,7 @@ export abstract class EventDispatcher {
             off: bind_info.off,
             other_id: other.id,
         };
-        this.hook_other_funs.push(bind_obj);
+        this.hook_other_fun_list.push(bind_obj);
         return bind_info;
     }
     /** 取消在其他的baseEvent绑定的事件处理 */
@@ -147,7 +147,7 @@ export abstract class EventDispatcher {
             return;
         }
 
-        const hook_funs = this.hook_other_funs;
+        const hook_funs = this.hook_other_fun_list;
         for (let len = hook_funs.length, i = len - 1; i >= 0; i--) {
             const hook_item = hook_funs[i];
             const other_id = hook_item.other_id;
@@ -163,13 +163,13 @@ export abstract class EventDispatcher {
     }
     /** 取消在其他的baseEvent绑定的事件处理 */
     protected offAllOtherEvent() {
-        const hook_funs = this.hook_other_funs;
+        const hook_funs = this.hook_other_fun_list;
         for (let len = hook_funs.length, i = len - 1; i >= 0; i--) {
             const hook_item = hook_funs[i];
             hook_item.off();
             hook_funs.splice(i, 1);
         }
-        this.hook_other_funs = [];
+        this.hook_other_fun_list = [];
     }
     public destroy() {
         this.event(cmd.destroy);
