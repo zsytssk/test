@@ -31,7 +31,7 @@ export class Node extends EventDispatcher {
     public children = [] as Node[];
     protected parent: Node;
     public is_top = false;
-    public matrix: number[] = [1, 0, 0, 1, 0, 0];
+    public matrix: number[];
     public type: NodeType = 'Node';
     constructor() {
         super();

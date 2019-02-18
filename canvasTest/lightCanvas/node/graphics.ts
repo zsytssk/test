@@ -14,7 +14,7 @@ export type ArcParams = [ number, number, number, number, number, boolean, Canva
 
 type GraphicsType = 'line' | 'rect' | 'arc' | 'poly' | 'path';
 
-type GraphicsItem = {
+export type GraphicsItem = {
     type: GraphicsType;
     params: LineParams | RectParams | ArcParams | PathParams;
 };
