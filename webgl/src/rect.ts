@@ -1,7 +1,7 @@
 /* eslint no-console:0 consistent-return:0 */
 'use strict';
 
-import { createProgram } from './utils';
+import { createProgram } from '../doc/utils1';
 
 export function drawRect(gl: WebGLRenderingContext) {
     // Get the strings for our GLSL shaders

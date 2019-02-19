@@ -4,7 +4,7 @@
 
 'use strict';
 
-import { createProgram, loadImage } from '../utils';
+import { createProgram, loadImage } from '../../doc/utils1';
 import * as fragmentShaderSource from './ImageFragment.glsl';
 import * as vertexShaderSource from './ImageVertex.glsl';
 
