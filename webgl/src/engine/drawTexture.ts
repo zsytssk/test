@@ -14,8 +14,11 @@ export function drawTexture(gl: WebGLRenderingContext, draw_info: TextureInfo) {
     program_info.set('a_position', {
         value: new Float32Array(getRectanglePoints(0, 0, width, height)),
     });
+
+    // [0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1] 颠倒 xy
+    // [0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1] 正常
     program_info.set('a_texcoord', {
-        value: new Float32Array([0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1]),
+        value: new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1]),
     });
 
     // Compute the matrices

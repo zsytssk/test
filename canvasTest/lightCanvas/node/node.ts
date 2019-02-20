@@ -11,7 +11,9 @@ export class Node extends EventDispatcher {
     public x: number = 0;
     @watch('calcTransform')
     public y: number = 0;
+    @watch('rePos')
     public centerX: number;
+    @watch('rePos')
     public centerY: number;
     public width: number;
     public height: number;

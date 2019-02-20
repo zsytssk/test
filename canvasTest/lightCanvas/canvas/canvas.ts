@@ -8,7 +8,6 @@ const engine = {
     clear,
     setAlpha,
     transform,
-    translate,
     drawTexture,
     drawGraphics,
     drawText,

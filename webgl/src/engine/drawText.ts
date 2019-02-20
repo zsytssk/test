@@ -21,6 +21,15 @@ export function drawText(gl: WebGLRenderingContext, node, matrix) {
     const canvas = document.createElement('canvas') as HTMLCanvasElement;
     const ctx = canvas.getContext('2d');
 
+    ctx.font = `${italic ? 'italic' : ''} ${
+        bold ? 'bold' : ''
+    } ${fontSize}px ${font}`;
+
+    const w = ctx.measureText(text).width;
+    const h = parseInt(ctx.font, 10) * 1.2;
+    canvas.width = w > width ? w : width;
+    canvas.height = h > height ? h : height;
+
     let x = 0;
     let y = 0;
     if (align === 'left') {
@@ -46,10 +55,10 @@ export function drawText(gl: WebGLRenderingContext, node, matrix) {
     } ${fontSize}px ${font}`;
     ctx.fillStyle = color;
 
-    const w = ctx.measureText(text).width;
-    const h = parseInt(ctx.font, 10) * 1.2;
-    canvas.width = w > width ? w : width;
-    canvas.height = h > height ? h : height;
+    ctx.font = `${italic ? 'italic' : ''} ${
+        bold ? 'bold' : ''
+    } ${fontSize}px ${font}`;
+    ctx.fillStyle = color;
 
     if (stroke) {
         ctx.strokeStyle = strokeColor;
@@ -60,7 +69,7 @@ export function drawText(gl: WebGLRenderingContext, node, matrix) {
 
     ctx.fillText(text, x, y);
     const texture = createTexture(gl, canvas);
-    document.body.appendChild(canvas);
+
     drawTexture(gl, {
         ...texture,
         matrix,

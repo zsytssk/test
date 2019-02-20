@@ -8,6 +8,6 @@ import { testTexture } from './test/texture';
 
 (() => {
     const gl = initWebGl();
-    testTexture(gl);
+    testDraw(gl);
     // drawImage(gl);
 })();

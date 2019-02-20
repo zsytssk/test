@@ -27,7 +27,11 @@ export function render(canvas: HTMLCanvasElement, stage: Node, tick: FuncVoid) {
     renderStage = () => {
         renderNode(stage);
         tick();
-        requestId = requestAnimationFrame(renderStage);
+        // @test
+        // requestId = requestAnimationFrame(renderStage);
+        setInterval(() => {
+            renderStage();
+        }, 1000);
     };
     requestId = requestAnimationFrame(renderStage);
 }
@@ -45,7 +49,7 @@ function renderNode(node: Node) {
         engine.clear(0, 0, canvas_width, canvas_height);
     }
     if (!node.visible) {
-        return;
+        return engine.restore();
     }
     const { matrix, alpha, graphics } = node;
     if (alpha !== 1) {

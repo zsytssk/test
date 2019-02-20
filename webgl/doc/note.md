@@ -7,6 +7,18 @@
 
 *   @ques text 2d 定位旋转
 
+-   @ques alpha matrix 的按层级变化如何处理
+    -   像 canvas 一样设置值???
+    -   save restore???
+
+## 2019-02-20 09:26:22
+
+-   @note 我如果做编辑器 元素的放大其实只要将里面的每一个元素的大小变大就可以了
+
+    -   设置全局 scale 值, 每一个大小都是 `xxx * scale`
+
+-   glsl 的基础 + matrix 运算
+
 ## 2019-02-19 09:11:46
 
 -   @ques texture 怎么是颠倒的
