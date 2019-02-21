@@ -1,15 +1,12 @@
--   @todo
-    -   shape 2d --> ...
-    -   pos | scale | rotation | pivot
-    -   图片 2d ->
-    -   text 2d -> ...
-    -   3d ...
+-   @ques alpha
 
-*   @ques text 2d 定位旋转
+    -   https://medium.com/david-guan/alpha-blending-and-webgl-823d86de00d8
 
--   @ques alpha matrix 的按层级变化如何处理
-    -   像 canvas 一样设置值???
-    -   save restore???
+-   @ques
+
+## 2019-02-21 09:20:38
+
+-   @ques @opt 字体超出自己的范围如何处理
 
 ## 2019-02-20 09:26:22
 

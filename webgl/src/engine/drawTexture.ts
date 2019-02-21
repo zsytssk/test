@@ -1,5 +1,5 @@
-import { getProgramInfo } from './glslUtil';
 import { getRectanglePoints, m3 } from '../utils/utils';
+import { getProgramInfo } from './glslUtil';
 type TextureInfo = {
     texture: WebGLTexture;
     width: number;

@@ -27,11 +27,7 @@ export function render(canvas: HTMLCanvasElement, stage: Node, tick: FuncVoid) {
     renderStage = () => {
         renderNode(stage);
         tick();
-        // @test
-        // requestId = requestAnimationFrame(renderStage);
-        setInterval(() => {
-            renderStage();
-        }, 1000);
+        requestId = requestAnimationFrame(renderStage);
     };
     requestId = requestAnimationFrame(renderStage);
 }

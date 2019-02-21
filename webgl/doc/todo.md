@@ -1,3 +1,15 @@
+-   @todo
+    -   shape 2d --> ...
+    -   pos | scale | rotation | pivot
+    -   图片 2d ->
+    -   text 2d -> ...
+    -   3d ...
+
+*   @ques alpha matrix 的按层级变化如何处理
+
+    -   像 canvas 一样设置值???
+    -   save restore???
+
 ## 提取基本的绘制方法
 
 -   @ques text image graphics ...

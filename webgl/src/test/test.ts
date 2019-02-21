@@ -32,7 +32,7 @@ export function testDraw(gl: WebGLRenderingContext) {
                 color: 'red',
                 align: 'center',
                 valign: 'middle',
-                width: 300,
+                width: 100,
                 height: 100,
             },
             matrix,
