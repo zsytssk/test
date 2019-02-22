@@ -1,7 +1,12 @@
 import { m3 } from '../utils/utils';
 import { getProgramInfo } from './glslUtil';
 
-export function drawPoly(gl: WebGLRenderingContext, params, matrix: number[]) {
+export function drawPoly(
+    gl: WebGLRenderingContext,
+    params,
+    matrix: number[],
+    alpha: number,
+) {
     const [x, y, points, fillColor, lineColor, lineWidth] = params;
     const inner = [];
     for (let i = 0; i < points.length - 3; i += 4) {
@@ -20,7 +25,7 @@ export function drawPoly(gl: WebGLRenderingContext, params, matrix: number[]) {
             getPointIndex(points, i + 4),
             getPointIndex(points, i + 5),
         ];
-        drawTriangle(gl, [x, y, triangle, fillColor], matrix);
+        drawTriangle(gl, [x, y, triangle, fillColor], matrix, alpha);
         inner.push(getPointIndex(points, i + 4), getPointIndex(points, i + 5));
         // drawTriangle(gl, [100, 100, [0, 0, 30, 10, 60, 0], [1, 0, 0, 1]]);
 
@@ -32,9 +37,15 @@ export function drawPoly(gl: WebGLRenderingContext, params, matrix: number[]) {
             gl,
             [x, y, inner, fillColor, lineColor, lineWidth],
             matrix,
+            alpha,
         );
     } else if (inner.length > 6) {
-        drawPoly(gl, [x, y, inner, fillColor, lineColor, lineWidth], matrix);
+        drawPoly(
+            gl,
+            [x, y, inner, fillColor, lineColor, lineWidth],
+            matrix,
+            alpha,
+        );
     }
 }
 function getPointIndex(points, index) {
@@ -48,6 +59,7 @@ export function drawTriangle(
     gl: WebGLRenderingContext,
     params,
     matrix: number[],
+    alpha?: number,
 ) {
     const [x, y, points, fillColor, lineColor, lineWidth] = params;
     const position = [];
@@ -62,6 +74,7 @@ export function drawTriangle(
             color,
             count,
             matrix,
+            alpha,
         });
     }
 }
@@ -96,10 +109,11 @@ type ShapeInfo = {
     position: number[];
     color: number[];
     matrix: number[];
+    alpha?: number;
     count?: number;
 };
 export function drawShape(gl: WebGLRenderingContext, draw_info: ShapeInfo) {
-    const { position, color, matrix, count } = draw_info;
+    const { position, color, matrix, count, alpha } = draw_info;
     const program_info = getProgramInfo(gl, 'shape');
 
     program_info.set('a_position', {
@@ -115,6 +129,7 @@ export function drawShape(gl: WebGLRenderingContext, draw_info: ShapeInfo) {
     matrix_gl = m3.multiply(matrix_gl, matrix);
     program_info.set('u_matrix', matrix_gl);
     program_info.set('u_color', color);
+    program_info.set('u_alpha', alpha);
 
     const primitiveType = gl.TRIANGLES;
     const offset = 0;

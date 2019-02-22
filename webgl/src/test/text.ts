@@ -5,10 +5,10 @@ export function testDraw(gl: WebGLRenderingContext) {
     const translation = [100, 100];
     const scale = [1, 1];
     let rotation = 0;
-    const pivot = [120, 90];
+    const pivot = [100, 50];
 
     function drawScene() {
-        // rotation += 0.01;
+        rotation += 0.01;
         // Tell WebGL how to convert from clip space to pixels
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
@@ -27,9 +27,8 @@ export function testDraw(gl: WebGLRenderingContext) {
         drawText(
             gl,
             {
-                text: 'hello',
-                font: 'Sans-Serif',
-                fontSize: 100,
+                text: 'hello world',
+                fontSize: 50,
                 color: 'red',
                 align: 'center',
                 valign: 'middle',
@@ -39,7 +38,7 @@ export function testDraw(gl: WebGLRenderingContext) {
             matrix,
         );
 
-        // requestAnimationFrame(drawScene);
+        requestAnimationFrame(drawScene);
     }
     drawScene();
 }

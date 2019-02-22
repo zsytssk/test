@@ -1,8 +1,7 @@
 -   @ques alpha
 
-    -   https://medium.com/david-guan/alpha-blending-and-webgl-823d86de00d8
-
--   @ques
+    -   图片 alpha
+    -
 
 ## 2019-02-21 09:20:38
 
