@@ -1,16 +1,20 @@
 import { createTexture, drawTexture } from '../engine/drawTexture';
 import { loadImage, m3 } from '../utils/utils';
 
-export function testTexture(gl: WebGLRenderingContext) {
+export function testDraw(gl: WebGLRenderingContext) {
     const translation = [100, 100];
     const scale = [1, 1];
     let rotation = 0;
+    const alpha = 0.9;
     const pivot = [90, 90];
 
     let texture_info1;
     loadImage('/dist/image/timg.jpg').then(image => {
         texture_info1 = createTexture(gl, image);
     });
+
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
     function drawScene() {
         rotation += 0.01;
@@ -21,7 +25,7 @@ export function testTexture(gl: WebGLRenderingContext) {
         gl.clearColor(0, 0, 0, 0);
         gl.clear(gl.COLOR_BUFFER_BIT);
 
-        const num = 10;
+        const num = 5;
         for (let i = 0; i < num; i++) {
             for (let j = 0; j < num; j++) {
                 let matrix = m3.translate(
@@ -37,6 +41,7 @@ export function testTexture(gl: WebGLRenderingContext) {
                     drawTexture(gl, {
                         ...texture_info1,
                         matrix,
+                        alpha,
                     });
                 }
             }

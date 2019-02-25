@@ -1,12 +1,17 @@
-import { drawPoly } from '../engine/drawShape';
-import { getPolygonPoints, m3 } from '../utils/utils';
+import { createTexture, drawTexture } from '../engine/drawTexture';
+import { loadImage, m3 } from '../utils/utils';
 
 export function testDraw(gl: WebGLRenderingContext) {
-    const translation = [300, 300];
+    const translation = [100, 100];
     const scale = [1, 1];
     let rotation = 0;
-    const alpha = 0.5;
-    const pivot = [0, 0];
+    const alpha = 0.9;
+    const pivot = [90, 90];
+
+    let texture_info1;
+    loadImage('/dist/image/timg.jpg').then(image => {
+        texture_info1 = createTexture(gl, image);
+    });
 
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
@@ -20,18 +25,27 @@ export function testDraw(gl: WebGLRenderingContext) {
         gl.clearColor(0, 0, 0, 0);
         gl.clear(gl.COLOR_BUFFER_BIT);
 
-        let matrix = m3.translate(
-            m3.identity(),
-            translation[0],
-            translation[1],
-        );
-        matrix = m3.rotate(matrix, rotation);
-        matrix = m3.scale(matrix, scale[0], scale[1]);
-        matrix = m3.translate(matrix, -pivot[0], -pivot[1]);
-        const points = getPolygonPoints(100, 10);
-        drawPoly(gl, [264, 166, points, [1, 0, 0, 1]], matrix, alpha);
-        drawPoly(gl, [264, 166, points, [0, 1, 1, 1]], matrix, alpha);
+        const num = 5;
+        for (let i = 0; i < num; i++) {
+            for (let j = 0; j < num; j++) {
+                let matrix = m3.translate(
+                    m3.identity(),
+                    translation[0] + i * 180,
+                    translation[1] + j * 180,
+                );
+                matrix = m3.rotate(matrix, rotation);
+                matrix = m3.scale(matrix, scale[0], scale[1]);
+                matrix = m3.translate(matrix, -pivot[0], -pivot[1]);
 
+                if (texture_info1) {
+                    drawTexture(gl, {
+                        ...texture_info1,
+                        matrix,
+                        alpha,
+                    });
+                }
+            }
+        }
         requestAnimationFrame(drawScene);
     }
     drawScene();

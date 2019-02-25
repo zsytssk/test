@@ -5,10 +5,11 @@ type TextureInfo = {
     width: number;
     height: number;
     matrix: number[];
+    alpha?: number;
     count?: number;
 };
 export function drawTexture(gl: WebGLRenderingContext, draw_info: TextureInfo) {
-    const { texture, matrix, width, height } = draw_info;
+    const { texture, matrix, width, height, alpha } = draw_info;
     const program_info = getProgramInfo(gl, 'texture');
 
     program_info.set('a_position', {
@@ -29,6 +30,7 @@ export function drawTexture(gl: WebGLRenderingContext, draw_info: TextureInfo) {
 
     matrix_gl = m3.multiply(matrix_gl, matrix);
     program_info.set('u_matrix', matrix_gl);
+    program_info.set('u_alpha', alpha || 1);
 
     program_info.set('u_texture', texture);
     gl.drawArrays(gl.TRIANGLES, 0, 6);

@@ -1,11 +1,17 @@
 import { m3 } from '../utils/utils';
 import { getProgramInfo } from './glslUtil';
 
+export type ShapeInfo = {
+    matrix?: number[];
+    alpha?: number;
+    position?: number[];
+    color?: number[];
+    count?: number;
+};
 export function drawPoly(
     gl: WebGLRenderingContext,
     params,
-    matrix: number[],
-    alpha: number,
+    shape_info: ShapeInfo,
 ) {
     const [x, y, points, fillColor, lineColor, lineWidth] = params;
     const inner = [];
@@ -25,7 +31,7 @@ export function drawPoly(
             getPointIndex(points, i + 4),
             getPointIndex(points, i + 5),
         ];
-        drawTriangle(gl, [x, y, triangle, fillColor], matrix, alpha);
+        drawTriangle(gl, [x, y, triangle, fillColor], shape_info);
         inner.push(getPointIndex(points, i + 4), getPointIndex(points, i + 5));
         // drawTriangle(gl, [100, 100, [0, 0, 30, 10, 60, 0], [1, 0, 0, 1]]);
 
@@ -36,15 +42,13 @@ export function drawPoly(
         drawTriangle(
             gl,
             [x, y, inner, fillColor, lineColor, lineWidth],
-            matrix,
-            alpha,
+            shape_info,
         );
     } else if (inner.length > 6) {
         drawPoly(
             gl,
             [x, y, inner, fillColor, lineColor, lineWidth],
-            matrix,
-            alpha,
+            shape_info,
         );
     }
 }
@@ -58,8 +62,7 @@ function getPointIndex(points, index) {
 export function drawTriangle(
     gl: WebGLRenderingContext,
     params,
-    matrix: number[],
-    alpha?: number,
+    shape_info: ShapeInfo,
 ) {
     const [x, y, points, fillColor, lineColor, lineWidth] = params;
     const position = [];
@@ -73,13 +76,16 @@ export function drawTriangle(
             position,
             color,
             count,
-            matrix,
-            alpha,
+            ...shape_info,
         });
     }
 }
 
-export function drawArc(gl: WebGLRenderingContext, params, matrix: number[]) {
+export function drawArc(
+    gl: WebGLRenderingContext,
+    params,
+    shape_info: ShapeInfo,
+) {
     const [x, y, radius, sAngle, eAngle, fillColor] = params;
 
     const points = [];
@@ -90,7 +96,7 @@ export function drawArc(gl: WebGLRenderingContext, params, matrix: number[]) {
         const px = Math.cos(angle) * radius;
         const py = Math.sin(angle) * radius;
         points.push(px + x, py + y);
-        drawTriangle(gl, [x, y, [x, y, px, py], fillColor], matrix);
+        drawTriangle(gl, [x, y, [x, y, px, py], fillColor], shape_info);
     }
     for (let i = 0; i < points.length - 3; i += 2) {
         const p = [
@@ -101,7 +107,7 @@ export function drawArc(gl: WebGLRenderingContext, params, matrix: number[]) {
             points[i + 2],
             points[i + 3],
         ];
-        drawTriangle(gl, [x, y, p, fillColor], matrix);
+        drawTriangle(gl, [x, y, p, fillColor], shape_info);
     }
 }
 
