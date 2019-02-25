@@ -1,4 +1,7 @@
 -   render 时先将所有的数据放到一个一维数组中, 然后遍历这个数组 render...
+    -   setTransForm
+    -   setAlpha @ques 不递归
+    -   @todo 浏览器内置方法和 js 的相互调用
 
 ## 2019-02-22 09:15:05
 
