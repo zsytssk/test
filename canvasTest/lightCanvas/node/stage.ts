@@ -1,7 +1,7 @@
 import { ResizeInfo } from '../event/watchResize';
 import { Engine } from '../render/render';
 import { setProps } from '../utils/utils';
-import { Node } from './node';
+import { Node, NodeType } from './node';
 
 let stage: Stage;
 export class Stage extends Node {
@@ -10,6 +10,7 @@ export class Stage extends Node {
     public canvas_width: number;
     public canvas_is_rotate: boolean = false;
     public canvas_scale: number;
+    public type = 'Stage' as NodeType;
     constructor() {
         super();
         stage = this;

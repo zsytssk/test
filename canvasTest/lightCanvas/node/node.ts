@@ -4,7 +4,7 @@ import { degreeToAngle, watch } from '../utils/utils';
 import { EventDispatcher } from './eventDispatcher';
 import { Graphics } from './graphics';
 
-export type NodeType = 'Image' | 'Node' | 'Text';
+export type NodeType = 'Stage' | 'Image' | 'Node' | 'Text';
 export class Node extends EventDispatcher {
     public name: string;
     @watch('calcTransform')
