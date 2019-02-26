@@ -13,17 +13,17 @@ export interface TextureData {
     height: number;
     pattern: Pattern;
 }
-export function getImageData(img: Image): { textures: TextureData[] } {
+export function getImageInfo(img: Image): { textures: TextureData[] } {
     const { textures: source_textures } = img;
     const textures = [];
     for (const texture of source_textures) {
-        textures.push(getTextureData(texture));
+        textures.push(getTextureInfo(texture));
     }
     return {
         textures,
     };
 }
-export function getTextureData(texture: Texture) {
+export function getTextureInfo(texture: Texture) {
     const { image, x, y, width, height, pattern } = texture;
     return { image, x, y, width, height, pattern };
 }

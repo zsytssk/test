@@ -1,3 +1,10 @@
+-   localToGlobal globalToLocal
+
+-   @ques 测试新的渲染逻辑的性能
+    -   性能测试
+
+## 2019-02-26 20:04:17
+
 -   render 时先将所有的数据放到一个一维数组中, 然后遍历这个数组 render...
 
     -   setTransForm

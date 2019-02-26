@@ -1,7 +1,7 @@
 import { Image } from '../../lightCanvas/node/image';
 import { Stage } from '../../lightCanvas/node/stage';
 
-export async function testPivot(stage: Stage) {
+export async function recursivePivot(stage: Stage) {
     const sun = new Image();
     sun.skin = './image/Canvas_sun.png';
     sun.x = 150;
@@ -26,38 +26,11 @@ export async function testPivot(stage: Stage) {
     moon.pivotY = 30;
     earth.addChild(moon);
 
-    const sun2 = new Image();
-    sun2.skin = './image/Canvas_sun.png';
-    sun2.x = 450;
-    sun2.y = 450;
-    sun2.pivotX = 150;
-    sun2.pivotY = 150;
-    stage.addChild(sun2);
-
-    const earth2 = new Image();
-    earth2.skin = './image/Canvas_earth.png';
-    earth2.x = 150;
-    earth2.y = 150;
-    earth2.pivotX = 80;
-    earth2.pivotY = 80;
-    sun2.addChild(earth2);
-
-    const moon2 = new Image();
-    moon2.skin = './image/Canvas_moon.png';
-    moon2.x = 12;
-    moon2.y = 12;
-    moon2.pivotX = 30;
-    moon2.pivotY = 30;
-    earth2.addChild(moon2);
-
     function draw() {
         sun.rotation = sun.rotation + 0.1;
         earth.rotation = earth.rotation + 1;
         moon.rotation = moon.rotation + 3;
 
-        sun2.rotation = sun2.rotation + 0.1;
-        earth2.rotation = earth2.rotation + 1;
-        moon2.rotation = moon2.rotation + 3;
         window.requestAnimationFrame(draw);
     }
     draw();

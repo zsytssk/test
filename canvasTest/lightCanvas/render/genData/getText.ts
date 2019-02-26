@@ -16,7 +16,7 @@ export interface TextInfo {
     padding: boolean;
     leading: boolean;
 }
-export function getTextData(text_node: Text): TextInfo {
+export function getTextInfo(text_node: Text): TextInfo {
     const {
         text,
         font,

@@ -119,7 +119,7 @@ export class Node extends EventDispatcher {
         matrix = m3.scale(matrix, scaleX, scaleY);
         matrix = m3.translate(matrix, -pivotX, -pivotY);
 
-        this.matrix = m3.toM2(matrix);
+        this.matrix = matrix;
         return matrix;
     }
     public globalToLocal(p: Point) {
@@ -129,14 +129,14 @@ export class Node extends EventDispatcher {
         }
         const out = this.parent.globalToLocal(p);
         // 从 laya 抄来的代码
-        const [m0, m1, m2, m3, m4, m5] = this.matrix;
-        const n = m0 * m3 - m1 * m2;
-        const a2 = m3 / n;
-        const b2 = -m1 / n;
-        const c2 = -m2 / n;
-        const d2 = m0 / n;
-        const tx2 = (m2 * m5 - m3 * m4) / n;
-        const ty2 = -(m0 * m5 - m1 * m4) / n;
+        const [m_0, m_1, m_2, m_3, m_4, m_5] = m3.toM2(this.matrix);
+        const n = m_0 * m_3 - m_1 * m_2;
+        const a2 = m_3 / n;
+        const b2 = -m_1 / n;
+        const c2 = -m_2 / n;
+        const d2 = m_0 / n;
+        const tx2 = (m_2 * m_5 - m_3 * m_4) / n;
+        const ty2 = -(m_0 * m_5 - m_1 * m_4) / n;
         const x = a2 * out.x + c2 * out.y + tx2;
         const y = b2 * out.x + d2 * out.y + ty2;
 

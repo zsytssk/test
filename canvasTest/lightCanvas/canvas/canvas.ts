@@ -1,3 +1,4 @@
+import { m3 } from '../utils/m3';
 import { drawGraphics } from './drawGraphic';
 import { drawText } from './drawText';
 import { drawTexture } from './drawTexture';
@@ -7,7 +8,8 @@ const engine = {
     restore,
     clear,
     setAlpha,
-    transform,
+    setTransform,
+    reset,
     drawTexture,
     drawGraphics,
     drawText,
@@ -31,8 +33,13 @@ export function clear(x: number, y: number, width: number, height: number) {
     ctx.clearRect(0, 0, width, height);
 }
 export function setAlpha(alpha: number) {
-    ctx.globalAlpha *= alpha;
+    ctx.globalAlpha = alpha;
 }
-export function transform(matrix: number[]) {
-    ctx.transform(...matrix);
+export function setTransform(matrix: number[]) {
+    matrix = m3.toM2(matrix);
+    ctx.setTransform(...matrix);
+}
+export function reset() {
+    ctx.resetTransform();
+    ctx.globalAlpha = 1;
 }

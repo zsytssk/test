@@ -1,19 +1,25 @@
 import { initEngine } from '../canvas/canvas';
-import { Graphics } from '../node/graphics';
 import { Node } from '../node/node';
-import { Text } from '../node/text';
-import { Texture } from '../node/texture';
-import { renderNode } from './data';
+import { TextureData } from './genData/getImage';
+import {
+    getNodeData,
+    GraphicsData,
+    ImageData,
+    NodeData,
+    StageData,
+    TextData,
+} from './genData/getNodeData';
 
 export type Engine = {
     save(): void;
     restore(): void;
     clear(x: number, y: number, width: number, height: number): void;
     setAlpha(alpha: number): void;
-    transform(matrix: number[]): void;
-    drawTexture(texture: Texture): void;
-    drawGraphics(graphics: Graphics): void;
-    drawText(txt: Text): void;
+    setTransform(matrix: number[]): void;
+    reset(): void;
+    drawTexture(texture: TextureData): void;
+    drawGraphics(graphics: GraphicsData): void;
+    drawText(txt: TextData): void;
 };
 
 let engine: Engine;
@@ -24,7 +30,7 @@ export function render(canvas: HTMLCanvasElement, stage: Node, tick: FuncVoid) {
         engine = initEngine(canvas);
     }
     renderStage = () => {
-        renderNode(engine, stage);
+        renderNode(stage);
         tick();
         requestId = requestAnimationFrame(renderStage);
     };
@@ -35,4 +41,37 @@ export function stopRender() {
 }
 export function startRender() {
     renderStage();
+}
+
+export function renderNode(node: Node) {
+    /** 获取一维数组的数据 */
+    const data_arr = getNodeData(node);
+    renderData(data_arr);
+}
+
+/** 渲染数据 */
+function renderData(data_arr: NodeData[]) {
+    for (const item of data_arr) {
+        const { type, alpha, matrix, graphics } = item as NodeData;
+        if (type === 'Stage') {
+            engine.reset();
+            const { canvas_height, canvas_width } = item as StageData;
+            engine.clear(0, 0, canvas_width, canvas_height);
+        }
+        if (alpha !== 1) {
+            engine.setAlpha(alpha);
+        }
+        engine.setTransform(matrix);
+        if (graphics) {
+            engine.drawGraphics(graphics);
+        }
+        if (type === 'Image') {
+            const { textures } = item as ImageData;
+            for (const texture of textures) {
+                engine.drawTexture(texture);
+            }
+        } else if (type === 'Text') {
+            engine.drawText(item as TextData);
+        }
+    }
 }
