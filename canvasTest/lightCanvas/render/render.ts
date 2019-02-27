@@ -1,5 +1,6 @@
-import { initEngine } from '../canvas/canvas';
+// import { initEngine } from '../canvas/canvas';
 import { Node } from '../node/node';
+import { initEngine } from '../webgl/webgl';
 import { TextureData } from './genData/getImage';
 import {
     getNodeData,
@@ -11,8 +12,6 @@ import {
 } from './genData/getNodeData';
 
 export type Engine = {
-    save(): void;
-    restore(): void;
     clear(x: number, y: number, width: number, height: number): void;
     setAlpha(alpha: number): void;
     setTransform(matrix: number[]): void;

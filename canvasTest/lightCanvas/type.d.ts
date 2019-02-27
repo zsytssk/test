@@ -45,3 +45,7 @@ type DeepPartial<T> = {
 type RecursivePartial<T> = { [P in keyof T]?: T[P] | RecursivePartial<T[P]> };
 
 type CanvasStyle = string | CanvasGradient | CanvasPattern;
+
+declare module '*.glsl';
+
+type Number6 = [number, number, number, number, number, number];

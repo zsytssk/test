@@ -17,11 +17,21 @@ let common_config = {
     module: {
         rules: [
             {
-                test: /\.(.*)?$/,
+                test: /\.(ts|js)$/,
                 loader: 'ts-loader',
                 options: {
                     transpileOnly: true,
                 },
+            },
+            {
+                test: /\.(glsl|frag|vert)$/,
+                exclude: /node_modules/,
+                use: [
+                    'raw-loader',
+                    {
+                        loader: 'glslify-loader',
+                    },
+                ],
             },
         ],
     },
@@ -50,7 +60,7 @@ module.exports = (env, argv) => {
     if (argv.mode === 'development') {
         return Object.assign(common_config, dev_config);
     } else {
-        common_config.module.rules[0].options.compilerOptions = prod_ts_compile_option;
+        common_config.moduweble.rules[0].options.compilerOptions = prod_ts_compile_option;
         return Object.assign(common_config, prod_config);
     }
 };

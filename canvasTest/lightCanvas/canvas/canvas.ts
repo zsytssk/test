@@ -1,11 +1,10 @@
+import { Engine } from '../render/render';
 import { m3 } from '../utils/m3';
 import { drawGraphics } from './drawGraphic';
 import { drawText } from './drawText';
 import { drawTexture } from './drawTexture';
 
-const engine = {
-    save,
-    restore,
+const engine: Engine = {
     clear,
     setAlpha,
     setTransform,
@@ -22,13 +21,6 @@ export function initEngine(canvas?: HTMLCanvasElement) {
     return engine;
 }
 
-export function save() {
-    ctx.save();
-}
-export function restore() {
-    ctx.restore();
-}
-
 export function clear(x: number, y: number, width: number, height: number) {
     ctx.clearRect(0, 0, width, height);
 }
@@ -37,7 +29,7 @@ export function setAlpha(alpha: number) {
 }
 export function setTransform(matrix: number[]) {
     matrix = m3.toM2(matrix);
-    ctx.setTransform(...matrix);
+    ctx.setTransform(...(matrix as Number6));
 }
 export function reset() {
     ctx.resetTransform();

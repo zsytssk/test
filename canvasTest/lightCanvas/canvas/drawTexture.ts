@@ -1,7 +1,7 @@
-import { Texture } from '../node/texture';
+import { TextureData } from '../render/genData/getImage';
 import { ctx } from './canvas';
 
-export function drawTexture(texture: Texture) {
+export function drawTexture(texture: TextureData) {
     ctx.save();
     const { x, y, width, height, image, pattern } = texture;
     ctx.translate(x, y);

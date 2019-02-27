@@ -1,7 +1,12 @@
--   @ques alpha
+-   @ques 图片 pattern ... repeat
 
-    -   图片 alpha
-    -
+    -   图片半透明
+
+-   @todo 实现和 canvas 一样的 api
+
+-   lightCanvas 和 webgl 使用相同的核心代码
+
+-   webgl 渲染的性能问题
 
 ## 2019-02-21 09:20:38
 

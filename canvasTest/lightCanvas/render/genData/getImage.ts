@@ -4,9 +4,10 @@ import { Pattern, Texture } from '../../node/texture';
 export interface ImageInfo {
     textures: TextureData[];
 }
+export type ImageSource = ImageBitmap | HTMLImageElement | HTMLCanvasElement;
 
 export interface TextureData {
-    image: CanvasImageSource;
+    image: ImageSource;
     x: number;
     y: number;
     width: number;

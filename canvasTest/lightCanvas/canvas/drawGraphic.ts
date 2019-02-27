@@ -1,13 +1,13 @@
 import {
     ArcParams,
-    Graphics,
     LineParams,
     PathParams,
     RectParams,
 } from '../node/graphics';
+import { GraphicsData } from '../render/genData/getNodeData';
 import { ctx } from './canvas';
 
-export function drawGraphics(graphics: Graphics) {
+export function drawGraphics(graphics: GraphicsData) {
     const { graphics_list, alpha } = graphics;
 
     ctx.save();
