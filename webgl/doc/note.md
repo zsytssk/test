@@ -1,12 +1,56 @@
--   @ques 图片 pattern ... repeat
+https://thebookofshaders.com/04/
 
-    -   图片半透明
+-   @ques glsl 上的值 能不能将打印出来
 
--   @todo 实现和 canvas 一样的 api
+-   @ques
+    `detail is that GLSL specs don’t guarantee that variables will be automatically casted`
 
--   lightCanvas 和 webgl 使用相同的核心代码
+## 2019-03-02 10:40:37
+
+-   https://vertostudio.com/
+
+-   @ques 图片 pattern ... repeat-x repeat-y
+
+*   https://codepen.io/zsytssk/pen/NJxxew?editors=1010
+
+-   png 图片有了如何重复呢???
+
+    -   应该是吧 a_texcoord 设置 texture 的位置和大小
+    -   然后 x,y 重复,
+
+-   @ques 但是如何通过 matrix 来定位 a_texcoord
+    -   图片的原始宽度 + 要显示的宽度
+    -   matrix v_texcoord 定位图片的位置和大小
+    -   x, y, width, height
+    -   glsl
+
+## 2019-02-28 09:00:14
+
+-   天天靠凑出来的东西真的不行,
+
+    -   我在 engine 之外还需要一个原始的 test, 用来纠正 engine 上的代码
+
+-   是不是图片的问题 换成他的图片看看
+
+    -   .. 本身 to_edge 是一样的
+    -   是 png+jpg 问题
+    -   jpg 如何重复...
+
+-   @ques 怎么变黑了
+    s - 可能是 position| texture 的设置有问题... - 用的是 m4, 向量
+
+*   @todo 实现和 canvas 一样的 api
+    -   lightCanvas 和 webgl 使用相同的核心代码
 
 -   webgl 渲染的性能问题
+
+    -   同时渲染多个对象
+
+-   图片半透明
+
+-   @play 将积分办理的网站记录下来
+
+https://tampermonkey.net/changelog.php?version=4.8&ext=dhdg&updated=true&old=4.7.54&intr=true
 
 ## 2019-02-21 09:20:38
 

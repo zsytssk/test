@@ -19,7 +19,7 @@ export function drawTexture(gl: WebGLRenderingContext, draw_info: TextureInfo) {
     // [0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1] 颠倒 xy
     // [0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1] 正常
     program_info.set('a_texcoord', {
-        value: new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1]),
+        value: new Float32Array([-3, -1, 2, -1, -3, 4, -3, 4, 2, -1, 2, 4]),
     });
 
     // Compute the matrices
@@ -28,11 +28,16 @@ export function drawTexture(gl: WebGLRenderingContext, draw_info: TextureInfo) {
         gl.canvas.clientHeight,
     );
 
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
     matrix_gl = m3.multiply(matrix_gl, matrix);
     program_info.set('u_matrix', matrix_gl);
+    program_info.set('u_texture', texture);
     program_info.set('u_alpha', alpha || 1);
 
-    program_info.set('u_texture', texture);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
 }
 
@@ -42,6 +47,7 @@ export function createTexture(
 ) {
     const texture = gl.createTexture();
     const { width, height } = image;
+
     gl.bindTexture(gl.TEXTURE_2D, texture);
     gl.texImage2D(
         gl.TEXTURE_2D,
@@ -54,12 +60,12 @@ export function createTexture(
         gl.UNSIGNED_BYTE,
         new Uint8Array([0, 0, 255, 255]),
     );
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 
     gl.bindTexture(gl.TEXTURE_2D, texture);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 
     return {
         texture,

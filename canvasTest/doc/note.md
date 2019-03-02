@@ -1,7 +1,11 @@
 -   localToGlobal globalToLocal
 
 -   @ques 测试新的渲染逻辑的性能
+
     -   性能测试
+
+-   @ques 能不能将 getData 变成只计算改变对象
+    -   增删改 三种修改...
 
 ## 2019-02-26 20:04:17
 
