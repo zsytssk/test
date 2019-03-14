@@ -9,7 +9,7 @@ export const logo_1768 = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAS0AAACS
 // tslint:disable-next-line:max-line-length
 
 export function setLogo(logo: string, width: number, height: number) {
-    const scene = `
+  const scene = `
 <View width="${width}" sceneColor="#000" height="${height}" editorInfo="compId=1">
 <Image skin="${logo || logo_1768}" centerX="0" centerY="-100" var="logo"/>
 <Box y="535" width="123" centerX="0" centerY="100" height="24" editorInfo="compId=8">
@@ -19,5 +19,5 @@ export function setLogo(logo: string, width: number, height: number) {
 </Box>
 </View>`;
 
-    setXml({ scene });
+  setXml({ scene });
 }

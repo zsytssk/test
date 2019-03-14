@@ -1,3 +1,17 @@
+## 重现卡顿
+
+-   genMap
+
+-   tslint 重现卡顿...
+    -   就他一个好像是好的
+    -   在 canvasTest 场景中无法重现
+
+webpack
+修改文件
+autoFix..
+
+## asdasdsdasdas
+
 -   localToGlobal globalToLocal
 
 -   @ques 测试新的渲染逻辑的性能

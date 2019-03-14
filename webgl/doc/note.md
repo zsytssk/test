@@ -1,9 +1,71 @@
-https://thebookofshaders.com/04/
+https://thebookofshaders.com/09
+
+## 2019-03-14 09:25:30
+
+-   @note 直接在 glsl 中运算 matrix 这样更有效率
+
+-   @ques 能不能直接在 shaper 中画各种的形状...
+
+-   glsl 的函数的样式...
+
+-   @ques 如何 画一个三角形
+
+    -   能不能借用矩形的公式
+    -   能不能直接使用三角形的公式
+    -   分割成一个个的矩形...
+
+*   @note 解法 1 有点难搞
+
+    -   一条边的直线方程
+    -   任一点到中心的距离 < 点和中心形成直线和直线交点的距离
+        -   点到中心直线
+        -   点到中心直线和原直线的交点
+        -   ...
+    -   两点直线方程...
+
+*   @ques 怎么 vec3(vec2) 这种类型如何创建...
+
+    -   直线方程
+
+*   @ques plot()
+
+## 2019-03-07 09:10:46
+
+-   @ques 有什么办法调试 glsl
+
+    -   输出里面的值...
+    -   将想要的值 做成图片显示在页面上
+    -   怎么将文字做成图片...
+    -   @ques 能不能将值传给 js console.log
+
+-   @ques 为什么不是 st.y
+
+-   @ques 为什么中间有一个直线
+
+-   @ques 看不懂了, 也没有办法调试...
+    -   数学方法实在是太复杂了...
+    -   先跳过看后面的
+
+## 2019-03-06 09:19:37
+
+-   @ques fract() 是做什么的
+
+    -   mod
+    -   sign
+    -   clamp
+
+-   @ques magenta 是什么颜色
+
+-   @ques mix smoothStep
+
+## 2019-03-05 09:10:52
 
 -   @ques glsl 上的值 能不能将打印出来
 
 -   @ques
     `detail is that GLSL specs don’t guarantee that variables will be automatically casted`
+
+-   https://github.com/patriciogonzalezvivo/glslViewer
 
 ## 2019-03-02 10:40:37
 

@@ -1,5 +1,4 @@
 import { ResizeInfo } from '../event/watchResize';
-import { Engine } from '../render/render';
 import { setProps } from '../utils/utils';
 import { Node, NodeType } from './node';
 

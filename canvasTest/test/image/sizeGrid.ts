@@ -7,7 +7,7 @@ export async function drawImage(stage: Stage) {
     grid.height = 500;
     grid.x = 100;
     grid.y = 100;
-    grid.sieGrid = '15, 15, 15, 15';
+    grid.sizeGrid = '15, 15, 15, 15';
     grid.skin = 'image/grid.png';
     stage.addChild(grid);
 }
