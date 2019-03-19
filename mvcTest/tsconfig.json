@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "experimentalDecorators": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "skipDefaultLibCheck": true,
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "baseUrl": ".",
+        "target": "es6",
+        "outDir": "dist",
+        "watch": true
+    },
+    "include": ["src", "test", "libs", "typings", "laya/src/ui"]
+}

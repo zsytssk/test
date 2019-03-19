@@ -1,5 +1,23 @@
 https://thebookofshaders.com/09
 
+## 2019-03-18 09:35:32
+
+-   [@todo](https://thebookofshaders.com/edit.php#09/diamondtiles.frag)
+
+## 2019-03-15 09:28:52
+
+-   @todo glsl 画一个矩形...
+
+    -   居中 offset
+
+-   glsl 的坐标原点是什么...
+
+    -   应该是左下角
+    -   和坐标系一样...
+    -   x 距离且 y 距离
+
+-   @ques dot 是什么意思...
+
 ## 2019-03-14 09:25:30
 
 -   @note 直接在 glsl 中运算 matrix 这样更有效率

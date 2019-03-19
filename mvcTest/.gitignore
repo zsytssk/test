@@ -1,0 +1,13 @@
+typings/
+script/releaseFile/config.json
+node_modules/
+monitor
+release/
+.laya
+laya/src/*
+!laya/src/libs
+laya/bin/*
+!laya/bin/libs
+!laya/bin/*.html
+dist
+Thumbs.db

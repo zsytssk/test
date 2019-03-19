@@ -1,0 +1,27 @@
+{
+    "name": "mvcTest",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "webpack-dev": "webpack --mode development",
+        "webpack-dev-server": "webpack-dev-server --mode development",
+        "webpack-prod": "webpack --mode production"
+    },
+    "devDependencies": {
+        "ts-loader": "^4.4.2",
+        "typescript": "^2.9.2",
+        "webpack": "^4.15.1",
+        "webpack-cli": "^3.0.8",
+        "webpack-dev-server": "^3.1.4"
+    },
+    "dependencies": {
+        "rxjs": "^6.2.1",
+        "lodash": "^4.17.10",
+        "axios": "^0.18.0",
+        "es6-promise": "^4.2.4"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}
