@@ -1,4 +1,30 @@
-https://thebookofshaders.com/09
+vscode tslint bug close
+
+rust test project
+
+## 2019-03-26 09:01:26
+
+-   后面没有文章了 我查...
+
+-   [神奇的效果](https://thebookofshaders.com/13/)
+
+## 2019-03-25 09:28:53
+
+-   @ques mix 渐进效果
+    -   mix 可以 mix color, 对于数又是什么效果...
+    -   mix(a, b, c) a-->b 随着 c 0 到 1 慢慢递进
+
+*   @ques 积分怎么样了 查看邮件
+
+    -   要不要问问
+
+*   @ques 怎么画一条线
+
+## 2019-03-21 09:19:42
+
+-   @ques 圆怎么画
+
+-   风车
 
 ## 2019-03-18 09:35:32
 

@@ -24,20 +24,19 @@ void main(){
   st = st *2.-1.;
 
   // Number of sides of your shape
-  int N = 5;
+  int N = 6;
 
   // Angle and radius from the current pixel
-  float a = atan(st.x,st.y)+PI;
+  float a = atan(st.x,st.y)+PI - u_time;
   float r = TWO_PI/float(N);
 
   //  最复杂的地方就是在这里
   // Shaping function that modulate the distance
   d = cos(floor(a/r)*r-a)*length(st);
 
-  color = vec3(1.0-smoothstep(.3,.31,d));
+  color = vec3(1.0-smoothstep(0.332,0.478,d));
   // color = vec3(d);
 
   gl_FragColor = vec4(color,1.0);
 }
-
 ```
