@@ -2,13 +2,14 @@
 const path = require('path');
 
 let common_config = {
-    entry: ['./src/main.ts'],
+    entry: ['./src/main.ecs.ts', './test/test.ts'],
     output: {
         filename: 'main.js',
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, 'bin'),
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js'],
+        modules: [path.resolve('./libs'), path.resolve('./test'), path.resolve('./node_modules')],
+        extensions: ['.ts', '.js'],
     },
     module: {
         rules: [
@@ -24,15 +25,16 @@ let common_config = {
 };
 
 const dev_config = {
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'eval-source-map',
     watch: true,
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
+        host: '0.0.0.0',
+        contentBase: path.join(__dirname, 'bin'),
     },
 };
 
 const prod_config = {
-    entry: ['es6-promise', './src/main.ts'],
+    entry: ['es6-promise', './src/main.ecs.ts'],
 };
 const prod_ts_compile_option = {
     target: 'es5',

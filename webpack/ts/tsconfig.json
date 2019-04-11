@@ -2,14 +2,19 @@
     "compilerOptions": {
         "allowJs": true,
         "experimentalDecorators": true,
-        "module": "esnext",
+        "module": "commonjs",
         "moduleResolution": "node",
-        "rootDir": "src",
+        "target": "es6",
         "skipDefaultLibCheck": true,
         "skipLibCheck": true,
+        "noEmitHelpers": true,
         "sourceMap": true,
-        "target": "es6",
-        "watch": true
+        "watch": true,
+        "baseUrl": "./",
+        "outDir": "dist",
+        "paths": {
+            "*": ["node_modules/*", "libs/*"]
+        }
     },
-    "include": ["src"]
+    "include": ["src", "libs", "test"]
 }

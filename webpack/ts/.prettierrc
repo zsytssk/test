@@ -3,6 +3,15 @@
     "singleQuote": true,
     "semi": true,
     "no-prose-wrap": true,
-    "trailingComma": "es5",
-    "extends": ["tslint:latest", "tslint-config-prettier"]
+    "trailingComma": "all",
+    "comma-dangle": [2, "always-multiline"],
+    "printWidth": 240,
+    "overrides": [
+        {
+            "files": "*.md",
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
 }

@@ -1,30 +1,39 @@
 {
-    "author": "zsytssk@gmail.com",
-    "contributors": [],
-    "license": "UNLICENSED",
-    "name": "webpack_test",
-    "version": "1.0.0",
-    "private": true,
-    "description": "",
-    "main": "index.js",
-    "directories": {
-        "doc": "doc"
-    },
-    "scripts": {
-        "webpack-dev": "webpack --mode development",
-        "webpack-dev-server": "webpack-dev-server --mode development",
-        "webpack-prod": "webpack --mode production"
-    },
-    "devDependencies": {
-        "ts-loader": "^4.3.1",
-        "tslint": "^5.10.0",
-        "tslint-config-prettier": "^1.13.0",
-        "typescript": "^3.2.0",
-        "webpack": "^4.11.1",
-        "webpack-cli": "^3.0.2",
-        "webpack-dev-server": "^3.1.4"
-    },
-    "dependencies": {
-        "es6-promise": "^4.2.4"
-    }
+  "author": "zsytssk@gmail.com",
+  "contributors": [],
+  "license": "UNLICENSED",
+  "name": "webpack_test",
+  "version": "1.0.0",
+  "private": true,
+  "main": "main.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "webpack-dev": "webpack --mode development",
+    "webpack-dev-server": "webpack-dev-server --mode development",
+    "webpack-prod": "webpack --mode production"
+  },
+  "devDependencies": {
+    "ts-loader": "^4.3.1",
+    "tslint": "^5.10.0",
+    "tslint-config-prettier": "^1.13.0",
+    "typescript": "^3.2.4",
+    "webpack": "^4.11.1",
+    "webpack-cli": "^3.0.2",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "dependencies": {
+    "es6-promise": "^4.2.4",
+    "node-xlsx": "^0.14.1",
+    "xls-to-json": "^0.5.1"
+  },
+  "bin": {
+    "webpack_test": "main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://172.21.1.184/ragnark/legend_demo.git"
+  },
+  "description": ""
 }
