@@ -613,6 +613,7 @@ dependencies = [
 name = "test"
 version = "0.1.0"
 dependencies = [
+ "futures 0.1.26 (registry+https://github.com/rust-lang/crates.io-index)",
  "image 0.21.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "tokio 0.1.18 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
