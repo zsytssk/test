@@ -3,23 +3,23 @@ extern crate futures;
 use super::interval::Interval;
 use futures::prelude::*;
 
-pub struct IntervalFuture {
+pub struct IntervalStream {
     interval: Interval,
     last: usize,
 }
 
-impl IntervalFuture {
-    pub fn new(interval: Interval) -> IntervalFuture {
+impl IntervalStream {
+    pub fn new(interval: Interval) -> IntervalStream {
         let last = interval.get_counter();
-        IntervalFuture { interval, last }
+        IntervalStream { interval, last }
     }
 }
 
-impl Future for IntervalFuture {
+impl Stream for IntervalStream {
     type Item = usize;
     type Error = ();
 
-    fn poll(&mut self) -> Poll<Self::Item, Self::Error> {
+    fn poll(&mut self) -> Poll<Option<Self::Item>, Self::Error> {
         let curr = self.interval.get_counter();
         if curr == self.last {
             let task = futures::task::current();
@@ -27,7 +27,7 @@ impl Future for IntervalFuture {
             Ok(Async::NotReady)
         } else {
             self.last = curr;
-            Ok(Async::Ready(curr))
+            Ok(Async::Ready(Some(curr)))
         }
     }
 }

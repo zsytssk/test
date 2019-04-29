@@ -1,29 +1,43 @@
-#[macro_use]
 extern crate futures;
 extern crate tokio;
 
-mod future;
 mod interval;
+mod stream;
 
-use self::future::IntervalFuture;
 use self::interval::Interval;
+use self::stream::IntervalStream;
 use tokio::prelude::*;
 
-struct IntervalPrinter(IntervalFuture);
+struct MyOk<T>(Option<T>, u32);
+impl<T> MyOk<T> {
+    fn new(t: T) -> MyOk<T> {
+        MyOk(Some(t), 0)
+    }
+}
 
-impl Future for IntervalPrinter {
-    type Item = ();
+impl<T> Future for MyOk<T> {
+    type Item = T;
     type Error = ();
-    fn poll(&mut self) -> Poll<Self::Item, Self::Error> {
-        let curr = try_ready!(self.0.poll());
-        println!("Counter is: {}", curr);
-        Ok(Async::Ready(()))
+    fn poll(&mut self) -> Poll<T, ()> {
+        let state = self.1;
+        println!("MyOk state  = {}", self.1);
+        if state == 0 {
+            self.1 = 1;
+            let task = futures::task::current();
+            task.clone().notify();
+            Ok(Async::NotReady)
+        } else {
+            Ok(Async::Ready(self.0.take().unwrap()))
+        }
     }
 }
 
 fn main() {
-    let interval = Interval::from_millis(500);
-    let interval_future = IntervalFuture::new(interval);
-    let interval_printer = IntervalPrinter(interval_future);
-    tokio::run(interval_printer)
+    let name = String::from("Alice");
+    let future = MyOk::new(name).and_then(|name| {
+        println!("Name: {}", name);
+        MyOk::new(())
+    });
+    println!("test");
+    tokio::run(future);
 }
