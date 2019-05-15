@@ -1,3 +1,29 @@
+- @ques 要不要将自己的 snippets 放在一个仓库中, 这样比 gist 有什么优点??
+
+- @todo vscode 只能打开一批文件 这样不好...
+  - 能不能自己写一个插件
+  - 原来的有没有这样的功能呢...
+
+## 2019-05-14 09:15:39
+
+- @todo gist generatic type
+
+- @ques rust type self::item
+
+- @ques impl specific type for generic type
+
+- @ques rust arr sum...
+
+- @ques 有没有这种写法...
+
+```rs
+impl<T: u8> Test<T> {
+    fn sum(&mut self) -> T {
+        self.arr.iter().sum()
+    }
+}
+```
+
 ## 2018-11-27 09:25:13
 
 - rust 2018
