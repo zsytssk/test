@@ -1,27 +1,42 @@
-use std::fs::File;
-use std::io;
-use std::io::prelude::*;
+use std::sync::{Arc, Mutex};
+use std::thread;
 
-struct Info {
-    name: String,
-    age: i32,
-    rating: i32,
+struct MyInner {
+    s: u8,
+}
+struct My {
+    inner: Arc<Mutex<MyInner>>,
 }
 
-fn write_info(info: &Info) -> io::Result<()> {
-    let mut file = File::create("my_best_friends.txt")?;
+impl My {
+    fn new(s: u8) -> My {
+        My {
+            inner: Arc::new(Mutex::new(MyInner { s })),
+        }
+    }
+    fn start(&mut self) {
+        let local_self = self.inner.clone();
+        thread::spawn(move || {
+            local_self.lock().unwrap().add();
+        });
+    }
+    fn get(&self) -> u8 {
+        self.inner.lock().unwrap().s
+    }
+}
 
-    file.write_all(format!("name: {}\n", info.name).as_bytes())?;
-    file.write_all(format!("age: {}\n", info.age).as_bytes())?;
-    file.write_all(format!("age: {}\n", info.rating).as_bytes())?;
-    Ok(())
+impl MyInner {
+    fn add(&mut self) {
+        println!("{:?}", self.s);
+        self.s += 1;
+        println!("{:?}", self.s);
+    }
 }
 
 fn main() {
-    let info = Info {
-        name: String::from("zsy"),
-        age: 31,
-        rating: 95,
-    };
-    write_info(&info);
+    let mut thread_test = My::new(0);
+    loop {
+        thread_test.start();
+        println!("{}", thread_test.get());
+    }
 }
