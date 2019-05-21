@@ -2,6 +2,10 @@ extern crate js_sys;
 
 use wasm_bindgen::prelude::*;
 
+extern "C" {
+
+}
+
 #[wasm_bindgen]
 pub fn greet() {
     let window = web_sys::window().expect("no global `window` exists");

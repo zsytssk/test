@@ -1,42 +1,39 @@
-use std::sync::{Arc, Mutex};
-use std::thread;
+#[macro_use]
+extern crate lazy_static;
 
-struct MyInner {
-    s: u8,
-}
-struct My {
-    inner: Arc<Mutex<MyInner>>,
-}
+mod add;
+mod commit;
+mod error;
+mod index;
+mod init;
 
-impl My {
-    fn new(s: u8) -> My {
-        My {
-            inner: Arc::new(Mutex::new(MyInner { s })),
-        }
-    }
-    fn start(&mut self) {
-        let local_self = self.inner.clone();
-        thread::spawn(move || {
-            local_self.lock().unwrap().add();
-        });
-    }
-    fn get(&self) -> u8 {
-        self.inner.lock().unwrap().s
-    }
-}
-
-impl MyInner {
-    fn add(&mut self) {
-        println!("{:?}", self.s);
-        self.s += 1;
-        println!("{:?}", self.s);
-    }
-}
+use clap::{App, Arg, SubCommand};
 
 fn main() {
-    let mut thread_test = My::new(0);
-    loop {
-        thread_test.start();
-        println!("{}", thread_test.get());
+    let m = App::new("tgit")
+        .subcommand(SubCommand::with_name("init").about("Initialize the Repo"))
+        .subcommand(
+            SubCommand::with_name("add").about("Add a file").arg(
+                Arg::with_name("file")
+                    .help("File to add")
+                    .index(1)
+                    .multiple(true)
+                    .required(true),
+            ),
+        )
+        .get_matches();
+
+    match m.subcommand() {
+        ("init", Some(..)) => match init::init() {
+            Ok(()) => println!("Repo initialized"),
+            Err(..) => println!("Already Initialized!"),
+        },
+        ("add", Some(submatch)) => {
+            match add::add_all(&submatch.values_of("file").unwrap().collect()) {
+                Ok(()) => (),
+                Err(e) => println!("Error: {:?}", e),
+            }
+        }
+        _ => println!("Command not recognized."),
     }
 }
