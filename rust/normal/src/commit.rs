@@ -1,11 +1,14 @@
 use crypto::digest::Digest;
 use crypto::sha1::Sha1;
 use regex::Regex;
+
 use std::collections::BTreeMap;
 use std::io::Write;
 
+use super::error::TgitError;
+
+use super::file::FileService;
 use super::index::Index;
-use crate::error::TgitError;
 
 pub struct Commit {
     pub hash: Option<String>,
@@ -35,12 +38,19 @@ impl Commit {
 
         commit
     }
+
+    pub fn add_from_index(&mut self, index: &Index) {
+        for (ref hash, ref path) in index.hashtree.iter() {
+            self.files.insert(hash.to_string(), path.to_string());
+        }
+    }
+
     pub fn from_string(hash: &str, input: &str) -> Result<Commit, TgitError> {
         let mut commit = Commit::new(None);
         commit.hash = Some(hash.to_string());
         lazy_static! {
-            static ref PARENT: Regex = Regex::new(r"parent ([0-9a-f]{40}").unwrap();
-            static ref BLOB: Regex = Regex::new(r"blob ([0-9a-f]{40}").unwrap();
+            static ref PARENT: Regex = Regex::new(r"parent ([0-9a-f]{40})").unwrap();
+            static ref BLOB: Regex = Regex::new(r"blob ([0-9a-f]{40}) (.*)").unwrap();
         }
 
         for line in input.lines() {
@@ -57,12 +67,13 @@ impl Commit {
 
         Ok(commit)
     }
+
     pub fn print(&self) {
         if let Some(ref p) = self.parent {
             println!("parent {}", p);
         }
         for (ref hash, ref path) in self.files.iter() {
-            println!("blob {} {}", hash, path)
+            println!("blob {} {}", hash, path);
         }
     }
 
@@ -72,13 +83,35 @@ impl Commit {
         if let Some(ref p) = self.parent {
             writeln!(&mut data, "parent {}", p).unwrap();
         }
+
         for (ref hash, ref path) in self.files.iter() {
             writeln!(&mut data, "blob {} {}", hash, path).unwrap();
         }
 
         let mut sha = Sha1::new();
-        sha::input(&data);
+        sha.input(&data);
         self.hash = Some(sha.result_str());
         self.data = Some(data);
     }
+}
+
+pub fn commit() -> Result<(), TgitError> {
+    let fs = FileService::new()?;
+    let head_ref = fs.get_head_ref().unwrap();
+    let parent_hash = FileService::get_hash_from_ref(&head_ref);
+    let mut index = Index::new(&fs.root_dir)?;
+
+    let parent = match parent_hash {
+        Some(ref h) => Some(fs.read_commit(h)?),
+        None => None,
+    };
+
+    let mut commit = Commit::new(parent.as_ref());
+    parent.map(|p| p.print());
+    commit.add_from_index(&index);
+    commit.print();
+
+    fs.write_commit(&mut commit)?;
+    index.clear()?;
+    Ok(())
 }
