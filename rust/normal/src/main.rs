@@ -25,4 +25,5 @@ fn main() {
     for val in &data {
         val.print();
     }
+    println!("this is a test");
 }
