@@ -1,0 +1,7 @@
+[package]
+name = "shakespeare_server"
+version = "0.1.0"
+authors = ["张世阳 <ZHANGSHIYANG162@pingan.com.cn>"]
+edition = "2018"
+
+[dependencies]

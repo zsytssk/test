@@ -1,0 +1,13 @@
+[package]
+name = "shakespeare_client"
+version = "0.1.0"
+authors = ["张世阳 <ZHANGSHIYANG162@pingan.com.cn>"]
+edition = "2018"
+
+[dependencies]
+romio = "0.3.0-alpha.8"
+
+[dependencies.futures]
+version = "0.3.0-alpha.16"
+package = "futures-preview"
+features = ["async-await", "nightly"]

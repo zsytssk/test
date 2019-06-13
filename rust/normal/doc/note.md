@@ -1,6 +1,24 @@
-- @ques 要不要将自己的 snippets 放在一个仓库中, 这样比 gist 有什么优点??
+rust nightly
 
-- @todo vscode 只能打开一批文件 这样不好...
+## 2019-06-13 09:24:09
+
+procedural macros
+
+https://github.com/dtolnay/proc-macro-workshop
+
+- vscode clapse other
+
+- google desktop
+
+## 2019-06-05 09:18:01
+
+- @ques 能不能将 lisp 写特殊功能...
+
+- @ques 语言 怎么分配内存 怎么计算 , @ques 有没有这样一本书...
+
+* @ques 要不要将自己的 snippets 放在一个仓库中, 这样比 gist 有什么优点??
+
+* @todo vscode 只能打开一批文件 这样不好...
   - 能不能自己写一个插件
   - 原来的有没有这样的功能呢...
 
