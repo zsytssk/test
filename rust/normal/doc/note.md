@@ -1,5 +1,8 @@
 - @ques code
 
+- marcro vec 看不懂..
+  - code generation
+
 ## 2018-11-27 09:25:13
 
 - rust 2018

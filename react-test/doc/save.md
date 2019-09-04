@@ -1,4 +1,4 @@
-- https://create-react-app.dev/docs/adding-images-fonts-and-files
+- https://create-react-app.dev/docs/loading-graphql-files
 
 ## react + reactNative
 
@@ -19,6 +19,8 @@
 css dom
 
 ## 目标
+
+- boss 直聘 react native 版本..
 
 - react + redux + ts + jest
 - context api - function component
