@@ -1,5 +1,8 @@
 - https://create-react-app.dev/docs/loading-graphql-files
 
+- swipe 切换页面 + react-route
+  - 没有理想的插件
+
 ## react + reactNative
 
 - redux

@@ -1,30 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { Index } from './index';
+import { Chat } from './chat/chat';
+import { Footer } from './footer/footer';
+import { Company } from './company/company';
+
 import './App.css';
-import { Button } from './button/button';
 
 const App: React.FC = () => {
-  const onCLick = () => {
-    console.log(`onclick`);
-  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <Button onClick={onCLick}>test</Button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Route
+        render={({ location }) => (
+          <TransitionGroup>
+            <CSSTransition key={location.key} timeout={30000} classNames="fade">
+              <Switch location={location}>
+                <Route path="/" exact component={Index} />
+                <Route path="/chat" component={Chat} />
+                <Route path="/company" component={Company} />
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
+        )}
+      />
+      <Footer></Footer>
+    </Router>
   );
 };
 

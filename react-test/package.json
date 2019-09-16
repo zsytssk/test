@@ -7,6 +7,7 @@
     "@types/node": "12.7.3",
     "@types/react": "16.9.2",
     "@types/react-dom": "16.9.0",
+    "@types/react-router-dom": "^4.3.5",
     "graphql": "^14.5.4",
     "graphql.macro": "^1.4.2",
     "husky": "^3.0.5",
@@ -14,7 +15,9 @@
     "prettier": "^1.18.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
+    "react-transition-group": "^4.3.0",
     "source-map-explorer": "^2.0.1",
     "typescript": "3.6.2"
   },
@@ -50,5 +53,8 @@
       "prettier --single-quote --write",
       "git add"
     ]
+  },
+  "devDependencies": {
+    "@types/react-transition-group": "^4.2.2"
   }
 }
