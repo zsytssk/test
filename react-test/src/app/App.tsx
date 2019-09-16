@@ -14,7 +14,7 @@ const App: React.FC = () => {
       <Route
         render={({ location }) => (
           <TransitionGroup>
-            <CSSTransition key={location.key} timeout={30000} classNames="fade">
+            <CSSTransition key={location.key} timeout={300} classNames="fade">
               <Switch location={location}>
                 <Route path="/" exact component={Index} />
                 <Route path="/chat" component={Chat} />
