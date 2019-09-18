@@ -1,0 +1,32 @@
+.footer {
+  height: 51px;
+  box-sizing: content-box;
+  border-top: 2px solid #eff1f0;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  & > a {
+    &.active {
+      & > .icon-wrap,
+      & > .name {
+        color: #40c9c3;
+      }
+    }
+    text-decoration: none;
+    & > .icon-wrap {
+      font-size: 20px;
+      line-height: 35px;
+      color: #000;
+      & > * {
+        vertical-align: middle;
+      }
+    }
+
+    & > .name {
+      line-height: 15px;
+      font-size: 10px;
+      color: #333;
+    }
+  }
+}

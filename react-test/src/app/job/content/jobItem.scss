@@ -1,0 +1,44 @@
+.job-item {
+  background-color: #fff;
+  border-bottom: 1px solid #f7f9f8;
+  margin-bottom: 8px;
+  padding: 15px 22px;
+  position: relative;
+
+  & > div {
+    margin-bottom: 12px;
+  }
+
+  .name {
+    color: #000;
+    font-size: 18px;
+  }
+  .company {
+    font-size: 14px;
+  }
+  .salary {
+    color: #2a9386;
+    font-size: 18px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+  .tag-list > * {
+    margin-right: 10px;
+  }
+  .hr-info {
+    & > .avatar {
+      width: 25px;
+      height: 25px;
+      display: inline-block;
+      vertical-align: middle;
+      border-radius: 15px;
+      background-color: red;
+      margin-right: 5px;
+    }
+    & > div {
+      display: inline-block;
+      font-size: 12px;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+.point {
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  background-color: #000;
+  vertical-align: middle;
+  border-radius: 3px;
+}

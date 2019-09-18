@@ -1,3 +1,87 @@
+- @todo 一个 css 只能用来做 module export 或者 直接 import 不能同时使用...
+
+- @ques NavLink activeClassName 怎么没有作用
+
+- @todo 数据应该一级一级的传递下去
+
+  - content > jobItem...
+  - 是否要用 redux, 实际项目中 redux 实用吗
+
+- @todo
+
+  - 小红点
+  - 急聘 tag
+
+- @ques svg animation
+  - https://css-tricks.com/guide-svg-animations-smil/
+  - [js ctrl svg](https://www.creativebloq.com/how-to/animate-svg-with-javascript)
+
+* @todo react import props from scss
+
+```scss
+@import "~shared/variables/colors";
+
+:export {
+  brandSecondary: $brand-secondary;
+}
+
+.root {
+  color: $brand-primary;
+}
+```
+
+```jsx
+<SomeFooBarComponent takesAColorProperty={styles.brandSecondary} />
+```
+
+- @ques react component 外面设置他的样式...
+  - 设置 class?? style...
+  - 应该抛出 api 给外界调用...
+
+## 2019-09-18 08:17:18
+
+- @ques 怎么在外面定义 tab 的样式
+
+  - 固定 class??
+  - 还有什么更好的方式...
+
+- @ques 模拟数据放在哪里?
+
+  - test 里面??
+
+- @todo 如何使用 icon [react-icons]
+
+  - 最好是有动画...
+  - svg 支不支持动画???
+
+- @todo 顶部提示栏
+
+- @todo 筛选弹出层...
+
+  - bottom-pop 只处理进入+离开动画
+
+- @ques 样式会不会冲突...
+
+  - 不同地方相同的 class..
+
+- @ques scss ts 自动补全
+
+- @todo filter 的样式
+
+- @todo job 显示面试的信息...
+
+- @todo job-content :> job-item 要不要像 laya 做成 list 形式
+
+  - 这样就需要滚动条...
+
+- @todo css js 写在一起
+
+  - ...
+
+- @ques 写 react 十分的舒服...
+
+## 2019-09-17 09:12:20
+
 - @ques 自定义 index.html
 
 - @ques
@@ -19,6 +103,11 @@
 - @ques footer icon 动画
 
 - @ques 切换 page 页面变大??
+
+- @ques scss 参数 主题
+
+- @ques import css class
+  - xxx.module.css
 
 ## 2019-09-16 15:32:32
 

@@ -1,0 +1,49 @@
+.filter-bar {
+  height: 40px;
+  line-height: 40px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 0 10px;
+
+  .order {
+    float: left;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    & > div {
+      padding: 0 10px;
+      color: #666;
+      &.active {
+        color: #000;
+      }
+    }
+  }
+
+  .filter {
+    float: right;
+    color: #666;
+    & > div {
+      margin-right: 10px;
+      width: 50px;
+      height: 28px;
+      font-size: 12px;
+      line-height: 28px;
+      background-color: #eee;
+      border-radius: 3px;
+      display: inline-block;
+      text-align: center;
+      position: relative;
+      &:after {
+        content: ' ';
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        width: 0;
+        height: 0;
+        border-bottom: 5px solid #999;
+        border-left: 5px solid transparent;
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+.content {
+  position: absolute;
+  width: 100%;
+  overflow: auto;
+  top: 82px;
+  left: 0;
+  bottom: 51px;
+}
+
+header {
+  position: relative;
+  z-index: 1;
+}
