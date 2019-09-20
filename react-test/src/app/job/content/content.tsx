@@ -1,8 +1,6 @@
 import React from 'react';
 import { JobItem } from './jobItem';
 
-import './content.scss';
-
 export const Content: React.FC = () => {
   return (
     <div className="content">

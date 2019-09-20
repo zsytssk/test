@@ -1,0 +1,136 @@
+@import '../theme/theme.scss';
+
+.chat {
+  header {
+    height: 57px;
+    line-height: 57px;
+    padding: 0 18px 0 22px;
+    background-color: $cur-bg-color;
+    font-size: 23px;
+    color: $cur-bg-content-color;
+    position: relative;
+
+    .tab {
+      .tab-item {
+        &.active {
+          font-size: 18px;
+          opacity: 1;
+          transition: all 150ms linear;
+        }
+
+        float: left;
+        font-size: 15px;
+        opacity: 0.8;
+        width: 55px;
+        text-align: center;
+      }
+    }
+
+    .tools {
+      position: absolute;
+      top: 0;
+      right: 18px;
+
+      .item {
+        float: left;
+        width: 40px;
+        text-align: center;
+      }
+    }
+  }
+
+  .content {
+    background-color: #fff;
+    position: absolute;
+    width: 100%;
+    overflow: auto;
+    top: 57px;
+    left: 0;
+    bottom: 0;
+    padding-bottom: 51px;
+
+    .item {
+      background-color: #fff;
+      border-bottom: 1px solid #f7f9f8;
+      margin-bottom: 8px;
+      padding: 15px 22px 0 25px;
+      position: relative;
+
+      .icon-left {
+        float: left;
+        width: 37px;
+
+        .icon {
+          width: 37px;
+          height: 37px;
+          background-color: $cur-bg-color;
+          text-align: center;
+          font-size: 20px;
+          line-height: 37px;
+          color: $cur-bg-content-color;
+        }
+      }
+
+      .con {
+        margin-left: 54px;
+        & > div {
+          margin-bottom: 10px;
+        }
+        .name {
+          font-size: 18px;
+          color: #000;
+        }
+
+        .location {
+          font-size: 12px;
+          color: #666;
+        }
+
+        .tag-list > div {
+          margin-right: 8px;
+        }
+
+        .bottom {
+          margin-top: 20px;
+          height: 46px;
+          border-top: 1px solid #ddd;
+          line-height: 46px;
+          font-size: 12px;
+
+          span {
+            color: $color-highlight;
+          }
+        }
+      }
+    }
+  }
+}
+
+.arrow_box {
+  position: relative;
+}
+.arrow_box:after,
+.arrow_box:before {
+  right: 10px;
+  top: 50%;
+  border: solid transparent;
+  content: ' ';
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.arrow_box:after {
+  border-color: rgba(136, 183, 213, 0);
+  border-left-color: #fff;
+  border-width: 8px;
+  margin-top: -8px;
+  right: 15px;
+}
+.arrow_box:before {
+  border-color: rgba(194, 225, 245, 0);
+  border-left-color: #ddd;
+  border-width: 10px;
+  margin-top: -10px;
+}
