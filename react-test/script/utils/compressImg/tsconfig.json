@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "resolveJsonModule": true,
+        "experimentalDecorators": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "rootDir": "./script",
+        "outDir": "D:\\zsytssk\\job\\git\\deepsea\\frontend\\tools",
+        "skipDefaultLibCheck": true,
+        "skipLibCheck": true,
+        "sourceMap": false,
+        "target": "esnext",
+        "watch": true
+    },
+    "include": ["script"]
+}
