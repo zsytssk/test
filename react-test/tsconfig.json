@@ -7,12 +7,13 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "noEmit": true,
     "jsx": "react",
-    "isolatedModules": true
+    "isolatedModules": true,
+    "strict": true
   },
   "include": ["src", "script"]
 }

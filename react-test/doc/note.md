@@ -1,55 +1,58 @@
-- @todo github pages
+- @ques ts noOuput 用来做编译检查
+
+* @todo github pages
 
   - 个人博客
+  - 游戏内容...
   - https://sspai.com/post/54608
 
-- @save component 可以定好 class 就是`小写-分割`
+* @save component 可以定好 class 就是`小写-分割`
 
-- @ques common 的样式如何处理
+* @ques common 的样式如何处理
   - .arrow-left
 
-* @ques 的样式通用 可以公用吗
+- @ques 的样式通用 可以公用吗
 
   - name + location (字体大小)
   - header > tools (布局)
   - content 样式...
 
-* Sass scss 有什么区别...
+- Sass scss 有什么区别...
 
-* @ques scss 查找所有引用
+- @ques scss 查找所有引用
 
-* @ques 不同的地方样式冲突怎么处理...
+- @ques 不同的地方样式冲突怎么处理...
 
   - 相同的 class...
   - 放在父亲下面?
 
-* @ques `.content .job-item` 的样式公用 怎么处理...
+- @ques `.content .job-item` 的样式公用 怎么处理...
 
   - 我直接在样式中 `.content .job-item` 就违背了封装的原则, 产生两个依赖
   - 或者这样式本身都是绑定的, 我只是将 dom 分割而已...
   - @ques 能不能直接设置 jsx 的样式..., 如果可以, 这样似乎是更合理的
 
-* @ques vscode scss 跳转
+- @ques vscode scss 跳转
 
-- @todo 一个 css 只能用来做 module export 或者 直接 import 不能同时使用...
+* @todo 一个 css 只能用来做 module export 或者 直接 import 不能同时使用...
 
-- @ques NavLink activeClassName 怎么没有作用
+* @ques NavLink activeClassName 怎么没有作用
 
-- @todo 数据应该一级一级的传递下去
+* @todo 数据应该一级一级的传递下去
 
   - content > jobItem...
   - 是否要用 redux, 实际项目中 redux 实用吗
 
-- @todo
+* @todo
 
   - 小红点
   - 急聘 tag
 
-- @ques svg animation
+* @ques svg animation
   - https://css-tricks.com/guide-svg-animations-smil/
   - [js ctrl svg](https://www.creativebloq.com/how-to/animate-svg-with-javascript)
 
-* @todo react import props from scss
+- @todo react import props from scss
 
 ```scss
 @import "~shared/variables/colors";
