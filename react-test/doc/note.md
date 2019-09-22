@@ -1,3 +1,6 @@
+- 还原 script 代码
+- script strict: true noEmit true
+
 - @ques ts noOuput 用来做编译检查
 
 * @todo github pages
