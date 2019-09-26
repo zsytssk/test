@@ -1,7 +1,18 @@
-fn main() {
-    let mut names = ["abe", "beth", "cory", "diane"];
+#[macro_export]
+macro_rules! vt {
+    [ $( $x:ident ),* ] => {
+        {
+            $(
+                $x = 1;
+            )*
+        }
+    };
+}
 
-    let alias = &mut names[0];
-    *alias = "alex";
-    println!("{}", names[0]);
+fn main() {
+    let mut x;
+    let mut y;
+    let mut z;
+    vt! {x, y, z};
+    println!("{} {} {}", x, y, z);
 }

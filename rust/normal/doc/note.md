@@ -1,3 +1,23 @@
+https://doc.rust-lang.org/1.7.0/reference.html#macro-by-example
+
+- @ques 特殊的 macro 在一个 youtube 上看过..
+
+  - declarative macros
+
+  - procedural macros
+
+- @ques macro 能不能处理 语言的匹配 cha
+
+- @ques `vec![]` [] 是在什么地方匹配的
+  - [] 只是一个闭合区域 到底是什么 其实无所谓的
+- @note write_html! 这么强大
+
+- @ques `Currently, macros can expand to expressions, statements, items, or patterns.`
+  - 这些东西到底是什么意思? express statement items patterns
+  - 分别怎么使用...
+
+## 2019-09-25 20:01:59
+
 - @ques code
 
 - marcro vec 看不懂..
