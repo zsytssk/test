@@ -1,11 +1,14 @@
-// RxJS v6+
-import { fromEvent } from 'rxjs/observable/fromEvent';
-import { interval } from 'rxjs/observable/interval';
-import { throttle } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-//emit value every 1 second
-const source = fromEvent(document, 'click');
-//throttle for 2 seconds, emit latest value
-const example = source.pipe(throttle(val => interval(1000)));
-//output: 0...3...6...9
-const subscribe = example.subscribe(val => console.log(val));
+let ob = Observable.from([1, 2, 3]);
+ob = ob.pipe(
+  map(x => {
+    console.log(`step1:>`, x);
+    return x + 1;
+  }),
+);
+
+ob.subscribe(e => {
+  console.log(`step2:>`, e);
+});

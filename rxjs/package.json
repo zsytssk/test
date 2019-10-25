@@ -2,7 +2,7 @@
   "author": "zsytssk@gmail.com",
   "contributors": [],
   "license": "UNLICENSED",
-  "name": "webpack_test",
+  "name": "rxjs_test",
   "version": "1.0.0",
   "private": true,
   "description": "",
@@ -11,21 +11,10 @@
     "doc": "doc"
   },
   "scripts": {
-    "webpack-dev": "webpack --mode development",
-    "webpack-dev-server": "webpack-dev-server --mode development",
-    "webpack-prod": "webpack --mode production"
-  },
-  "devDependencies": {
-    "ts-loader": "^4.3.1",
-    "tslint": "^5.10.0",
-    "tslint-config-prettier": "^1.13.0",
-    "typescript": "^2.9.1",
-    "webpack": "^4.11.1",
-    "webpack-cli": "^3.0.2",
-    "webpack-dev-server": "^3.1.4",
-    "rxjs": "^5.5.6"
+    "run": "ts-node --files src/main.ts"
   },
   "dependencies": {
-    "es6-promise": "^4.2.4"
+    "typescript": "^3.6.4",
+    "rxjs": "^5.5.6"
   }
 }

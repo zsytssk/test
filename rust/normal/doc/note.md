@@ -1,4 +1,53 @@
-https://rust-lang.github.io/async-book/01_getting_started/05_http_server_example.html
+https://rust-lang.github.io/async-book/02_execution/03_wakeups.html
+
+- @ques future 运行的整个流程...
+
+  - Executor + Spawner + Task + Future
+  - ...
+
+- @ques futures poll 的 第二个参数 context 是什么意思...
+
+- new_excutor_and_spawner
+
+- @ques Arc::new + Mutex::new
+
+  - task 是做什么的 SyncSender
+
+- @ques std::task
+
+- 自己根本就看不懂这些东西在干什么??
+
+  - 要记忆 rust 的常用功能... 这些现在都记不住...
+  - 也可以一个个的查+记忆...
+
+- @ques rust rc 的 count 能够获取吗 ?
+
+- @ques task . context waker... 到底有什么用...
+
+## 2019-10-14 09:44:08
+
+- @ques `sync::mpsc::{sync_channel, Receiver, SyncSender}`
+
+- @ques `impl Future<Output = ()> + 'static + Send`
+
+- @ques 下面语法的意思
+
+  - Pin<&mut Self>
+  - Arc<Mutex<SharedState>>
+  - &mut Context<'\_>
+  - Some(cx.waker().clone())
+  - Mutex<Option<BoxFuture<'static, ()>>, ??
+  - SyncSender<Arc<Task>>,
+  - sync_channel((MAX_QUEUED_TASKS))
+
+- future -> awaker
+
+## 2019-10-14 09:28:32
+
+- @ques serve_req(req).boxed().compat()
+
+- @ques run(futures_01_future);
+  - 是不是 hyper 不支持 features-0.3
 
 ## 2019-10-12 10:02:30
 
