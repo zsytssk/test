@@ -1,5 +1,4 @@
 - @ques future 怎么使用
-
   - Pin + Poll + Stream
 
 - 类似 js promise 的功能
