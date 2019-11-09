@@ -1,3 +1,63 @@
+- @ques future 怎么使用
+
+  - Pin + Poll + Stream
+
+- 类似 js promise 的功能
+  then await Promise.all|join|race
+  自己写一个 future...
+
+* https://cfsamson.github.io/book-exploring-async-basics/7_1_what_is_node.html
+
+- https://www.viget.com/articles/understanding-futures-in-rust-part-1/
+
+## 2019-11-09 09:46:01
+
+- `impl From<io::Error> for Decode` 是干什么的
+
+  - 到底是怎么使用的...
+
+- @thk rust 的难点就是记住各种的 trait 各自的功能, 还有就是 lifeTime
+
+- @ques `Deref` std::Pin
+
+- @ques `pub auto trait UnPin` auto 是什么意思
+
+- @ques Parsed<'self> 为什么会报错...
+
+  - 好像现在还不支持 只是展示逻辑的代码...
+
+- @ques `dyn AsynsRead + AsyncWrite` dyn 是什么意思...
+
+* @ques 无法记忆这么多东西, 到后面都不知道 在做什么
+
+## tokio-beanstalkd
+
+- @qyes sink sinkExit(futures_util) frame
+
+- @ques #[fail(display = "Did not find a job of that Id")]
+- #![warn(rust_2018_idioms)]
+- #[macro_use]
+
+- @ques 几个文件是干什么的
+
+çç
+
+- 是只是两个类型之间的转化 ?
+- 将 `io::Error` --> `Decode`
+
+- @ques 是做什么的, 和 http 有什么关系...
+
+  - `enum Request`
+  - `enum Response`
+
+- @ques `pub(crate) enum ProtocolError`
+
+  - 是不是可以发布出去...
+
+- @ques `tokio::codec::Framed;`
+
+## 2019-10-31 09:36:59
+
 https://rust-lang.github.io/async-book/02_execution/03_wakeups.html
 
 - @ques future 运行的整个流程...

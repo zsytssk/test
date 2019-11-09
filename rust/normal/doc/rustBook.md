@@ -47,3 +47,29 @@ fn main() {
 ```
 
 - Mutex(mutable)
+
+- dyn Trait
+  rust 新语法用在 trait 前面, &Trait -> &dyn Trait, Box<Trait> -> Box<dyn Trait>
+
+- Deref(trait use std::ops::Deref)
+  customize the behavior of the dereference operator
+
+- Drop (trait use std::ops::Drop)
+  run some code when a value goes out of scope
+
+- `impl From<io::Error> for Decode`
+  io::Error --> Decode 的转化过程...
+
+- `const fn`
+  - 只能传递 const 参数
+
+## other
+
+### rustup
+
+- 切换 rust 版本 `rustup default stable`
+  https://doc.rust-lang.org/edition-guide/rust-2018/rustup-for-managing-rust-versions.html
+
+### pub(crate) pub(super) pub(self)
+
+makes an item visible within the current crate | super | self
