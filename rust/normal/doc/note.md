@@ -1,15 +1,85 @@
-- @ques future 怎么使用
-  - Pin + Poll + Stream
-
 - 类似 js promise 的功能
   then await Promise.all|join|race
   自己写一个 future...
 
-* https://cfsamson.github.io/book-exploring-async-basics/7_1_what_is_node.html
+- https://www.viget.com/articles/understanding-futures-is-rust-part-2/
 
-- https://www.viget.com/articles/understanding-futures-in-rust-part-1/
+- https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=9c427527c64b4dd5238c508de1d4151a
+
+## 2019-11-14 09:18:44
+
+- The Observer pattern
+- https://stackoverflow.com/questions/37572734/how-can-i-implement-the-observer-pattern-in-rust
+
+- @ques `fn poll(&mut Pin<Self>, cx: &Context)`
+
+  - poll Pin<Self> 是干什么的
+  - 或许和生命周期有关...
+
+- @ques RefCell + thread_local
+
+- rust
+
+在 future 链上的 前面比 A -> B A 的生命周期 > B
+
+- @ques
+  NOTIFY 只是用来做 future 开始调用 开关的, 只有这种方式吗
+  或者通常如何实现这个功能...
+
+每次调用 context 都不一样??
+
+分散 + 整理
+
+## 2019-11-12 09:21:42
+
+- @ques NOTIFY 是做什么的...
+
+- future 传递 必须要前一个 future 的类型 这样不怎么好用...
+
+## 2019-11-11 09:21:53
+
+- task...
+
+- future-chain
+
+  - future -> future -> ...
+
+- @ques
+- RefCell
+- thread_local!
+- Poll push
+
+- `T: std::ops::Add<i32, Output = i32>,` ? 是什么意思...
+
+  - x(:T) + i32 = i32
+
+- NOTIFY.with? (NOTIFY ? width 是做什么的)
+
+- context -> waker -> wake
+
+- future
+  -> Output
+  -> poll(ctx: &Context) -> Poll<Output>
+
+- context 是为了传递 wake 的, 用来通知 异步任务完成...
+
+  - 是不是用来在多个 future 中同步...
+
+- future 的流程到底是什么样子的...
+
+  - 一个个的节点 到底是什么, 消息怎么传递...
+
+- wake 如何通知其他地方, 自己完成了...
+
+- pin 又是什么 ??
+
+- @ques future 传递的类型...
 
 ## 2019-11-09 09:46:01
+
+- @ques future 怎么使用
+
+  - Pin + Poll, Pin<self>
 
 - `impl From<io::Error> for Decode` 是干什么的
 
