@@ -1,4 +1,11 @@
-- @ques Result 不需要设置错误类型
+- The Observer pattern
+- https://stackoverflow.com/questions/37572734/how-can-i-implement-the-observer-pattern-in-rust
+
+  - https://this-week-in-rust.org/blog/2019/11/12/this-week-in-rust-312/
+
+- https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=9c427527c64b4dd5238c508de1d4151a
+
+* @ques Result 不需要设置错误类型
 
 ```rs
 use std::io;

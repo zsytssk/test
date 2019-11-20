@@ -2,14 +2,33 @@
   then await Promise.all|join|race
   自己写一个 future...
 
-- https://www.viget.com/articles/understanding-futures-is-rust-part-2/
+- @rust
 
-- https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=9c427527c64b4dd5238c508de1d4151a
+- https://www.viget.com/articles/understanding-futures-is-rust-part-2/
+  - future 常见的概念 和他们的相互关系 作用...
+
+* tryFuture 一定是 Future 吗
+* Future TryFuture AndThe 的相互关系
+
+## 2019-11-20 09:33:33
+
+- @ques AndThen 将一个返回值为 Result 的 future 转化为一个新的 future
+
+- @ques 为什么 用 try_poll 代替 poll
+
+## 2019-11-19 09:37:48
+
+- @ques andThen tryFuture 到底是干什么的
+  - 看了半天都看不懂..., 为什么...
+
+## 2019-11-18 09:39:07
+
+- @ques TryFuture, try_poll 怎么处理错误...
+
+- @ques Then 的三个 <Fut, F> 分别都是怎么实现的
+  - future.then 返回一个 then 包含 原来的 future + 一个 FnOnce
 
 ## 2019-11-14 09:18:44
-
-- The Observer pattern
-- https://stackoverflow.com/questions/37572734/how-can-i-implement-the-observer-pattern-in-rust
 
 - @ques `fn poll(&mut Pin<Self>, cx: &Context)`
 
