@@ -12,6 +12,10 @@
 
 ## 2019-11-20 09:33:33
 
+- @ques `Ok::<i32, ()>` 是做什么的
+
+- @ques 链式调用的过程是什么...
+
 - @ques AndThen 将一个返回值为 Result 的 future 转化为一个新的 future
 
 - @ques 为什么 用 try_poll 代替 poll

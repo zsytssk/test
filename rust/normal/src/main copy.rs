@@ -72,6 +72,7 @@ mod future {
         type Error;
 
         fn try_poll(&mut self, cx: &Context) -> Poll<Result<Self::Ok, Self::Error>>;
+
         fn and_then<Fut, F>(self, f: F) -> AndThen<Self, F>
         where
             F: FnOnce(Self::Ok) -> Fut,
