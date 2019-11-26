@@ -83,6 +83,29 @@ mod future {
                 f: Some(f),
             }
         }
+        fn map_err<E, F>(self, f:F) -> MapErr<Self, F>
+            where
+                F: FnOnce(Self::Error) -> E,
+                Self: Sized,
+            {
+                MapErr {
+                    future: self,
+                    f: Some(f)
+                }
+
+            }
+
+        fn map_ok<E, F>(self, f:F) -> MapOk<Self, F>
+            where
+                F: FnOnce(Self::Error) -> E,
+                Self: Sized,
+            {
+                MapOk {
+                    future: self,
+                    f: Some(f)
+                }
+
+            }
     }
 
     impl<F, T, E> TryFuture for F
@@ -182,6 +205,52 @@ mod future {
             }
         }
     }
+
+    pub struct MapErr<Fut, F> {
+        future: Fut,
+        f: Option<F>,
+    }
+
+    impl<Fut, F, E> Future for MapErr<Fut, F>
+    where
+        Fut: TryFuture,
+        F: FnOnce(Fut::Error) -> E
+    {
+        type Output = Result<Fut::Ok, E>;
+
+        fn poll(&mut self, cx: &Context) -> Poll<Self::Output> {
+            match self.future.try_poll(cx) {
+                Poll::Ready(result) => {
+                    let f = self.f.take().unwrap();
+                    Poll::Ready(result.map_err(f))
+                }
+                Poll::Pending => Poll::Pending
+            }
+        }
+    }
+
+    pub struct MapOk<Fut, F> {
+        future: Fut,
+        f: Option<F>,
+    }
+
+    impl<Fut, F, E> Future for MapOk<Fut, F>
+    where
+        Fut: TryFuture,
+        F: FnOnce(Fut::Error) -> E
+    {
+        type Output = Result<Fut::Ok, E>;
+
+        fn poll(&mut self, cx: &Context) -> Poll<Self::Output> {
+            match self.future.try_poll(cx) {
+                Poll::Ready(result) => {
+                    let f = self.f.take().unwrap();
+                    Poll::Ready(result.map_err(f))
+                }
+                Poll::Pending => Poll::Pending
+            }
+        }
+    }
 }
 
 use crate::future::*;
@@ -205,8 +274,17 @@ fn main() {
     let my_future = future::ready(1)
         .map(|val| val + 1)
         .then(|val| future::ready(val + 1))
-        .map(Ok::<i32, ()>)
-        .and_then(|val| future::ready(Ok(val + 1)));
+        .map(|val| {
+            if val < 10 {
+                Ok(val + 1)
+            } else {
+                Err(())
+            }
+        })
+        .and_then(|val| future::ready(<Result<i32, ()>>::Err(())))
+        .map_err(|_: ()| 100);
+
+    let a = Ok(1) as Result<i32, i32>;
 
     println!("Output: {:?}", block_on(my_future));
 }

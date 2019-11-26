@@ -1,53 +1,24 @@
-import { BaseEvent } from "./event";
 
-function inject(comp) {
-  return function(Class): typeof Class {
-    return (...args) => {
-      const a = new Class(...args);
-      comp(a);
-      return a;
-    };
-  };
+var a: Promise<any>;
+const promise1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve(1);
+    }, 3000);
+}).then((val) => {
+  a = sleep(3);
+  return a
+});
+const promise2 = promise1.then((data: any) => {
+    console.log(1);
+});
+
+console.log(promise1 === a)
+
+function sleep(time: number) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log(time);
+      resolve();
+    }, time * 1000)
+  })
 }
-
-class ClassB {
-  target: BaseEvent;
-  constructor(target: BaseEvent) {
-    this.target = target;
-
-    this.init();
-  }
-  private init() {
-    const { target } = this;
-    target.on("destroy", () => {
-      this.unBindCtrl();
-    });
-
-    this.bindCtrl();
-  }
-  private bindCtrl() {
-    const { target } = this;
-    target.on("destroy", () => {
-      this.unBindCtrl();
-    });
-  }
-  private unBindCtrl() {}
-}
-
-interface B {
-  bindCtrl(): void;
-}
-
-@inject(ClassB)
-class CtrlA extends BaseEvent {
-  dd = 1;
-  components = [];
-  constructor(...args) {
-    super();
-    console.log(args);
-  }
-  // ...
-}
-
-const a = new CtrlA(1, 2, 3);
-console.log(a);

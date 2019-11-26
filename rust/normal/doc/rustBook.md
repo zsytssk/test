@@ -1,10 +1,24 @@
 - std::sync::mpsc::sync_channel
   - cross thread pass msg
 
-* @todo Option<T>
+* Result<T, E>
 
 ```rs
+enum Result<T, E> {
+   Ok(T),
+   Err(E),
+}
+
 match result {
+    Ok(v) => ...,
+    Err(e) => ...,
+}
+
+```
+* Option<T>
+
+```rs
+match option {
     // The division was valid
     Some(x) => println!("Some: {}", x),
     // The division was invalid

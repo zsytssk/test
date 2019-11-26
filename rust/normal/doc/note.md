@@ -10,6 +10,52 @@
 * tryFuture 一定是 Future 吗
 * Future TryFuture AndThe 的相互关系
 
+- @ques `map(|val| Ok(val + 1))` 是什么鬼
+    -  因为4中Result<i32, ()> 确定 3 中的err类型为()
+```ts
+let my_future = future::ready(1) // 0
+    .map(|val| val + 1) // 1
+    .then(|val| future::ready(val + 1)) // 2
+    .map(|val| Ok(val + 1)) // 3
+    .and_then(|val| future::ready(<Result<i32, ()>>::Err(()))) // 4
+    .map_err(|_: ()| 100); // 5
+```
+
+- future::ready(Ok(val + 1))
+
+
+## 2019-11-25 09:39:34
+task + Context + waker
+
+
+- @ques 为什么要 context
+
+## 2019-11-22 09:21:36
+
+- @ques `.map(|val| val + 1)`
+    - `let t = |x: i32| {Ok(x)};` 会报错
+    - `.map(|val| val + 1)` 不会报错 为什么...
+
+- @ques `.map_err(|_: ()| 5)` 是什么意思
+    - ..
+
+- @ques future 怎么转化为 tryFuture
+    - 只要返回值是一个result就可以
+    - result 是一个enum 又一个ok + error
+    - 怎么就可以and_then+ mapError
+
+- @ques rust result
+
+- map_err 转化错误...
+
+## 2019-11-21 09:42:00
+
+- @ques 每一个trait的相互关系...
+    - ...
+
+- @ques Sized 是干什么的
+    - 在编译的时候能知道他的大小 ?
+
 ## 2019-11-20 09:33:33
 
 - @ques `Ok::<i32, ()>` 是做什么的
