@@ -1,3 +1,13 @@
+- @todo react redux
+
+  - https://redux.js.org/basics/usage-with-react
+
+* @ques 现在用 redux 还多吗
+
+-
+
+## 2019-11-27 20:55:31
+
 - 还原 script 代码
 - script strict: true noEmit true
 

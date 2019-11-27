@@ -7,17 +7,22 @@
 
 ## react + reactNative
 
-- redux
+- @todo mobx react-saga
+- dva 结合 immer
 
-- 自动化测试
+- redux-saga 的官网 有个取消登录的功能
 
-- react native
+* redux
+
+* 自动化测试
+
+* react native
 
   - template
   - saga + reselector + sass
   - GraphQL
 
-- @todo 服务器端渲染...
+* @todo 服务器端渲染...
 
 ## 其他知识
 
