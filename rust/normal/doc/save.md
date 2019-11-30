@@ -25,3 +25,5 @@ fn main() -> io::Result<(), _> {
 - vscode 不能自动补全
 - @ques `let slice:[i32, 2]` 怎么定义数组的类型+个数
 - @ques 如何从 String::from("hello") 去掉几个字母
+
+- async-std

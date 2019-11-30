@@ -15,7 +15,8 @@ match result {
 }
 
 ```
-* Option<T>
+
+- Option<T>
 
 ```rs
 match option {
@@ -75,7 +76,24 @@ fn main() {
   io::Error --> Decode 的转化过程...
 
 - `const fn`
+
   - 只能传递 const 参数
+
+- thread::spawn<F, T>(f: F) -> JoinHandle<T>; f: fnOnce->T
+  - 启动一个进程, 做特定的任务, 可以通过 channel 传递消息到主进程/其他进程
+  - 函数的结果 可以通过 JoinHandle.join() 获取
+
+```rs
+use std::sync::mpsc::channel;
+use std::thread;
+use std::time::Duration;
+
+fn main() {
+    let a = thread::spawn(move || return 1);
+    let b = a.join().unwrap();
+    println!("{}", b);
+}
+```
 
 ## other
 

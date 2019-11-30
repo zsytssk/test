@@ -1,3 +1,38 @@
+- https://www.viget.com/articles/understanding-futures-is-rust-part-2/
+
+thread::spawn JoinHandle
+
+- @ques channel 怎么结束...
+
+## 2019-11-30 10:53:06
+
+- understand task and stream is import than futures
+
+  - future 常见的概念 和他们的相互关系 作用...
+
+- ? 什么意思... synthetic + side effect
+
+- @ques rust 异步函数 会不会阻塞 main thread
+
+- marinara firefox
+
+- @ques found staticlib `std` instead of rlib or dylib
+
+- @ques JoinHandle ?
+
+- @ques `task::spawn` 应该是启动一个独立的 thread 去做任务
+- @ques `task::spawn_blocking` 到底是干什么的
+
+  - 他是异步的吗, 会阻塞当前进程吗...
+
+- @ques 如何使用 unstable api
+
+- @ques await 不是一个 function, 倒像一个属性...
+
+- @todo 学习 std 的常用功能 arc mutex channel ...
+
+## 2019-11-29 19:54:13
+
 - 类似 js promise 的功能
   then await Promise.all|join|race
   自己写一个 future...
@@ -11,7 +46,8 @@
 * Future TryFuture AndThe 的相互关系
 
 - @ques `map(|val| Ok(val + 1))` 是什么鬼
-    -  因为4中Result<i32, ()> 确定 3 中的err类型为()
+  - 因为 4 中 Result<i32, ()> 确定 3 中的 err 类型为()
+
 ```ts
 let my_future = future::ready(1) // 0
     .map(|val| val + 1) // 1
@@ -23,26 +59,28 @@ let my_future = future::ready(1) // 0
 
 - future::ready(Ok(val + 1))
 
-
 ## 2019-11-25 09:39:34
-task + Context + waker
 
+task + Context + waker
 
 - @ques 为什么要 context
 
 ## 2019-11-22 09:21:36
 
 - @ques `.map(|val| val + 1)`
-    - `let t = |x: i32| {Ok(x)};` 会报错
-    - `.map(|val| val + 1)` 不会报错 为什么...
+
+  - `let t = |x: i32| {Ok(x)};` 会报错
+  - `.map(|val| val + 1)` 不会报错 为什么...
 
 - @ques `.map_err(|_: ()| 5)` 是什么意思
-    - ..
+
+  - ..
 
 - @ques future 怎么转化为 tryFuture
-    - 只要返回值是一个result就可以
-    - result 是一个enum 又一个ok + error
-    - 怎么就可以and_then+ mapError
+
+  - 只要返回值是一个 result 就可以
+  - result 是一个 enum 又一个 ok + error
+  - 怎么就可以 and_then+ mapError
 
 - @ques rust result
 
@@ -50,11 +88,12 @@ task + Context + waker
 
 ## 2019-11-21 09:42:00
 
-- @ques 每一个trait的相互关系...
-    - ...
+- @ques 每一个 trait 的相互关系...
+
+  - ...
 
 - @ques Sized 是干什么的
-    - 在编译的时候能知道他的大小 ?
+  - 在编译的时候能知道他的大小 ?
 
 ## 2019-11-20 09:33:33
 
