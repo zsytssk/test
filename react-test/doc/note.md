@@ -1,19 +1,23 @@
-- @todo react redux
+- @ques getDerivedStateFromProps 目的到底是什么
+  - 问题: setState 之后也会触发 将 props 覆盖 state, 这显然不是我想要的
+  - 那么怎么使用才是最合理的...
+
+* @todo react redux
 
   - https://redux.js.org/basics/usage-with-react
 
-* @ques 现在用 redux 还多吗
+- @ques 现在用 redux 还多吗
 
-- @ques getDerivedStateFromProps 是干嘛的
+* @ques getDerivedStateFromProps 是干嘛的
 
-- react hook 有没有周期函数
+* react hook 有没有周期函数
 
   - useEffect Hook 只有两个函数 分别为什么时候执行...
   - 为什么这两个函数能代替 component 那么多的状态吗...
 
-- @ques componentWillUnmount 能不能中断 unMount
+* @ques componentWillUnmount 能不能中断 unMount
 
-- @ques componentDidCatch 中的 info 到底是什么东西...
+* @ques componentDidCatch 中的 info 到底是什么东西...
 
 ## 2019-11-27 20:55:31
 

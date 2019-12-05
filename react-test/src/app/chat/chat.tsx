@@ -3,7 +3,6 @@ import { Tools } from './tools';
 
 import './chat.scss';
 
-import { ChatItem } from './chatItem';
 import { Tab } from '../../component/tab/tab';
 import { SearchBox } from './searchBox';
 
