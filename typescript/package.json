@@ -17,6 +17,7 @@
     "webpack-dev-server": "^3.0.0"
   },
   "dependencies": {
+    "@types/node": "^12.12.14",
     "redux": "^3.7.2"
   }
 }

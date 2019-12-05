@@ -4,7 +4,16 @@
 
 * @ques 现在用 redux 还多吗
 
--
+- @ques getDerivedStateFromProps 是干嘛的
+
+- react hook 有没有周期函数
+
+  - useEffect Hook 只有两个函数 分别为什么时候执行...
+  - 为什么这两个函数能代替 component 那么多的状态吗...
+
+- @ques componentWillUnmount 能不能中断 unMount
+
+- @ques componentDidCatch 中的 info 到底是什么东西...
 
 ## 2019-11-27 20:55:31
 

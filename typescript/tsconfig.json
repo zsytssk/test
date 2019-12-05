@@ -1,16 +1,16 @@
 {
-  "compilerOptions": {
-    "target": "es6",
-    "sourceMap": false,
-    "watch": true,
-    "allowJs": true,
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "outDir": "dist",
-    "rootDir": "src",
-    "module": "esnext",
-    "experimentalDecorators": true,
-    "moduleResolution": "node"
-  },
-  "include": ["src", "typings"]
+    "compilerOptions": {
+        "target": "es6",
+        "sourceMap": false,
+        "watch": true,
+        "allowJs": true,
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "outDir": "dist",
+        "rootDir": "src",
+        "module": "commonjs",
+        "experimentalDecorators": true,
+        "moduleResolution": "node"
+    },
+    "include": ["src", "typings"]
 }

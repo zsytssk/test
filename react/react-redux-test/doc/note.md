@@ -1,3 +1,27 @@
+- @ques useContext
+- @ques useReducer
+
+- @todo @sum hook
+
+- @ques hook 有 shouldUpdateComponent 这种功能吗
+
+## 2019-12-02 08:01:41
+
+- combineReducers
+
+- @ques component 的参数...
+
+- mapStateToProps 中的 state 就是 redux store getState
+- mapDispatchToProps 中的 dispatch 就是 redux store dispatch
+
+- redux 是如何知道改变的值, 然后触发 react 重新的渲染...
+  - 每次 reducer 都会 return 新的对象, 然后触发 connect 绑定的函数...改变
+  - 重新调用 component | hook, 然后呢 --> react 内部 改变 ui
+
+* @ques Suspense
+
+## 2019-12-01 19:38:53
+
 - @rem Container Components(容器组件) Presentational Components(渲染组件)
 
   - 容器组件 包着 渲染组件: 用来处理数据
