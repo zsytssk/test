@@ -1,0 +1,8 @@
+.Button {
+  padding: 20px;
+  background: #000;
+}
+
+.error {
+  background-color: red;
+}

@@ -1,8 +1,21 @@
-- https://www.viget.com/articles/understanding-futures-is-rust-part-2/
+- https://dev.to/mindflavor
 
-thread::spawn JoinHandle
+- https://rust-lang.github.io/async-book/05_streams/01_chapter.html
 
-- @ques channel 怎么结束...
+- @learn@todo@sum stream + pin ...
+
+- @ques stream poll_next 什么时候执行...
+
+  - 像 future 通过 context waker 一样吗?
+
+- @ques `Result<Async<Option<Self::Item>>, Self::Error>`
+  - Async 是什么意思
+
+### save
+
+- @ques rust 能不能录制视频...
+- @ques channel 怎么关闭(close)
+  - drop(tx|rx)
 
 ## 2019-11-30 10:53:06
 
@@ -695,6 +708,7 @@ fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
     }
 
     largest
+
 }
 ```
 

@@ -1,0 +1,16 @@
+.job {
+  header {
+    position: relative;
+    z-index: 1;
+  }
+  .content {
+    position: absolute;
+    width: 100%;
+    overflow: auto;
+    top: 82px;
+    left: 0;
+    bottom: 0;
+    padding-bottom: 51px;
+    background-color: #f4f6f5;
+  }
+}

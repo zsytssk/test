@@ -1,0 +1,46 @@
+@import '../../theme/theme.scss';
+
+.top-bar {
+  width: 100%;
+  height: 41px;
+  line-height: 41px;
+  background-color: $cur-bg-color;
+  padding: 0 10px;
+  box-sizing: border-box;
+  .tab {
+    float: left;
+    .tab-item {
+      color: #fff;
+      padding: 0 10px;
+      display: inline-block;
+      opacity: 0.5;
+
+      &.active {
+        opacity: 1;
+        transition: opacity 150ms linear;
+      }
+    }
+  }
+
+  .tools {
+    float: right;
+    .item {
+      position: relative;
+      line-height: 37px;
+      &:not(:last-child)::after {
+        content: ' ';
+        position: absolute;
+        top: 50%;
+        margin-top: -6px;
+        right: -0.5px;
+        vertical-align: middle;
+        border-right: 1px solid #fff;
+        height: 20px;
+        opacity: 0.8;
+      }
+      float: left;
+      width: 40px;
+      text-align: center;
+    }
+  }
+}
