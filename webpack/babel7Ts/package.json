@@ -1,0 +1,39 @@
+{
+    "author": "zsytssk@gmail.com",
+    "contributors": [],
+    "license": "UNLICENSED",
+    "name": "webpack_test",
+    "version": "1.0.0",
+    "private": true,
+    "main": "main.js",
+    "directories": {
+        "doc": "doc"
+    },
+    "scripts": {
+        "build": "ts-node --project ./script/tsconfig.json --files ./script/build/build.ts"
+    },
+    "devDependencies": {
+        "@types/node": "^13.13.5",
+        "@babel/cli": "^7.8.4",
+        "@babel/core": "^7.9.6",
+        "@babel/runtime-corejs3": "^7.9.6",
+        "@babel/plugin-transform-runtime": "^7.9.6",
+        "@babel/preset-env": "^7.9.6",
+        "babel-loader": "^8.1.0",
+        "ts-loader": "^7.0.3",
+        "typescript": "^3.8.3",
+        "webpack": "^4.43.0",
+        "webpack-cli": "^3.3.11",
+        "webpack-dev-server": "^3.10.3",
+        "tslint": "^6.1.2"
+    },
+    "dependencies": {
+        "lodash": "^4.17.15",
+        "rxjs": "^6.5.5"
+    },
+    "repository": {
+        "type": "git",
+        "url": "xxx.git"
+    },
+    "description": ""
+}

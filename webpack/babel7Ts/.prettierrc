@@ -1,0 +1,10 @@
+{
+  "extends": ["tslint:latest", "tslint-config-prettier"],
+  "tabWidth": 4,
+  "singleQuote": true,
+  "semi": true,
+  "no-prose-wrap": true,
+  "trailingComma": "all",
+  "arrowParens": "avoid",
+  "printWidth": 80
+}
