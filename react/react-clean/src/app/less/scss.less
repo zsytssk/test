@@ -1,0 +1,34 @@
+@import './base.less';
+@import './mixin.less';
+@import './extend.less';
+@import './buildIn.less';
+
+#bundle() {
+	primary: blue;
+	secondary: green;
+
+	.button {
+		display: block;
+		border: 1px solid black;
+		background-color: grey;
+		&:hover {
+			background-color: white;
+		}
+	}
+}
+
+.box {
+	.child {
+		&:extend(.extend);
+		border: 1px solid red;
+		margin-bottom: 10px;
+
+		#bundle.button();
+	}
+}
+
+.class {
+	.box .child();
+
+	color: #bundle[primary];
+}

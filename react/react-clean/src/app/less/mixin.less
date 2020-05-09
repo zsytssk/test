@@ -1,0 +1,30 @@
+.transform(@property) {
+	.display();
+
+	-webkit-transform: @property;
+	-ms-transform: @property;
+	transform: @property;
+}
+
+.display() {
+	text-align: center;
+}
+
+.average(@x, @y) {
+	@result: ((@x + @y) / 2);
+}
+
+.loop(@counter) when (@counter > 0) {
+	.loop((@counter - 1)); // next iteration
+	width: (10px * @counter); // code for each iteration
+}
+
+.mixinTest(@a) when (lightness(@a) >= 50%) {
+	background-color: black;
+}
+.mixinTest(@a) when (lightness(@a) < 50%) {
+	background-color: white;
+}
+.mixinTest(@a) {
+	color: @a;
+}
