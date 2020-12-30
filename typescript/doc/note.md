@@ -1,5 +1,44 @@
 https://leetcode-cn.com/explore/featured/card/bytedance/
 
+## 2020-12-30 10:20:48
+
+-   @ques 如果要重构项目需要做什么
+-   目标文件
+-   引用文件 最顶级的依赖
+
+    -   export 出去的
+    -   export 的依赖的
+
+-   @ques 怎么知道一个函数 方法引用其他的 代码
+
+*   @ques 如何将语法变成简洁的格式
+
+*   @ques local 是干嘛的
+    -   是当前的 node 信息
+
+-   @ques 所有 node type
+    -   ImportSpecifier
+    -   ImportDeclaration
+        -   specifiers
+        -   source
+    -   VariableDeclaration
+        -   kind
+        -   declarations
+    -   VariableDeclarator
+        -   id init
+    -   NumericLiteral
+        -   extra.rawValue
+    -   ObjectPattern
+        -   properties
+    -   ObjectProperty
+        -   key
+
+### end
+
+-   @ques tokens 的作用
+
+    -   是记录所有信息的地方
+
 ## 2019-12-04 20:08:36
 
 -   @ques https://www.npmjs.com/package/recast

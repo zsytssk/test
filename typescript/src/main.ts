@@ -5,12 +5,11 @@ import { readFile } from './script/ls/asyncUtil';
 
 async function main() {
     const file_path = path.resolve(__dirname, './test/test2.ts');
-    console.log(file_path);
     const source = await readFile(file_path);
     const ast = recast.parse(source, { parser: tsParser });
-    console.log(ast);
-
-    console.log(recast.print(ast).code);
+    const item = ast.program.body[1].declarations[0];
+    console.log(item);
+    console.log(recast.print(item).code);
 }
 
 main();
