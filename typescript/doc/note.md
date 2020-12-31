@@ -1,6 +1,16 @@
 https://leetcode-cn.com/explore/featured/card/bytedance/
 
+-   https://medium.com/clevyio/using-rust-and-nom-to-create-an-open-source-programming-language-for-chatbots-12fe67582af5
+
 ## 2020-12-30 10:20:48
+
+-   @ques boa rust write a js engine
+
+-   @ques function body directives
+
+-   @ques 各种各样的结构如何处理
+
+    -   如何找寻变量...
 
 -   @ques 如果要重构项目需要做什么
 -   目标文件
@@ -17,6 +27,11 @@ https://leetcode-cn.com/explore/featured/card/bytedance/
     -   是当前的 node 信息
 
 -   @ques 所有 node type
+    -   FunctionDeclaration
+        -   id.name
+        -   params
+        -   returnType
+        -   async | generator
     -   ImportSpecifier
     -   ImportDeclaration
         -   specifiers
@@ -32,6 +47,38 @@ https://leetcode-cn.com/explore/featured/card/bytedance/
         -   properties
     -   ObjectProperty
         -   key
+    -   TSTypeAnnotation
+        -   typeAnnotation
+        -   `TSNumberKeyword`
+    -   TSTypeReference
+        -   typeName.identifierName
+    -   TSTypeAliasDeclaration
+        -   typeAnnotation
+            -   type
+            -   types
+    -   TSInterfaceDeclaration
+        -   body>TSInterfaceBody.body
+        -   ***
+        -   TSPropertySignature
+    -   BinaryExpression
+        -   operator
+        -   left
+        -   right
+    -   ExpressionStatement
+        -   expression
+    -   CallExpression
+        -   calee
+        -   arguments
+    -   MemberExpression
+        -   object
+        -   property
+    -   ObjectExpression
+        -   properties
+    -   IfStatement
+        -   test
+        -   consequent
+    -   BlockStatement
+        -   body
 
 ### end
 

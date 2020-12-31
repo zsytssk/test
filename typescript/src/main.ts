@@ -7,9 +7,10 @@ async function main() {
     const file_path = path.resolve(__dirname, './test/test2.ts');
     const source = await readFile(file_path);
     const ast = recast.parse(source, { parser: tsParser });
-    const item = ast.program.body[1].declarations[0];
-    console.log(item);
+    const item = ast.program.body[2].body.body[1].argument;
     console.log(recast.print(item).code);
+    console.log(item);
+    console.log('end');
 }
 
 main();
