@@ -4,12 +4,12 @@ import * as tsParser from 'recast/parsers/typescript';
 import { readFile } from './script/ls/asyncUtil';
 
 async function main() {
-    const file_path = path.resolve(__dirname, './test/test2.ts');
+    const file_path = path.resolve(__dirname, './test/test1.ts');
     const source = await readFile(file_path);
     const ast = recast.parse(source, { parser: tsParser });
-    const item = ast.program.body[0].declaration;
-    var a = eval(`var a = ${recast.print(item).code}; a`);
-    console.log(a);
+    const item = ast.program.body;
+    // var a = eval(`${recast.print(item).code}`);
+    console.log(recast.print(item).code);
 }
 
 main();
