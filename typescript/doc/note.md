@@ -6,10 +6,12 @@ https://leetcode-cn.com/explore/featured/card/bytedance/
 
 -   @todo
 
-    -   从后往前替换
-    -   ***
-    -   匹配 import 对象 -> 可以现在文件中匹配
-    -   找到 ['Lang', 'En'] -> en :代码写起来太麻烦了
+        -   从后往前替换
+        -   ***
+        -   function as any 太恶心了
+        -   匹配 import 对象 -> 可以现在文件中匹配
+
+    ·
 
 -   @ques 这种东西有没有内置的方法
 
@@ -23,6 +25,7 @@ https://leetcode-cn.com/explore/featured/card/bytedance/
 
 ### end
 
+    -   找到 ['Lang', 'En'] -> en :代码写起来太麻烦了
     -   有没有一个 findNode Object
 
 -   遍历找到 International 声明
