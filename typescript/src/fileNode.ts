@@ -1,7 +1,7 @@
 import * as ts from 'typescript';
 import * as path from 'path';
 import { exists, readFile } from './script/ls/asyncUtil';
-import { findNodeValue, findNodeValueNode, getNodeName } from './utils';
+import { findNodeValue, findValueNode, getNodeName } from './utils';
 import { write } from './script/ls/write';
 
 type Range = [number, number];
@@ -44,7 +44,7 @@ export class FileNode {
             return node;
         }
 
-        node = findNodeValueNode(node);
+        node = findValueNode(node);
 
         if (ts.isEnumDeclaration(node)) {
             return this.innerFindTargetNode(rest, node.members);
