@@ -2,7 +2,9 @@ import * as ts from 'typescript';
 import * as path from 'path';
 import { exists, readFile } from './script/ls/asyncUtil';
 import { findNodeValue, findNodeValueNode, getNodeName } from './utils';
+import { write } from './script/ls/write';
 
+type Range = [number, number];
 type NameMap = string;
 export class FileNode {
     private rel_map: Map<string, FileNode> = new Map();

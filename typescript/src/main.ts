@@ -1,10 +1,6 @@
 import * as path from 'path';
-import * as ts from 'typescript';
-import { readFile } from './script/ls/asyncUtil';
-import { write } from './script/ls/write';
 import { FileNode } from './fileNode';
 
-type Range = [number, number];
 const key_map = ['International', 'zh', '101'];
 const value = 'hello world';
 async function main() {
@@ -14,7 +10,7 @@ async function main() {
     const source = new FileNode(file_path);
 
     const find_node = await source.findTargetNode(key_map);
-    console.log();
+    console.log(find_node);
 
     console.timeEnd(`test:>`);
 }

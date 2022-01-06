@@ -9,7 +9,7 @@ export function replaceRange(source: string, range: Range, content: string) {
 }
 
 export function findNodeValue(node: ts.Node) {
-    const valueNode = findNodeValueNode(node);
+    const valueNode = findValueNode(node);
 
     if (!valueNode) {
         return undefined;
@@ -43,7 +43,7 @@ export function getComputedPropertyName(node: ts.Node): string[] {
     ];
 }
 
-export function findNodeValueNode(node: ts.Node) {
+export function findValueNode(node: ts.Node) {
     if (!node) {
         return;
     }
