@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "test",
             "runtimeArgs": ["-r", "ts-node/register"],
-            "args": ["${workspaceRoot}\\src\\test.ts"],
+            "args": ["${workspaceRoot}/src/main.ts"],
             "sourceMaps": true,
             "env": {
                 "TS_NODE_FILES": true

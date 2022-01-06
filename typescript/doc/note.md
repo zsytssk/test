@@ -6,6 +6,12 @@ https://leetcode-cn.com/explore/featured/card/bytedance/
 
 -   @ques 找到某个 key 读取 修改 删除 或者增加
 
+-   @ques 能不能将这个换成 json -> 管理起来更简单
+
+-   @ques 太复杂了
+    -   如果能将 parseNode 和本身的值一一对应就好了
+    -   很方便的找到位置
+
 ## 2020-12-30 10:20:48
 
 -   @ques boa rust write a js engine
