@@ -4,11 +4,19 @@ https://leetcode-cn.com/explore/featured/card/bytedance/
 
 ## 2022-01-06 11:11:42
 
--   @ques 找到某个 key 读取 修改 删除 或者增加
+-   @todo
+    -   遍历找到 International 声明
+    -   找到 [Lang.En] 对应的值 [难]
+    -   找到关键的 key 的位置
+    -   从后往前替换
+    -   ***
+    -   有没有一个 findNode Object
 
--   @ques 能不能将这个换成 json -> 管理起来更简单
+*   @ques 找到某个 key 读取 修改 删除 或者增加
 
--   @ques 太复杂了
+*   @ques 能不能将这个换成 json -> 管理起来更简单
+
+*   @ques 太复杂了
     -   如果能将 parseNode 和本身的值一一对应就好了
     -   很方便的找到位置
 
