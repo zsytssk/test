@@ -1,13 +1,20 @@
 import * as ts from 'typescript';
 
+let fileStatements: ts.NodeArray<ts.Node>;
+
+export function setFileStatements(statements: ts.NodeArray<ts.Node>) {
+    fileStatements = statements;
+}
+
 type NameMap = string | string[];
 // [lang, En]
 export function findTargetNode(
     name: NameMap[],
     statements: ts.NodeArray<ts.Node>,
+    matchValue = false,
 ) {
     const [first, ...rest] = [...name];
-    let node = findMatchNode(first, statements);
+    let node = findMatchNode(first, statements, true);
     if (!first || !node) {
         return null;
     }
@@ -16,7 +23,7 @@ export function findTargetNode(
         return node;
     }
 
-    node = findNodeValue(node);
+    node = findNodeValueNode(node);
     if (ts.isEnumDeclaration(node)) {
         return findTargetNode(rest, node.members);
     }
@@ -28,15 +35,10 @@ export function findTargetNode(
 export function findMatchNode(
     name: string | string[],
     statements: ts.NodeArray<ts.Node>,
+    matchValue = false,
 ): ts.Node | null {
+    const matchFn = matchValue ? matchNodeValue : matchNodeName;
     for (const item of statements) {
-        // console.log(
-        //     `test:>1`,
-        //     ts.SyntaxKind[item.kind],
-        //     name,
-        //     getNodeName(item),
-        //     matchNodeName(item, name),
-        // );
         if (ts.SyntaxKind[item.kind] === 'FirstStatement') {
             const findItem = findMatchNode(
                 name,
@@ -46,22 +48,22 @@ export function findMatchNode(
                 return findItem;
             }
         } else if (ts.isImportDeclaration(item)) {
-            if (matchNodeName(item.importClause, name)) {
+            if (matchFn(item.importClause, name as any)) {
                 return item;
             }
-            if (matchNodeName(item.importClause?.namedBindings, name)) {
+            if (matchFn(item.importClause?.namedBindings, name as any)) {
                 return item;
             }
 
             const elements =
                 (item.importClause?.namedBindings as any)?.elements || [];
             for (const element of elements) {
-                if (matchNodeName(element, name)) {
+                if (matchFn(element, name as any)) {
                     return item;
                 }
             }
         } else {
-            if (matchNodeName(item, name)) {
+            if (matchFn(item, name as any)) {
                 return item;
             }
         }
@@ -85,6 +87,19 @@ export function matchNodeName(node: ts.Node, name: string | string[]): boolean {
     const filer = node_name.filter((item, index) => name[index] !== item);
     return Boolean(!filer.length);
 }
+
+export function matchNodeValue(node: ts.Node, name: string): boolean {
+    const node_name = getNodeName(node);
+    if (!node_name) {
+        return false;
+    }
+    if (typeof node_name === 'string') {
+        return name === node_name;
+    }
+    const node_value = findTargetNode(node_name, fileStatements);
+    return name === findNodeValue(node_value);
+}
+
 export function getNodeName(node: ts.Node): void | string | string[] {
     const name = (node as any).name;
 
@@ -94,7 +109,12 @@ export function getNodeName(node: ts.Node): void | string | string[] {
     if (ts.isIdentifier(name)) {
         return name.escapedText;
     } else if (ts.isComputedPropertyName(name)) {
-        return getComputedPropertyName(name.expression);
+        const txt = getComputedPropertyName(name.expression);
+
+        const node = findTargetNode(txt, fileStatements);
+        // console.log(`test:>2`, txt, findNodeValue(node));
+
+        return txt;
     }
     return (name as any).escapedText;
 }
@@ -109,7 +129,7 @@ export function getComputedPropertyName(node: ts.Node): string[] {
     ];
 }
 
-export function findNodeValue(node: ts.Node) {
+export function findNodeValueNode(node: ts.Node) {
     if (!node) {
         return;
     }
@@ -125,4 +145,14 @@ export function findNodeValue(node: ts.Node) {
     }
 
     return node;
+}
+
+export function findNodeValue(node: ts.Node) {
+    const valueNode = findNodeValueNode(node);
+
+    if (!valueNode) {
+        return undefined;
+    }
+
+    return (valueNode as any).text;
 }

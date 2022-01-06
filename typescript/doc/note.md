@@ -8,7 +8,8 @@ https://leetcode-cn.com/explore/featured/card/bytedance/
 
     -   从后往前替换
     -   ***
-    -   找到 ['Lang', 'En'] -> en
+    -   匹配 import 对象 -> 可以现在文件中匹配
+    -   找到 ['Lang', 'En'] -> en :代码写起来太麻烦了
 
 -   @ques 这种东西有没有内置的方法
 

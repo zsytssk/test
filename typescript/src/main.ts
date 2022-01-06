@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as ts from 'typescript';
 import { readFile } from './script/ls/asyncUtil';
 import { write } from './script/ls/write';
-import { findTargetNode } from './utils';
+import { findTargetNode, setFileStatements } from './utils';
 
 type Range = [number, number];
 const key_map = ['test', 'arenaHelpRule11'];
@@ -19,10 +19,12 @@ async function main() {
     const props = (node.statements[3] as any).declarationList.declarations[0]
         .initializer.properties;
 
+    setFileStatements(node.statements);
     console.log(
         findTargetNode(
-            ['International', ['Lang', 'En'], 'arenaHelpRule11'],
+            ['International', 'en', 'arenaHelpRule11'],
             node.statements,
+            true,
         ),
     );
     // for (const item of node.statements) {
