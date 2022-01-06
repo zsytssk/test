@@ -2,6 +2,10 @@ https://leetcode-cn.com/explore/featured/card/bytedance/
 
 -   https://medium.com/clevyio/using-rust-and-nom-to-create-an-open-source-programming-language-for-chatbots-12fe67582af5
 
+## 2022-01-06 11:11:42
+
+-   @ques 找到某个 key 读取 修改 删除 或者增加
+
 ## 2020-12-30 10:20:48
 
 -   @ques boa rust write a js engine
@@ -9,6 +13,7 @@ https://leetcode-cn.com/explore/featured/card/bytedance/
 -   @ques function body directives
 
 -   @ques 各种各样的结构如何处理
+
     -   如何找寻变量...
 
 -   @ques 如果要重构项目需要做什么
