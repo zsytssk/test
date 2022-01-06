@@ -1,6 +1,7 @@
 import * as ts from 'typescript';
 import * as path from 'path';
 import { exists, readFile } from './script/ls/asyncUtil';
+import { findNodeValue, findNodeValueNode, getNodeName } from './utils';
 
 type NameMap = string;
 export class FileNode {
@@ -9,15 +10,22 @@ export class FileNode {
     constructor(private file_path: string) {}
     public async findTargetNode(name_path: NameMap[]) {
         if (!this.source_file) {
+            const filename = path.basename(this.file_path);
             const source = await readFile(this.file_path);
             this.source_file = ts.createSourceFile(
-                'x.ts', // fileName
-                source, // sourceText
+                filename,
+                source,
                 ts.ScriptTarget.Latest,
             );
         }
 
         return this.innerFindTargetNode(name_path, this.source_file.statements);
+    }
+    public replaceNode(node: ts.Node, content: string) {
+        // const range: Range = [find_node.pos, find_node.end];
+        // console.log(source.slice(...range));
+        // const new_source = replaceRange(source, range, ` '${value}'`);
+        // await write(file_path, new_source);
     }
     private async innerFindTargetNode(
         name_path: NameMap[],
@@ -34,7 +42,7 @@ export class FileNode {
             return node;
         }
 
-        node = this.findNodeValueNode(node);
+        node = findNodeValueNode(node);
 
         if (ts.isEnumDeclaration(node)) {
             return this.innerFindTargetNode(rest, node.members);
@@ -55,7 +63,6 @@ export class FileNode {
                 this.rel_map.set(file_path, target_file_node);
             }
             const val = await target_file_node.findTargetNode(name_path);
-            console.log(`test:>`, name_path, val);
             return val;
         }
     }
@@ -102,30 +109,11 @@ export class FileNode {
         return null;
     }
 
-    private async matchNodeName(
-        node: ts.Node,
-        name: string | string[],
-    ): Promise<boolean> {
-        const node_name = this.getNodeName(node);
-        if (!node_name) {
-            return false;
-        }
-        if (typeof name === 'string' || typeof node_name === 'string') {
-            return name === node_name;
-        }
-
-        if (name.length !== node_name.length) {
-            return false;
-        }
-        const filer = node_name.filter((item, index) => name[index] !== item);
-        return Boolean(!filer.length);
-    }
-
     private async matchNodeValue(
         node: ts.Node,
         name: string,
     ): Promise<boolean> {
-        const node_name = this.getNodeName(node);
+        const node_name = getNodeName(node);
 
         if (!node_name) {
             return false;
@@ -139,59 +127,6 @@ export class FileNode {
             this.source_file.statements,
         );
 
-        return name === this.findNodeValue(node_value);
-    }
-
-    private getNodeName(node: ts.Node): void | string | string[] {
-        const name = (node as any).name;
-
-        if (!name) {
-            return name;
-        }
-        if (ts.isIdentifier(name)) {
-            return name.escapedText;
-        } else if (ts.isComputedPropertyName(name)) {
-            const txt = this.getComputedPropertyName(name.expression);
-            return txt;
-        }
-        return (name as any).escapedText;
-    }
-
-    private getComputedPropertyName(node: ts.Node): string[] {
-        if ((node as any).escapedText) {
-            return [(node as any).escapedText];
-        }
-        return [
-            ...this.getComputedPropertyName((node as any).expression),
-            (node as any).name.escapedText,
-        ];
-    }
-
-    private findNodeValueNode(node: ts.Node) {
-        if (!node) {
-            return;
-        }
-
-        if (ts.isEnumMember(node)) {
-            return node.initializer;
-        }
-        if (ts.isVariableDeclaration(node)) {
-            return node.initializer;
-        }
-        if (ts.isPropertyAssignment(node)) {
-            return node.initializer;
-        }
-
-        return node;
-    }
-
-    private findNodeValue(node: ts.Node) {
-        const valueNode = this.findNodeValueNode(node);
-
-        if (!valueNode) {
-            return undefined;
-        }
-
-        return (valueNode as any).text;
+        return name === findNodeValue(node_value);
     }
 }
