@@ -1,5 +1,8 @@
 import { ServerErrCode } from './serverEvent';
 
+export const a = {
+    b: 1,
+};
 export enum Lang {
     /** 中文 */
     Zh = 'zh',
@@ -66,10 +69,8 @@ export const International = {
         aimFish: 'Please select the fish you want to attack',
         help: 'Help',
         times: 'times',
-        help1:
-            '1. Fish Points: Different fishes have different values, with the number of bullets obtained after capturing a fish being equal to the multiple of the cannon currently being used multiplied by the number of Fish Points. For example, if a fish with 50 Fish Points is captured using a 10x cannon, the number of bullets obtained is 50x10=500. Each different type of fish and their corresponding numbers of Fish Points are as follows:',
-        help2:
-            '2. Skill description: Players can apply the following skills in the game.',
+        help1: '1. Fish Points: Different fishes have different values, with the number of bullets obtained after capturing a fish being equal to the multiple of the cannon currently being used multiplied by the number of Fish Points. For example, if a fish with 50 Fish Points is captured using a 10x cannon, the number of bullets obtained is 50x10=500. Each different type of fish and their corresponding numbers of Fish Points are as follows:',
+        help2: '2. Skill description: Players can apply the following skills in the game.',
         help2Super:
             'Super Skill: This is a passive skill which is automatically triggered after a certain number of fish have been captured by the player. It increases bullet power and doubles the firing speed.',
         help2Freeze:
@@ -81,23 +82,16 @@ export const International = {
         help3: '3. Available cannon multiples: ',
         help31: '1,2,3,4,5,10,15,20',
         help4: '4. Other instructions',
-        help41:
-            'Redemption: Players can get some Fish Vouchers after capturing certain types of fish. Fish Vouchers can be redeemed in exchange for rewards.',
-        help42:
-            'Lucky draw: Players can qualify for 1 lucky draw after capturing 10 fish that each have at least 100 Fish Points. Rewards include bullets and currency.',
-        help43:
-            'Purchases: Players can purchase bullets inside the main hall, and can also purchase cannon skins or bullet effects by clicking on the cannon icon in the game.',
+        help41: 'Redemption: Players can get some Fish Vouchers after capturing certain types of fish. Fish Vouchers can be redeemed in exchange for rewards.',
+        help42: 'Lucky draw: Players can qualify for 1 lucky draw after capturing 10 fish that each have at least 100 Fish Points. Rewards include bullets and currency.',
+        help43: 'Purchases: Players can purchase bullets inside the main hall, and can also purchase cannon skins or bullet effects by clicking on the cannon icon in the game.',
         tourSkip: 'Skip',
         tourStart: 'Start game',
         tour1: 'Click the drop-down button to select the currency',
-        tour2:
-            'Game room will change <br/>according to which currency is selected',
-        tour3:
-            'In the demo game you can only experience the game, <br/>you must be in the real game in order to earn currency',
-        tour4:
-            'The system will automatically convert your digital currency into<br/> bullets when you enter a real game; any remaining <br/> bullets will be converted back into currency after you <br/> have left the room.',
-        tour5:
-            'Control your cannon, click and catch <br/>fish to get more bullets',
+        tour2: 'Game room will change <br/>according to which currency is selected',
+        tour3: 'In the demo game you can only experience the game, <br/>you must be in the real game in order to earn currency',
+        tour4: 'The system will automatically convert your digital currency into<br/> bullets when you enter a real game; any remaining <br/> bullets will be converted back into currency after you <br/> have left the room.',
+        tour5: 'Control your cannon, click and catch <br/>fish to get more bullets',
         tour6: 'Use items to help you catch more <br/> and bigger fish',
         noData: 'No data',
         NetError: 'Problem with Internet connection, reconnecting',
@@ -254,10 +248,8 @@ export const International = {
         aimFish: '공격하실 물고기를 선택하세요.',
         help: '도움',
         times: '배',
-        help1:
-            '1. 물고기 점수 설명: 물고기에 따라 점수가 다릅니다. 한 마리를 잡고 받을 수 있는 총알의 수량는 현재 사용 중인 포좌의 배수에 이 물고기의 점수를 곱한 것과 같습니다. 예를 들어 50배의 물고기 한 마리를 잡았을 때 10배의 포좌를 사용하였으면 받을 수 있는 총알 수량은 50X10=500입니다.각 물고기의 점수는 아래와 같습니다.',
-        help2:
-            '2. 기능 사용 설명: 게임 진행중 플레이어는 다음과 같은 기능을 사용할 수 있습니다.',
+        help1: '1. 물고기 점수 설명: 물고기에 따라 점수가 다릅니다. 한 마리를 잡고 받을 수 있는 총알의 수량는 현재 사용 중인 포좌의 배수에 이 물고기의 점수를 곱한 것과 같습니다. 예를 들어 50배의 물고기 한 마리를 잡았을 때 10배의 포좌를 사용하였으면 받을 수 있는 총알 수량은 50X10=500입니다.각 물고기의 점수는 아래와 같습니다.',
+        help2: '2. 기능 사용 설명: 게임 진행중 플레이어는 다음과 같은 기능을 사용할 수 있습니다.',
         help2Super:
             '슈퍼기능: 자동 기능, 플레이어가 일정량의 물고기를 포획한 후 자동으로 발사 됩니다.',
         help2Freeze:
@@ -269,24 +261,17 @@ export const International = {
         help3: '3. 선택 가능한 포좌의 배수는 아래와 같습니다.',
         help31: '1,2,3,4,5,10,15,20',
         help4: '4. 기타 설명',
-        help41:
-            '환전: 플레이어가 지정된 물고기를 포획할 때, 물고기 쿠폰을 받게 되고, 쿠폰을 모으면 경품을 교환할 수 있게 됩니다.',
-        help42:
-            '추첨: 플레이어는 100점 이상의 물고기를 10마리 잡은 후, 추첨 기회가 한번 주어집니다. 추첨 보상은 총알이나 코인입니다.',
-        help43:
-            '구매: 플레이어는 첫 페이지에서 ‘구매’를 클릭하여 총알을 구입할 수도 있고, 게임 내에서 ‘포좌’를 클릭하여 포좌 종류 또한 특수 기능 총알을 구입할 수도 있습니다. 기능의 수가 0일 때 이 기능 아이콘을 클릭하여 기능을 구입할 수 있습니다.',
+        help41: '환전: 플레이어가 지정된 물고기를 포획할 때, 물고기 쿠폰을 받게 되고, 쿠폰을 모으면 경품을 교환할 수 있게 됩니다.',
+        help42: '추첨: 플레이어는 100점 이상의 물고기를 10마리 잡은 후, 추첨 기회가 한번 주어집니다. 추첨 보상은 총알이나 코인입니다.',
+        help43: '구매: 플레이어는 첫 페이지에서 ‘구매’를 클릭하여 총알을 구입할 수도 있고, 게임 내에서 ‘포좌’를 클릭하여 포좌 종류 또한 특수 기능 총알을 구입할 수도 있습니다. 기능의 수가 0일 때 이 기능 아이콘을 클릭하여 기능을 구입할 수 있습니다.',
         tourSkip: 'Exit',
         tourStart: 'Start',
         tour1: '내리기 버튼을 클릭하여 코인 종류를 선택합니다.',
         tour2: '코인 종류에 따라 게임방이 다를 수 있습니다.',
-        tour3:
-            '시연장에서 유저는 체험만 가능하고 기엠장에서는 디지털 화폐를 획득할 수 있습니다',
-        tour4:
-            '게임이 본격적으로 시작되면 시스템이 자동으로 디지털 화폐를 총알로 바꿔드립니다. 게임방을 떠난 후, 남은 모든 총알은 다시 디지털 화폐로 교환됩니다.',
-        tour5:
-            '포좌를 컨트롤하고 물고기 포획을 클릭하면 더 <br/> 많은 총알을 받을 수 있습니다.',
-        tour6:
-            '도구를 사용하여 더 많고 더 큰 물고기를 <br/> 포획할 수 있습니다.',
+        tour3: '시연장에서 유저는 체험만 가능하고 기엠장에서는 디지털 화폐를 획득할 수 있습니다',
+        tour4: '게임이 본격적으로 시작되면 시스템이 자동으로 디지털 화폐를 총알로 바꿔드립니다. 게임방을 떠난 후, 남은 모든 총알은 다시 디지털 화폐로 교환됩니다.',
+        tour5: '포좌를 컨트롤하고 물고기 포획을 클릭하면 더 <br/> 많은 총알을 받을 수 있습니다.',
+        tour6: '도구를 사용하여 더 많고 더 큰 물고기를 <br/> 포획할 수 있습니다.',
         noData: '데이터 없음',
         NetError: '네트워크 오류, 다시 연결 중',
         NetComeBack: '돌아오신 걸 환영합니다!',
@@ -442,10 +427,8 @@ export const International = {
         aimFish: '攻撃したい⿂を選択してください。',
         help: 'ヘルプ',
         times: '倍',
-        help1:
-            '⿂ポイント説明：それぞれの⿂ポイントの數値は異なります。１つの⿂を捕獲すること により、獲得弾薬は現在使⽤中の砲臺の倍數をかける⿂ポイントの數値となります。 例えば、50倍の⿂を捕獲する場合は、10倍で撃ちまして、獲得弾薬は50X10=500となり ます。それぞれのポイントは以下のようです。',
-        help2:
-            'スキル使⽤説明：プレーヤーはゲーム中で以下のスキルで使⽤可能です。',
+        help1: '⿂ポイント説明：それぞれの⿂ポイントの數値は異なります。１つの⿂を捕獲すること により、獲得弾薬は現在使⽤中の砲臺の倍數をかける⿂ポイントの數値となります。 例えば、50倍の⿂を捕獲する場合は、10倍で撃ちまして、獲得弾薬は50X10=500となり ます。それぞれのポイントは以下のようです。',
+        help2: 'スキル使⽤説明：プレーヤーはゲーム中で以下のスキルで使⽤可能です。',
         help2Super:
             'スーパースキル：受動スキル、プレーヤーが捕獲した⿂におけて、⼀定の數量に達 すると、弾薬の威⼒が増加し、攻撃スピードが加速となります。',
         help2Freeze:
@@ -457,23 +440,16 @@ export const International = {
         help3: '選択可能の倍數は以下のようです。',
         help31: '1,2,3,4,5,10,15,20',
         help4: 'その他説明：',
-        help41:
-            '交換：プレーヤーは、特定な⿂を捕獲することにより、⿂券が獲得できます。その ⼀定の數量の⿂券を収集すると、景品と交換可能です',
-        help42:
-            '抽選：プレーヤーは、10匹100ポイント以上の⿂を捕獲すると、1回の抽選に參加可 能です。景品は弾薬と通貨を含みます。',
-        help43:
-            '購⼊：プレーヤーは、ホームで購⼊ボタンをクリックし、弾薬を購⼊できます。ま た、ゲーム中で砲臺ボタンをクリックし、砲臺スタイルと弾薬特効を購⼊できま す。スキルの數は0の時、スキルボタンを押して購⼊できます。',
+        help41: '交換：プレーヤーは、特定な⿂を捕獲することにより、⿂券が獲得できます。その ⼀定の數量の⿂券を収集すると、景品と交換可能です',
+        help42: '抽選：プレーヤーは、10匹100ポイント以上の⿂を捕獲すると、1回の抽選に參加可 能です。景品は弾薬と通貨を含みます。',
+        help43: '購⼊：プレーヤーは、ホームで購⼊ボタンをクリックし、弾薬を購⼊できます。ま た、ゲーム中で砲臺ボタンをクリックし、砲臺スタイルと弾薬特効を購⼊できま す。スキルの數は0の時、スキルボタンを押して購⼊できます。',
         tourSkip: 'Exit',
         tourStart: 'Start',
         tour1: 'ボタンで通貨タイプを選択',
-        tour2:
-            '通貨タイプが異なることにより、ゲーム <br/> ルームが切替されます。',
-        tour3:
-            '體験ルームプレーはゲームの體験のみ可能です。本番プレールームで仮想通貨が獲得 可能です。',
-        tour4:
-            '本番ゲームルームに⼊場の際、システムは⾃動的に仮想通貨を弾薬に交換されます。 また、お客様は退場の際、殘りの弾薬が⾃動的に仮想通貨に交換されます。ご安⼼くだ さい。',
-        tour5:
-            '砲臺をコントロールし、クリックかつ⿂<br/>の捕獲、もっと弾薬が獲得可能',
+        tour2: '通貨タイプが異なることにより、ゲーム <br/> ルームが切替されます。',
+        tour3: '體験ルームプレーはゲームの體験のみ可能です。本番プレールームで仮想通貨が獲得 可能です。',
+        tour4: '本番ゲームルームに⼊場の際、システムは⾃動的に仮想通貨を弾薬に交換されます。 また、お客様は退場の際、殘りの弾薬が⾃動的に仮想通貨に交換されます。ご安⼼くだ さい。',
+        tour5: '砲臺をコントロールし、クリックかつ⿂<br/>の捕獲、もっと弾薬が獲得可能',
         tour6: 'スキルの使⽤で、もっと⼤きくて多い⿂を<br/>捕獲可能です。',
         noData: 'データなし',
         NetError: '異常なネットワーク、再接続',
@@ -630,8 +606,7 @@ export const International = {
         aimFish: '请选中你要攻击的鱼',
         help: '帮助',
         times: '倍',
-        help1:
-            '1.	鱼分说明：不同的鱼有不同的分值，捕获一条鱼得的子弹数等于当前使用的炮台倍数乘以这条鱼的分数。比如捕获一条50倍的鱼，用的10倍的炮，获得的子弹数量就是50X10=500。 不同鱼的鱼分如下',
+        help1: '1.	鱼分说明：不同的鱼有不同的分值，捕获一条鱼得的子弹数等于当前使用的炮台倍数乘以这条鱼的分数。比如捕获一条50倍的鱼，用的10倍的炮，获得的子弹数量就是50X10=500。 不同鱼的鱼分如下',
         help2: '2.	技能使用说明：玩家在游戏过程中可以使用下列技能。',
         help2Super:
             '超级技能：被动技能，玩家捕获一定数量的鱼后自动触发，子弹威力加强、射速加倍。',
@@ -643,19 +618,15 @@ export const International = {
         help3: '3. 可选的炮倍数如下：',
         help31: '1,2,3,4,5,10,15,20',
         help4: '4. 其他说明',
-        help41:
-            '兑换：玩家捕获某些鱼时，会得到一些鱼券，收集一定数量的鱼券可以兑换奖品。',
-        help42:
-            '抽奖：玩家捕获10条鱼分100以上的鱼后，可以抽一次，奖品包括子弹和货币。',
-        help43:
-            '购买：玩家可以在大厅点击购买来购买子弹，也可以在游戏内点击炮台购买炮台皮肤或子弹特效。当技能的数量是0时，可以点击此技能图标来购买技能。',
+        help41: '兑换：玩家捕获某些鱼时，会得到一些鱼券，收集一定数量的鱼券可以兑换奖品。',
+        help42: '抽奖：玩家捕获10条鱼分100以上的鱼后，可以抽一次，奖品包括子弹和货币。',
+        help43: '购买：玩家可以在大厅点击购买来购买子弹，也可以在游戏内点击炮台购买炮台皮肤或子弹特效。当技能的数量是0时，可以点击此技能图标来购买技能。',
         tourSkip: '退出引导',
         tourStart: '开始游戏',
         tour1: '点击下拉按钮选择币种',
         tour2: '选择币种不同，<br/>游戏房间也会随之切换',
         tour3: '在试玩场您只能体验游戏，<br/>在正式场才能赢得数字货币',
-        tour4:
-            '进入正式场后，系统会自动将您的数字货币兑换成子弹；<br/>请放心，在您离开房间后，所有剩余子弹将会再兑换成您的数字货币',
+        tour4: '进入正式场后，系统会自动将您的数字货币兑换成子弹；<br/>请放心，在您离开房间后，所有剩余子弹将会再兑换成您的数字货币',
         tour5: '控制您的炮台，点击并捕捉鱼群，<br/>获得更多子弹',
         tour6: '可以使用道具，帮助您捕获<br/>更多更大的鱼',
         noData: '暂无数据',
@@ -825,8 +796,7 @@ export const International = {
         aimFish: '請選中你要攻擊的魚',
         help: '幫助',
         times: '倍',
-        help1:
-            '1.	魚分說明：不同的魚有不同的分值，捕獲一條魚得的子彈數等於當前使用的炮臺倍數乘以這條魚的分數。比如捕獲一條50倍的魚，用的10倍的炮，獲得的子彈數量就是50X10=500。 不同魚的魚分如下',
+        help1: '1.	魚分說明：不同的魚有不同的分值，捕獲一條魚得的子彈數等於當前使用的炮臺倍數乘以這條魚的分數。比如捕獲一條50倍的魚，用的10倍的炮，獲得的子彈數量就是50X10=500。 不同魚的魚分如下',
         help2: '2.	技能使用說明：玩家在遊戲過程中可以使用下列技能。',
         help2Super:
             '超級技能：被動技能，玩家捕獲一定數量的魚後自動觸發，子彈威力加強、射速加倍。',
@@ -838,19 +808,15 @@ export const International = {
         help3: '3. 可選的炮倍數如下：',
         help31: '1,2,3,4,5,10,15,20',
         help4: '4.	其他說明',
-        help41:
-            '兌換：玩家捕獲某些魚時，會得到一些魚券，收集一定數量的魚券可以兌換獎品。',
-        help42:
-            '抽獎：玩家捕獲10條魚分100以上的魚後，可以抽一次，獎品包括子彈和貨幣。',
-        help43:
-            '購買：玩家可以在大廳點擊購買來購買子彈，也可以在遊戲內點擊炮臺購買炮臺皮膚或子彈特效。當技能的數量是0時，可以點擊此技能圖標來購買技能。',
+        help41: '兌換：玩家捕獲某些魚時，會得到一些魚券，收集一定數量的魚券可以兌換獎品。',
+        help42: '抽獎：玩家捕獲10條魚分100以上的魚後，可以抽一次，獎品包括子彈和貨幣。',
+        help43: '購買：玩家可以在大廳點擊購買來購買子彈，也可以在遊戲內點擊炮臺購買炮臺皮膚或子彈特效。當技能的數量是0時，可以點擊此技能圖標來購買技能。',
         tourSkip: '退出引導',
         tourStart: '開始遊戲',
         tour1: '點擊下拉按鈕選擇幣種',
         tour2: '選擇幣種不同，<br/>遊戲房間也會隨之切換',
         tour3: '在試玩場您隻能體驗遊戲，<br/>在正式場才能贏得數字貨幣',
-        tour4:
-            '進入正式場後，係統會自動將您的數字貨幣兌換成子彈；請放心，在您離開房間後，所有剩餘子彈將會再兌換成您的數字貨幣',
+        tour4: '進入正式場後，係統會自動將您的數字貨幣兌換成子彈；請放心，在您離開房間後，所有剩餘子彈將會再兌換成您的數字貨幣',
         tour5: '控製您的炮臺，點擊並捕捉魚群，<br/>獲得更多子彈',
         tour6: '可以使用道具，幫助您捕獲<br/>更多更大的魚',
         noData: '暫無數據',

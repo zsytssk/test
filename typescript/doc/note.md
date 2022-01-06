@@ -5,12 +5,12 @@ https://leetcode-cn.com/explore/featured/card/bytedance/
 ## 2022-01-06 11:11:42
 
 -   @todo
-    -   遍历找到 International 声明
-    -   找到 [Lang.En] 对应的值 [难]
-    -   找到关键的 key 的位置
+
     -   从后往前替换
     -   ***
-    -   有没有一个 findNode Object
+    -   找到 ['Lang', 'En'] -> en
+
+-   @ques 这种东西有没有内置的方法
 
 *   @ques 找到某个 key 读取 修改 删除 或者增加
 
@@ -19,6 +19,15 @@ https://leetcode-cn.com/explore/featured/card/bytedance/
 *   @ques 太复杂了
     -   如果能将 parseNode 和本身的值一一对应就好了
     -   很方便的找到位置
+
+### end
+
+    -   有没有一个 findNode Object
+
+-   遍历找到 International 声明
+-   找到 [Lang.En] 对应的值 [难]
+    -   如何获取 a.b.c 这种 Node，这有很多的类型
+-   找到关键的 key 的位置
 
 ## 2020-12-30 10:20:48
 
@@ -167,7 +176,7 @@ https://leetcode-cn.com/explore/featured/card/bytedance/
 *   @ques promise then 的原理...
 
 ```ts
-return (promise2 = new Promise(function(resolve, reject) {
+return (promise2 = new Promise(function (resolve, reject) {
     try {
         var x = onResolved(self.data);
         if (x instanceof Promise) {
