@@ -26,6 +26,6 @@
     "dependencies": {
         "es6-promise": "^4.2.4",
         "iconv-lite": "^0.4.24",
-        "jsdom": "^13.0.0"
+        "jsdom": "^16.5.0"
     }
 }
